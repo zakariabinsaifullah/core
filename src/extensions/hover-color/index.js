@@ -30,7 +30,7 @@ const hasTextColorSupport = blockTypeOrSettings => {
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#blocks-registerblocktype
  */
-addFilter( 'blocks.registerBlockType', 'dnte/hover-color-add-attributes', settings => {
+addFilter( 'blocks.registerBlockType', 'core-theme/hover-color-add-attributes', settings => {
     if ( ! hasTextColorSupport( settings ) ) {
         return settings;
     }
@@ -76,7 +76,7 @@ addFilter( 'blocks.registerBlockType', 'dnte/hover-color-add-attributes', settin
  */
 addFilter(
     'editor.BlockEdit',
-    'dnte/hover-color-add-inspector-controls',
+    'core-theme/hover-color-add-inspector-controls',
     createHigherOrderComponent( BlockEdit => {
         return props => {
             const { name, attributes, setAttributes, clientId } = props;
@@ -106,7 +106,7 @@ addFilter(
  */
 addFilter(
     'editor.BlockListBlock',
-    'dnte/hover-color-add-styles',
+    'core-theme/hover-color-add-styles',
     createHigherOrderComponent( BlockListBlock => {
         return props => {
             const { name, attributes } = props;

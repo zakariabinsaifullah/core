@@ -21,7 +21,7 @@ const CLASS_NAME = 'has-force-full-height';
 /**
  * Add `forceFullHeight` attribute to core/group.
  */
-addFilter('blocks.registerBlockType', 'dnte/group-full-height-add-attribute', (settings, name) => {
+addFilter('blocks.registerBlockType', 'core-theme/group-full-height-add-attribute', (settings, name) => {
     if (name !== BLOCK_NAME) {
         return settings;
     }
@@ -43,7 +43,7 @@ addFilter('blocks.registerBlockType', 'dnte/group-full-height-add-attribute', (s
  */
 addFilter(
     'editor.BlockEdit',
-    'dnte/group-full-height-add-inspector-controls',
+    'core-theme/group-full-height-add-inspector-controls',
     createHigherOrderComponent(BlockEdit => {
         return props => {
             const { name, attributes, setAttributes } = props;
@@ -75,7 +75,7 @@ addFilter(
  */
 addFilter(
     'editor.BlockListBlock',
-    'dnte/group-full-height-add-styles',
+    'core-theme/group-full-height-add-styles',
     createHigherOrderComponent(BlockListBlock => {
         return props => {
             const { name, attributes } = props;

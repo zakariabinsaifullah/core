@@ -67,4 +67,4 @@ function hangIconicButtonAttribute( settings, name ) {
     };
 }
 
-addFilter( 'blocks.registerBlockType', 'dnte/iconic-button-attribute', hangIconicButtonAttribute );
+addFilter( 'blocks.registerBlockType', 'core-theme/iconic-button-attribute', hangIconicButtonAttribute );

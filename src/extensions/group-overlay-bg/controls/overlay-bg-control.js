@@ -35,7 +35,7 @@ const OverlayBgControl = ( { clientId, attributes, setAttributes, overlayBgColor
                 customOverlayBgColor: undefined
             } );
         },
-        label: __( 'Overlay Background', 'dentist-exchange' ),
+        label: __( 'Overlay Background', 'core' ),
         isShownByDefault: true,
         enableAlpha: true,
         clearable: true,

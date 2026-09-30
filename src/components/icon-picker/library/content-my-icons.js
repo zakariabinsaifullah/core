@@ -56,15 +56,15 @@ export const ContentMyIcons = ({ currentCustomSvg, onIconSelect, onGoToCustomTab
             setError('');
             await deleteIcon(icon.id);
         } catch (deleteError) {
-            setError(deleteError?.message || __('The icon could not be deleted.', 'dentist-exchange'));
+            setError(deleteError?.message || __('The icon could not be deleted.', 'core'));
         }
     };
 
     if (!hasLoaded) {
         return (
-            <div className="dnte-modal__my-icons-placeholder">
+            <div className="core-theme-modal__my-icons-placeholder">
                 <Spinner />
-                <p>{__('Loading your icons…', 'dentist-exchange')}</p>
+                <p>{__('Loading your icons…', 'core')}</p>
             </div>
         );
     }
@@ -83,9 +83,9 @@ export const ContentMyIcons = ({ currentCustomSvg, onIconSelect, onGoToCustomTab
                         <SearchControl
                             value={searchTerm}
                             onChange={setSearchTerm}
-                            label={__('Search your icons', 'dentist-exchange')}
-                            placeholder={__('Search...', 'dentist-exchange')}
-                            className="dnte-modal__search"
+                            label={__('Search your icons', 'core')}
+                            placeholder={__('Search...', 'core')}
+                            className="core-theme-modal__search"
                             size="compact"
                         />
                     </FlexItem>
@@ -93,48 +93,48 @@ export const ContentMyIcons = ({ currentCustomSvg, onIconSelect, onGoToCustomTab
             )}
 
             {0 === myIcons.length && (
-                <div className="dnte-modal__my-icons-placeholder">
-                    <p>{__('You have not saved any icons yet.', 'dentist-exchange')}</p>
-                    <p className="dnte-modal__my-icons-placeholder-help">
+                <div className="core-theme-modal__my-icons-placeholder">
+                    <p>{__('You have not saved any icons yet.', 'core')}</p>
+                    <p className="core-theme-modal__my-icons-placeholder-help">
                         {__(
                             'Paste an SVG in the Custom SVG tab, give it a name, and choose “Add to My Icons” to make it available across the whole site.',
-                            'dentist-exchange'
+                            'core'
                         )}
                     </p>
                     <Button variant="primary" onClick={onGoToCustomTab} __next40pxDefaultSize>
-                        {__('Add an icon', 'dentist-exchange')}
+                        {__('Add an icon', 'core')}
                     </Button>
                 </div>
             )}
 
-            {myIcons.length > 0 && 0 === filteredIcons.length && <p>{__('No icons found!', 'dentist-exchange')}</p>}
+            {myIcons.length > 0 && 0 === filteredIcons.length && <p>{__('No icons found!', 'core')}</p>}
 
             {filteredIcons.length > 0 && (
-                <div className="dnte-modal__icons dnte-modal__my-icons">
+                <div className="core-theme-modal__icons core-theme-modal__my-icons">
                     {filteredIcons.map(icon => {
                         const isDeleting = deletingIds.includes(icon.id);
 
                         return (
-                            <div className="dnte-modal__my-icons-item" key={icon.id}>
+                            <div className="core-theme-modal__my-icons-item" key={icon.id}>
                                 <Button
-                                    className={`dnte-modal__icons-button ${currentCustomSvg === icon.svg ? 'is-selected' : ''}`}
+                                    className={`core-theme-modal__icons-button ${currentCustomSvg === icon.svg ? 'is-selected' : ''}`}
                                     onClick={() => onIconSelect(icon)}
                                     disabled={isDeleting}
                                     label={sprintf(
                                         /* translators: %s: icon name. */
-                                        __('Use %s', 'dentist-exchange'),
+                                        __('Use %s', 'core'),
                                         icon.label
                                     )}
                                     showTooltip
                                 >
                                     <span
-                                        className="dnte-modal__my-icons-preview"
+                                        className="core-theme-modal__my-icons-preview"
                                         dangerouslySetInnerHTML={{ __html: icon.svg }} // eslint-disable-line react/no-danger
                                     />
                                     <span className="icon-title">{icon.label}</span>
                                 </Button>
                                 <Button
-                                    className="dnte-modal__my-icons-remove"
+                                    className="core-theme-modal__my-icons-remove"
                                     icon={trash}
                                     iconSize={18}
                                     size="small"
@@ -143,7 +143,7 @@ export const ContentMyIcons = ({ currentCustomSvg, onIconSelect, onGoToCustomTab
                                     disabled={isDeleting}
                                     label={sprintf(
                                         /* translators: %s: icon name. */
-                                        __('Delete %s', 'dentist-exchange'),
+                                        __('Delete %s', 'core'),
                                         icon.label
                                     )}
                                     onClick={() => setPendingDelete(icon)}
@@ -158,12 +158,12 @@ export const ContentMyIcons = ({ currentCustomSvg, onIconSelect, onGoToCustomTab
                 isOpen={!!pendingDelete}
                 onConfirm={confirmDelete}
                 onCancel={() => setPendingDelete(null)}
-                confirmButtonText={__('Delete', 'dentist-exchange')}
+                confirmButtonText={__('Delete', 'core')}
             >
                 {pendingDelete &&
                     sprintf(
                         /* translators: %s: icon name. */
-                        __('Delete “%s” from your icon library? Blocks already using it keep their icon.', 'dentist-exchange'),
+                        __('Delete “%s” from your icon library? Blocks already using it keep their icon.', 'core'),
                         pendingDelete.label
                     )}
             </ConfirmDialog>

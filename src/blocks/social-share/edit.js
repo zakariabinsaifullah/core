@@ -25,7 +25,7 @@ export default function Edit(props) {
                 />
             </BlockControls>
             <div {...blockProps}>
-                <ServerSideRender block="dnte/social-share" attributes={props.attributes} />
+                <ServerSideRender block="core-theme/social-share" attributes={props.attributes} />
             </div>
         </>
     );

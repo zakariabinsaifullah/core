@@ -8,7 +8,7 @@
  *
  * Usage: [opening_roles columns="4" per_page="12"]
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,22 +19,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Assets
 // =============================================================================
 
-if ( ! function_exists( 'dnte_roles_grid_enqueue_assets' ) ) :
+if ( ! function_exists( 'core_theme_roles_grid_enqueue_assets' ) ) :
 	/**
 	 * Enqueues the job board styles and the filtering script.
 	 */
-	function dnte_roles_grid_enqueue_assets() {
+	function core_theme_roles_grid_enqueue_assets() {
 		$version = wp_get_theme()->get( 'Version' );
 
 		wp_enqueue_style(
-			'dnte-roles-grid',
+			'core-theme-roles-grid',
 			get_theme_file_uri( 'assets/css/roles-grid.css' ),
 			array(),
 			$version
 		);
 
 		wp_enqueue_script(
-			'dnte-roles-grid',
+			'core-theme-roles-grid',
 			get_theme_file_uri( 'assets/js/roles-grid.js' ),
 			array(),
 			$version,
@@ -48,7 +48,7 @@ endif;
 // Helpers
 // =============================================================================
 
-if ( ! function_exists( 'dnte_roles_inline_icon' ) ) :
+if ( ! function_exists( 'core_theme_roles_inline_icon' ) ) :
 	/**
 	 * The search bar's own icons.
 	 *
@@ -58,7 +58,7 @@ if ( ! function_exists( 'dnte_roles_inline_icon' ) ) :
 	 * @param string $name One of: search, pin, briefcase, chevron.
 	 * @return string SVG markup.
 	 */
-	function dnte_roles_inline_icon( $name ) {
+	function core_theme_roles_inline_icon( $name ) {
 		$icons = array(
 			'search'    => '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
 			'pin'       => '<path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
@@ -70,14 +70,14 @@ if ( ! function_exists( 'dnte_roles_inline_icon' ) ) :
 			return '';
 		}
 
-		return '<svg class="dnte-jobs__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
+		return '<svg class="core-theme-jobs__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
 			. 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
 			. $icons[ $name ] . '</svg>';
 	}
 endif;
 
 
-if ( ! function_exists( 'dnte_roles_active_ids' ) ) :
+if ( ! function_exists( 'core_theme_roles_active_ids' ) ) :
 	/**
 	 * IDs of the roles that should be listed.
 	 *
@@ -89,7 +89,7 @@ if ( ! function_exists( 'dnte_roles_active_ids' ) ) :
 	 * @param string $orderby Sort field.
 	 * @return int[] Post IDs.
 	 */
-	function dnte_roles_active_ids( $limit, $order, $orderby ) {
+	function core_theme_roles_active_ids( $limit, $order, $orderby ) {
 		$ids = get_posts(
 			array(
 				'post_type'        => 'open-role',
@@ -103,12 +103,12 @@ if ( ! function_exists( 'dnte_roles_active_ids' ) ) :
 			)
 		);
 
-		return array_values( array_filter( $ids, 'dnte_open_role_is_active' ) );
+		return array_values( array_filter( $ids, 'core_theme_open_role_is_active' ) );
 	}
 endif;
 
 
-if ( ! function_exists( 'dnte_roles_render_card' ) ) :
+if ( ! function_exists( 'core_theme_roles_render_card' ) ) :
 	/**
 	 * Renders one role card.
 	 *
@@ -119,17 +119,17 @@ if ( ! function_exists( 'dnte_roles_render_card' ) ) :
 	 * @param int $post_id Role ID.
 	 * @return string Markup.
 	 */
-	function dnte_roles_render_card( $post_id ) {
-		$types = get_the_terms( $post_id, 'dnte-job-type' );
+	function core_theme_roles_render_card( $post_id ) {
+		$types = get_the_terms( $post_id, 'core-theme-job-type' );
 		$types = is_array( $types ) ? $types : array();
 
-		$tags = get_the_terms( $post_id, 'dnte-role-tag' );
+		$tags = get_the_terms( $post_id, 'core-theme-role-tag' );
 		$tags = is_array( $tags ) ? $tags : array();
 
-		$vacancies = (int) get_post_meta( $post_id, 'dnte_role_vacancies', true );
-		$location  = (string) get_post_meta( $post_id, 'dnte_role_location', true );
-		$apply     = (string) get_post_meta( $post_id, 'dnte_role_apply_link', true );
-		$icon_id   = (int) get_post_meta( $post_id, 'dnte_role_icon', true );
+		$vacancies = (int) get_post_meta( $post_id, 'core_theme_role_vacancies', true );
+		$location  = (string) get_post_meta( $post_id, 'core_theme_role_location', true );
+		$apply     = (string) get_post_meta( $post_id, 'core_theme_role_apply_link', true );
+		$icon_id   = (int) get_post_meta( $post_id, 'core_theme_role_icon', true );
 		$title     = get_the_title( $post_id );
 
 		$type_names = wp_list_pluck( $types, 'name' );
@@ -143,7 +143,7 @@ if ( ! function_exists( 'dnte_roles_render_card' ) ) :
 		$type_label = $type_names ? implode( ', ', $type_names ) : '';
 
 		/* translators: %d: number of open positions. */
-		$open_label = $vacancies > 0 ? sprintf( _n( '%d open', '%d open', $vacancies, 'dentist-exchange' ), $vacancies ) : '';
+		$open_label = $vacancies > 0 ? sprintf( _n( '%d open', '%d open', $vacancies, 'core' ), $vacancies ) : '';
 
 		// Keywords the search matches on, beyond the title.
 		$keywords = implode( ' ', array_merge( wp_list_pluck( $tags, 'name' ), $type_names ) );
@@ -162,7 +162,7 @@ if ( ! function_exists( 'dnte_roles_render_card' ) ) :
 		ob_start();
 		?>
 		<<?php echo esc_html( $tag ); ?>
-			class="dnte-job"
+			class="core-theme-job"
 			<?php if ( '' !== $apply_url ) : ?>
 				<?php // Already escaped above. ?>
 				href="<?php echo $apply_url; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
@@ -171,19 +171,19 @@ if ( ! function_exists( 'dnte_roles_render_card' ) ) :
 			data-keywords="<?php echo esc_attr( strtolower( $title . ' ' . $keywords ) ); ?>"
 			data-location="<?php echo esc_attr( strtolower( $location ) ); ?>"
 		>
-			<span class="dnte-job__icon" aria-hidden="true">
+			<span class="core-theme-job__icon" aria-hidden="true">
 				<?php if ( $icon_id ) : ?>
 					<?php echo wp_get_attachment_image( $icon_id, 'full', false, array( 'alt' => '', 'loading' => 'lazy' ) ); ?>
 				<?php endif; ?>
 			</span>
-			<span class="dnte-job__title"><?php echo esc_html( $title ); ?></span>
+			<span class="core-theme-job__title"><?php echo esc_html( $title ); ?></span>
 			<?php if ( '' !== $type_label || '' !== $open_label ) : ?>
-				<span class="dnte-job__meta">
+				<span class="core-theme-job__meta">
 					<?php if ( '' !== $type_label ) : ?>
-						<span class="dnte-job__type"><?php echo esc_html( $type_label ); ?></span>
+						<span class="core-theme-job__type"><?php echo esc_html( $type_label ); ?></span>
 					<?php endif; ?>
 					<?php if ( '' !== $open_label ) : ?>
-						<span class="dnte-job__open"><?php echo esc_html( $open_label ); ?></span>
+						<span class="core-theme-job__open"><?php echo esc_html( $open_label ); ?></span>
 					<?php endif; ?>
 				</span>
 			<?php endif; ?>
@@ -198,14 +198,14 @@ endif;
 // Shortcode
 // =============================================================================
 
-if ( ! function_exists( 'dnte_opening_roles_shortcode' ) ) :
+if ( ! function_exists( 'core_theme_opening_roles_shortcode' ) ) :
 	/**
 	 * Renders the job board.
 	 *
 	 * @param array $atts Shortcode attributes.
 	 * @return string Markup, or '' when there are no active roles.
 	 */
-	function dnte_opening_roles_shortcode( $atts ) {
+	function core_theme_opening_roles_shortcode( $atts ) {
 		$atts = shortcode_atts(
 			array(
 				'columns'  => 4,
@@ -222,19 +222,19 @@ if ( ! function_exists( 'dnte_opening_roles_shortcode' ) ) :
 		$columns = min( 4, max( 1, (int) $atts['columns'] ) );
 		$order   = 'ASC' === strtoupper( $atts['order'] ) ? 'ASC' : 'DESC';
 
-		$ids = dnte_roles_active_ids( (int) $atts['per_page'], $order, sanitize_key( $atts['orderby'] ) );
+		$ids = core_theme_roles_active_ids( (int) $atts['per_page'], $order, sanitize_key( $atts['orderby'] ) );
 
 		if ( ! $ids ) {
 			return '';
 		}
 
-		dnte_roles_grid_enqueue_assets();
+		core_theme_roles_grid_enqueue_assets();
 
 		// Only job types that actually have an active role behind them.
 		$used_types = array();
 
 		foreach ( $ids as $id ) {
-			foreach ( (array) get_the_terms( $id, 'dnte-job-type' ) as $term ) {
+			foreach ( (array) get_the_terms( $id, 'core-theme-job-type' ) as $term ) {
 				if ( $term instanceof WP_Term ) {
 					$used_types[ $term->slug ] = $term->name;
 				}
@@ -243,27 +243,27 @@ if ( ! function_exists( 'dnte_opening_roles_shortcode' ) ) :
 
 		ob_start();
 		?>
-		<div class="dnte-jobs" data-dnte-jobs>
+		<div class="core-theme-jobs" data-core-theme-jobs>
 			<?php if ( 'yes' === $atts['search'] ) : ?>
-				<form class="dnte-jobs__search" role="search" novalidate>
-					<div class="dnte-jobs__field">
-						<?php echo dnte_roles_inline_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
+				<form class="core-theme-jobs__search" role="search" novalidate>
+					<div class="core-theme-jobs__field">
+						<?php echo core_theme_roles_inline_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
 						<input
 							type="search"
-							class="dnte-jobs__input"
+							class="core-theme-jobs__input"
 							data-filter="keyword"
-							placeholder="<?php esc_attr_e( 'Job title, keywords', 'dentist-exchange' ); ?>"
-							aria-label="<?php esc_attr_e( 'Job title or keywords', 'dentist-exchange' ); ?>"
+							placeholder="<?php esc_attr_e( 'Job title, keywords', 'core' ); ?>"
+							aria-label="<?php esc_attr_e( 'Job title or keywords', 'core' ); ?>"
 						/>
 					</div>
-					<div class="dnte-jobs__field">
-						<?php echo dnte_roles_inline_icon( 'pin' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
+					<div class="core-theme-jobs__field">
+						<?php echo core_theme_roles_inline_icon( 'pin' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
 						<input
 							type="text"
-							class="dnte-jobs__input"
+							class="core-theme-jobs__input"
 							data-filter="location"
-							placeholder="<?php esc_attr_e( 'City or postcode', 'dentist-exchange' ); ?>"
-							aria-label="<?php esc_attr_e( 'City or postcode', 'dentist-exchange' ); ?>"
+							placeholder="<?php esc_attr_e( 'City or postcode', 'core' ); ?>"
+							aria-label="<?php esc_attr_e( 'City or postcode', 'core' ); ?>"
 						/>
 					</div>
 					<?php
@@ -275,45 +275,45 @@ if ( ! function_exists( 'dnte_opening_roles_shortcode' ) ) :
 					 * tabs below, which filter the same field.
 					 */
 					?>
-					<div class="dnte-jobs__field dnte-jobs__field--select">
-						<?php echo dnte_roles_inline_icon( 'briefcase' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
-						<select class="dnte-jobs__input" data-filter="type" aria-label="<?php esc_attr_e( 'Job type', 'dentist-exchange' ); ?>">
-							<option value=""><?php esc_html_e( 'Job Type', 'dentist-exchange' ); ?></option>
+					<div class="core-theme-jobs__field core-theme-jobs__field--select">
+						<?php echo core_theme_roles_inline_icon( 'briefcase' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
+						<select class="core-theme-jobs__input" data-filter="type" aria-label="<?php esc_attr_e( 'Job type', 'core' ); ?>">
+							<option value=""><?php esc_html_e( 'Job Type', 'core' ); ?></option>
 							<?php foreach ( $used_types as $slug => $name ) : ?>
 								<option value="<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $name ); ?></option>
 							<?php endforeach; ?>
 						</select>
-						<?php echo dnte_roles_inline_icon( 'chevron' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
+						<?php echo core_theme_roles_inline_icon( 'chevron' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?>
 					</div>
-					<button type="submit" class="dnte-jobs__submit"><?php esc_html_e( 'Find Jobs', 'dentist-exchange' ); ?></button>
+					<button type="submit" class="core-theme-jobs__submit"><?php esc_html_e( 'Find Jobs', 'core' ); ?></button>
 				</form>
 			<?php endif; ?>
 
 			<?php if ( 'yes' === $atts['tabs'] && $used_types ) : ?>
-				<div class="dnte-jobs__tabs" role="tablist">
-					<button type="button" class="dnte-jobs__tab is-active" data-type="" role="tab" aria-selected="true">
-						<?php esc_html_e( 'All Roles', 'dentist-exchange' ); ?>
+				<div class="core-theme-jobs__tabs" role="tablist">
+					<button type="button" class="core-theme-jobs__tab is-active" data-type="" role="tab" aria-selected="true">
+						<?php esc_html_e( 'All Roles', 'core' ); ?>
 					</button>
 					<?php foreach ( $used_types as $slug => $name ) : ?>
-						<button type="button" class="dnte-jobs__tab" data-type="<?php echo esc_attr( $slug ); ?>" role="tab" aria-selected="false">
+						<button type="button" class="core-theme-jobs__tab" data-type="<?php echo esc_attr( $slug ); ?>" role="tab" aria-selected="false">
 							<?php echo esc_html( $name ); ?>
 						</button>
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
 
-			<div class="dnte-jobs__grid" data-columns="<?php echo esc_attr( (string) $columns ); ?>">
+			<div class="core-theme-jobs__grid" data-columns="<?php echo esc_attr( (string) $columns ); ?>">
 				<?php
 				foreach ( $ids as $id ) {
-					echo dnte_roles_render_card( $id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped within.
+					echo core_theme_roles_render_card( $id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped within.
 				}
 				?>
 			</div>
 
-			<p class="dnte-jobs__empty" hidden><?php esc_html_e( 'No roles match your search.', 'dentist-exchange' ); ?></p>
+			<p class="core-theme-jobs__empty" hidden><?php esc_html_e( 'No roles match your search.', 'core' ); ?></p>
 		</div>
 		<?php
 		return (string) ob_get_clean();
 	}
 endif;
-add_shortcode( 'opening_roles', 'dnte_opening_roles_shortcode' );
+add_shortcode( 'opening_roles', 'core_theme_opening_roles_shortcode' );

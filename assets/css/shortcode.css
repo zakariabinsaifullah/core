@@ -16,7 +16,7 @@
    Filter Nav
    ============================================================================= */
 
-/* Tabs read as plain text until selected, when one takes the theme's blue
+/* Tabs read as plain text until selected, when one takes the theme's tiber
    pill. The grid is designed to sit on a dark section, so the resting colour
    is white rather than the page's text colour. */
 
@@ -52,7 +52,7 @@
 
 .ipg-filter-btn.active,
 .ipg-filter-btn.active:hover {
-    background: var(--wp--preset--color--dnte-primary-800, #2234b0);
+    background: var(--wp--preset--color--core-theme-tiber, #04262f);
     color: #ffffff;
 }
 
@@ -164,7 +164,7 @@
     margin: 0 0 20px;
     font-size: 20px;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.2;
     color: #ffffff;
 }
 
@@ -248,17 +248,16 @@
     transition: all 0.2s ease;
 }
 
-/* primary-800 rather than the brighter primary-600: it is the same blue as the
-   Learn More button and the selected tab, so the grid keeps one accent, and it
-   holds white text at 9.6:1 against primary-600's 5.9:1. */
+/* Tiber rather than the lighter tiber-light: it is the same colour as the
+   Learn More button and the selected tab, so the grid keeps one accent. */
 .ipg-page-btn:hover:not(:disabled) {
-    border-color: var(--wp--preset--color--dnte-primary-800, #2234b0);
-    color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+    border-color: var(--wp--preset--color--core-theme-tiber, #04262f);
+    color: var(--wp--preset--color--core-theme-tiber, #04262f);
 }
 
 .ipg-page-btn.active {
-    background: var(--wp--preset--color--dnte-primary-800, #2234b0);
-    border-color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+    background: var(--wp--preset--color--core-theme-tiber, #04262f);
+    border-color: var(--wp--preset--color--core-theme-tiber, #04262f);
     color: #ffffff;
 }
 

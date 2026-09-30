@@ -1,11 +1,11 @@
 /* ── Slide-in Form Panel ───────────────────────────────────────────────────── */
 
-.dnte-form-panel__body .gform-theme--foundation .gform_fields {
+.core-theme-form-panel__body .gform-theme--foundation .gform_fields {
     display: flex !important;
     flex-direction: column !important;
 }
 
-.dnte-form-overlay {
+.core-theme-form-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.55);
@@ -17,12 +17,12 @@
         visibility 0.35s ease;
 }
 
-.dnte-form-overlay.is-open {
+.core-theme-form-overlay.is-open {
     opacity: 1;
     visibility: visible;
 }
 
-.dnte-form-panel {
+.core-theme-form-panel {
     position: fixed;
     top: 0;
     right: 0;
@@ -42,14 +42,14 @@
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
 }
 
-.dnte-form-panel.is-open {
+.core-theme-form-panel.is-open {
     transform: translateX(0);
 }
 
 /* ── Header ──────────────────────────────────────────────────────────────────── */
 
-.dnte-form-panel__header {
-    background: var(--wp--preset--color--dnte-primary-800, #2234b0);
+.core-theme-form-panel__header {
+    background: var(--wp--preset--color--core-theme-tiber, #04262f);
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -62,7 +62,7 @@
     flex-shrink: 0;
 }
 
-.dnte-form-panel__phone {
+.core-theme-form-panel__phone {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -73,13 +73,13 @@
     transition: opacity 0.2s ease;
 }
 
-.dnte-form-panel__phone:hover {
+.core-theme-form-panel__phone:hover {
     color: #ffffff;
     opacity: 0.85;
     text-decoration: none;
 }
 
-.dnte-form-panel__close {
+.core-theme-form-panel__close {
     background: none;
     border: none;
     color: #ffffff;
@@ -93,7 +93,7 @@
     border-radius: 0;
 }
 
-.dnte-form-panel__close:hover {
+.core-theme-form-panel__close:hover {
     background: none;
     color: #ffffff;
     opacity: 0.7;
@@ -101,7 +101,7 @@
 
 /* ── Body ────────────────────────────────────────────────────────────────────── */
 
-.dnte-form-panel__body {
+.core-theme-form-panel__body {
     flex: 1;
     overflow-y: auto;
 
@@ -119,13 +119,13 @@
    a plain link out to the booking page, so there is nothing to switch between
    and no script behind this. */
 
-.dnte-form-panel__tabs {
+.core-theme-form-panel__tabs {
     display: flex;
-    border-bottom: 1px solid #9ca3af;
+    border-bottom: 1px solid var(--wp--preset--color--core-theme-neutral-light, #b2b3b3);
     margin: 0 0 40px;
 }
 
-.dnte-form-panel__tab {
+.core-theme-form-panel__tab {
     flex: 1;
     display: inline-flex;
     align-items: center;
@@ -136,7 +136,7 @@
     font-size: 15px;
     font-weight: 500;
     line-height: 1.3;
-    color: #9ca3af;
+    color: var(--wp--preset--color--core-theme-neutral-light, #b2b3b3);
     text-decoration: none;
 
     /* Pulls the tab's own rule down over the row's hairline so the two occupy
@@ -148,55 +148,55 @@
         border-color 0.2s ease;
 }
 
-.dnte-form-panel__tab svg {
+.core-theme-form-panel__tab svg {
     flex-shrink: 0;
 }
 
-.dnte-form-panel__tab:hover,
-.dnte-form-panel__tab:focus {
-    color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+.core-theme-form-panel__tab:hover,
+.core-theme-form-panel__tab:focus {
+    color: var(--wp--preset--color--core-theme-tiber, #04262f);
     text-decoration: none;
 }
 
-.dnte-form-panel__tab:focus-visible {
-    outline: 2px solid var(--wp--preset--color--dnte-primary-800, #2234b0);
+.core-theme-form-panel__tab:focus-visible {
+    outline: 2px solid var(--wp--preset--color--core-theme-tiber, #04262f);
     outline-offset: -2px;
 }
 
-.dnte-form-panel__tab.is-active {
-    color: var(--wp--preset--color--dnte-primary-800, #2234b0);
-    border-bottom-color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+.core-theme-form-panel__tab.is-active {
+    color: var(--wp--preset--color--core-theme-tiber, #04262f);
+    border-bottom-color: var(--wp--preset--color--core-theme-tiber, #04262f);
 }
 
 /* ── Tab panels ─────────────────────────────────────────────────────────────── */
 
-.dnte-form-panel__panel[hidden] {
+.core-theme-form-panel__panel[hidden] {
     display: none;
 }
 
-.dnte-form-panel__calendly {
+.core-theme-form-panel__calendly {
     margin-top: 8px;
 }
 
-.dnte-form-panel__calendly iframe {
+.core-theme-form-panel__calendly iframe {
     display: block;
     width: 100%;
 }
 
-.dnte-form-panel__title {
+.core-theme-form-panel__title {
     font-size: clamp(22px, 5vw, 25px);
     font-weight: 400;
-    line-height: 1.3;
+    line-height: 1.2;
 
-    /* The drawn title sits tighter than Inter's default tracking at this
+    /* The drawn title sits tighter than Instrument Sans's default tracking at this
        size; without this it runs about 6% wider than the artwork. */
     letter-spacing: -0.02em;
-    color: var(--wp--preset--color--dnte-neutral-900, #0b0d17);
+    color: var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d);
     text-align: center;
     margin: 0 0 16px;
 }
 
-.dnte-form-panel__desc {
+.core-theme-form-panel__desc {
     font-size: 16px;
     color: #4b5563;
     line-height: 1.5;
@@ -211,15 +211,15 @@
 /* On a phone the panel is the whole screen, so the 80px column of the design
    would leave the fields barely half the width. */
 @media (max-width: 600px) {
-    .dnte-form-panel__header {
+    .core-theme-form-panel__header {
         padding: 0 20px;
     }
 
-    .dnte-form-panel__body {
+    .core-theme-form-panel__body {
         padding: 28px 20px 40px;
     }
 
-    .dnte-form-panel__tab {
+    .core-theme-form-panel__tab {
         font-size: 14px;
         gap: 8px;
     }
@@ -227,13 +227,13 @@
 
 /* ── Body scroll lock ────────────────────────────────────────────────────────── */
 
-body.dnte-panel-open {
+body.core-theme-panel-open {
     overflow: hidden;
 }
 
 /* ── Gravity Forms fields ───────────────────────────────────────────────────── */
 
-/* Roboto across every Gravity Form. GF's font variables all resolve back to
+/* Instrument Sans across every Gravity Form. GF's font variables all resolve back to
    --gf-font-family-base: controls and placeholders through -primary, labels
    through -secondary, descriptions through -tertiary, buttons and validation
    direct. Setting that one variable therefore covers the lot.
@@ -241,7 +241,7 @@ body.dnte-panel-open {
    The element rule after it is for the no-framework theme, which predates the
    CSS API and does not read those variables. */
 .gform_wrapper {
-    --gf-font-family-base: var(--wp--preset--font-family--roboto, Roboto, sans-serif);
+    --gf-font-family-base: var(--wp--preset--font-family--instrument-sans, "Instrument Sans", sans-serif);
 }
 
 .gform_wrapper input,
@@ -252,7 +252,7 @@ body.dnte-panel-open {
 .gform_wrapper legend,
 .gform_wrapper .gfield_description,
 .gform_wrapper .gform_button {
-    font-family: var(--wp--preset--font-family--roboto, Roboto, sans-serif) !important;
+    font-family: var(--wp--preset--font-family--instrument-sans, "Instrument Sans", sans-serif) !important;
 }
 
 /* Field metrics come from Gravity Forms' own CSS API custom properties rather
@@ -333,7 +333,7 @@ body.dnte-panel-open {
    Each selector here carries one class more than the rule it overrides, which
    is what lets it win — several of those rules are !important. */
 
-.dnte-form-panel__body .gform_wrapper.gform-theme--framework {
+.core-theme-form-panel__body .gform_wrapper.gform-theme--framework {
     --gf-ctrl-size: 56px;
     --gf-ctrl-size-md: 56px;
     --gf-ctrl-line-height: 56px;
@@ -344,19 +344,19 @@ body.dnte-panel-open {
     --gf-ctrl-radius-max-lg: 8px;
 }
 
-.dnte-form-panel__body .gform-theme--foundation .gform_fields {
+.core-theme-form-panel__body .gform-theme--foundation .gform_fields {
     row-gap: 28px !important;
 }
 
-.dnte-form-panel__body .gform-body.gform_body input,
-.dnte-form-panel__body .gform-body.gform_body textarea,
-.dnte-form-panel__body .gform-body.gform_body select {
-    border-color: #9ca3af !important;
+.core-theme-form-panel__body .gform-body.gform_body input,
+.core-theme-form-panel__body .gform-body.gform_body textarea,
+.core-theme-form-panel__body .gform-body.gform_body select {
+    border-color: var(--wp--preset--color--core-theme-neutral-light, #b2b3b3) !important;
 }
 
-.dnte-form-panel__body .gfield_label {
+.core-theme-form-panel__body .gfield_label {
     display: block;
-    color: var(--wp--preset--color--dnte-neutral-900, #111827) !important;
+    color: var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d) !important;
     font-size: 18px !important;
     font-weight: 700 !important;
     line-height: 1.3;
@@ -365,7 +365,7 @@ body.dnte-panel-open {
 
 /* No asterisks in the design. Required fields still announce themselves —
    Gravity Forms puts aria-required on the input, not on this mark. */
-.dnte-form-panel__body .gfield_required {
+.core-theme-form-panel__body .gfield_required {
     display: none;
 }
 
@@ -380,13 +380,13 @@ body.dnte-panel-open {
 
    Kept in step with theme.json > styles.elements.button. */
 .gform_button.button {
-    background-color: var(--wp--preset--color--dnte-primary-800, #2234b0) !important;
-    color: var(--wp--preset--color--dnte-white, #ffffff) !important;
+    background-color: var(--wp--preset--color--core-theme-tiber, #04262f) !important;
+    color: var(--wp--preset--color--core-theme-white, #ffffff) !important;
     padding: 10px 20px !important;
     border: 0 !important;
     border-radius: 100px !important;
-    font-family: var(--wp--preset--font-family--inter, Inter, sans-serif) !important;
-    font-size: var(--wp--preset--font-size--dnte-medium, 16px) !important;
+    font-family: var(--wp--preset--font-family--instrument-sans, "Instrument Sans", sans-serif) !important;
+    font-size: var(--wp--preset--font-size--core-theme-medium, 16px) !important;
     font-style: normal !important;
     font-weight: 500 !important;
     line-height: 1.5 !important;
@@ -398,12 +398,12 @@ body.dnte-panel-open {
 /* Repeats the resting colour to override Gravity Forms' own hover background. */
 .gform_button.button:hover,
 .gform_button.button:focus {
-    background-color: var(--wp--preset--color--dnte-primary-900, #24338b) !important;
-    color: var(--wp--preset--color--dnte-white, #ffffff) !important;
+    background-color: var(--wp--preset--color--core-theme-tiber-dark, #031e25) !important;
+    color: var(--wp--preset--color--core-theme-white, #ffffff) !important;
 }
 
 .gform_button.button:focus-visible {
-    outline: 2px solid var(--wp--preset--color--dnte-neutral-800, #2a3136) !important;
+    outline: 2px solid var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d) !important;
     outline-offset: 2px !important;
 }
 
@@ -468,16 +468,16 @@ body.dnte-panel-open {
 }
 
 .gform_wrapper .gfield_radio .gchoice:hover {
-    border-color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+    border-color: var(--wp--preset--color--core-theme-tiber, #04262f);
 }
 
 .gform_wrapper .gfield_radio .gchoice:has(input:checked) {
-    border-color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+    border-color: var(--wp--preset--color--core-theme-tiber, #04262f);
     background: #edf5ff;
 }
 
 .gform_wrapper .gfield_radio .gchoice:has(input:focus-visible) {
-    outline: 2px solid var(--wp--preset--color--dnte-primary-800, #2234b0);
+    outline: 2px solid var(--wp--preset--color--core-theme-tiber, #04262f);
     outline-offset: 2px;
 }
 
@@ -521,14 +521,14 @@ body.dnte-panel-open {
 }
 
 .gform_wrapper .gfield_radio .gchoice input[type='radio']:checked {
-    border-color: var(--wp--preset--color--dnte-primary-800, #2234b0) !important;
-    background-color: var(--wp--preset--color--dnte-primary-800, #2234b0) !important;
+    border-color: var(--wp--preset--color--core-theme-tiber, #04262f) !important;
+    background-color: var(--wp--preset--color--core-theme-tiber, #04262f) !important;
 }
 
 .gform_wrapper .gfield_radio .gchoice label {
     margin: 0 !important;
     padding: 0 !important;
-    color: var(--wp--preset--color--dnte-neutral-900, #0b0d17);
+    color: var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d);
     font-size: 16px;
     line-height: 1.3;
     cursor: pointer;
@@ -540,7 +540,7 @@ body.dnte-panel-open {
 }
 
 .gform_wrapper .gfield_radio .gchoice:has(input:checked) label {
-    color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+    color: var(--wp--preset--color--core-theme-tiber, #04262f);
 }
 
 /* The pills keep their labels on one line, so on a narrow phone the longest
@@ -587,7 +587,7 @@ p.gform_required_legend {
 
    Both the border and the placeholder derive from the inherited text colour, so
    the bar reads correctly on a dark section (white on black, as drawn) and on a
-   light one without being told which it is on. `--dnte-subscribe-border`
+   light one without being told which it is on. `--core-theme-subscribe-border`
    overrides the border alone where a section wants it stronger or softer. */
 
 .gform_wrapper:has(.gform_fields > .gfield--type-email:only-child) {
@@ -634,7 +634,7 @@ p.gform_required_legend {
 
     /* Both answer !important rules on every field earlier in this file. */
     background-color: transparent !important;
-    border: 1px solid var(--dnte-subscribe-border, #fff) !important;
+    border: 1px solid var(--core-theme-subscribe-border, #fff) !important;
 }
 
 .gform_wrapper form:has(.gform_fields > .gfield--type-email:only-child) input[type='email']::placeholder {

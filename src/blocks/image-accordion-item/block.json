@@ -1,15 +1,15 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "dnte/image-accordion-item",
-    "version": "0.9.0",
+    "name": "core-theme/image-accordion-item",
+    "version": "0.0.1",
     "title": "Image Accordion Item",
-    "category": "dnte",
+    "category": "core-theme",
     "icon": "format-image",
     "description": "Individual image, title and button for the Image Accordion block.",
     "example": {},
-    "parent": ["dnte/image-accordion"],
-    "usesContext": ["dnte/showTitle", "dnte/showDesc", "dnte/showBtn", "dnte/titleTag"],
+    "parent": ["core-theme/image-accordion"],
+    "usesContext": ["core-theme/showTitle", "core-theme/showDesc", "core-theme/showBtn", "core-theme/titleTag"],
     "supports": {
         "anchor": true,
         "html": false,
@@ -107,7 +107,7 @@
             "type": "string"
         }
     },
-    "textdomain": "dentist-exchange",
+    "textdomain": "core",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css"

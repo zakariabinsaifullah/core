@@ -2,7 +2,7 @@
  * core/read-more — theme button styling, with an optional arrow.
  *
  * The block is dynamic, so the classes that do the work are added on the
- * server by dnte_render_read_more_button(). This file adds the toggle and
+ * server by core_theme_render_read_more_button(). This file adds the toggle and
  * mirrors the same classes onto the editor preview, which the render filter
  * never reaches.
  */
@@ -19,7 +19,7 @@ import './style.scss';
 const BLOCK_NAME = 'core/read-more';
 const ATTRIBUTE = 'showArrow';
 
-addFilter('blocks.registerBlockType', 'dnte/read-more-button-add-attribute', (settings, name) => {
+addFilter('blocks.registerBlockType', 'core-theme/read-more-button-add-attribute', (settings, name) => {
     if (name !== BLOCK_NAME) {
         return settings;
     }
@@ -38,7 +38,7 @@ addFilter('blocks.registerBlockType', 'dnte/read-more-button-add-attribute', (se
 
 addFilter(
     'editor.BlockEdit',
-    'dnte/read-more-button-add-inspector-controls',
+    'core-theme/read-more-button-add-inspector-controls',
     createHigherOrderComponent(BlockEdit => {
         return props => {
             const { name, attributes, setAttributes } = props;
@@ -51,9 +51,9 @@ addFilter(
                 <>
                     <BlockEdit {...props} />
                     <InspectorControls>
-                        <PanelBody title={__('Button', 'dentist-exchange')} initialOpen={false}>
+                        <PanelBody title={__('Button', 'core')} initialOpen={false}>
                             <NativeToggleControl
-                                label={__('Show arrow icon', 'dentist-exchange')}
+                                label={__('Show arrow icon', 'core')}
                                 checked={!!attributes[ATTRIBUTE]}
                                 onChange={value => setAttributes({ [ATTRIBUTE]: value })}
                             />
@@ -67,7 +67,7 @@ addFilter(
 
 addFilter(
     'editor.BlockListBlock',
-    'dnte/read-more-button-add-styles',
+    'core-theme/read-more-button-add-styles',
     createHigherOrderComponent(BlockListBlock => {
         return props => {
             const { name, attributes } = props;
@@ -76,7 +76,7 @@ addFilter(
                 return <BlockListBlock {...props} />;
             }
 
-            const classes = [props.className, 'wp-element-button', attributes?.[ATTRIBUTE] && 'dnte-has-arrow'].filter(Boolean).join(' ');
+            const classes = [props.className, 'wp-element-button', attributes?.[ATTRIBUTE] && 'core-theme-has-arrow'].filter(Boolean).join(' ');
 
             return <BlockListBlock {...props} className={classes} />;
         };

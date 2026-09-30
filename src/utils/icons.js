@@ -265,59 +265,59 @@ import {
 const categories = [
     {
         slug: 'all',
-        name: __('All Icons', 'dentist-exchange')
+        name: __('All Icons', 'core')
     },
     {
         slug: 'arrows',
-        name: __('Arrows', 'dentist-exchange')
+        name: __('Arrows', 'core')
     },
     {
         slug: 'editor',
-        name: __('Editor', 'dentist-exchange')
+        name: __('Editor', 'core')
     },
     {
         slug: 'actions',
-        name: __('Actions', 'dentist-exchange')
+        name: __('Actions', 'core')
     },
     {
         slug: 'devices',
-        name: __('Devices', 'dentist-exchange')
+        name: __('Devices', 'core')
     },
     {
         slug: 'interface',
-        name: __('Interface', 'dentist-exchange')
+        name: __('Interface', 'core')
     },
     {
         slug: 'media',
-        name: __('Media', 'dentist-exchange')
+        name: __('Media', 'core')
     },
     {
         slug: 'format',
-        name: __('Formatting', 'dentist-exchange')
+        name: __('Formatting', 'core')
     },
     {
         slug: 'layout',
-        name: __('Layout', 'dentist-exchange')
+        name: __('Layout', 'core')
     },
     {
         slug: 'tables',
-        name: __('Tables', 'dentist-exchange')
+        name: __('Tables', 'core')
     },
     {
         slug: 'posts',
-        name: __('Posts & Pages', 'dentist-exchange')
+        name: __('Posts & Pages', 'core')
     },
     {
         slug: 'comments',
-        name: __('Comments', 'dentist-exchange')
+        name: __('Comments', 'core')
     },
     {
         slug: 'ecommerce',
-        name: __('E-Commerce', 'dentist-exchange')
+        name: __('E-Commerce', 'core')
     },
     {
         slug: 'misc',
-        name: __('Miscellaneous', 'dentist-exchange')
+        name: __('Miscellaneous', 'core')
     }
 ];
 
@@ -328,209 +328,209 @@ const icons = [
     // Original icons
     {
         name: 'wordpress',
-        title: __('WordPress', 'dentist-exchange'),
+        title: __('WordPress', 'core'),
         icon: wordpress,
         categories: ['misc'],
         isDefault: true
     },
     {
         name: 'paragraph',
-        title: __('Paragraph', 'dentist-exchange'),
+        title: __('Paragraph', 'core'),
         icon: paragraph,
         categories: ['editor']
     },
     {
         name: 'share',
-        title: __('Share', 'dentist-exchange'),
+        title: __('Share', 'core'),
         icon: share,
         categories: ['actions']
     },
     {
         name: 'star-filled',
-        title: __('Star Filled', 'dentist-exchange'),
+        title: __('Star Filled', 'core'),
         icon: starFilled,
         categories: ['interface'],
         isDefault: true
     },
     {
         name: 'star-empty',
-        title: __('Star Empty', 'dentist-exchange'),
+        title: __('Star Empty', 'core'),
         icon: starEmpty,
         categories: ['interface']
     },
     {
         name: 'check',
-        title: __('Check', 'dentist-exchange'),
+        title: __('Check', 'core'),
         icon: check,
         categories: ['interface'],
         isDefault: true
     },
     {
         name: 'menu',
-        title: __('Menu', 'dentist-exchange'),
+        title: __('Menu', 'core'),
         icon: menu,
         categories: ['interface']
     },
     {
         name: 'help',
-        title: __('Help', 'dentist-exchange'),
+        title: __('Help', 'core'),
         icon: help,
         categories: ['interface']
     },
     {
         name: 'globe',
-        title: __('Globe', 'dentist-exchange'),
+        title: __('Globe', 'core'),
         icon: globe,
         categories: ['misc']
     },
     {
         name: 'gallery',
-        title: __('Gallery', 'dentist-exchange'),
+        title: __('Gallery', 'core'),
         icon: gallery,
         categories: ['editor', 'media']
     },
     // {
     //     name: 'edit',
-    //     title: __('Edit', 'dentist-exchange'),
+    //     title: __('Edit', 'core'),
     //     icon: edit,
     //     categories: ['actions']
     // },
     {
         name: 'cloud',
-        title: __('Cloud', 'dentist-exchange'),
+        title: __('Cloud', 'core'),
         icon: cloud,
         categories: ['misc']
     },
     {
         name: 'archive',
-        title: __('Archive', 'dentist-exchange'),
+        title: __('Archive', 'core'),
         icon: archive,
         categories: ['misc']
     },
     {
         name: 'settings',
-        title: __('Settings', 'dentist-exchange'),
+        title: __('Settings', 'core'),
         icon: settings,
         categories: ['interface']
     },
     {
         name: 'home',
-        title: __('Home', 'dentist-exchange'),
+        title: __('Home', 'core'),
         icon: home,
         categories: ['misc']
     },
     // {
     //     name: 'warning',
-    //     title: __('Warning', 'dentist-exchange'),
+    //     title: __('Warning', 'core'),
     //     icon: warning,
     //     categories: ['interface']
     // },
     {
         name: 'info',
-        title: __('Info', 'dentist-exchange'),
+        title: __('Info', 'core'),
         icon: info,
         categories: ['interface']
     },
     {
         name: 'search',
-        title: __('Search', 'dentist-exchange'),
+        title: __('Search', 'core'),
         icon: search,
         categories: ['actions']
     },
     {
         name: 'calendar',
-        title: __('Calendar', 'dentist-exchange'),
+        title: __('Calendar', 'core'),
         icon: calendar,
         categories: ['misc']
     },
     {
         name: 'desktop',
-        title: __('Desktop', 'dentist-exchange'),
+        title: __('Desktop', 'core'),
         icon: desktop,
         categories: ['devices']
     },
     {
         name: 'mobile',
-        title: __('Mobile', 'dentist-exchange'),
+        title: __('Mobile', 'core'),
         icon: mobile,
         categories: ['devices']
     },
     {
         name: 'tablet',
-        title: __('Tablet', 'dentist-exchange'),
+        title: __('Tablet', 'core'),
         icon: tablet,
         categories: ['devices']
     },
     {
         name: 'download',
-        title: __('Download', 'dentist-exchange'),
+        title: __('Download', 'core'),
         icon: download,
         categories: ['actions'],
         isDefault: true
     },
     {
         name: 'pencil',
-        title: __('Pencil', 'dentist-exchange'),
+        title: __('Pencil', 'core'),
         icon: pencil,
         categories: ['actions']
     },
     {
         name: 'external',
-        title: __('External', 'dentist-exchange'),
+        title: __('External', 'core'),
         icon: external,
         categories: ['interface']
     },
     {
         name: 'trash',
-        title: __('Trash', 'dentist-exchange'),
+        title: __('Trash', 'core'),
         icon: trash,
         categories: ['actions']
     },
     {
         name: 'upload',
-        title: __('Upload', 'dentist-exchange'),
+        title: __('Upload', 'core'),
         icon: upload,
         categories: ['actions']
     },
     {
         name: 'plus',
-        title: __('Plus', 'dentist-exchange'),
+        title: __('Plus', 'core'),
         icon: plus,
         categories: ['interface']
     },
     {
         name: 'close',
-        title: __('Close', 'dentist-exchange'),
+        title: __('Close', 'core'),
         icon: close,
         categories: ['interface']
     },
     {
         name: 'update',
-        title: __('Update', 'dentist-exchange'),
+        title: __('Update', 'core'),
         icon: update,
         categories: ['actions']
     },
     {
         name: 'arrow-up',
-        title: __('Arrow Up', 'dentist-exchange'),
+        title: __('Arrow Up', 'core'),
         icon: arrowUp,
         categories: ['arrows']
     },
     {
         name: 'arrow-down',
-        title: __('Arrow Down', 'dentist-exchange'),
+        title: __('Arrow Down', 'core'),
         icon: arrowDown,
         categories: ['arrows']
     },
     {
         name: 'arrow-left',
-        title: __('Arrow Left', 'dentist-exchange'),
+        title: __('Arrow Left', 'core'),
         icon: arrowLeft,
         categories: ['arrows']
     },
     {
         name: 'arrow-right',
-        title: __('Arrow Right', 'dentist-exchange'),
+        title: __('Arrow Right', 'core'),
         icon: arrowRight,
         categories: ['arrows'],
         isDefault: true
@@ -539,50 +539,50 @@ const icons = [
     // Additional icons - Arrows
     {
         name: 'chevron-down',
-        title: __('Chevron Down', 'dentist-exchange'),
+        title: __('Chevron Down', 'core'),
         icon: chevronDown,
         categories: ['arrows']
     },
     {
         name: 'chevron-up',
-        title: __('Chevron Up', 'dentist-exchange'),
+        title: __('Chevron Up', 'core'),
         icon: chevronUp,
         categories: ['arrows']
     },
     {
         name: 'chevron-left',
-        title: __('Chevron Left', 'dentist-exchange'),
+        title: __('Chevron Left', 'core'),
         icon: chevronLeft,
         categories: ['arrows']
     },
     {
         name: 'chevron-right',
-        title: __('Chevron Right', 'dentist-exchange'),
+        title: __('Chevron Right', 'core'),
         icon: chevronRight,
         categories: ['arrows'],
         isDefault: true
     },
     {
         name: 'chevron-right-small',
-        title: __('Chevron Right Small', 'dentist-exchange'),
+        title: __('Chevron Right Small', 'core'),
         icon: chevronRightSmall,
         categories: ['arrows']
     },
     {
         name: 'chevron-up-down',
-        title: __('Chevron Up Down', 'dentist-exchange'),
+        title: __('Chevron Up Down', 'core'),
         icon: chevronUpDown,
         categories: ['arrows']
     },
     {
         name: 'previous',
-        title: __('Previous', 'dentist-exchange'),
+        title: __('Previous', 'core'),
         icon: previous,
         categories: ['arrows']
     },
     {
         name: 'next',
-        title: __('Next', 'dentist-exchange'),
+        title: __('Next', 'core'),
         icon: next,
         categories: ['arrows']
     },
@@ -590,109 +590,109 @@ const icons = [
     // Editor
     {
         name: 'heading',
-        title: __('Heading', 'dentist-exchange'),
+        title: __('Heading', 'core'),
         icon: heading,
         categories: ['editor']
     },
     {
         name: 'quote',
-        title: __('Quote', 'dentist-exchange'),
+        title: __('Quote', 'core'),
         icon: quote,
         categories: ['editor']
     },
     {
         name: 'list',
-        title: __('List', 'dentist-exchange'),
+        title: __('List', 'core'),
         icon: list,
         categories: ['editor']
     },
     {
         name: 'list-item',
-        title: __('List Item', 'dentist-exchange'),
+        title: __('List Item', 'core'),
         icon: listItem,
         categories: ['editor']
     },
     {
         name: 'code',
-        title: __('Code', 'dentist-exchange'),
+        title: __('Code', 'core'),
         icon: code,
         categories: ['editor']
     },
     {
         name: 'image',
-        title: __('Image', 'dentist-exchange'),
+        title: __('Image', 'core'),
         icon: image,
         categories: ['editor', 'media']
     },
     {
         name: 'video',
-        title: __('Video', 'dentist-exchange'),
+        title: __('Video', 'core'),
         icon: video,
         categories: ['editor', 'media']
     },
     {
         name: 'audio',
-        title: __('Audio', 'dentist-exchange'),
+        title: __('Audio', 'core'),
         icon: audio,
         categories: ['editor', 'media']
     },
     {
         name: 'media',
-        title: __('Media', 'dentist-exchange'),
+        title: __('Media', 'core'),
         icon: media,
         categories: ['editor', 'media']
     },
     {
         name: 'cover',
-        title: __('Cover', 'dentist-exchange'),
+        title: __('Cover', 'core'),
         icon: cover,
         categories: ['editor']
     },
     {
         name: 'verse',
-        title: __('Verse', 'dentist-exchange'),
+        title: __('Verse', 'core'),
         icon: verse,
         categories: ['editor']
     },
     {
         name: 'preformatted',
-        title: __('Preformatted', 'dentist-exchange'),
+        title: __('Preformatted', 'core'),
         icon: preformatted,
         categories: ['editor']
     },
     {
         name: 'shortcode',
-        title: __('Shortcode', 'dentist-exchange'),
+        title: __('Shortcode', 'core'),
         icon: shortcode,
         categories: ['editor']
     },
     {
         name: 'html',
-        title: __('HTML', 'dentist-exchange'),
+        title: __('HTML', 'core'),
         icon: html,
         categories: ['editor']
     },
     {
         name: 'pullquote',
-        title: __('Pullquote', 'dentist-exchange'),
+        title: __('Pullquote', 'core'),
         icon: pullquote,
         categories: ['editor']
     },
     {
         name: 'button',
-        title: __('Button', 'dentist-exchange'),
+        title: __('Button', 'core'),
         icon: button,
         categories: ['editor']
     },
     {
         name: 'buttons',
-        title: __('Buttons', 'dentist-exchange'),
+        title: __('Buttons', 'core'),
         icon: buttons,
         categories: ['editor']
     },
     {
         name: 'media-and-text',
-        title: __('Media & Text', 'dentist-exchange'),
+        title: __('Media & Text', 'core'),
         icon: mediaAndText,
         categories: ['editor', 'layout']
     },
@@ -700,121 +700,121 @@ const icons = [
     // Format
     {
         name: 'format-bold',
-        title: __('Format Bold', 'dentist-exchange'),
+        title: __('Format Bold', 'core'),
         icon: formatBold,
         categories: ['format']
     },
     {
         name: 'format-italic',
-        title: __('Format Italic', 'dentist-exchange'),
+        title: __('Format Italic', 'core'),
         icon: formatItalic,
         categories: ['format']
     },
     {
         name: 'format-strikethrough',
-        title: __('Format Strikethrough', 'dentist-exchange'),
+        title: __('Format Strikethrough', 'core'),
         icon: formatStrikethrough,
         categories: ['format']
     },
     {
         name: 'format-underline',
-        title: __('Format Underline', 'dentist-exchange'),
+        title: __('Format Underline', 'core'),
         icon: formatUnderline,
         categories: ['format']
     },
     {
         name: 'format-capitalize',
-        title: __('Format Capitalize', 'dentist-exchange'),
+        title: __('Format Capitalize', 'core'),
         icon: formatCapitalize,
         categories: ['format']
     },
     {
         name: 'format-uppercase',
-        title: __('Format Uppercase', 'dentist-exchange'),
+        title: __('Format Uppercase', 'core'),
         icon: formatUppercase,
         categories: ['format']
     },
     {
         name: 'format-lowercase',
-        title: __('Format Lowercase', 'dentist-exchange'),
+        title: __('Format Lowercase', 'core'),
         icon: formatLowercase,
         categories: ['format']
     },
     {
         name: 'format-ltr',
-        title: __('Format LTR', 'dentist-exchange'),
+        title: __('Format LTR', 'core'),
         icon: formatLTR,
         categories: ['format']
     },
     // {
     //     name: 'format-rtl',
-    //     title: __('Format RTL', 'dentist-exchange'),
+    //     title: __('Format RTL', 'core'),
     //     icon: formatRTL,
     //     categories: ['format']
     // },
     {
         name: 'format-indent',
-        title: __('Format Indent', 'dentist-exchange'),
+        title: __('Format Indent', 'core'),
         icon: formatIndent,
         categories: ['format']
     },
     {
         name: 'format-indent-rtl',
-        title: __('Format Indent RTL', 'dentist-exchange'),
+        title: __('Format Indent RTL', 'core'),
         icon: formatIndentRTL,
         categories: ['format']
     },
     {
         name: 'format-outdent',
-        title: __('Format Outdent', 'dentist-exchange'),
+        title: __('Format Outdent', 'core'),
         icon: formatOutdent,
         categories: ['format']
     },
     {
         name: 'format-outdent-rtl',
-        title: __('Format Outdent RTL', 'dentist-exchange'),
+        title: __('Format Outdent RTL', 'core'),
         icon: formatOutdentRTL,
         categories: ['format']
     },
     {
         name: 'format-list-bullets',
-        title: __('Format List Bullets', 'dentist-exchange'),
+        title: __('Format List Bullets', 'core'),
         icon: formatListBullets,
         categories: ['format']
     },
     {
         name: 'format-list-bullets-rtl',
-        title: __('Format List Bullets RTL', 'dentist-exchange'),
+        title: __('Format List Bullets RTL', 'core'),
         icon: formatListBulletsRTL,
         categories: ['format']
     },
     {
         name: 'format-list-numbered',
-        title: __('Format List Numbered', 'dentist-exchange'),
+        title: __('Format List Numbered', 'core'),
         icon: formatListNumbered,
         categories: ['format']
     },
     {
         name: 'format-list-numbered-rtl',
-        title: __('Format List Numbered RTL', 'dentist-exchange'),
+        title: __('Format List Numbered RTL', 'core'),
         icon: formatListNumberedRTL,
         categories: ['format']
     },
     {
         name: 'text-color',
-        title: __('Text Color', 'dentist-exchange'),
+        title: __('Text Color', 'core'),
         icon: textColor,
         categories: ['format']
     },
     {
         name: 'subscript',
-        title: __('Subscript', 'dentist-exchange'),
+        title: __('Subscript', 'core'),
         icon: subscript,
         categories: ['format']
     },
     {
         name: 'superscript',
-        title: __('Superscript', 'dentist-exchange'),
+        title: __('Superscript', 'core'),
         icon: superscript,
         categories: ['format']
     },
@@ -822,7 +822,7 @@ const icons = [
     // Layout
     {
         name: 'layouts',
-        title: __('Layouts', 'dentist-exchange'),
+        title: __('Layouts', 'core'),
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -843,145 +843,145 @@ const icons = [
     },
     {
         name: 'align-left',
-        title: __('Align Left', 'dentist-exchange'),
+        title: __('Align Left', 'core'),
         icon: alignLeft,
         categories: ['layout']
     },
     {
         name: 'align-center',
-        title: __('Align Center', 'dentist-exchange'),
+        title: __('Align Center', 'core'),
         icon: alignCenter,
         categories: ['layout']
     },
     {
         name: 'align-right',
-        title: __('Align Right', 'dentist-exchange'),
+        title: __('Align Right', 'core'),
         icon: alignRight,
         categories: ['layout']
     },
     {
         name: 'align-justify',
-        title: __('Align Justify', 'dentist-exchange'),
+        title: __('Align Justify', 'core'),
         icon: alignJustify,
         categories: ['layout']
     },
     {
         name: 'align-none',
-        title: __('Align None', 'dentist-exchange'),
+        title: __('Align None', 'core'),
         icon: alignNone,
         categories: ['layout']
     },
     {
         name: 'columns',
-        title: __('Columns', 'dentist-exchange'),
+        title: __('Columns', 'core'),
         icon: columns,
         categories: ['layout']
     },
     {
         name: 'column',
-        title: __('Column', 'dentist-exchange'),
+        title: __('Column', 'core'),
         icon: column,
         categories: ['layout']
     },
     {
         name: 'row',
-        title: __('Row', 'dentist-exchange'),
+        title: __('Row', 'core'),
         icon: row,
         categories: ['layout']
     },
     {
         name: 'group',
-        title: __('Group', 'dentist-exchange'),
+        title: __('Group', 'core'),
         icon: group,
         categories: ['layout']
     },
     {
         name: 'ungroup',
-        title: __('Ungroup', 'dentist-exchange'),
+        title: __('Ungroup', 'core'),
         icon: ungroup,
         categories: ['layout']
     },
     {
         name: 'stretch-wide',
-        title: __('Stretch Wide', 'dentist-exchange'),
+        title: __('Stretch Wide', 'core'),
         icon: stretchWide,
         categories: ['layout']
     },
     {
         name: 'stretch-full-width',
-        title: __('Stretch Full Width', 'dentist-exchange'),
+        title: __('Stretch Full Width', 'core'),
         icon: stretchFullWidth,
         categories: ['layout']
     },
     {
         name: 'position-left',
-        title: __('Position Left', 'dentist-exchange'),
+        title: __('Position Left', 'core'),
         icon: positionLeft,
         categories: ['layout']
     },
     {
         name: 'position-center',
-        title: __('Position Center', 'dentist-exchange'),
+        title: __('Position Center', 'core'),
         icon: positionCenter,
         categories: ['layout']
     },
     {
         name: 'position-right',
-        title: __('Position Right', 'dentist-exchange'),
+        title: __('Position Right', 'core'),
         icon: positionRight,
         categories: ['layout']
     },
     {
         name: 'justify-left',
-        title: __('Justify Left', 'dentist-exchange'),
+        title: __('Justify Left', 'core'),
         icon: justifyLeft,
         categories: ['layout']
     },
     {
         name: 'justify-center',
-        title: __('Justify Center', 'dentist-exchange'),
+        title: __('Justify Center', 'core'),
         icon: justifyCenter,
         categories: ['layout']
     },
     {
         name: 'justify-right',
-        title: __('Justify Right', 'dentist-exchange'),
+        title: __('Justify Right', 'core'),
         icon: justifyRight,
         categories: ['layout']
     },
     {
         name: 'justify-space-between',
-        title: __('Justify Space Between', 'dentist-exchange'),
+        title: __('Justify Space Between', 'core'),
         icon: justifySpaceBetween,
         categories: ['layout']
     },
     {
         name: 'justify-stretch',
-        title: __('Justify Stretch', 'dentist-exchange'),
+        title: __('Justify Stretch', 'core'),
         icon: justifyStretch,
         categories: ['layout']
     },
     {
         name: 'header',
-        title: __('Header', 'dentist-exchange'),
+        title: __('Header', 'core'),
         icon: header,
         categories: ['layout']
     },
     {
         name: 'footer',
-        title: __('Footer', 'dentist-exchange'),
+        title: __('Footer', 'core'),
         icon: footer,
         categories: ['layout']
     },
     {
         name: 'sidebar',
-        title: __('Sidebar', 'dentist-exchange'),
+        title: __('Sidebar', 'core'),
         icon: sidebar,
         categories: ['layout']
     },
     {
         name: 'layout',
-        title: __('Layout', 'dentist-exchange'),
+        title: __('Layout', 'core'),
         icon: layout,
         categories: ['layout']
     },
@@ -989,49 +989,49 @@ const icons = [
     // Tables
     {
         name: 'table',
-        title: __('Table', 'dentist-exchange'),
+        title: __('Table', 'core'),
         icon: table,
         categories: ['tables']
     },
     {
         name: 'block-table',
-        title: __('Block Table', 'dentist-exchange'),
+        title: __('Block Table', 'core'),
         icon: blockTable,
         categories: ['tables']
     },
     {
         name: 'table-column-after',
-        title: __('Table Column After', 'dentist-exchange'),
+        title: __('Table Column After', 'core'),
         icon: tableColumnAfter,
         categories: ['tables']
     },
     {
         name: 'table-column-before',
-        title: __('Table Column Before', 'dentist-exchange'),
+        title: __('Table Column Before', 'core'),
         icon: tableColumnBefore,
         categories: ['tables']
     },
     {
         name: 'table-column-delete',
-        title: __('Table Column Delete', 'dentist-exchange'),
+        title: __('Table Column Delete', 'core'),
         icon: tableColumnDelete,
         categories: ['tables']
     },
     {
         name: 'table-row-after',
-        title: __('Table Row After', 'dentist-exchange'),
+        title: __('Table Row After', 'core'),
         icon: tableRowAfter,
         categories: ['tables']
     },
     {
         name: 'table-row-before',
-        title: __('Table Row Before', 'dentist-exchange'),
+        title: __('Table Row Before', 'core'),
         icon: tableRowBefore,
         categories: ['tables']
     },
     {
         name: 'table-row-delete',
-        title: __('Table Row Delete', 'dentist-exchange'),
+        title: __('Table Row Delete', 'core'),
         icon: tableRowDelete,
         categories: ['tables']
     },
@@ -1039,98 +1039,98 @@ const icons = [
     // Actions
     {
         name: 'copy',
-        title: __('Copy', 'dentist-exchange'),
+        title: __('Copy', 'core'),
         icon: copy,
         categories: ['actions']
     },
 
     {
         name: 'redo',
-        title: __('Redo', 'dentist-exchange'),
+        title: __('Redo', 'core'),
         icon: redo,
         categories: ['actions']
     },
     {
         name: 'undo',
-        title: __('Undo', 'dentist-exchange'),
+        title: __('Undo', 'core'),
         icon: undo,
         categories: ['actions']
     },
     {
         name: 'create',
-        title: __('Create', 'dentist-exchange'),
+        title: __('Create', 'core'),
         icon: create,
         categories: ['actions']
     },
     {
         name: 'lock',
-        title: __('Lock', 'dentist-exchange'),
+        title: __('Lock', 'core'),
         icon: lock,
         categories: ['actions']
     },
     {
         name: 'unlock',
-        title: __('Unlock', 'dentist-exchange'),
+        title: __('Unlock', 'core'),
         icon: unlock,
         categories: ['actions']
     },
     {
         name: 'lock-outline',
-        title: __('Lock Outline', 'dentist-exchange'),
+        title: __('Lock Outline', 'core'),
         icon: lockOutline,
         categories: ['actions']
     },
     {
         name: 'lock-small',
-        title: __('Lock Small', 'dentist-exchange'),
+        title: __('Lock Small', 'core'),
         icon: lockSmall,
         categories: ['actions']
     },
     {
         name: 'login',
-        title: __('Login', 'dentist-exchange'),
+        title: __('Login', 'core'),
         icon: login,
         categories: ['actions']
     },
     {
         name: 'reset',
-        title: __('Reset', 'dentist-exchange'),
+        title: __('Reset', 'core'),
         icon: reset,
         categories: ['actions']
     },
     {
         name: 'rotate-left',
-        title: __('Rotate Left', 'dentist-exchange'),
+        title: __('Rotate Left', 'core'),
         icon: rotateLeft,
         categories: ['actions']
     },
     {
         name: 'rotate-right',
-        title: __('Rotate Right', 'dentist-exchange'),
+        title: __('Rotate Right', 'core'),
         icon: rotateRight,
         categories: ['actions']
     },
     {
         name: 'flip-horizontal',
-        title: __('Flip Horizontal', 'dentist-exchange'),
+        title: __('Flip Horizontal', 'core'),
         icon: flipHorizontal,
         categories: ['actions']
     },
     {
         name: 'flip-vertical',
-        title: __('Flip Vertical', 'dentist-exchange'),
+        title: __('Flip Vertical', 'core'),
         icon: flipVertical,
         categories: ['actions']
     },
     {
         name: 'replace',
-        title: __('Replace', 'dentist-exchange'),
+        title: __('Replace', 'core'),
         icon: replace,
         categories: ['actions']
     },
     {
         name: 'fullscreen',
-        title: __('Fullscreen', 'dentist-exchange'),
+        title: __('Fullscreen', 'core'),
         icon: fullscreen,
         categories: ['actions']
     },
@@ -1138,122 +1138,122 @@ const icons = [
     // Interface
     {
         name: 'close-small',
-        title: __('Close Small', 'dentist-exchange'),
+        title: __('Close Small', 'core'),
         icon: closeSmall,
         categories: ['interface']
     },
     {
         name: 'more',
-        title: __('More', 'dentist-exchange'),
+        title: __('More', 'core'),
         icon: more,
         categories: ['interface']
     },
     {
         name: 'more-horizontal',
-        title: __('More Horizontal', 'dentist-exchange'),
+        title: __('More Horizontal', 'core'),
         icon: moreHorizontal,
         categories: ['interface']
     },
     {
         name: 'more-vertical',
-        title: __('More Vertical', 'dentist-exchange'),
+        title: __('More Vertical', 'core'),
         icon: moreVertical,
         categories: ['interface']
     },
     {
         name: 'star-half',
-        title: __('Star Half', 'dentist-exchange'),
+        title: __('Star Half', 'core'),
         icon: starHalf,
         categories: ['interface']
     },
     {
         name: 'help-filled',
-        title: __('Help Filled', 'dentist-exchange'),
+        title: __('Help Filled', 'core'),
         icon: helpFilled,
         categories: ['interface']
     },
     {
         name: 'cog',
-        title: __('Cog', 'dentist-exchange'),
+        title: __('Cog', 'core'),
         icon: cog,
         categories: ['interface'],
         isDefault: true
     },
     {
         name: 'plus-circle',
-        title: __('Plus Circle', 'dentist-exchange'),
+        title: __('Plus Circle', 'core'),
         icon: plusCircle,
         categories: ['interface']
     },
     {
         name: 'plus-circle-filled',
-        title: __('Plus Circle Filled', 'dentist-exchange'),
+        title: __('Plus Circle Filled', 'core'),
         icon: plusCircleFilled,
         categories: ['interface']
     },
     {
         name: 'cancel-circle-filled',
-        title: __('Cancel Circle Filled', 'dentist-exchange'),
+        title: __('Cancel Circle Filled', 'core'),
         icon: cancelCircleFilled,
         categories: ['interface']
     },
     {
         name: 'plugins',
-        title: __('Plugins', 'dentist-exchange'),
+        title: __('Plugins', 'core'),
         icon: plugins,
         categories: ['interface']
     },
     {
         name: 'filter',
-        title: __('Filter', 'dentist-exchange'),
+        title: __('Filter', 'core'),
         icon: filter,
         categories: ['interface']
     },
     {
         name: 'list-view',
-        title: __('List View', 'dentist-exchange'),
+        title: __('List View', 'core'),
         icon: listView,
         categories: ['interface']
     },
     {
         name: 'drag-handle',
-        title: __('Drag Handle', 'dentist-exchange'),
+        title: __('Drag Handle', 'core'),
         icon: dragHandle,
         categories: ['interface']
     },
     {
         name: 'handle',
-        title: __('Handle', 'dentist-exchange'),
+        title: __('Handle', 'core'),
         icon: handle,
         categories: ['interface']
     },
     {
         name: 'seen',
-        title: __('Seen', 'dentist-exchange'),
+        title: __('Seen', 'core'),
         icon: seen,
         categories: ['interface']
     },
     {
         name: 'unseen',
-        title: __('Unseen', 'dentist-exchange'),
+        title: __('Unseen', 'core'),
         icon: unseen,
         categories: ['interface']
     },
     {
         name: 'keyboard-close',
-        title: __('Keyboard Close', 'dentist-exchange'),
+        title: __('Keyboard Close', 'core'),
         icon: keyboardClose,
         categories: ['interface']
     },
     {
         name: 'keyboard-return',
-        title: __('Keyboard Return', 'dentist-exchange'),
+        title: __('Keyboard Return', 'core'),
         icon: keyboardReturn,
         categories: ['interface']
     },
     {
         name: 'styles',
-        title: __('Styles', 'dentist-exchange'),
+        title: __('Styles', 'core'),
         icon: styles,
         categories: ['interface']
     },
@@ -1261,103 +1261,103 @@ const icons = [
     // Posts & Pages
     {
         name: 'page',
-        title: __('Page', 'dentist-exchange'),
+        title: __('Page', 'core'),
         icon: page,
         categories: ['posts']
     },
     {
         name: 'pages',
-        title: __('Pages', 'dentist-exchange'),
+        title: __('Pages', 'core'),
         icon: pages,
         categories: ['posts']
     },
     {
         name: 'post',
-        title: __('Post', 'dentist-exchange'),
+        title: __('Post', 'core'),
         icon: post,
         categories: ['posts']
     },
     {
         name: 'post-author',
-        title: __('Post Author', 'dentist-exchange'),
+        title: __('Post Author', 'core'),
         icon: postAuthor,
         categories: ['posts']
     },
     {
         name: 'post-categories',
-        title: __('Post Categories', 'dentist-exchange'),
+        title: __('Post Categories', 'core'),
         icon: postCategories,
         categories: ['posts']
     },
     {
         name: 'post-content',
-        title: __('Post Content', 'dentist-exchange'),
+        title: __('Post Content', 'core'),
         icon: postContent,
         categories: ['posts']
     },
     {
         name: 'post-date',
-        title: __('Post Date', 'dentist-exchange'),
+        title: __('Post Date', 'core'),
         icon: postDate,
         categories: ['posts']
     },
     {
         name: 'post-excerpt',
-        title: __('Post Excerpt', 'dentist-exchange'),
+        title: __('Post Excerpt', 'core'),
         icon: postExcerpt,
         categories: ['posts']
     },
     {
         name: 'post-featured-image',
-        title: __('Post Featured Image', 'dentist-exchange'),
+        title: __('Post Featured Image', 'core'),
         icon: postFeaturedImage,
         categories: ['posts', 'media']
     },
     {
         name: 'post-list',
-        title: __('Post List', 'dentist-exchange'),
+        title: __('Post List', 'core'),
         icon: postList,
         categories: ['posts']
     },
     {
         name: 'post-terms',
-        title: __('Post Terms', 'dentist-exchange'),
+        title: __('Post Terms', 'core'),
         icon: postTerms,
         categories: ['posts']
     },
     {
         name: 'page-break',
-        title: __('Page Break', 'dentist-exchange'),
+        title: __('Page Break', 'core'),
         icon: pageBreak,
         categories: ['posts', 'editor']
     },
     {
         name: 'custom-post-type',
-        title: __('Custom Post Type', 'dentist-exchange'),
+        title: __('Custom Post Type', 'core'),
         icon: customPostType,
         categories: ['posts']
     },
     {
         name: 'term-description',
-        title: __('Term Description', 'dentist-exchange'),
+        title: __('Term Description', 'core'),
         icon: termDescription,
         categories: ['posts']
     },
     {
         name: 'category',
-        title: __('Category', 'dentist-exchange'),
+        title: __('Category', 'core'),
         icon: category,
         categories: ['posts']
     },
     {
         name: 'tag',
-        title: __('Tag', 'dentist-exchange'),
+        title: __('Tag', 'core'),
         icon: tag,
         categories: ['posts']
     },
     {
         name: 'title',
-        title: __('Title', 'dentist-exchange'),
+        title: __('Title', 'core'),
         icon: title,
         categories: ['posts', 'editor']
     },
@@ -1365,55 +1365,55 @@ const icons = [
     // Comments
     {
         name: 'comment',
-        title: __('Comment', 'dentist-exchange'),
+        title: __('Comment', 'core'),
         icon: comment,
         categories: ['comments']
     },
     {
         name: 'post-comments',
-        title: __('Post Comments', 'dentist-exchange'),
+        title: __('Post Comments', 'core'),
         icon: postComments,
         categories: ['comments', 'posts']
     },
     {
         name: 'post-comments-count',
-        title: __('Post Comments Count', 'dentist-exchange'),
+        title: __('Post Comments Count', 'core'),
         icon: postCommentsCount,
         categories: ['comments', 'posts']
     },
     {
         name: 'post-comments-form',
-        title: __('Post Comments Form', 'dentist-exchange'),
+        title: __('Post Comments Form', 'core'),
         icon: postCommentsForm,
         categories: ['comments', 'posts']
     },
     {
         name: 'comment-author-avatar',
-        title: __('Comment Author Avatar', 'dentist-exchange'),
+        title: __('Comment Author Avatar', 'core'),
         icon: commentAuthorAvatar,
         categories: ['comments']
     },
     {
         name: 'comment-author-name',
-        title: __('Comment Author Name', 'dentist-exchange'),
+        title: __('Comment Author Name', 'core'),
         icon: commentAuthorName,
         categories: ['comments']
     },
     {
         name: 'comment-content',
-        title: __('Comment Content', 'dentist-exchange'),
+        title: __('Comment Content', 'core'),
         icon: commentContent,
         categories: ['comments']
     },
     {
         name: 'comment-edit-link',
-        title: __('Comment Edit Link', 'dentist-exchange'),
+        title: __('Comment Edit Link', 'core'),
         icon: commentEditLink,
         categories: ['comments']
     },
     {
         name: 'comment-reply-link',
-        title: __('Comment Reply Link', 'dentist-exchange'),
+        title: __('Comment Reply Link', 'core'),
         icon: commentReplyLink,
         categories: ['comments']
     },
@@ -1421,37 +1421,37 @@ const icons = [
     // Media
     {
         name: 'caption',
-        title: __('Caption', 'dentist-exchange'),
+        title: __('Caption', 'core'),
         icon: caption,
         categories: ['media']
     },
     {
         name: 'capture-photo',
-        title: __('Capture Photo', 'dentist-exchange'),
+        title: __('Capture Photo', 'core'),
         icon: capturePhoto,
         categories: ['media']
     },
     {
         name: 'capture-video',
-        title: __('Capture Video', 'dentist-exchange'),
+        title: __('Capture Video', 'core'),
         icon: captureVideo,
         categories: ['media']
     },
     {
         name: 'aspect-ratio',
-        title: __('Aspect Ratio', 'dentist-exchange'),
+        title: __('Aspect Ratio', 'core'),
         icon: aspectRatio,
         categories: ['media']
     },
     {
         name: 'crop',
-        title: __('Crop', 'dentist-exchange'),
+        title: __('Crop', 'core'),
         icon: crop,
         categories: ['media', 'actions']
     },
     {
         name: 'file',
-        title: __('File', 'dentist-exchange'),
+        title: __('File', 'core'),
         icon: file,
         categories: ['media']
     },
@@ -1459,68 +1459,68 @@ const icons = [
     // E-commerce
     {
         name: 'currency-dollar',
-        title: __('Currency Dollar', 'dentist-exchange'),
+        title: __('Currency Dollar', 'core'),
         icon: currencyDollar,
         categories: ['ecommerce']
     },
     {
         name: 'currency-euro',
-        title: __('Currency Euro', 'dentist-exchange'),
+        title: __('Currency Euro', 'core'),
         icon: currencyEuro,
         categories: ['ecommerce']
     },
     {
         name: 'currency-pound',
-        title: __('Currency Pound', 'dentist-exchange'),
+        title: __('Currency Pound', 'core'),
         icon: currencyPound,
         categories: ['ecommerce']
     },
     {
         name: 'payment',
-        title: __('Payment', 'dentist-exchange'),
+        title: __('Payment', 'core'),
         icon: payment,
         categories: ['ecommerce']
     },
     {
         name: 'percent',
-        title: __('Percent', 'dentist-exchange'),
+        title: __('Percent', 'core'),
         icon: percent,
         categories: ['ecommerce']
     },
     {
         name: 'receipt',
-        title: __('Receipt', 'dentist-exchange'),
+        title: __('Receipt', 'core'),
         icon: receipt,
         categories: ['ecommerce']
     },
     {
         name: 'shipping',
-        title: __('Shipping', 'dentist-exchange'),
+        title: __('Shipping', 'core'),
         icon: shipping,
         categories: ['ecommerce'],
         isDefault: true
     },
     {
         name: 'store',
-        title: __('Store', 'dentist-exchange'),
+        title: __('Store', 'core'),
         icon: store,
         categories: ['ecommerce']
     },
     {
         name: 'chart-bar',
-        title: __('Chart Bar', 'dentist-exchange'),
+        title: __('Chart Bar', 'core'),
         icon: chartBar,
         categories: ['ecommerce']
     },
     {
         name: 'trending-down',
-        title: __('Trending Down', 'dentist-exchange'),
+        title: __('Trending Down', 'core'),
         icon: trendingDown,
         categories: ['ecommerce']
     },
     {
         name: 'trending-up',
-        title: __('Trending Up', 'dentist-exchange'),
+        title: __('Trending Up', 'core'),
         icon: trendingUp,
         categories: ['ecommerce']
     },
@@ -1528,355 +1528,355 @@ const icons = [
     // Miscellaneous
     {
         name: 'at-symbol',
-        title: __('At Symbol', 'dentist-exchange'),
+        title: __('At Symbol', 'core'),
         icon: atSymbol,
         categories: ['misc']
     },
     {
         name: 'backup',
-        title: __('Backup', 'dentist-exchange'),
+        title: __('Backup', 'core'),
         icon: backup,
         categories: ['misc']
     },
     {
         name: 'block-default',
-        title: __('Block Default', 'dentist-exchange'),
+        title: __('Block Default', 'core'),
         icon: blockDefault,
         categories: ['misc']
     },
     {
         name: 'border',
-        title: __('Border', 'dentist-exchange'),
+        title: __('Border', 'core'),
         icon: border,
         categories: ['misc']
     },
     {
         name: 'box',
-        title: __('Box', 'dentist-exchange'),
+        title: __('Box', 'core'),
         icon: box,
         categories: ['misc']
     },
     {
         name: 'brush',
-        title: __('Brush', 'dentist-exchange'),
+        title: __('Brush', 'core'),
         icon: brush,
         categories: ['misc']
     },
     {
         name: 'bug',
-        title: __('Bug', 'dentist-exchange'),
+        title: __('Bug', 'core'),
         icon: bug,
         categories: ['misc']
     },
     {
         name: 'remove-bug',
-        title: __('Remove Bug', 'dentist-exchange'),
+        title: __('Remove Bug', 'core'),
         icon: removeBug,
         categories: ['misc']
     },
     {
         name: 'classic',
-        title: __('Classic', 'dentist-exchange'),
+        title: __('Classic', 'core'),
         icon: classic,
         categories: ['misc']
     },
     {
         name: 'cloud-upload',
-        title: __('Cloud Upload', 'dentist-exchange'),
+        title: __('Cloud Upload', 'core'),
         icon: cloudUpload,
         categories: ['misc', 'actions']
     },
     {
         name: 'color',
-        title: __('Color', 'dentist-exchange'),
+        title: __('Color', 'core'),
         icon: color,
         categories: ['misc']
     },
     {
         name: 'custom-link',
-        title: __('Custom Link', 'dentist-exchange'),
+        title: __('Custom Link', 'core'),
         icon: customLink,
         categories: ['misc']
     },
     {
         name: 'drawer-left',
-        title: __('Drawer Left', 'dentist-exchange'),
+        title: __('Drawer Left', 'core'),
         icon: drawerLeft,
         categories: ['misc']
     },
     {
         name: 'drawer-right',
-        title: __('Drawer Right', 'dentist-exchange'),
+        title: __('Drawer Right', 'core'),
         icon: drawerRight,
         categories: ['misc']
     },
     {
         name: 'grid',
-        title: __('Grid', 'dentist-exchange'),
+        title: __('Grid', 'core'),
         icon: grid,
         categories: ['misc', 'layout']
     },
     {
         name: 'inbox',
-        title: __('Inbox', 'dentist-exchange'),
+        title: __('Inbox', 'core'),
         icon: inbox,
         categories: ['misc']
     },
     {
         name: 'institution',
-        title: __('Institution', 'dentist-exchange'),
+        title: __('Institution', 'core'),
         icon: institution,
         categories: ['misc']
     },
     {
         name: 'insert-after',
-        title: __('Insert After', 'dentist-exchange'),
+        title: __('Insert After', 'core'),
         icon: insertAfter,
         categories: ['misc', 'actions']
     },
     {
         name: 'insert-before',
-        title: __('Insert Before', 'dentist-exchange'),
+        title: __('Insert Before', 'core'),
         icon: insertBefore,
         categories: ['misc', 'actions']
     },
     {
         name: 'key',
-        title: __('Key', 'dentist-exchange'),
+        title: __('Key', 'core'),
         icon: key,
         categories: ['misc']
     },
     {
         name: 'lifesaver',
-        title: __('Lifesaver', 'dentist-exchange'),
+        title: __('Lifesaver', 'core'),
         icon: lifesaver,
         categories: ['misc']
     },
     {
         name: 'line-dashed',
-        title: __('Line Dashed', 'dentist-exchange'),
+        title: __('Line Dashed', 'core'),
         icon: lineDashed,
         categories: ['misc']
     },
     {
         name: 'line-dotted',
-        title: __('Line Dotted', 'dentist-exchange'),
+        title: __('Line Dotted', 'core'),
         icon: lineDotted,
         categories: ['misc']
     },
     {
         name: 'line-solid',
-        title: __('Line Solid', 'dentist-exchange'),
+        title: __('Line Solid', 'core'),
         icon: lineSolid,
         categories: ['misc']
     },
     {
         name: 'link',
-        title: __('Link', 'dentist-exchange'),
+        title: __('Link', 'core'),
         icon: link,
         categories: ['misc']
     },
     {
         name: 'link-off',
-        title: __('Link Off', 'dentist-exchange'),
+        title: __('Link Off', 'core'),
         icon: linkOff,
         categories: ['misc']
     },
     {
         name: 'loop',
-        title: __('Loop', 'dentist-exchange'),
+        title: __('Loop', 'core'),
         icon: loop,
         categories: ['misc']
     },
     {
         name: 'map-marker',
-        title: __('Map Marker', 'dentist-exchange'),
+        title: __('Map Marker', 'core'),
         icon: mapMarker,
         categories: ['misc']
     },
     {
         name: 'megaphone',
-        title: __('Megaphone', 'dentist-exchange'),
+        title: __('Megaphone', 'core'),
         icon: megaphone,
         categories: ['misc']
     },
     {
         name: 'move-to',
-        title: __('Move To', 'dentist-exchange'),
+        title: __('Move To', 'core'),
         icon: moveTo,
         categories: ['misc', 'actions']
     },
     {
         name: 'navigation',
-        title: __('Navigation', 'dentist-exchange'),
+        title: __('Navigation', 'core'),
         icon: navigation,
         categories: ['misc']
     },
     {
         name: 'overlay-text',
-        title: __('Overlay Text', 'dentist-exchange'),
+        title: __('Overlay Text', 'core'),
         icon: overlayText,
         categories: ['misc']
     },
     {
         name: 'people',
-        title: __('People', 'dentist-exchange'),
+        title: __('People', 'core'),
         icon: people,
         categories: ['misc']
     },
     {
         name: 'pin',
-        title: __('Pin', 'dentist-exchange'),
+        title: __('Pin', 'core'),
         icon: pin,
         categories: ['misc']
     },
     {
         name: 'pull-left',
-        title: __('Pull Left', 'dentist-exchange'),
+        title: __('Pull Left', 'core'),
         icon: pullLeft,
         categories: ['misc', 'layout']
     },
     {
         name: 'pull-right',
-        title: __('Pull Right', 'dentist-exchange'),
+        title: __('Pull Right', 'core'),
         icon: pullRight,
         categories: ['misc', 'layout']
     },
     {
         name: 'query-pagination',
-        title: __('Query Pagination', 'dentist-exchange'),
+        title: __('Query Pagination', 'core'),
         icon: queryPagination,
         categories: ['misc']
     },
     {
         name: 'query-pagination-next',
-        title: __('Query Pagination Next', 'dentist-exchange'),
+        title: __('Query Pagination Next', 'core'),
         icon: queryPaginationNext,
         categories: ['misc']
     },
     {
         name: 'query-pagination-numbers',
-        title: __('Query Pagination Numbers', 'dentist-exchange'),
+        title: __('Query Pagination Numbers', 'core'),
         icon: queryPaginationNumbers,
         categories: ['misc']
     },
     {
         name: 'query-pagination-previous',
-        title: __('Query Pagination Previous', 'dentist-exchange'),
+        title: __('Query Pagination Previous', 'core'),
         icon: queryPaginationPrevious,
         categories: ['misc']
     },
     {
         name: 'resize-corner-ne',
-        title: __('Resize Corner NE', 'dentist-exchange'),
+        title: __('Resize Corner NE', 'core'),
         icon: resizeCornerNE,
         categories: ['misc']
     },
     {
         name: 'reusable-block',
-        title: __('Reusable Block', 'dentist-exchange'),
+        title: __('Reusable Block', 'core'),
         icon: reusableBlock,
         categories: ['misc', 'editor']
     },
     {
         name: 'rss',
-        title: __('RSS', 'dentist-exchange'),
+        title: __('RSS', 'core'),
         icon: rss,
         categories: ['misc']
     },
     {
         name: 'separator',
-        title: __('Separator', 'dentist-exchange'),
+        title: __('Separator', 'core'),
         icon: separator,
         categories: ['misc', 'editor']
     },
     {
         name: 'shadow',
-        title: __('Shadow', 'dentist-exchange'),
+        title: __('Shadow', 'core'),
         icon: shadow,
         categories: ['misc']
     },
     {
         name: 'shield',
-        title: __('Shield', 'dentist-exchange'),
+        title: __('Shield', 'core'),
         icon: shield,
         categories: ['misc']
     },
     {
         name: 'shuffle',
-        title: __('Shuffle', 'dentist-exchange'),
+        title: __('Shuffle', 'core'),
         icon: shuffle,
         categories: ['misc']
     },
     {
         name: 'site-logo',
-        title: __('Site Logo', 'dentist-exchange'),
+        title: __('Site Logo', 'core'),
         icon: siteLogo,
         categories: ['misc']
     },
     {
         name: 'stack',
-        title: __('Stack', 'dentist-exchange'),
+        title: __('Stack', 'core'),
         icon: stack,
         categories: ['misc']
     },
     {
         name: 'swatch',
-        title: __('Swatch', 'dentist-exchange'),
+        title: __('Swatch', 'core'),
         icon: swatch,
         categories: ['misc']
     },
     {
         name: 'symbol',
-        title: __('Symbol', 'dentist-exchange'),
+        title: __('Symbol', 'core'),
         icon: symbol,
         categories: ['misc']
     },
     {
         name: 'symbol-filled',
-        title: __('Symbol Filled', 'dentist-exchange'),
+        title: __('Symbol Filled', 'core'),
         icon: symbolFilled,
         categories: ['misc']
     },
     {
         name: 'tip',
-        title: __('Tip', 'dentist-exchange'),
+        title: __('Tip', 'core'),
         icon: tip,
         categories: ['misc']
     },
     {
         name: 'tool',
-        title: __('Tool', 'dentist-exchange'),
+        title: __('Tool', 'core'),
         icon: tool,
         categories: ['misc']
     },
     {
         name: 'typography',
-        title: __('Typography', 'dentist-exchange'),
+        title: __('Typography', 'core'),
         icon: typography,
         categories: ['misc', 'format']
     },
     {
         name: 'widget',
-        title: __('Widget', 'dentist-exchange'),
+        title: __('Widget', 'core'),
         icon: widget,
         categories: ['misc']
     },
     {
         name: 'add-card',
-        title: __('Add Card', 'dentist-exchange'),
+        title: __('Add Card', 'core'),
         icon: addCard,
         categories: ['actions']
     },
     {
         name: 'add-submenu',
-        title: __('Add Submenu', 'dentist-exchange'),
+        title: __('Add Submenu', 'core'),
         icon: addSubmenu,
         categories: ['actions']
     },
     {
         name: 'remove-submenu',
-        title: __('Remove Submenu', 'dentist-exchange'),
+        title: __('Remove Submenu', 'core'),
         icon: removeSubmenu,
         categories: ['actions']
     }

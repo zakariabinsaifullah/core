@@ -7,7 +7,7 @@
     border-top: 1px solid #e0e0e0;
 }
 
-.dnte-icon-settings__indicator .dnte-custom-svg-container {
+.core-theme-icon-settings__indicator .core-theme-custom-svg-container {
     svg {
         width: 24px !important;
         height: 24px !important;
@@ -139,19 +139,19 @@ button.native-responsive-device-button span::before {
 }
 
 // SVG Icons Modal
-.dnte-modal__overlay {
+.core-theme-modal__overlay {
     .components-modal__header-heading-container {
         min-width: fit-content;
     }
 
-    .dnte-modal__tabs {
+    .core-theme-modal__tabs {
         display: flex;
         align-items: center;
         gap: 8px;
         margin-left: 20px;
     }
 
-    .dnte-modal__tabs-button {
+    .core-theme-modal__tabs-button {
         border: 1px solid #949494;
         height: 36px !important;
         padding: 6px 20px;
@@ -165,13 +165,13 @@ button.native-responsive-device-button span::before {
         }
     }
 
-    .dnte-modal__tabs-button.is-selected {
+    .core-theme-modal__tabs-button.is-selected {
         background: #000;
         color: #fff;
         border-color: #000;
     }
 
-    .dnte-modal__container {
+    .core-theme-modal__container {
         display: flex;
         gap: 30px;
         margin-top: 30px;
@@ -182,22 +182,22 @@ button.native-responsive-device-button span::before {
         font-size: 18px;
     }
 
-    .dnte-modal__sidebar {
+    .core-theme-modal__sidebar {
         min-width: 230px;
         width: 230px;
     }
 
-    .dnte-modal__content {
+    .core-theme-modal__content {
         flex-grow: 1;
     }
 
-    .dnte-modal__sidebar-buttons {
+    .core-theme-modal__sidebar-buttons {
         display: flex;
         flex-direction: column;
         gap: 8px;
     }
 
-    .dnte-modal__sidebar-button.is-selected {
+    .core-theme-modal__sidebar-button.is-selected {
         color: #ffffff;
         background: #145cd1;
     }
@@ -214,14 +214,14 @@ button.native-responsive-device-button span::before {
         height: 40px !important;
     }
 
-    .dnte-modal__icons {
+    .core-theme-modal__icons {
         margin-top: 15px;
         display: grid;
         grid-template-columns: repeat(10, 1fr);
         gap: 15px;
     }
 
-    .dnte-modal__icons-button {
+    .core-theme-modal__icons-button {
         gap: 8px;
         border: 1px solid #949494;
         padding: 20px;
@@ -232,13 +232,13 @@ button.native-responsive-device-button span::before {
         }
     }
 
-    .dnte-modal__icons-button.is-selected {
+    .core-theme-modal__icons-button.is-selected {
         border-color: #145cd1;
         background: #145cd1;
         color: #fff;
     }
 
-    .dnte-modal__icons-button:hover {
+    .core-theme-modal__icons-button:hover {
         border-color: #145cd1;
         background: #145cd1;
         color: #fff !important;

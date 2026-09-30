@@ -18,7 +18,7 @@ const SUPPORTED_BLOCKS = ['core/heading', 'core/paragraph'];
 const ATTRIBUTE = 'maxWidth';
 const CLASS_NAME = 'has-max-width';
 
-addFilter('blocks.registerBlockType', 'dnte/text-max-width-add-attribute', (settings, name) => {
+addFilter('blocks.registerBlockType', 'core-theme/text-max-width-add-attribute', (settings, name) => {
     if (!SUPPORTED_BLOCKS.includes(name)) {
         return settings;
     }
@@ -37,7 +37,7 @@ addFilter('blocks.registerBlockType', 'dnte/text-max-width-add-attribute', (sett
 
 addFilter(
     'editor.BlockEdit',
-    'dnte/text-max-width-add-inspector-controls',
+    'core-theme/text-max-width-add-inspector-controls',
     createHigherOrderComponent(BlockEdit => {
         return props => {
             const { name, attributes, setAttributes } = props;
@@ -50,9 +50,9 @@ addFilter(
                 <>
                     <BlockEdit {...props} />
                     <InspectorControls>
-                        <PanelBody title={__('Max Width', 'dentist-exchange')}>
+                        <PanelBody title={__('Max Width', 'core')}>
                             <NativeRangeControl
-                                label={__('Maximum width (px)', 'dentist-exchange')}
+                                label={__('Maximum width (px)', 'core')}
                                 value={attributes[ATTRIBUTE]}
                                 onChange={value => setAttributes({ [ATTRIBUTE]: value })}
                                 min={200}
@@ -70,7 +70,7 @@ addFilter(
 
 addFilter(
     'editor.BlockListBlock',
-    'dnte/text-max-width-add-styles',
+    'core-theme/text-max-width-add-styles',
     createHigherOrderComponent(BlockListBlock => {
         return props => {
             const { name, attributes } = props;

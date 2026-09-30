@@ -140,7 +140,7 @@ export default function save({ attributes, className }) {
         return (
             <Tag {...blockProps} {...(href && { href, target: linkTarget, rel: linkRel })}>
                 <div
-                    className={classNames('dnte-icon-block-wrapper', {
+                    className={classNames('core-theme-icon-block-wrapper', {
                         [`icon-valign-${iconVerticalAlign}`]: iconVerticalAlign
                     })}
                 >
@@ -160,7 +160,7 @@ export default function save({ attributes, className }) {
     return (
         <Tag {...blockProps} {...(href && { href, target: linkTarget, rel: linkRel })}>
             <div
-                className={classNames('dnte-icon-block-wrapper', {
+                className={classNames('core-theme-icon-block-wrapper', {
                     [`icon-valign-${iconVerticalAlign}`]: iconVerticalAlign
                 })}
             >

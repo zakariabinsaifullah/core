@@ -17,7 +17,7 @@ const BLOCK_NAME = 'core/group';
 /**
  * Add overlay background attributes to core/group.
  */
-addFilter( 'blocks.registerBlockType', 'dnte/group-overlay-bg-add-attributes', ( settings, name ) => {
+addFilter( 'blocks.registerBlockType', 'core-theme/group-overlay-bg-add-attributes', ( settings, name ) => {
     if ( name !== BLOCK_NAME ) {
         return settings;
     }
@@ -44,7 +44,7 @@ addFilter( 'blocks.registerBlockType', 'dnte/group-overlay-bg-add-attributes', (
  */
 addFilter(
     'editor.BlockEdit',
-    'dnte/group-overlay-bg-add-inspector-controls',
+    'core-theme/group-overlay-bg-add-inspector-controls',
     createHigherOrderComponent( BlockEdit => {
         return props => {
             const { name, attributes, setAttributes, clientId } = props;
@@ -66,11 +66,11 @@ addFilter(
 );
 
 /**
- * Apply `dnte-overlay-bg` class and `--dnte-overlay-bg` CSS variable in the editor preview.
+ * Apply `core-theme-overlay-bg` class and `--core-theme-overlay-bg` CSS variable in the editor preview.
  */
 addFilter(
     'editor.BlockListBlock',
-    'dnte/group-overlay-bg-add-styles',
+    'core-theme/group-overlay-bg-add-styles',
     createHigherOrderComponent( BlockListBlock => {
         return props => {
             const { name, attributes } = props;
@@ -97,11 +97,11 @@ addFilter(
                 ...props.wrapperProps,
                 style: {
                     ...props.wrapperProps?.style,
-                    '--dnte-overlay-bg': bgValue
+                    '--core-theme-overlay-bg': bgValue
                 }
             };
 
-            const classes = [ props.className, 'dnte-overlay-bg' ].filter( Boolean ).join( ' ' );
+            const classes = [ props.className, 'core-theme-overlay-bg' ].filter( Boolean ).join( ' ' );
 
             return <BlockListBlock { ...props } className={ classes } wrapperProps={ wrapperProps } />;
         };

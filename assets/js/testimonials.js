@@ -1,5 +1,5 @@
 /**
- * Testimonials carousel — [dnte_testimonials]
+ * Testimonials carousel — [core_theme_testimonials]
  *
  * Initialises one Swiper per shortcode instance. Options come from the
  * shortcode attributes, serialised onto the element by PHP.
@@ -7,11 +7,11 @@
 (function () {
     'use strict';
 
-    var SELECTOR = '[data-dnte-testimonials]';
+    var SELECTOR = '[data-core-theme-testimonials]';
 
     function readOptions(el) {
         try {
-            return JSON.parse(el.getAttribute('data-dnte-testimonials')) || {};
+            return JSON.parse(el.getAttribute('data-core-theme-testimonials')) || {};
         } catch (e) {
             return {};
         }
@@ -25,13 +25,13 @@
         }
 
         Array.prototype.forEach.call(nodes, function (el) {
-            if (el.dataset.dnteTestimonialsReady) {
+            if (el.dataset.coreThemeTestimonialsReady) {
                 return;
             }
 
             var opts = readOptions(el);
-            var root = el.closest('.dnte-testimonials') || el.parentNode;
-            var pagination = root ? root.querySelector('.dnte-testimonials__pagination') : null;
+            var root = el.closest('.core-theme-testimonials') || el.parentNode;
+            var pagination = root ? root.querySelector('.core-theme-testimonials__pagination') : null;
 
             var slideCount = el.querySelectorAll('.swiper-slide').length;
 
@@ -79,7 +79,7 @@
             }
 
             new window.Swiper(el, config);
-            el.dataset.dnteTestimonialsReady = 'true';
+            el.dataset.coreThemeTestimonialsReady = 'true';
         });
     }
 

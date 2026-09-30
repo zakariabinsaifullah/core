@@ -1,5 +1,5 @@
-.wp-block-dnte-image-accordion {
-    .dnte-image-accordion {
+.wp-block-core-theme-image-accordion {
+    .core-theme-image-accordion {
         display: flex;
         gap: var(--dgap, 0px);
     }
@@ -7,14 +7,14 @@
     // Below the tablet breakpoint the items are too narrow to read side by
     // side, so the accordion stacks and each item expands downwards instead.
     @media (max-width: 781px) {
-        .dnte-image-accordion {
+        .core-theme-image-accordion {
             flex-direction: column;
             gap: var(--tgap, var(--dgap, 0px));
         }
     }
 
     @media (max-width: 599px) {
-        .dnte-image-accordion {
+        .core-theme-image-accordion {
             gap: var(--mgap, var(--tgap, var(--dgap, 0px)));
         }
     }

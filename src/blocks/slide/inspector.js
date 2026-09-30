@@ -16,9 +16,9 @@ const Inspector = props => {
 
     return (
         <InspectorControls>
-            <PanelBody title={__('Position', 'dentist-exchange')} initialOpen={true}>
+            <PanelBody title={__('Position', 'core')} initialOpen={true}>
                 <NativeRangeControl
-                    label={__('Rotate (deg)', 'dentist-exchange')}
+                    label={__('Rotate (deg)', 'core')}
                     value={stackRotate}
                     onChange={value => setAttributes({ stackRotate: value })}
                     min={-45}
@@ -26,7 +26,7 @@ const Inspector = props => {
                     step={1}
                 />
                 <NativeRangeControl
-                    label={__('Offset X (px)', 'dentist-exchange')}
+                    label={__('Offset X (px)', 'core')}
                     value={stackOffsetX}
                     onChange={value => setAttributes({ stackOffsetX: value })}
                     min={-300}
@@ -34,7 +34,7 @@ const Inspector = props => {
                     step={5}
                 />
                 <NativeRangeControl
-                    label={__('Offset Y (px)', 'dentist-exchange')}
+                    label={__('Offset Y (px)', 'core')}
                     value={stackOffsetY}
                     onChange={value => setAttributes({ stackOffsetY: value })}
                     min={-300}
@@ -42,7 +42,7 @@ const Inspector = props => {
                     step={5}
                 />
                 <NativeRangeControl
-                    label={__('Z-Index', 'dentist-exchange')}
+                    label={__('Z-Index', 'core')}
                     value={stackZIndex}
                     onChange={value => setAttributes({ stackZIndex: value })}
                     min={0}

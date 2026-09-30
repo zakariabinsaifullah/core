@@ -1,10 +1,10 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "dnte/image-accordion",
-    "version": "0.9.0",
+    "name": "core-theme/image-accordion",
+    "version": "0.0.1",
     "title": "Image Accordion",
-    "category": "dnte",
+    "category": "core-theme",
     "icon": "images-alt2",
     "description": "Display a series of images in an accordion format.",
     "example": {},
@@ -22,10 +22,10 @@
         }
     },
     "providesContext": {
-        "dnte/showTitle": "showTitle",
-        "dnte/showDesc": "showDesc",
-        "dnte/showBtn": "showBtn",
-        "dnte/titleTag": "titleTag"
+        "core-theme/showTitle": "showTitle",
+        "core-theme/showDesc": "showDesc",
+        "core-theme/showBtn": "showBtn",
+        "core-theme/titleTag": "titleTag"
     },
     "attributes": {
         "resMode": {
@@ -67,7 +67,7 @@
             "default": "h4"
         }
     },
-    "textdomain": "dentist-exchange",
+    "textdomain": "core",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",

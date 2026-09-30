@@ -1,8 +1,8 @@
-.dnte-toggle-group-control {
+.core-theme-toggle-group-control {
     width: 100%;
     border: 1px solid #1e1e1e !important;
 
-    &.dnte-valign {
+    &.core-theme-valign {
         .dashicons-align-pull-left,
         .dashicons-align-pull-right {
             transform: rotate(90deg);
@@ -10,7 +10,7 @@
     }
 }
 
-.dnte-editor-slides {
+.core-theme-editor-slides {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -45,13 +45,13 @@
         overflow: visible;
         padding: 60px 0;
 
-        .wp-block-dnte-slide {
+        .wp-block-core-theme-slide {
             flex-shrink: 0;
             transition: transform 0.2s ease;
         }
 
         @for $i from 1 through 10 {
-            &.visible-#{$i} .wp-block-dnte-slide {
+            &.visible-#{$i} .wp-block-core-theme-slide {
                 width: calc(100% / #{$i});
             }
         }

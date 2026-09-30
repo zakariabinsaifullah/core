@@ -6,7 +6,7 @@
  * something while it is being dragged.
  */
 
-.dnte-story-card__icon-preview {
+.core-theme-story-card__icon-preview {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -25,7 +25,7 @@
     }
 }
 
-.dnte-story-card__icon-actions {
+.core-theme-story-card__icon-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -35,6 +35,6 @@
 /* The connector is decorative and carries no pointer events, but it can sit
  * over a neighbouring card's text and confuse the eye while editing. Dimmed
  * rather than hidden — authors still have to place it. */
-.editor-styles-wrapper .dnte-story-card__connector {
+.editor-styles-wrapper .core-theme-story-card__connector {
     opacity: 0.75;
 }

@@ -1,4 +1,4 @@
-.wp-block-dnte-social-share {
+.wp-block-core-theme-social-share {
 	--icon-size: 24px;
 	--gap: 12px;
 	--icon-color: currentColor;
@@ -6,26 +6,26 @@
 	--icon-radius: 0px;
 	--icon-padding: 0px;
 
-	&.justify-center .dnte-social-share__icons {
+	&.justify-center .core-theme-social-share__icons {
 		justify-content: center;
 	}
 
-	&.justify-right .dnte-social-share__icons {
+	&.justify-right .core-theme-social-share__icons {
 		justify-content: flex-end;
 	}
 
-	&.justify-left .dnte-social-share__icons {
+	&.justify-left .core-theme-social-share__icons {
 		justify-content: flex-start;
 	}
 
-	.dnte-social-share__icons {
+	.core-theme-social-share__icons {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 		gap: var(--gap);
 	}
 
-	.dnte-social-share__item {
+	.core-theme-social-share__item {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;

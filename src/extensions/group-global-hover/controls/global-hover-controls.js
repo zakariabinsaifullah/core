@@ -19,7 +19,7 @@ const GlobalHoverControls = ( { clientId, globalHoverBgColor, setGlobalHoverBgCo
         {
             colorValue: globalHoverBgColor?.color,
             onColorChange: color => setGlobalHoverBgColor( color ),
-            label: __( 'Hover Background', 'dentist-exchange' ),
+            label: __( 'Hover Background', 'core' ),
             isShownByDefault: true,
             enableAlpha: true,
             clearable: true,
@@ -31,7 +31,7 @@ const GlobalHoverControls = ( { clientId, globalHoverBgColor, setGlobalHoverBgCo
         {
             colorValue: globalHoverColor?.color,
             onColorChange: setGlobalHoverColor,
-            label: __( 'Hover Color', 'dentist-exchange' ),
+            label: __( 'Hover Color', 'core' ),
             isShownByDefault: true,
             enableAlpha: true,
             clearable: true,

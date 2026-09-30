@@ -1,12 +1,12 @@
 <?php
 /**
- * Dentist Exchange — Theme Functions
+ * Core — Theme Functions
  *
  * This file is intentionally kept as a loader only.
  * All feature logic lives in the files under inc/.
  *
  * @link    https://developer.wordpress.org/themes/basics/theme-functions/
- * @package Dentist_Exchange
+ * @package Core
  * @since   1.0
  */
 
@@ -42,21 +42,21 @@ require_once get_theme_file_path( 'inc/form.php' );       // Slide-in form panel
 // ── Shortcodes ─────────────────────────────────────────────────────────────────
 require_once get_theme_file_path( 'inc/shortcode.php' );         // Posts grid shortcode
 require_once get_theme_file_path( 'inc/shortcode-roles.php' );   // Opening roles shortcode
-require_once get_theme_file_path( 'inc/shortcodes-page.php' );  // Appearance → Dentist Exchange reference page
+require_once get_theme_file_path( 'inc/shortcodes-page.php' );  // Appearance → Core reference page
 
 
 /**
  * Set WordPress excerpt length to 25 words.
  */
-function dnte_excerpt_length( $length ) {
+function core_theme_excerpt_length( $length ) {
     return 25;
 }
-add_filter( 'excerpt_length', 'dnte_excerpt_length' );
+add_filter( 'excerpt_length', 'core_theme_excerpt_length' );
 
 /**
  * Customize excerpt more text.
  */
-function dnte_excerpt_more( $more ) {
+function core_theme_excerpt_more( $more ) {
     return '...';
 }
-add_filter( 'excerpt_more', 'dnte_excerpt_more' );
+add_filter( 'excerpt_more', 'core_theme_excerpt_more' );

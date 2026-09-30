@@ -127,17 +127,17 @@ export default function Library({
 
     return (
         <Modal
-            overlayClassName="dnte-modal__overlay"
-            className={`dnte-modal is-${activeTab}`}
-            title={__('Icons Library', 'dentist-exchange')}
+            overlayClassName="core-theme-modal__overlay"
+            className={`core-theme-modal is-${activeTab}`}
+            title={__('Icons Library', 'core')}
             onRequestClose={onClose}
             isFullScreen={true}
             headerActions={<Header activeTab={activeTab} onTabChange={onTabChange} />}
         >
-            <div className="dnte-modal__container">
+            <div className="core-theme-modal__container">
                 <Sidebar categories={categories} category={selectedCategory} setCategory={setSelectedCategory} activeTab={activeTab} />
-                <div className="dnte-modal__content">
-                    <Scrollable className="dnte-modal__scrollable">
+                <div className="core-theme-modal__content">
+                    <Scrollable className="core-theme-modal__scrollable">
                         {activeTab === 'library' && (
                             <ContentIcons
                                 searchTerm={searchTerm}

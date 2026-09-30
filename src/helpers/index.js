@@ -6,7 +6,7 @@ export const RenderIcon = ({ customSvgCode, iconName, size = '24' }) => {
         if (customSvgCode) {
             return (
                 <div
-                    className="dnte-custom-svg-container"
+                    className="core-theme-custom-svg-container"
                     style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -32,7 +32,7 @@ export const RenderIcon = ({ customSvgCode, iconName, size = '24' }) => {
 
 // soft minify
 export const softMinifyCssStrings = (cssString = ' ') =>
-    cssString.replace(/\s+/g, ' ').replace(/\.dnte\-[\w\-\s\.\,\:\>\(\)\d\+\[\]\#\>]+\{[\s]+\}/g, '');
+    cssString.replace(/\s+/g, ' ').replace(/\.core-theme\-[\w\-\s\.\,\:\>\(\)\d\+\[\]\#\>]+\{[\s]+\}/g, '');
 
 // Convert SVG code to a Base64 data URL
 export const svgToBase64DataUrl = svgCode => {

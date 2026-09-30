@@ -1,10 +1,10 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "dnte/story-cards",
-    "version": "0.9.0",
+    "name": "core-theme/story-cards",
+    "version": "0.0.1",
     "title": "Story Cards",
-    "category": "dnte",
+    "category": "core-theme",
     "icon": "excerpt-view",
     "description": "A staggered two-lane run of cards joined by hand-drawn arrows, each revealing on scroll.",
     "example": {},
@@ -67,7 +67,7 @@
             "default": false
         }
     },
-    "textdomain": "dentist-exchange",
+    "textdomain": "core",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",

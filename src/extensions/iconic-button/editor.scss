@@ -1,9 +1,9 @@
-.wp-block-button.dnte-icon-button {
+.wp-block-button.core-theme-icon-button {
     .wp-block-button__link {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: var(--dnte-icon-gap, 8px);
+        gap: var(--core-theme-icon-gap, 8px);
 
         &.has-text-align-left {
             justify-content: flex-start !important;
@@ -22,9 +22,9 @@
             display: none;
             flex-shrink: 0;
             pointer-events: none;
-            width: var(--dnte-icon-size, 1em);
-            height: var(--dnte-icon-size, 1em);
-            mask-image: var(--dnte-icon-url);
+            width: var(--core-theme-icon-size, 1em);
+            height: var(--core-theme-icon-size, 1em);
+            mask-image: var(--core-theme-icon-url);
             mask-position: center;
             mask-size: contain;
             mask-repeat: no-repeat;
@@ -32,7 +32,7 @@
         }
     }
 
-    &.dnte-icon-before {
+    &.core-theme-icon-before {
         .wp-block-button__link {
             flex-direction: row-reverse;
         }

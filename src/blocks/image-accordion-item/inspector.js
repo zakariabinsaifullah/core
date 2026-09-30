@@ -28,7 +28,7 @@ import { NativeTextControl, NativeTextareaControl, NativeToggleControl } from '.
  */
 const allowOnlyLineBreaks = value => (value || '').replace(/<\/?(?!br\b)[a-zA-Z][^>]*>/gi, '');
 
-const BR_HELP = __('Use <br> for a line break. Other HTML is removed.', 'dentist-exchange');
+const BR_HELP = __('Use <br> for a line break. Other HTML is removed.', 'core');
 
 const EMPTY_IMAGE = { id: '', url: '', alt: '' };
 
@@ -42,8 +42,8 @@ const EMPTY_IMAGE = { id: '', url: '', alt: '' };
  * @param {string}   props.help     Optional help text.
  */
 const ImageField = ({ label, value, onChange, help }) => (
-    <div className="dnte-accordion-image">
-        <p className="dnte-accordion-image__label">{label}</p>
+    <div className="core-theme-accordion-image">
+        <p className="core-theme-accordion-image__label">{label}</p>
         {value?.url && <img src={value.url} alt="" />}
         <MediaUploadCheck>
             <MediaUpload
@@ -52,17 +52,17 @@ const ImageField = ({ label, value, onChange, help }) => (
                 value={value?.id}
                 render={({ open }) => (
                     <Button variant="secondary" onClick={open}>
-                        {value?.url ? __('Replace Image', 'dentist-exchange') : __('Upload Image', 'dentist-exchange')}
+                        {value?.url ? __('Replace Image', 'core') : __('Upload Image', 'core')}
                     </Button>
                 )}
             />
         </MediaUploadCheck>
         {value?.url && (
             <Button variant="link" isDestructive onClick={() => onChange({ ...EMPTY_IMAGE })}>
-                {__('Remove Image', 'dentist-exchange')}
+                {__('Remove Image', 'core')}
             </Button>
         )}
-        {help && <p className="dnte-accordion-image__help">{help}</p>}
+        {help && <p className="core-theme-accordion-image__help">{help}</p>}
     </div>
 );
 
@@ -72,38 +72,38 @@ const Inspector = props => {
 
     return (
         <InspectorControls>
-            <PanelBody title={__('Content', 'dentist-exchange')} initialOpen={true}>
+            <PanelBody title={__('Content', 'core')} initialOpen={true}>
                 <ImageField
-                    label={__('Image (Desktop)', 'dentist-exchange')}
+                    label={__('Image (Desktop)', 'core')}
                     value={image}
                     onChange={value => setAttributes({ image: value })}
                 />
                 <ImageField
-                    label={__('Image (Tablet)', 'dentist-exchange')}
+                    label={__('Image (Tablet)', 'core')}
                     value={imageTablet}
                     onChange={value => setAttributes({ imageTablet: value })}
-                    help={__('Used up to 781px. Falls back to the desktop image.', 'dentist-exchange')}
+                    help={__('Used up to 781px. Falls back to the desktop image.', 'core')}
                 />
                 <ImageField
-                    label={__('Image (Mobile)', 'dentist-exchange')}
+                    label={__('Image (Mobile)', 'core')}
                     value={imageMobile}
                     onChange={value => setAttributes({ imageMobile: value })}
-                    help={__('Used up to 599px. Falls back to tablet, then desktop.', 'dentist-exchange')}
+                    help={__('Used up to 599px. Falls back to tablet, then desktop.', 'core')}
                 />
                 {showTitle && (
                     <NativeTextControl
-                        label={__('Heading', 'dentist-exchange')}
+                        label={__('Heading', 'core')}
                         value={title}
-                        placeholder={__('Accordion title..', 'dentist-exchange')}
+                        placeholder={__('Accordion title..', 'core')}
                         help={BR_HELP}
                         onChange={value => setAttributes({ title: allowOnlyLineBreaks(value) })}
                     />
                 )}
                 {showDesc && (
                     <NativeTextareaControl
-                        label={__('Description', 'dentist-exchange')}
+                        label={__('Description', 'core')}
                         value={description}
-                        placeholder={__('Accordion description..', 'dentist-exchange')}
+                        placeholder={__('Accordion description..', 'core')}
                         help={BR_HELP}
                         onChange={value => setAttributes({ description: allowOnlyLineBreaks(value) })}
                     />
@@ -111,20 +111,20 @@ const Inspector = props => {
                 {showBtn && (
                     <>
                         <NativeTextControl
-                            label={__('Button Label', 'dentist-exchange')}
+                            label={__('Button Label', 'core')}
                             value={btnLabel}
-                            placeholder={__('Show More', 'dentist-exchange')}
+                            placeholder={__('Show More', 'core')}
                             onChange={value => setAttributes({ btnLabel: value })}
                         />
                         <NativeTextControl
-                            label={__('Button Link', 'dentist-exchange')}
+                            label={__('Button Link', 'core')}
                             value={href}
                             placeholder="https://"
-                            help={__('Only applies on the live site — the editor preview link stays disabled.', 'dentist-exchange')}
+                            help={__('Only applies on the live site — the editor preview link stays disabled.', 'core')}
                             onChange={value => setAttributes({ href: value })}
                         />
                         <NativeToggleControl
-                            label={__('Open in new tab', 'dentist-exchange')}
+                            label={__('Open in new tab', 'core')}
                             checked={linkTarget === '_blank'}
                             onChange={value =>
                                 setAttributes({

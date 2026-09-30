@@ -6,13 +6,13 @@
  * an overlay for a section seam, not a mask that cuts the section's shape —
  * so it is painted over the row's own background rather than clipping it.
  *
- * The image URL arrives as `--dnte-divider-image`, set by PHP on the front end
+ * The image URL arrives as `--core-theme-divider-image`, set by PHP on the front end
  * and by the editor.BlockListBlock filter in the editor, so neither this file
  * nor the bundle has to know the theme's asset path.
  */
 
-.dnte-has-top-divider,
-.dnte-has-bottom-divider {
+.core-theme-has-top-divider,
+.core-theme-has-bottom-divider {
     /* The dividers are absolutely positioned against the row. */
     position: relative;
 }
@@ -34,13 +34,13 @@
  * Repeating the class raises specificity above the clearfix without hard-coding
  * a Kadence selector, so this keeps working if their class names change.
  */
-.dnte-has-top-divider.dnte-has-top-divider::before,
-.dnte-has-bottom-divider::after {
+.core-theme-has-top-divider.core-theme-has-top-divider::before,
+.core-theme-has-bottom-divider::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
-    background-image: var(--dnte-divider-image);
+    background-image: var(--core-theme-divider-image);
 
     /* Undo the clearfix, which sets both of these on ::before. */
     display: block;
@@ -63,7 +63,7 @@
      * wrap. Deliberately not higher: .kt-row-column-wrap is also z-index 1, so
      * raising this would paint the divider over the row's content.
      */
-    z-index: var(--dnte-divider-z-index, 1);
+    z-index: var(--core-theme-divider-z-index, 1);
 }
 
 /*
@@ -74,9 +74,9 @@
  * with the bottom, that overhang is only visible if nothing clips it — see
  * the overflow note below.
  */
-.dnte-has-top-divider.dnte-has-top-divider::before {
-    height: var(--dnte-divider-top-height, 100px);
-    top: var(--dnte-divider-top-offset, -50px);
+.core-theme-has-top-divider.core-theme-has-top-divider::before {
+    height: var(--core-theme-divider-top-height, 100px);
+    top: var(--core-theme-divider-top-offset, -50px);
 
     /*
      * No transform: the artwork's natural orientation is the top edge.
@@ -97,9 +97,9 @@
  * set it on the row wrapper by default, but its background/parallax options
  * and some section wrappers do.
  */
-.dnte-has-bottom-divider::after {
-    height: var(--dnte-divider-bottom-height, 140px);
-    bottom: var(--dnte-divider-bottom-offset, -50px);
+.core-theme-has-bottom-divider::after {
+    height: var(--core-theme-divider-bottom-height, 140px);
+    bottom: var(--core-theme-divider-bottom-offset, -50px);
 
     /*
      * The artwork's designed orientation. The source SVG wrapper carried

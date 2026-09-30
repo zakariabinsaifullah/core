@@ -17,7 +17,7 @@
 				wrapper.classList.add( 'is-loading' );
 
 				var body = new URLSearchParams( {
-					action:     'dnte_posts_grid',
+					action:     'core_theme_posts_grid',
 					nonce:      config.nonce,
 					cat:        state.cat,
 					page:       state.page,
@@ -76,12 +76,12 @@
 		} );
 
 
-		// ── Remote grids (listen for dnte:filter CustomEvent) ───────────────
+		// ── Remote grids (listen for core-theme:filter CustomEvent) ───────────────
 		document.querySelectorAll( '.ipg-wrapper[data-grid-id]' ).forEach( function ( wrapper ) {
 			var gridId = wrapper.dataset.gridId;
 			var grid   = initGrid( wrapper );
 
-			document.addEventListener( 'dnte:filter', function ( e ) {
+			document.addEventListener( 'core-theme:filter', function ( e ) {
 				if ( e.detail.id !== gridId ) return;
 				grid.state.cat  = e.detail.cat;
 				grid.state.page = 1;
@@ -90,7 +90,7 @@
 		} );
 
 
-		// ── Remote tabs (fire dnte:filter CustomEvent) ───────────────────────
+		// ── Remote tabs (fire core-theme:filter CustomEvent) ───────────────────────
 		document.querySelectorAll( '.ipg-tabs-remote' ).forEach( function ( tabsEl ) {
 			var forId = tabsEl.dataset.for;
 
@@ -101,7 +101,7 @@
 					} );
 					this.classList.add( 'active' );
 
-					document.dispatchEvent( new CustomEvent( 'dnte:filter', {
+					document.dispatchEvent( new CustomEvent( 'core-theme:filter', {
 						detail: {
 							id:  forId,
 							cat: parseInt( this.dataset.cat || '0', 10 ),

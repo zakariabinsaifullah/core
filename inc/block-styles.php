@@ -4,19 +4,19 @@
  *
  * Registers custom style variations for core (and third-party) blocks.
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
-if ( ! function_exists( 'dnte_block_styles' ) ) :
+if ( ! function_exists( 'core_theme_block_styles' ) ) :
 	/**
 	 * Registers all custom block style variations for the theme.
 	 */
-	function dnte_block_styles() {
+	function core_theme_block_styles() {
 		register_block_style(
 			'core/group',
 			array(
 				'name'  => 'wrap-mobile',
-				'label' => __( 'Wrap Mobile', 'dentist-exchange' ),
+				'label' => __( 'Wrap Mobile', 'core' ),
 			)
 		);
 
@@ -25,7 +25,7 @@ if ( ! function_exists( 'dnte_block_styles' ) ) :
 			'core/button',
 			array(
 				'name'  => 'alternative',
-				'label' => __( 'Alternative', 'dentist-exchange' ),
+				'label' => __( 'Alternative', 'core' ),
 			)
 		);
 
@@ -33,9 +33,9 @@ if ( ! function_exists( 'dnte_block_styles' ) ) :
 			'core/button',
 			array(
 				'name'  => 'link',
-				'label' => __( 'Link', 'dentist-exchange' ),
+				'label' => __( 'Link', 'core' ),
 			)
 		);
 	}
 endif;
-add_action( 'init', 'dnte_block_styles' );
+add_action( 'init', 'core_theme_block_styles' );

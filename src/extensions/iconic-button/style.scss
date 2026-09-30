@@ -1,9 +1,9 @@
-.wp-block-button.dnte-icon-button {
+.wp-block-button.core-theme-icon-button {
     .wp-block-button__link {
         display: flex !important;
         align-items: center;
         justify-content: center;
-        gap: var(--dnte-icon-gap, 8px) !important;
+        gap: var(--core-theme-icon-gap, 8px) !important;
 
         &.has-text-align-left {
             justify-content: flex-start !important;
@@ -17,25 +17,25 @@
             justify-content: flex-end !important;
         }
 
-        .dnte-icon-button-svg {
+        .core-theme-icon-button-svg {
             flex-shrink: 0;
             pointer-events: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--dnte-icon-bg-color, transparent);
-            padding: var(--dnte-icon-padding, 0);
+            background-color: var(--core-theme-icon-bg-color, transparent);
+            padding: var(--core-theme-icon-padding, 0);
             border-radius: 50%;
 
             svg {
-                width: var(--dnte-icon-size, 1em);
-                height: var(--dnte-icon-size, 1em);
+                width: var(--core-theme-icon-size, 1em);
+                height: var(--core-theme-icon-size, 1em);
                 fill: currentColor;
             }
         }
     }
 
-    &.dnte-icon-before {
+    &.core-theme-icon-before {
         .wp-block-button__link {
             flex-direction: row-reverse;
         }

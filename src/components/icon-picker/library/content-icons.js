@@ -16,22 +16,22 @@ export const ContentIcons = ({ searchTerm, setSearchTerm, filteredIcons, current
                     <SearchControl
                         value={searchTerm}
                         onChange={setSearchTerm}
-                        label={__('Search icons', 'dentist-exchange')}
-                        placeholder={__('Search...', 'dentist-exchange')}
-                        className="dnte-modal__search"
+                        label={__('Search icons', 'core')}
+                        placeholder={__('Search...', 'core')}
+                        className="core-theme-modal__search"
                         size="compact"
                     />
                 </FlexItem>
             </Flex>
 
             {filteredIcons.length === 0 ? (
-                <p>{__('No icons found!', 'dentist-exchange')}</p>
+                <p>{__('No icons found!', 'core')}</p>
             ) : (
-                <div className="dnte-modal__icons">
+                <div className="core-theme-modal__icons">
                     {filteredIcons.map(iconData => (
                         <Button
                             key={iconData.name}
-                            className={`dnte-modal__icons-button ${currentIconName === iconData.name ? 'is-selected' : ''}`}
+                            className={`core-theme-modal__icons-button ${currentIconName === iconData.name ? 'is-selected' : ''}`}
                             onClick={() => handleIconSelect(iconData)}
                         >
                             <Icon icon={iconData.icon} size={32} />

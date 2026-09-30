@@ -10,12 +10,12 @@
  * without touching this file.
  */
 
-.wp-block-dnte-ticker-gallery {
+.wp-block-core-theme-ticker-gallery {
     /* Cycle of four tilts. The design hand-jitters these; these are its means. */
-    --dnte-ticker-tilt-1: 5deg;
-    --dnte-ticker-tilt-2: 2deg;
-    --dnte-ticker-tilt-3: -8deg;
-    --dnte-ticker-tilt-4: -2deg;
+    --core-theme-ticker-tilt-1: 5deg;
+    --core-theme-ticker-tilt-2: 2deg;
+    --core-theme-ticker-tilt-3: -8deg;
+    --core-theme-ticker-tilt-4: -2deg;
 
     /*
      * Rotating a rectangle drops its lower corner below the baseline by about
@@ -25,16 +25,16 @@
      * a roughly square tile. Widen the images a lot and these want raising to
      * match.
      */
-    --dnte-ticker-lift-1: 12px;
-    --dnte-ticker-lift-2: 5px;
-    --dnte-ticker-lift-3: 19px;
-    --dnte-ticker-lift-4: 5px;
+    --core-theme-ticker-lift-1: 12px;
+    --core-theme-ticker-lift-2: 5px;
+    --core-theme-ticker-lift-3: 19px;
+    --core-theme-ticker-lift-4: 5px;
 
-    --dnte-ticker-height: 304px;
-    --dnte-ticker-short: 0.88;
-    --dnte-ticker-gap: 44px;
-    --dnte-ticker-radius: 24px;
-    --dnte-ticker-speed: 40s;
+    --core-theme-ticker-height: 304px;
+    --core-theme-ticker-short: 0.88;
+    --core-theme-ticker-gap: 44px;
+    --core-theme-ticker-radius: 24px;
+    --core-theme-ticker-speed: 40s;
 
     /*
      * The tilted tiles poke outside the row on both axes, so the viewport
@@ -45,24 +45,24 @@
     padding-block: 24px;
 }
 
-.dnte-ticker__track {
+.core-theme-ticker__track {
     display: flex;
 
     /* What puts every tile on the same baseline. */
     align-items: flex-end;
 
-    gap: var(--dnte-ticker-gap);
+    gap: var(--core-theme-ticker-gap);
     width: max-content;
     will-change: transform;
-    animation: dnte-ticker-scroll var(--dnte-ticker-speed) linear infinite;
+    animation: core-theme-ticker-scroll var(--core-theme-ticker-speed) linear infinite;
 }
 
-.wp-block-dnte-ticker-gallery.is-direction-right .dnte-ticker__track {
+.wp-block-core-theme-ticker-gallery.is-direction-right .core-theme-ticker__track {
     animation-direction: reverse;
 }
 
-.wp-block-dnte-ticker-gallery.is-pause-on-hover:hover .dnte-ticker__track,
-.dnte-ticker__track:focus-within {
+.wp-block-core-theme-ticker-gallery.is-pause-on-hover:hover .core-theme-ticker__track,
+.core-theme-ticker__track:focus-within {
     animation-play-state: paused;
 }
 
@@ -71,15 +71,15 @@
  * width lands the second copy where the first began — seamless regardless of
  * how many images there are.
  */
-@keyframes dnte-ticker-scroll {
+@keyframes core-theme-ticker-scroll {
     to {
         transform: translateX(-50%);
     }
 }
 
-.dnte-ticker__item {
+.core-theme-ticker__item {
     flex: none;
-    height: calc(var(--dnte-ticker-height) * var(--dnte-ticker-short));
+    height: calc(var(--core-theme-ticker-height) * var(--core-theme-ticker-short));
 
     /*
      * Pivot at the bottom, not the centre, so each tile stays seated on the
@@ -89,18 +89,18 @@
      * being dead level.
      */
     transform-origin: bottom center;
-    transform: rotate(var(--dnte-ticker-tilt, 0deg));
+    transform: rotate(var(--core-theme-ticker-tilt, 0deg));
 
     /* Raises the tile by its own corner drop, so all four sit level. */
-    margin-bottom: var(--dnte-ticker-lift, 0px);
+    margin-bottom: var(--core-theme-ticker-lift, 0px);
 }
 
-.dnte-ticker__item img {
+.core-theme-ticker__item img {
     display: block;
     width: auto;
     height: 100%;
     max-width: none;
-    border-radius: var(--dnte-ticker-radius);
+    border-radius: var(--core-theme-ticker-radius);
     object-fit: cover;
 }
 
@@ -113,33 +113,33 @@
  * to be seamless — :nth-child would keep counting into the second copy. See
  * the note in save.js.
  */
-.dnte-ticker__item.is-v1 {
-    --dnte-ticker-tilt: var(--dnte-ticker-tilt-1);
-    --dnte-ticker-lift: var(--dnte-ticker-lift-1);
+.core-theme-ticker__item.is-v1 {
+    --core-theme-ticker-tilt: var(--core-theme-ticker-tilt-1);
+    --core-theme-ticker-lift: var(--core-theme-ticker-lift-1);
 }
 
-.dnte-ticker__item.is-v2 {
-    --dnte-ticker-tilt: var(--dnte-ticker-tilt-2);
-    --dnte-ticker-lift: var(--dnte-ticker-lift-2);
-    height: var(--dnte-ticker-height);
+.core-theme-ticker__item.is-v2 {
+    --core-theme-ticker-tilt: var(--core-theme-ticker-tilt-2);
+    --core-theme-ticker-lift: var(--core-theme-ticker-lift-2);
+    height: var(--core-theme-ticker-height);
 }
 
-.dnte-ticker__item.is-v3 {
-    --dnte-ticker-tilt: var(--dnte-ticker-tilt-3);
-    --dnte-ticker-lift: var(--dnte-ticker-lift-3);
+.core-theme-ticker__item.is-v3 {
+    --core-theme-ticker-tilt: var(--core-theme-ticker-tilt-3);
+    --core-theme-ticker-lift: var(--core-theme-ticker-lift-3);
 }
 
-.dnte-ticker__item.is-v4 {
-    --dnte-ticker-tilt: var(--dnte-ticker-tilt-4);
-    --dnte-ticker-lift: var(--dnte-ticker-lift-4);
-    height: var(--dnte-ticker-height);
+.core-theme-ticker__item.is-v4 {
+    --core-theme-ticker-tilt: var(--core-theme-ticker-tilt-4);
+    --core-theme-ticker-lift: var(--core-theme-ticker-lift-4);
+    height: var(--core-theme-ticker-height);
 }
 
 @media (max-width: 781px) {
-    .wp-block-dnte-ticker-gallery {
-        --dnte-ticker-height: 220px;
-        --dnte-ticker-gap: 24px;
-        --dnte-ticker-radius: 16px;
+    .wp-block-core-theme-ticker-gallery {
+        --core-theme-ticker-height: 220px;
+        --core-theme-ticker-gap: 24px;
+        --core-theme-ticker-radius: 16px;
     }
 }
 
@@ -148,11 +148,11 @@
      * A row that never stops moving is exactly what this setting is for. The
      * gallery stays, it simply holds still and can be scrolled by hand.
      */
-    .dnte-ticker__track {
+    .core-theme-ticker__track {
         animation: none;
     }
 
-    .wp-block-dnte-ticker-gallery {
+    .wp-block-core-theme-ticker-gallery {
         overflow-x: auto;
     }
 }

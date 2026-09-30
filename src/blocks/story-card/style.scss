@@ -6,7 +6,7 @@
  * gates it.
  */
 
-.dnte-story-card {
+.core-theme-story-card {
     position: relative;
 
     /* The lane width is a percentage of the section, so the padding has to
@@ -19,8 +19,8 @@
     overflow: visible;
     align-self: start;
 
-    padding: var(--dnte-card-padding, 24px);
-    border-radius: var(--dnte-card-radius, 24px);
+    padding: var(--core-theme-card-padding, 24px);
+    border-radius: var(--core-theme-card-radius, 24px);
 
     /* The 24px between the image and the text group. A flex gap rather than a
      * margin on the figure, because the theme's blocks.css zeroes every
@@ -28,44 +28,44 @@
      * positioned, so the gap never applies to them. */
     display: flex;
     flex-direction: column;
-    gap: var(--dnte-card-gap, 24px);
-    background: var(--dnte-card-bg, #ffffff);
-    box-shadow: var(--dnte-card-shadow, 0 4px 44px 9px rgba(139, 139, 139, 0.25));
+    gap: var(--core-theme-card-gap, 24px);
+    background: var(--core-theme-card-bg, #ffffff);
+    box-shadow: var(--core-theme-card-shadow, 0 4px 44px 9px rgba(139, 139, 139, 0.25));
 }
 
 /* ── Top icon ───────────────────────────────────────────────────────────────
-   The uploaded SVG on a filled blue disc. It sits over the top corner facing
+   The uploaded SVG on a filled tiber disc. It sits over the top corner facing
    the gutter, and the offset is derived so the disc's inner edge lands exactly
    on the image's corner: the badge touches the image at any size. */
 
-.dnte-story-card__badge {
+.core-theme-story-card__badge {
     position: absolute;
-    top: calc(var(--dnte-card-padding, 24px) - var(--dnte-badge-size, 75px));
+    top: calc(var(--core-theme-card-padding, 24px) - var(--core-theme-badge-size, 75px));
     z-index: 2;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: var(--dnte-badge-size, 75px);
-    height: var(--dnte-badge-size, 75px);
+    width: var(--core-theme-badge-size, 75px);
+    height: var(--core-theme-badge-size, 75px);
     padding: 10px;
     border-radius: 50%;
-    background: var(--dnte-badge-bg, #334df8);
+    background: var(--core-theme-badge-bg, var(--wp--preset--color--core-theme-tiber, #04262f));
     box-shadow: 0 8.17021px 32.8851px rgba(0, 103, 222, 0.55);
     line-height: 0;
 }
 
-.dnte-story-card.has-badge-left .dnte-story-card__badge {
-    left: calc(var(--dnte-card-padding, 24px) - var(--dnte-badge-size, 75px));
+.core-theme-story-card.has-badge-left .core-theme-story-card__badge {
+    left: calc(var(--core-theme-card-padding, 24px) - var(--core-theme-badge-size, 75px));
 }
 
-.dnte-story-card.has-badge-right .dnte-story-card__badge {
-    right: calc(var(--dnte-card-padding, 24px) - var(--dnte-badge-size, 75px));
+.core-theme-story-card.has-badge-right .core-theme-story-card__badge {
+    right: calc(var(--core-theme-card-padding, 24px) - var(--core-theme-badge-size, 75px));
 }
 
-.dnte-story-card__badge img,
-.dnte-story-card__badge svg {
+.core-theme-story-card__badge img,
+.core-theme-story-card__badge svg {
     display: block;
     width: 45px;
     height: 45px;
@@ -82,23 +82,23 @@
    the corner — would be chopped by the viewport. Smaller disc, and an overhang
    of only 12px, which any edge padding of 15px or more absorbs entirely. */
 @media (max-width: 900px) {
-    .dnte-story-card__badge {
-        width: var(--dnte-badge-size-m, 56px);
-        height: var(--dnte-badge-size-m, 56px);
-        top: var(--dnte-badge-offset-m, -12px);
+    .core-theme-story-card__badge {
+        width: var(--core-theme-badge-size-m, 56px);
+        height: var(--core-theme-badge-size-m, 56px);
+        top: var(--core-theme-badge-offset-m, -12px);
         padding: 8px;
     }
 
-    .dnte-story-card.has-badge-left .dnte-story-card__badge {
-        left: var(--dnte-badge-offset-m, -12px);
+    .core-theme-story-card.has-badge-left .core-theme-story-card__badge {
+        left: var(--core-theme-badge-offset-m, -12px);
     }
 
-    .dnte-story-card.has-badge-right .dnte-story-card__badge {
-        right: var(--dnte-badge-offset-m, -12px);
+    .core-theme-story-card.has-badge-right .core-theme-story-card__badge {
+        right: var(--core-theme-badge-offset-m, -12px);
     }
 
-    .dnte-story-card__badge img,
-    .dnte-story-card__badge svg {
+    .core-theme-story-card__badge img,
+    .core-theme-story-card__badge svg {
         width: 34px;
         height: 34px;
     }
@@ -106,43 +106,43 @@
 
 /* ── Content ────────────────────────────────────────────────────────────── */
 
-.dnte-story-card__media {
+.core-theme-story-card__media {
     margin: 0;
     line-height: 0;
 }
 
-.dnte-story-card__image {
+.core-theme-story-card__image {
     display: block;
     width: 100%;
 
     /* 6:5, as drawn — the card keeps its shape whatever the source image's
      * own proportions are. */
-    aspect-ratio: var(--dnte-card-image-ratio, 6 / 5);
+    aspect-ratio: var(--core-theme-card-image-ratio, 6 / 5);
     object-fit: cover;
-    border-radius: var(--dnte-card-image-radius, 12px);
+    border-radius: var(--core-theme-card-image-radius, 12px);
 }
 
 /* Title and description travel as one group: 16px between them, and the
  * group's own distance from the image is the card's flex gap above. */
-.dnte-story-card__content {
+.core-theme-story-card__content {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.dnte-story-card__heading {
+.core-theme-story-card__heading {
     margin: 0;
-    font-size: var(--dnte-card-heading-size, 28px);
+    font-size: var(--core-theme-card-heading-size, 28px);
     font-weight: 400;
-    line-height: 1.3;
-    color: var(--wp--preset--color--dnte-neutral-900, #111827);
+    line-height: 1.2;
+    color: var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d);
 }
 
-.dnte-story-card__desc {
+.core-theme-story-card__desc {
     margin: 0;
-    font-size: var(--dnte-card-desc-size, 16px);
+    font-size: var(--core-theme-card-desc-size, 16px);
     line-height: 1.55;
-    color: var(--dnte-card-desc-color, #4b5563);
+    color: var(--core-theme-card-desc-color, #4b5563);
 }
 
 /* ── Connector ──────────────────────────────────────────────────────────────
@@ -150,24 +150,24 @@
    offsets are deliberately unbounded: most arrows in the design sit outside
    the card, and several outside the content column entirely. */
 
-.dnte-story-card__connector {
+.core-theme-story-card__connector {
     position: absolute;
-    top: var(--dnte-arrow-top, 0);
-    left: var(--dnte-arrow-left, 100%);
-    width: var(--dnte-arrow-width, 45%);
+    top: var(--core-theme-arrow-top, 0);
+    left: var(--core-theme-arrow-left, 100%);
+    width: var(--core-theme-arrow-width, 45%);
     z-index: 1;
 
-    color: var(--wp--preset--color--dnte-primary-800, #2234b0);
+    color: var(--wp--preset--color--core-theme-tiber, #04262f);
     pointer-events: none;
 
     /* scaleX is the flip, so it composes with the rotation rather than
      * fighting it. */
-    transform: rotate(var(--dnte-arrow-rotate, 0deg)) scaleX(var(--dnte-arrow-flip, 1));
+    transform: rotate(var(--core-theme-arrow-rotate, 0deg)) scaleX(var(--core-theme-arrow-flip, 1));
     transform-origin: top left;
 }
 
-.dnte-story-card__connector-art,
-.dnte-story-card__connector-art svg {
+.core-theme-story-card__connector-art,
+.core-theme-story-card__connector-art svg {
     display: block;
     width: 100%;
     height: auto;

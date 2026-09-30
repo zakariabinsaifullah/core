@@ -16,9 +16,9 @@ import { plus } from '@wordpress/icons';
 import Inspector from './inspector';
 
 const TEMPLATE = [
-    ['dnte/image-accordion-item', { title: __('Title 01', 'dentist-exchange') }],
-    ['dnte/image-accordion-item', { title: __('Title 02', 'dentist-exchange') }],
-    ['dnte/image-accordion-item', { title: __('Title 03', 'dentist-exchange') }]
+    ['core-theme/image-accordion-item', { title: __('Title 01', 'core') }],
+    ['core-theme/image-accordion-item', { title: __('Title 02', 'core') }],
+    ['core-theme/image-accordion-item', { title: __('Title 03', 'core') }]
 ];
 
 // block edit function
@@ -59,10 +59,10 @@ const Edit = props => {
     });
 
     const innerBlockProps = useInnerBlocksProps(
-        { className: 'dnte-image-accordion' },
+        { className: 'core-theme-image-accordion' },
         {
             renderAppender: false,
-            allowedBlocks: ['dnte/image-accordion-item'],
+            allowedBlocks: ['core-theme/image-accordion-item'],
             template: TEMPLATE,
             templateLock: false
         }
@@ -70,7 +70,7 @@ const Edit = props => {
 
     const addItem = () => {
         const childBlocks = wp.data.select('core/block-editor').getBlocks(clientId);
-        const newBlock = wp.blocks.createBlock('dnte/image-accordion-item', { title: __('New Item', 'dentist-exchange') });
+        const newBlock = wp.blocks.createBlock('core-theme/image-accordion-item', { title: __('New Item', 'core') });
         wp.data.dispatch('core/block-editor').insertBlocks(newBlock, childBlocks.length, clientId);
     };
 
@@ -78,7 +78,7 @@ const Edit = props => {
         <Fragment>
             <BlockControls>
                 <ToolbarGroup>
-                    <ToolbarButton icon={plus} label={__('Add Item', 'dentist-exchange')} onClick={addItem} />
+                    <ToolbarButton icon={plus} label={__('Add Item', 'core')} onClick={addItem} />
                 </ToolbarGroup>
             </BlockControls>
             <Inspector {...props} />

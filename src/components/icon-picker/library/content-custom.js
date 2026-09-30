@@ -62,14 +62,14 @@ export const ContentCustom = ({
                 status: 'success',
                 message: sprintf(
                     /* translators: %s: icon name. */
-                    __('“%s” was added to My Icons.', 'dentist-exchange'),
+                    __('“%s” was added to My Icons.', 'core'),
                     saved.label
                 )
             });
         } catch (error) {
             setNotice({
                 status: 'error',
-                message: error?.message || __('The icon could not be saved.', 'dentist-exchange')
+                message: error?.message || __('The icon could not be saved.', 'core')
             });
         }
     };
@@ -88,7 +88,7 @@ export const ContentCustom = ({
 
             return (
                 <div
-                    className="dnte-custom-svg-container"
+                    className="core-theme-custom-svg-container"
                     dangerouslySetInnerHTML={{ __html: finalSvgCode }}
                     style={{ width: `${size}px`, height: `${size}px` }}
                 />
@@ -104,30 +104,30 @@ export const ContentCustom = ({
     };
 
     return (
-        <div className="dnte-modal__custom-svg">
-            <div className="dnte-modal__custom-svg-editor">
+        <div className="core-theme-modal__custom-svg">
+            <div className="core-theme-modal__custom-svg-editor">
                 <TextareaControl
-                    label={__('Custom SVG code', 'dentist-exchange')}
+                    label={__('Custom SVG code', 'core')}
                     value={tempCustomSvgCode}
                     onChange={setTempCustomSvgCode}
-                    help={__('Paste your custom SVG code here. It will override the selected icon.', 'dentist-exchange')}
+                    help={__('Paste your custom SVG code here. It will override the selected icon.', 'core')}
                     rows={15}
                 />
             </div>
 
-            <div className="dnte-modal__custom-svg-preview">
-                <h3>{__('Preview', 'dentist-exchange')}</h3>
-                <div className="dnte-icon-preview-container">
+            <div className="core-theme-modal__custom-svg-preview">
+                <h3>{__('Preview', 'core')}</h3>
+                <div className="core-theme-icon-preview-container">
                     {tempCustomSvgCode ? (
                         renderCurrentIcon(previewIconSize, tempCustomSvgCode, previewStrokeWidth)
                     ) : (
-                        <div className="dnte-empty-preview">{__('Enter SVG code to see preview', 'dentist-exchange')}</div>
+                        <div className="core-theme-empty-preview">{__('Enter SVG code to see preview', 'core')}</div>
                     )}
                 </div>
 
-                <div className="dnte-modal__custom-svg-controls">
+                <div className="core-theme-modal__custom-svg-controls">
                     <RangeControl
-                        label={__('Icon Size', 'dentist-exchange')}
+                        label={__('Icon Size', 'core')}
                         value={previewIconSize}
                         onChange={setPreviewIconSize}
                         min={16}
@@ -137,7 +137,7 @@ export const ContentCustom = ({
 
                     {tempIconType === 'line' && (
                         <RangeControl
-                            label={__('Stroke Width', 'dentist-exchange')}
+                            label={__('Stroke Width', 'core')}
                             value={previewStrokeWidth}
                             onChange={setPreviewStrokeWidth}
                             min={0.5}
@@ -148,13 +148,13 @@ export const ContentCustom = ({
                     )}
                 </div>
 
-                <div className="dnte-modal__custom-svg-save">
+                <div className="core-theme-modal__custom-svg-save">
                     <TextControl
-                        label={__('Icon name', 'dentist-exchange')}
+                        label={__('Icon name', 'core')}
                         value={iconLabel}
                         onChange={setIconLabel}
-                        placeholder={__('e.g. Arrow Badge', 'dentist-exchange')}
-                        help={__('Name this icon to save it to My Icons and reuse it anywhere on the site.', 'dentist-exchange')}
+                        placeholder={__('e.g. Arrow Badge', 'core')}
+                        help={__('Name this icon to save it to My Icons and reuse it anywhere on the site.', 'core')}
                         __next40pxDefaultSize
                         __nextHasNoMarginBottom
                     />
@@ -166,7 +166,7 @@ export const ContentCustom = ({
                     )}
                 </div>
 
-                <div className="dnte-modal__custom-svg-buttons">
+                <div className="core-theme-modal__custom-svg-buttons">
                     <Flex>
                         <Button
                             __next40pxDefaultSize
@@ -175,7 +175,7 @@ export const ContentCustom = ({
                             isDestructive
                             style={{ flex: '1', justifyContent: 'center' }}
                         >
-                            {__('Clear', 'dentist-exchange')}
+                            {__('Clear', 'core')}
                         </Button>
                         <Button
                             __next40pxDefaultSize
@@ -185,7 +185,7 @@ export const ContentCustom = ({
                             disabled={!tempCustomSvgCode || !iconLabel.trim() || isSaving}
                             style={{ flex: '1', justifyContent: 'center' }}
                         >
-                            {__('Add to My Icons', 'dentist-exchange')}
+                            {__('Add to My Icons', 'core')}
                         </Button>
                     </Flex>
                     <Button
@@ -195,7 +195,7 @@ export const ContentCustom = ({
                         disabled={!tempCustomSvgCode}
                         style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}
                     >
-                        {__('Insert Custom Icon', 'dentist-exchange')}
+                        {__('Insert Custom Icon', 'core')}
                     </Button>
                 </div>
             </div>

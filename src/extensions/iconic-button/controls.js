@@ -35,15 +35,15 @@ const hangIconicButtonPanel = createHigherOrderComponent( BlockEdit => {
                 <BlockEdit key="edit" { ...props } />
                 { isSelected && (
                     <InspectorControls>
-                        <PanelBody title={ __( 'Icon Settings', 'dentist-exchange' ) } initialOpen={ initialOpen }>
+                        <PanelBody title={ __( 'Icon Settings', 'core' ) } initialOpen={ initialOpen }>
                             <NativeToggleControl
-                                label={ __( 'Add Icon to Button', 'dentist-exchange' ) }
+                                label={ __( 'Add Icon to Button', 'core' ) }
                                 checked={ iconicButtonEnabled }
                                 onChange={ () => {
                                     const newEnabled = ! iconicButtonEnabled;
                                     const newAttrs = { iconicButtonEnabled: newEnabled };
                                     if ( newEnabled && ! iconicButtonUniqueClass ) {
-                                        newAttrs.iconicButtonUniqueClass = `dnte-icon-button-${ clientId.slice( 0, 8 ) }`;
+                                        newAttrs.iconicButtonUniqueClass = `core-theme-icon-button-${ clientId.slice( 0, 8 ) }`;
                                     }
                                     setAttributes( newAttrs );
                                     initialOpen = true;
@@ -75,34 +75,34 @@ const hangIconicButtonPanel = createHigherOrderComponent( BlockEdit => {
                                         iconSize={ 24 }
                                     />
                                     <NativeToggleGroupControl
-                                        label={ __( 'Position', 'dentist-exchange' ) }
+                                        label={ __( 'Position', 'core' ) }
                                         value={ iconicButtonIconPosition }
                                         options={ [
-                                            { label: __( 'Before', 'dentist-exchange' ), value: 'dnte-icon-before' },
-                                            { label: __( 'After', 'dentist-exchange' ), value: '' }
+                                            { label: __( 'Before', 'core' ), value: 'core-theme-icon-before' },
+                                            { label: __( 'After', 'core' ), value: '' }
                                         ] }
                                         onChange={ value => setAttributes( { iconicButtonIconPosition: value } ) }
                                     />
                                     <NativeUnitControl
-                                        label={ __( 'Size', 'dentist-exchange' ) }
+                                        label={ __( 'Size', 'core' ) }
                                         value={ iconicButtonIconSize }
                                         onChange={ value => setAttributes( { iconicButtonIconSize: value } ) }
                                         mb="16px"
                                     />
                                     <NativeUnitControl
-                                        label={ __( 'Gap', 'dentist-exchange' ) }
+                                        label={ __( 'Gap', 'core' ) }
                                         value={ iconicButtonIconGap }
                                         onChange={ value => setAttributes( { iconicButtonIconGap: value } ) }
                                         mb="16px"
                                     />
                                     <NativeUnitControl
-                                        label={ __( 'Icon Padding', 'dentist-exchange' ) }
+                                        label={ __( 'Icon Padding', 'core' ) }
                                         value={ iconicButtonIconPadding }
                                         onChange={ value => setAttributes( { iconicButtonIconPadding: value } ) }
                                         mb="16px"
                                     />
                                     <PanelColorControl
-                                        label={ __( 'Icon Background', 'dentist-exchange' ) }
+                                        label={ __( 'Icon Background', 'core' ) }
                                         colorSettings={ [
                                             {
                                                 value: iconicButtonIconBgColor,
@@ -120,4 +120,4 @@ const hangIconicButtonPanel = createHigherOrderComponent( BlockEdit => {
     };
 }, 'withHangIconicButtonPanel' );
 
-addFilter( 'editor.BlockEdit', 'dnte/iconic-button-panel', hangIconicButtonPanel );
+addFilter( 'editor.BlockEdit', 'core-theme/iconic-button-panel', hangIconicButtonPanel );

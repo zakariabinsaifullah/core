@@ -28,7 +28,7 @@ const HoverColorsControls = ( {
             colorValue: hoverTextColor?.color,
             onColorChange: setHoverTextColor,
             isShownByDefault: false,
-            label: __( 'Hover Text', 'dentist-exchange' ),
+            label: __( 'Hover Text', 'core' ),
             resetAllFilter: () => ( {
                 hoverTextColor: undefined,
                 customHoverTextColor: undefined
@@ -38,7 +38,7 @@ const HoverColorsControls = ( {
             colorValue: hoverBackgroundColor?.color,
             onColorChange: setHoverBackgroundColor,
             isShownByDefault: false,
-            label: __( 'Hover Background', 'dentist-exchange' ),
+            label: __( 'Hover Background', 'core' ),
             resetAllFilter: () => ( {
                 hoverBackgroundColor: undefined,
                 customHoverBackgroundColor: undefined
@@ -48,7 +48,7 @@ const HoverColorsControls = ( {
             colorValue: hoverBorderColor?.color,
             onColorChange: setHoverBorderColor,
             isShownByDefault: false,
-            label: __( 'Hover Border', 'dentist-exchange' ),
+            label: __( 'Hover Border', 'core' ),
             resetAllFilter: () => ( {
                 hoverBorderColor: undefined,
                 customHoverBorderColor: undefined

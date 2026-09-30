@@ -37,11 +37,11 @@ const Edit = props => {
     const { images, tallHeight, shortRatio, gap, radius, speed, direction, pauseOnHover } = attributes;
 
     const cssCustomProperties = {
-        '--dnte-ticker-height': `${tallHeight}px`,
-        '--dnte-ticker-short': `${shortRatio}`,
-        '--dnte-ticker-gap': `${gap}px`,
-        '--dnte-ticker-radius': `${radius}px`,
-        '--dnte-ticker-speed': `${speed}s`
+        '--core-theme-ticker-height': `${tallHeight}px`,
+        '--core-theme-ticker-short': `${shortRatio}`,
+        '--core-theme-ticker-gap': `${gap}px`,
+        '--core-theme-ticker-radius': `${radius}px`,
+        '--core-theme-ticker-speed': `${speed}s`
     };
 
     useEffect(() => {
@@ -64,8 +64,8 @@ const Edit = props => {
                     multiple
                     addToGallery={false}
                     labels={{
-                        title: __('Ticker Gallery', 'dentist-exchange'),
-                        instructions: __('Select the images to scroll.', 'dentist-exchange')
+                        title: __('Ticker Gallery', 'core'),
+                        instructions: __('Select the images to scroll.', 'core')
                     }}
                     accept="image/*"
                     allowedTypes={['image']}
@@ -87,9 +87,9 @@ const Edit = props => {
                         allowedTypes={['image']}
                         accept="image/*"
                         onSelect={media => setAttributes({ images: (Array.isArray(media) ? media : [media]).map(toImage) })}
-                        name={__('Edit images', 'dentist-exchange')}
+                        name={__('Edit images', 'core')}
                     />
-                    <ToolbarButton onClick={() => setAttributes({ images: [] })}>{__('Clear', 'dentist-exchange')}</ToolbarButton>
+                    <ToolbarButton onClick={() => setAttributes({ images: [] })}>{__('Clear', 'core')}</ToolbarButton>
                 </ToolbarGroup>
             </BlockControls>
             <div {...blockProps}>
@@ -98,9 +98,9 @@ const Edit = props => {
                  * marquee can loop seamlessly, but doubling it here would only
                  * make the canvas harder to work with.
                  */}
-                <div className="dnte-ticker__track">
+                <div className="core-theme-ticker__track">
                     {images.map((image, i) => (
-                        <div className={classNames('dnte-ticker__item', `is-v${(i % 4) + 1}`)} key={image.id || i}>
+                        <div className={classNames('core-theme-ticker__item', `is-v${(i % 4) + 1}`)} key={image.id || i}>
                             <img src={image.url} alt={image.alt || ''} />
                         </div>
                     ))}

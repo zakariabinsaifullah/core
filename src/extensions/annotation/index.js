@@ -12,10 +12,10 @@
  * is why it is one colour per block — deliberately not reused here.)
  *
  * The stroke itself is a real inline <svg>, spliced in at render time by
- * dnte_render_annotation() in inc/annotations.php; the Format API cannot emit
+ * core_theme_render_annotation() in inc/annotations.php; the Format API cannot emit
  * child nodes into a RichText value without them becoming editable content.
  * The editor therefore previews the same artwork as a CSS mask — see
- * dnte_annotation_editor_preview_css().
+ * core_theme_annotation_editor_preview_css().
  */
 
 /**
@@ -31,13 +31,13 @@ import { ToolbarButton, Popover, ColorPalette, Button, BaseControl } from '@word
 import './style.scss';
 import './editor.scss';
 
-const FORMAT_NAME = 'dnte/annotation';
-const BASE_CLASS = 'dnte-annotation';
-const COLOR_VARIABLE = '--dnte-annotation-color';
+const FORMAT_NAME = 'core-theme/annotation';
+const BASE_CLASS = 'core-theme-annotation';
+const COLOR_VARIABLE = '--core-theme-annotation-color';
 
 // Format types have no native per-block restriction, so the toolbar button
 // opts out for anything else.
-const SUPPORTED_BLOCKS = ['core/heading', 'dnte/story-card'];
+const SUPPORTED_BLOCKS = ['core/heading', 'core-theme/story-card'];
 
 const annotationIcon = (
     <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -53,12 +53,12 @@ const annotationIcon = (
 );
 
 /**
- * Stroke variants, injected by dnte_enqueue_annotation_editor_assets() from
+ * Stroke variants, injected by core_theme_enqueue_annotation_editor_assets() from
  * the .svg files in assets/svg/annotations/. Empty until artwork is added.
  *
  * @return {Array<{slug: string, label: string}>} Available variants.
  */
-const getVariants = () => (Array.isArray(window.dnteAnnotations) ? window.dnteAnnotations : []);
+const getVariants = () => (Array.isArray(window.coreThemeAnnotations) ? window.coreThemeAnnotations : []);
 
 /**
  * Reads the colour back out of the format's inline `style` attribute.
@@ -176,7 +176,7 @@ const Edit = ({ value, onChange, isActive, activeAttributes, contentRef }) => {
             <BlockControls group="other">
                 <ToolbarButton
                     icon={annotationIcon}
-                    label={__('Annotation', 'dentist-exchange')}
+                    label={__('Annotation', 'core')}
                     onClick={() => setIsOpen(open => !open)}
                     isActive={isActive}
                     disabled={isDisabled}
@@ -186,26 +186,26 @@ const Edit = ({ value, onChange, isActive, activeAttributes, contentRef }) => {
             {isOpen && (
                 <Popover
                     anchor={popoverAnchor}
-                    className="dnte-annotation-popover"
+                    className="core-theme-annotation-popover"
                     placement="bottom"
                     focusOnMount="firstElement"
                     onClose={() => setIsOpen(false)}
                 >
-                    <div className="dnte-annotation-popover__inner">
+                    <div className="core-theme-annotation-popover__inner">
                         {!variants.length && (
-                            <p className="dnte-annotation-popover__empty">
-                                {__('No stroke artwork found. Add .svg files to assets/svg/annotations/.', 'dentist-exchange')}
+                            <p className="core-theme-annotation-popover__empty">
+                                {__('No stroke artwork found. Add .svg files to assets/svg/annotations/.', 'core')}
                             </p>
                         )}
                         {!!variants.length && (
                             <>
-                                <BaseControl.VisualLabel>{__('Stroke', 'dentist-exchange')}</BaseControl.VisualLabel>
-                                <div className="dnte-annotation-popover__grid">
+                                <BaseControl.VisualLabel>{__('Stroke', 'core')}</BaseControl.VisualLabel>
+                                <div className="core-theme-annotation-popover__grid">
                                     {variants.map(variant => (
                                         <button
                                             key={variant.slug}
                                             type="button"
-                                            className={`dnte-annotation-swatch${activeVariant === variant.slug ? ' is-selected' : ''}`}
+                                            className={`core-theme-annotation-swatch${activeVariant === variant.slug ? ' is-selected' : ''}`}
                                             data-annotation={variant.slug}
                                             aria-label={variant.label}
                                             aria-pressed={activeVariant === variant.slug}
@@ -213,7 +213,7 @@ const Edit = ({ value, onChange, isActive, activeAttributes, contentRef }) => {
                                         />
                                     ))}
                                 </div>
-                                <BaseControl.VisualLabel>{__('Colour', 'dentist-exchange')}</BaseControl.VisualLabel>
+                                <BaseControl.VisualLabel>{__('Colour', 'core')}</BaseControl.VisualLabel>
                                 <ColorPalette
                                     colors={paletteColors}
                                     value={fromCssColor(activeColor, paletteColors)}
@@ -223,8 +223,8 @@ const Edit = ({ value, onChange, isActive, activeAttributes, contentRef }) => {
                             </>
                         )}
                         {isActive && (
-                            <Button className="dnte-annotation-popover__remove" variant="tertiary" isDestructive onClick={remove}>
-                                {__('Remove annotation', 'dentist-exchange')}
+                            <Button className="core-theme-annotation-popover__remove" variant="tertiary" isDestructive onClick={remove}>
+                                {__('Remove annotation', 'core')}
                             </Button>
                         )}
                     </div>
@@ -235,7 +235,7 @@ const Edit = ({ value, onChange, isActive, activeAttributes, contentRef }) => {
 };
 
 const annotationFormat = {
-    title: __('Annotation', 'dentist-exchange'),
+    title: __('Annotation', 'core'),
     tagName: 'span',
     className: BASE_CLASS,
     // Per-instance state. `variant` picks the artwork; `style` carries the

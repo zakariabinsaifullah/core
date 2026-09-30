@@ -1,13 +1,13 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "dnte/slide",
-    "version": "0.9.0",
+    "name": "core-theme/slide",
+    "version": "0.0.1",
     "title": "Slide",
-    "category": "dnte",
+    "category": "core-theme",
     "description": "Slide child block for carousel.",
     "example": {},
-    "parent": ["dnte/carousel"],
+    "parent": ["core-theme/carousel"],
     "attributes": {
         "stackRotate": {
             "type": "number",
@@ -56,7 +56,7 @@
             "__experimentalSkipSerialization": true
         }
     },
-    "textdomain": "dentist-exchange",
+    "textdomain": "core",
     "editorScript": ["file:./index.js"],
     "editorStyle": "file:./index.css"
 }

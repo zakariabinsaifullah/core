@@ -18,7 +18,7 @@ const StarRating = ({ total = 5, rating }) => {
     }
 
     return (
-        <div className="dnte-rating">
+        <div className="core-theme-rating">
             {filled > 0 && (
                 <>
                     {fillItems &&

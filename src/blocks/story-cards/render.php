@@ -19,17 +19,17 @@ $animate    = ! empty( $attributes['animate'] );
 $stagger    = (int) ( $attributes['revealStagger'] ?? 120 );
 
 $trailing        = $attributes['trailingArrow'] ?? '';
-$trailing_markup = $trailing ? dnte_arrow_svg( $trailing ) : '';
+$trailing_markup = $trailing ? core_theme_arrow_svg( $trailing ) : '';
 
 $styles = array(
-	'--dnte-card-width:' . $card_width . '%',
-	'--dnte-lane-gap:' . $lane_gap . 'px',
-	'--dnte-mobile-gap:' . (float) ( $attributes['mobileGap'] ?? 70 ) . 'px',
+	'--core-theme-card-width:' . $card_width . '%',
+	'--core-theme-lane-gap:' . $lane_gap . 'px',
+	'--core-theme-mobile-gap:' . (float) ( $attributes['mobileGap'] ?? 70 ) . 'px',
 );
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
-		'class'         => 'dnte-story-cards',
+		'class'         => 'core-theme-story-cards',
 		'style'         => implode( ';', $styles ),
 		// view.js reads these; it does nothing at all when animation is off.
 		'data-animate'  => $animate ? 'true' : 'false',
@@ -49,20 +49,20 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		 * in the composition at any size.
 		 */
 		$trailing_styles = array(
-			'--dnte-trailing-left:' . (float) ( $attributes['trailingLeft'] ?? 41 ) . '%',
-			'--dnte-trailing-offset:' . (float) ( $attributes['trailingOffset'] ?? -13 ) . '%',
-			'--dnte-trailing-width:' . (float) ( $attributes['trailingWidth'] ?? 20 ) . '%',
-			'--dnte-trailing-flip:' . ( ! empty( $attributes['trailingFlipX'] ) ? '-1' : '1' ),
-			'--dnte-arrow-angle:' . dnte_arrow_angle( $trailing ) . 'deg',
+			'--core-theme-trailing-left:' . (float) ( $attributes['trailingLeft'] ?? 41 ) . '%',
+			'--core-theme-trailing-offset:' . (float) ( $attributes['trailingOffset'] ?? -13 ) . '%',
+			'--core-theme-trailing-width:' . (float) ( $attributes['trailingWidth'] ?? 20 ) . '%',
+			'--core-theme-trailing-flip:' . ( ! empty( $attributes['trailingFlipX'] ) ? '-1' : '1' ),
+			'--core-theme-arrow-angle:' . core_theme_arrow_angle( $trailing ) . 'deg',
 		);
 		?>
 		<span
-			class="dnte-story-cards__trailing"
+			class="core-theme-story-cards__trailing"
 			style="<?php echo esc_attr( implode( ';', $trailing_styles ) ); ?>"
 			data-arrow-delay="<?php echo esc_attr( (int) ( $attributes['trailingDelay'] ?? 180 ) ); ?>"
 			aria-hidden="true"
 		>
-			<span class="dnte-story-card__connector-art">
+			<span class="core-theme-story-card__connector-art">
 				<?php echo $trailing_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-owned artwork from assets/svg/arrows/. ?>
 			</span>
 		</span>

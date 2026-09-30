@@ -12,10 +12,10 @@
  * dirname() when it cannot resolve the file paths — producing PHP deprecation
  * warnings.  Using a manual loop with an is_dir() guard is the safe alternative.
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
-if ( ! function_exists( 'dnte_register_blocks' ) ) :
+if ( ! function_exists( 'core_theme_register_blocks' ) ) :
 	/**
 	 * Registers custom blocks from the build directory.
 	 *
@@ -25,7 +25,7 @@ if ( ! function_exists( 'dnte_register_blocks' ) ) :
 	 * 2. If no manifest, scan build/blocks/ directly.
 	 * 3. If build/ does not exist at all, fall back to src/ for development.
 	 */
-	function dnte_register_blocks() {
+	function core_theme_register_blocks() {
 		$build_dir     = __DIR__ . '/../build/blocks';
 		$manifest_path = __DIR__ . '/../build/blocks-manifest.php';
 		$src_dir       = __DIR__ . '/../src/blocks';
@@ -66,4 +66,4 @@ if ( ! function_exists( 'dnte_register_blocks' ) ) :
 		}
 	}
 endif;
-add_action( 'init', 'dnte_register_blocks' );
+add_action( 'init', 'core_theme_register_blocks' );

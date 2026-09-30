@@ -51,10 +51,10 @@ const Edit = props => {
     // even when the underlying values haven't changed, so this only calls
     // setAttributes when a value actually differs — otherwise the resulting
     // attribute update re-triggers this same effect and the item flickers.
-    const nextShowTitle = context['dnte/showTitle'];
-    const nextShowDesc = context['dnte/showDesc'];
-    const nextShowBtn = context['dnte/showBtn'];
-    const nextTitleTag = context['dnte/titleTag'];
+    const nextShowTitle = context['core-theme/showTitle'];
+    const nextShowDesc = context['core-theme/showDesc'];
+    const nextShowBtn = context['core-theme/showBtn'];
+    const nextTitleTag = context['core-theme/titleTag'];
 
     useEffect(() => {
         if (showTitle === nextShowTitle && showDesc === nextShowDesc && showBtn === nextShowBtn && titleTag === nextTitleTag) {
@@ -114,7 +114,7 @@ const Edit = props => {
                 <div className="img" style={imageCustomProperties}>
                     {!image?.url && (
                         <MediaPlaceholder
-                            labels={{ title: __('Accordion Image', 'dentist-exchange') }}
+                            labels={{ title: __('Accordion Image', 'core') }}
                             onSelect={media => setAttributes({ image: { id: media.id, url: media.url, alt: media.alt } })}
                             accept="image/*"
                             allowedTypes={['image']}
@@ -136,7 +136,7 @@ const Edit = props => {
                                 className="heading"
                                 value={title}
                                 onChange={value => setAttributes({ title: value })}
-                                placeholder={__('Accordion title..', 'dentist-exchange')}
+                                placeholder={__('Accordion title..', 'core')}
                                 allowedFormats={[]}
                                 withoutInteractiveFormatting
                             />
@@ -147,7 +147,7 @@ const Edit = props => {
                                 className="description"
                                 value={description}
                                 onChange={value => setAttributes({ description: value })}
-                                placeholder={__('Accordion description..', 'dentist-exchange')}
+                                placeholder={__('Accordion description..', 'core')}
                                 allowedFormats={[]}
                                 withoutInteractiveFormatting
                             />

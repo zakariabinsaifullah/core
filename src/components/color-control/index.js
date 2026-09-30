@@ -136,15 +136,15 @@ function ColorControlDropdown({ label, colorValue = {}, onChangeColor, hasHover 
                         tabs={[
                             {
                                 name: 'default',
-                                title: __('Default', 'dentist-exchange')
+                                title: __('Default', 'core')
                             },
                             {
                                 name: 'hover',
-                                title: __('Hover', 'dentist-exchange')
+                                title: __('Hover', 'core')
                             },
                             {
                                 name: 'active',
-                                title: __('Active', 'dentist-exchange')
+                                title: __('Active', 'core')
                             }
                         ]}
                     >

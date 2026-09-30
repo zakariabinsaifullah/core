@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const sliders = document.querySelectorAll('.wp-block-dnte-carousel');
+    const sliders = document.querySelectorAll('.wp-block-core-theme-carousel');
     sliders.forEach(function (slider) {
         const options = JSON.parse(slider.getAttribute('data-options'));
         const { loop, autoplay, gaps, visibleItems } = options;

@@ -1,10 +1,10 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "dnte/carousel",
-    "version": "0.9.0",
+    "name": "core-theme/carousel",
+    "version": "0.0.1",
     "title": "Carousel",
-    "category": "dnte",
+    "category": "core-theme",
     "icon": "slides",
     "description": "Create flexible sliders and carousels using any inner blocks",
     "example": {},
@@ -85,9 +85,9 @@
             "default": false
         }
     },
-    "textdomain": "dentist-exchange",
+    "textdomain": "core",
     "editorScript": ["file:./index.js"],
     "editorStyle": ["file:./index.css"],
-    "style": ["file:./style-index.css", "dnte-swiper-style"],
-    "viewScript": ["file:./view.js", "dnte-swiper-script"]
+    "style": ["file:./style-index.css", "core-theme-swiper-style"],
+    "viewScript": ["file:./view.js", "core-theme-swiper-script"]
 }

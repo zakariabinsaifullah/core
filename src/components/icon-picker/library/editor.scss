@@ -1,4 +1,4 @@
-.dnte-modal__icons {
+.core-theme-modal__icons {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 24px;
@@ -46,17 +46,17 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
-.dnte-modal__my-icons {
+.core-theme-modal__my-icons {
     &-item {
         position: relative;
         display: flex;
 
-        .dnte-modal__icons-button {
+        .core-theme-modal__icons-button {
             flex: 1;
         }
 
-        &:hover .dnte-modal__my-icons-remove,
-        .dnte-modal__my-icons-remove:focus {
+        &:hover .core-theme-modal__my-icons-remove,
+        .core-theme-modal__my-icons-remove:focus {
             opacity: 1;
         }
     }
@@ -107,7 +107,7 @@
     }
 }
 
-.dnte-modal__custom-svg {
+.core-theme-modal__custom-svg {
     display: flex;
     padding: 24px 0;
     gap: 24px;
@@ -136,7 +136,7 @@
         width: 360px;
         display: flex;
         flex-direction: column;
-        .dnte-icon-preview-container {
+        .core-theme-icon-preview-container {
             flex: 1;
         }
 

@@ -39,7 +39,7 @@
 	}
 
 	document.addEventListener( 'DOMContentLoaded', function () {
-		var buttons = document.querySelectorAll( '.dnte-copy-button' );
+		var buttons = document.querySelectorAll( '.core-theme-copy-button' );
 
 		buttons.forEach( function ( button ) {
 			button.addEventListener( 'click', function () {

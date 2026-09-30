@@ -2,54 +2,54 @@
 /**
  * Testimonials
  *
- * Meta fields, admin UI and the [dnte_testimonials] shortcode for the
+ * Meta fields, admin UI and the [core_theme_testimonials] shortcode for the
  * Testimonial post type registered in inc/post-types.php.
  *
  * A testimonial is the reviewer's name (post title), a designation and a
  * review message. It has no front-end single view; the shortcode is the only
  * place it is ever rendered.
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const DNTE_TESTIMONIAL_POST_TYPE = 'dnte-testimonial';
-const DNTE_TESTIMONIAL_DESIGNATION_KEY = '_dnte_testimonial_designation';
-const DNTE_TESTIMONIAL_MESSAGE_KEY = '_dnte_testimonial_message';
-const DNTE_TESTIMONIAL_VARIANT_KEY = '_dnte_testimonial_variant';
+const CORE_THEME_TESTIMONIAL_POST_TYPE = 'core-testimonial';
+const CORE_THEME_TESTIMONIAL_DESIGNATION_KEY = '_core_theme_testimonial_designation';
+const CORE_THEME_TESTIMONIAL_MESSAGE_KEY = '_core_theme_testimonial_message';
+const CORE_THEME_TESTIMONIAL_VARIANT_KEY = '_core_theme_testimonial_variant';
 
 /**
  * Card colours, in the order the design cycles them.
  *
- * White, black, blue, then repeat — so the fourth card is white again. The
- * blue is #2234b0, the theme's dnte-primary-800, sampled from the design.
+ * White, black, tiber, then repeat — so the fourth card is white again. The
+ * tiber is #04262f, the theme's core-theme-tiber.
  *
  * Tilt runs on a two-step alternation rather than this three-step one (see
  * assets/css/testimonials.css), so the two only realign every sixth card.
  */
-const DNTE_TESTIMONIAL_VARIANT_CYCLE = array( 'white', 'black', 'blue' );
+const CORE_THEME_TESTIMONIAL_VARIANT_CYCLE = array( 'white', 'black', 'tiber' );
 
 
-if ( ! function_exists( 'dnte_testimonial_variants' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_variants' ) ) :
 	/**
 	 * The selectable card colours.
 	 *
 	 * @return array<string, string> Slug => label.
 	 */
-	function dnte_testimonial_variants() {
+	function core_theme_testimonial_variants() {
 		return array(
-			'white' => __( 'White', 'dentist-exchange' ),
-			'black' => __( 'Black', 'dentist-exchange' ),
-			'blue'  => __( 'Blue', 'dentist-exchange' ),
+			'white' => __( 'White', 'core' ),
+			'black' => __( 'Black', 'core' ),
+			'tiber' => __( 'Tiber', 'core' ),
 		);
 	}
 endif;
 
 
-if ( ! function_exists( 'dnte_testimonial_variant_for_index' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_variant_for_index' ) ) :
 	/**
 	 * The card colour for a position in the list.
 	 *
@@ -62,21 +62,21 @@ if ( ! function_exists( 'dnte_testimonial_variant_for_index' ) ) :
 	 * @param string $override Per-testimonial choice, or '' to follow the cycle.
 	 * @return string Variant slug.
 	 */
-	function dnte_testimonial_variant_for_index( $index, $override = '' ) {
-		$variants = dnte_testimonial_variants();
+	function core_theme_testimonial_variant_for_index( $index, $override = '' ) {
+		$variants = core_theme_testimonial_variants();
 
 		if ( '' !== $override && isset( $variants[ $override ] ) ) {
 			return $override;
 		}
 
-		$cycle = DNTE_TESTIMONIAL_VARIANT_CYCLE;
+		$cycle = CORE_THEME_TESTIMONIAL_VARIANT_CYCLE;
 
 		return $cycle[ $index % count( $cycle ) ];
 	}
 endif;
 
 
-if ( ! function_exists( 'dnte_testimonial_auto_index' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_auto_index' ) ) :
 	/**
 	 * Where a testimonial falls in the shortcode's default ordering.
 	 *
@@ -91,13 +91,13 @@ if ( ! function_exists( 'dnte_testimonial_auto_index' ) ) :
 	 * @param int $post_id Testimonial ID.
 	 * @return int Zero-based position, or 0 when not found.
 	 */
-	function dnte_testimonial_auto_index( $post_id ) {
+	function core_theme_testimonial_auto_index( $post_id ) {
 		static $order = null;
 
 		if ( null === $order ) {
 			$ids = get_posts(
 				array(
-					'post_type'        => DNTE_TESTIMONIAL_POST_TYPE,
+					'post_type'        => CORE_THEME_TESTIMONIAL_POST_TYPE,
 					'post_status'      => 'publish',
 					'posts_per_page'   => -1,
 					'orderby'          => 'date',
@@ -120,12 +120,12 @@ endif;
 // Meta
 // =============================================================================
 
-if ( ! function_exists( 'dnte_register_testimonial_meta' ) ) :
+if ( ! function_exists( 'core_theme_register_testimonial_meta' ) ) :
 	/**
 	 * Registers the testimonial meta so it is sanitised consistently and
 	 * deleted with the post.
 	 */
-	function dnte_register_testimonial_meta() {
+	function core_theme_register_testimonial_meta() {
 		// The first argument is the post type: register_post_meta() sets
 		// `object_subtype` from it and ignores any passed in $args, so naming
 		// the type here is what scopes the meta to testimonials.
@@ -139,24 +139,24 @@ if ( ! function_exists( 'dnte_register_testimonial_meta' ) ) :
 		);
 
 		register_post_meta(
-			DNTE_TESTIMONIAL_POST_TYPE,
-			DNTE_TESTIMONIAL_DESIGNATION_KEY,
+			CORE_THEME_TESTIMONIAL_POST_TYPE,
+			CORE_THEME_TESTIMONIAL_DESIGNATION_KEY,
 			array_merge(
 				$common,
 				array(
-					'description'       => __( 'Reviewer designation.', 'dentist-exchange' ),
+					'description'       => __( 'Reviewer designation.', 'core' ),
 					'sanitize_callback' => 'sanitize_text_field',
 				)
 			)
 		);
 
 		register_post_meta(
-			DNTE_TESTIMONIAL_POST_TYPE,
-			DNTE_TESTIMONIAL_MESSAGE_KEY,
+			CORE_THEME_TESTIMONIAL_POST_TYPE,
+			CORE_THEME_TESTIMONIAL_MESSAGE_KEY,
 			array_merge(
 				$common,
 				array(
-					'description'       => __( 'Review message.', 'dentist-exchange' ),
+					'description'       => __( 'Review message.', 'core' ),
 					// Line breaks are meaningful here, so the message keeps them
 					// and is escaped on output rather than stripped on input.
 					'sanitize_callback' => 'sanitize_textarea_field',
@@ -165,86 +165,86 @@ if ( ! function_exists( 'dnte_register_testimonial_meta' ) ) :
 		);
 
 		register_post_meta(
-			DNTE_TESTIMONIAL_POST_TYPE,
-			DNTE_TESTIMONIAL_VARIANT_KEY,
+			CORE_THEME_TESTIMONIAL_POST_TYPE,
+			CORE_THEME_TESTIMONIAL_VARIANT_KEY,
 			array_merge(
 				$common,
 				array(
-					'description'       => __( 'Card colour override.', 'dentist-exchange' ),
+					'description'       => __( 'Card colour override.', 'core' ),
 					'sanitize_callback' => 'sanitize_key',
 				)
 			)
 		);
 	}
 endif;
-add_action( 'init', 'dnte_register_testimonial_meta' );
+add_action( 'init', 'core_theme_register_testimonial_meta' );
 
 
-if ( ! function_exists( 'dnte_testimonial_meta_box' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_meta_box' ) ) :
 	/**
 	 * Adds the testimonial details box to the edit screen.
 	 */
-	function dnte_testimonial_meta_box() {
+	function core_theme_testimonial_meta_box() {
 		add_meta_box(
-			'dnte-testimonial-details',
-			__( 'Testimonial Details', 'dentist-exchange' ),
-			'dnte_render_testimonial_meta_box',
-			DNTE_TESTIMONIAL_POST_TYPE,
+			'core-theme-testimonial-details',
+			__( 'Testimonial Details', 'core' ),
+			'core_theme_render_testimonial_meta_box',
+			CORE_THEME_TESTIMONIAL_POST_TYPE,
 			'normal',
 			'high'
 		);
 	}
 endif;
-add_action( 'add_meta_boxes', 'dnte_testimonial_meta_box' );
+add_action( 'add_meta_boxes', 'core_theme_testimonial_meta_box' );
 
 
-if ( ! function_exists( 'dnte_render_testimonial_meta_box' ) ) :
+if ( ! function_exists( 'core_theme_render_testimonial_meta_box' ) ) :
 	/**
 	 * Renders the designation, message and colour fields.
 	 *
 	 * @param WP_Post $post Current post.
 	 */
-	function dnte_render_testimonial_meta_box( $post ) {
-		wp_nonce_field( 'dnte_save_testimonial', 'dnte_testimonial_nonce' );
+	function core_theme_render_testimonial_meta_box( $post ) {
+		wp_nonce_field( 'core_theme_save_testimonial', 'core_theme_testimonial_nonce' );
 
-		$designation = get_post_meta( $post->ID, DNTE_TESTIMONIAL_DESIGNATION_KEY, true );
-		$message     = get_post_meta( $post->ID, DNTE_TESTIMONIAL_MESSAGE_KEY, true );
-		$variant     = get_post_meta( $post->ID, DNTE_TESTIMONIAL_VARIANT_KEY, true );
+		$designation = get_post_meta( $post->ID, CORE_THEME_TESTIMONIAL_DESIGNATION_KEY, true );
+		$message     = get_post_meta( $post->ID, CORE_THEME_TESTIMONIAL_MESSAGE_KEY, true );
+		$variant     = get_post_meta( $post->ID, CORE_THEME_TESTIMONIAL_VARIANT_KEY, true );
 		?>
 		<p>
-			<label for="dnte-testimonial-designation"><strong><?php esc_html_e( 'Designation', 'dentist-exchange' ); ?></strong></label><br />
+			<label for="core-theme-testimonial-designation"><strong><?php esc_html_e( 'Designation', 'core' ); ?></strong></label><br />
 			<input
 				type="text"
-				id="dnte-testimonial-designation"
-				name="dnte_testimonial_designation"
+				id="core-theme-testimonial-designation"
+				name="core_theme_testimonial_designation"
 				class="widefat"
 				value="<?php echo esc_attr( $designation ); ?>"
-				placeholder="<?php esc_attr_e( 'Customer', 'dentist-exchange' ); ?>"
+				placeholder="<?php esc_attr_e( 'Customer', 'core' ); ?>"
 			/>
-			<span class="description"><?php esc_html_e( 'Shown under the reviewer name.', 'dentist-exchange' ); ?></span>
+			<span class="description"><?php esc_html_e( 'Shown under the reviewer name.', 'core' ); ?></span>
 		</p>
 		<p>
-			<label for="dnte-testimonial-message"><strong><?php esc_html_e( 'Review Message', 'dentist-exchange' ); ?></strong></label><br />
+			<label for="core-theme-testimonial-message"><strong><?php esc_html_e( 'Review Message', 'core' ); ?></strong></label><br />
 			<textarea
-				id="dnte-testimonial-message"
-				name="dnte_testimonial_message"
+				id="core-theme-testimonial-message"
+				name="core_theme_testimonial_message"
 				class="widefat"
 				rows="6"
-				placeholder="<?php esc_attr_e( 'What the reviewer said…', 'dentist-exchange' ); ?>"
+				placeholder="<?php esc_attr_e( 'What the reviewer said…', 'core' ); ?>"
 			><?php echo esc_textarea( $message ); ?></textarea>
 		</p>
 		<p>
-			<label for="dnte-testimonial-variant"><strong><?php esc_html_e( 'Card Colour', 'dentist-exchange' ); ?></strong></label><br />
-			<select id="dnte-testimonial-variant" name="dnte_testimonial_variant">
-				<option value=""><?php esc_html_e( 'Automatic (follows the design pattern)', 'dentist-exchange' ); ?></option>
-				<?php foreach ( dnte_testimonial_variants() as $slug => $label ) : ?>
+			<label for="core-theme-testimonial-variant"><strong><?php esc_html_e( 'Card Colour', 'core' ); ?></strong></label><br />
+			<select id="core-theme-testimonial-variant" name="core_theme_testimonial_variant">
+				<option value=""><?php esc_html_e( 'Automatic (follows the design pattern)', 'core' ); ?></option>
+				<?php foreach ( core_theme_testimonial_variants() as $slug => $label ) : ?>
 					<option value="<?php echo esc_attr( $slug ); ?>" <?php selected( $variant, $slug ); ?>>
 						<?php echo esc_html( $label ); ?>
 					</option>
 				<?php endforeach; ?>
 			</select>
 			<span class="description">
-				<?php esc_html_e( 'Leave automatic unless this testimonial must always be a particular colour. The quote icon follows the card colour either way.', 'dentist-exchange' ); ?>
+				<?php esc_html_e( 'Leave automatic unless this testimonial must always be a particular colour. The quote icon follows the card colour either way.', 'core' ); ?>
 			</span>
 		</p>
 		<?php
@@ -252,18 +252,18 @@ if ( ! function_exists( 'dnte_render_testimonial_meta_box' ) ) :
 endif;
 
 
-if ( ! function_exists( 'dnte_save_testimonial_meta' ) ) :
+if ( ! function_exists( 'core_theme_save_testimonial_meta' ) ) :
 	/**
 	 * Saves the testimonial fields.
 	 *
 	 * @param int $post_id Post ID.
 	 */
-	function dnte_save_testimonial_meta( $post_id ) {
-		if ( ! isset( $_POST['dnte_testimonial_nonce'] ) ) {
+	function core_theme_save_testimonial_meta( $post_id ) {
+		if ( ! isset( $_POST['core_theme_testimonial_nonce'] ) ) {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['dnte_testimonial_nonce'] ) ), 'dnte_save_testimonial' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['core_theme_testimonial_nonce'] ) ), 'core_theme_save_testimonial' ) ) {
 			return;
 		}
 
@@ -275,31 +275,31 @@ if ( ! function_exists( 'dnte_save_testimonial_meta' ) ) :
 			return;
 		}
 
-		$designation = isset( $_POST['dnte_testimonial_designation'] )
-			? sanitize_text_field( wp_unslash( $_POST['dnte_testimonial_designation'] ) )
+		$designation = isset( $_POST['core_theme_testimonial_designation'] )
+			? sanitize_text_field( wp_unslash( $_POST['core_theme_testimonial_designation'] ) )
 			: '';
 
-		$message = isset( $_POST['dnte_testimonial_message'] )
-			? sanitize_textarea_field( wp_unslash( $_POST['dnte_testimonial_message'] ) )
+		$message = isset( $_POST['core_theme_testimonial_message'] )
+			? sanitize_textarea_field( wp_unslash( $_POST['core_theme_testimonial_message'] ) )
 			: '';
 
-		$variant = isset( $_POST['dnte_testimonial_variant'] )
-			? sanitize_key( wp_unslash( $_POST['dnte_testimonial_variant'] ) )
+		$variant = isset( $_POST['core_theme_testimonial_variant'] )
+			? sanitize_key( wp_unslash( $_POST['core_theme_testimonial_variant'] ) )
 			: '';
 
-		if ( ! isset( dnte_testimonial_variants()[ $variant ] ) ) {
+		if ( ! isset( core_theme_testimonial_variants()[ $variant ] ) ) {
 			$variant = '';
 		}
 
-		update_post_meta( $post_id, DNTE_TESTIMONIAL_DESIGNATION_KEY, $designation );
-		update_post_meta( $post_id, DNTE_TESTIMONIAL_MESSAGE_KEY, $message );
-		update_post_meta( $post_id, DNTE_TESTIMONIAL_VARIANT_KEY, $variant );
+		update_post_meta( $post_id, CORE_THEME_TESTIMONIAL_DESIGNATION_KEY, $designation );
+		update_post_meta( $post_id, CORE_THEME_TESTIMONIAL_MESSAGE_KEY, $message );
+		update_post_meta( $post_id, CORE_THEME_TESTIMONIAL_VARIANT_KEY, $variant );
 	}
 endif;
-add_action( 'save_post_' . DNTE_TESTIMONIAL_POST_TYPE, 'dnte_save_testimonial_meta' );
+add_action( 'save_post_' . CORE_THEME_TESTIMONIAL_POST_TYPE, 'core_theme_save_testimonial_meta' );
 
 
-if ( ! function_exists( 'dnte_testimonial_admin_columns' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_admin_columns' ) ) :
 	/**
 	 * Shows the designation in the list table, so reviewers are
 	 * distinguishable at a glance.
@@ -307,12 +307,12 @@ if ( ! function_exists( 'dnte_testimonial_admin_columns' ) ) :
 	 * @param array $columns Existing columns.
 	 * @return array Modified columns.
 	 */
-	function dnte_testimonial_admin_columns( $columns ) {
+	function core_theme_testimonial_admin_columns( $columns ) {
 		$date = $columns['date'] ?? null;
 		unset( $columns['date'] );
 
-		$columns['dnte_designation'] = __( 'Designation', 'dentist-exchange' );
-		$columns['dnte_colour']      = __( 'Card Colour', 'dentist-exchange' );
+		$columns['core_theme_designation'] = __( 'Designation', 'core' );
+		$columns['core_theme_colour']      = __( 'Card Colour', 'core' );
 
 		if ( $date ) {
 			$columns['date'] = $date;
@@ -321,35 +321,35 @@ if ( ! function_exists( 'dnte_testimonial_admin_columns' ) ) :
 		return $columns;
 	}
 endif;
-add_filter( 'manage_' . DNTE_TESTIMONIAL_POST_TYPE . '_posts_columns', 'dnte_testimonial_admin_columns' );
+add_filter( 'manage_' . CORE_THEME_TESTIMONIAL_POST_TYPE . '_posts_columns', 'core_theme_testimonial_admin_columns' );
 
 
-if ( ! function_exists( 'dnte_testimonial_admin_column_content' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_admin_column_content' ) ) :
 	/**
 	 * Fills the custom list table column.
 	 *
 	 * @param string $column  Column key.
 	 * @param int    $post_id Post ID.
 	 */
-	function dnte_testimonial_admin_column_content( $column, $post_id ) {
-		if ( 'dnte_designation' === $column ) {
-			echo esc_html( get_post_meta( $post_id, DNTE_TESTIMONIAL_DESIGNATION_KEY, true ) );
+	function core_theme_testimonial_admin_column_content( $column, $post_id ) {
+		if ( 'core_theme_designation' === $column ) {
+			echo esc_html( get_post_meta( $post_id, CORE_THEME_TESTIMONIAL_DESIGNATION_KEY, true ) );
 			return;
 		}
 
-		if ( 'dnte_colour' !== $column ) {
+		if ( 'core_theme_colour' !== $column ) {
 			return;
 		}
 
-		$override = (string) get_post_meta( $post_id, DNTE_TESTIMONIAL_VARIANT_KEY, true );
-		$index    = dnte_testimonial_auto_index( $post_id );
-		$variant  = dnte_testimonial_variant_for_index( $index, $override );
-		$labels   = dnte_testimonial_variants();
+		$override = (string) get_post_meta( $post_id, CORE_THEME_TESTIMONIAL_VARIANT_KEY, true );
+		$index    = core_theme_testimonial_auto_index( $post_id );
+		$variant  = core_theme_testimonial_variant_for_index( $index, $override );
+		$labels   = core_theme_testimonial_variants();
 
 		$swatch = array(
 			'white' => '#ffffff',
 			'black' => '#000000',
-			'blue'  => '#2234b0',
+			'tiber' => '#04262f',
 		);
 
 		printf(
@@ -359,21 +359,21 @@ if ( ! function_exists( 'dnte_testimonial_admin_column_content' ) ) :
 		);
 
 		if ( '' === $override ) {
-			echo ' <span style="color:#646970;">' . esc_html__( '(automatic)', 'dentist-exchange' ) . '</span>';
+			echo ' <span style="color:#646970;">' . esc_html__( '(automatic)', 'core' ) . '</span>';
 		}
 	}
 endif;
-add_action( 'manage_' . DNTE_TESTIMONIAL_POST_TYPE . '_posts_custom_column', 'dnte_testimonial_admin_column_content', 10, 2 );
+add_action( 'manage_' . CORE_THEME_TESTIMONIAL_POST_TYPE . '_posts_custom_column', 'core_theme_testimonial_admin_column_content', 10, 2 );
 
 
 // =============================================================================
 // Settings
 // =============================================================================
 
-const DNTE_TESTIMONIAL_OPTION = 'dnte_testimonial_settings';
+const CORE_THEME_TESTIMONIAL_OPTION = 'core_theme_testimonial_settings';
 
 
-if ( ! function_exists( 'dnte_testimonial_settings' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_settings' ) ) :
 	/**
 	 * Carousel settings, with defaults filled in.
 	 *
@@ -382,8 +382,8 @@ if ( ! function_exists( 'dnte_testimonial_settings' ) ) :
 	 *
 	 * @return array{autoplay: bool, speed: int, loop: bool, pagination: bool}
 	 */
-	function dnte_testimonial_settings() {
-		$saved = get_option( DNTE_TESTIMONIAL_OPTION, array() );
+	function core_theme_testimonial_settings() {
+		$saved = get_option( CORE_THEME_TESTIMONIAL_OPTION, array() );
 
 		if ( ! is_array( $saved ) ) {
 			$saved = array();
@@ -405,14 +405,14 @@ if ( ! function_exists( 'dnte_testimonial_settings' ) ) :
 endif;
 
 
-if ( ! function_exists( 'dnte_testimonial_sanitize_settings' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_sanitize_settings' ) ) :
 	/**
 	 * Sanitises the settings form.
 	 *
 	 * @param mixed $input Raw submission.
 	 * @return array Clean settings.
 	 */
-	function dnte_testimonial_sanitize_settings( $input ) {
+	function core_theme_testimonial_sanitize_settings( $input ) {
 		$input = is_array( $input ) ? $input : array();
 
 		return array(
@@ -425,126 +425,126 @@ if ( ! function_exists( 'dnte_testimonial_sanitize_settings' ) ) :
 endif;
 
 
-if ( ! function_exists( 'dnte_testimonial_register_settings' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_register_settings' ) ) :
 	/**
 	 * Registers the settings store.
 	 */
-	function dnte_testimonial_register_settings() {
+	function core_theme_testimonial_register_settings() {
 		register_setting(
-			'dnte_testimonial_settings_group',
-			DNTE_TESTIMONIAL_OPTION,
+			'core_theme_testimonial_settings_group',
+			CORE_THEME_TESTIMONIAL_OPTION,
 			array(
 				'type'              => 'array',
-				'sanitize_callback' => 'dnte_testimonial_sanitize_settings',
+				'sanitize_callback' => 'core_theme_testimonial_sanitize_settings',
 				'default'           => array(),
 			)
 		);
 	}
 endif;
-add_action( 'admin_init', 'dnte_testimonial_register_settings' );
+add_action( 'admin_init', 'core_theme_testimonial_register_settings' );
 
 
-if ( ! function_exists( 'dnte_testimonial_settings_menu' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_settings_menu' ) ) :
 	/**
 	 * Adds the settings screen under the Testimonials menu.
 	 */
-	function dnte_testimonial_settings_menu() {
+	function core_theme_testimonial_settings_menu() {
 		add_submenu_page(
-			'edit.php?post_type=' . DNTE_TESTIMONIAL_POST_TYPE,
-			__( 'Testimonial Settings', 'dentist-exchange' ),
-			__( 'Settings', 'dentist-exchange' ),
+			'edit.php?post_type=' . CORE_THEME_TESTIMONIAL_POST_TYPE,
+			__( 'Testimonial Settings', 'core' ),
+			__( 'Settings', 'core' ),
 			'manage_options',
-			'dnte-testimonial-settings',
-			'dnte_testimonial_render_settings_page'
+			'core-theme-testimonial-settings',
+			'core_theme_testimonial_render_settings_page'
 		);
 	}
 endif;
-add_action( 'admin_menu', 'dnte_testimonial_settings_menu' );
+add_action( 'admin_menu', 'core_theme_testimonial_settings_menu' );
 
 
-if ( ! function_exists( 'dnte_testimonial_render_settings_page' ) ) :
+if ( ! function_exists( 'core_theme_testimonial_render_settings_page' ) ) :
 	/**
 	 * Renders the carousel settings form.
 	 */
-	function dnte_testimonial_render_settings_page() {
+	function core_theme_testimonial_render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		$settings = dnte_testimonial_settings();
+		$settings = core_theme_testimonial_settings();
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Testimonial Settings', 'dentist-exchange' ); ?></h1>
+			<h1><?php esc_html_e( 'Testimonial Settings', 'core' ); ?></h1>
 			<p>
-				<?php esc_html_e( 'Defaults for the testimonials carousel. An attribute written into the shortcode overrides whatever is set here.', 'dentist-exchange' ); ?>
-				<code>[dnte_testimonials]</code>
+				<?php esc_html_e( 'Defaults for the testimonials carousel. An attribute written into the shortcode overrides whatever is set here.', 'core' ); ?>
+				<code>[core_theme_testimonials]</code>
 			</p>
 			<form method="post" action="options.php">
-				<?php settings_fields( 'dnte_testimonial_settings_group' ); ?>
+				<?php settings_fields( 'core_theme_testimonial_settings_group' ); ?>
 				<table class="form-table" role="presentation">
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Autoplay', 'dentist-exchange' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Autoplay', 'core' ); ?></th>
 						<td>
 							<label>
 								<input
 									type="checkbox"
-									name="<?php echo esc_attr( DNTE_TESTIMONIAL_OPTION ); ?>[autoplay]"
+									name="<?php echo esc_attr( CORE_THEME_TESTIMONIAL_OPTION ); ?>[autoplay]"
 									value="1"
 									<?php checked( $settings['autoplay'] ); ?>
 								/>
-								<?php esc_html_e( 'Advance the cards automatically', 'dentist-exchange' ); ?>
+								<?php esc_html_e( 'Advance the cards automatically', 'core' ); ?>
 							</label>
 							<p class="description">
-								<?php esc_html_e( 'Always off for visitors who have asked their system for reduced motion.', 'dentist-exchange' ); ?>
+								<?php esc_html_e( 'Always off for visitors who have asked their system for reduced motion.', 'core' ); ?>
 							</p>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="dnte-testimonial-speed"><?php esc_html_e( 'Autoplay Speed', 'dentist-exchange' ); ?></label>
+							<label for="core-theme-testimonial-speed"><?php esc_html_e( 'Autoplay Speed', 'core' ); ?></label>
 						</th>
 						<td>
 							<input
 								type="number"
-								id="dnte-testimonial-speed"
-								name="<?php echo esc_attr( DNTE_TESTIMONIAL_OPTION ); ?>[speed]"
+								id="core-theme-testimonial-speed"
+								name="<?php echo esc_attr( CORE_THEME_TESTIMONIAL_OPTION ); ?>[speed]"
 								value="<?php echo esc_attr( (string) $settings['speed'] ); ?>"
 								min="1000"
 								step="500"
 								class="small-text"
 							/>
-							<?php esc_html_e( 'milliseconds', 'dentist-exchange' ); ?>
-							<p class="description"><?php esc_html_e( 'How long each card is held. Minimum 1000.', 'dentist-exchange' ); ?></p>
+							<?php esc_html_e( 'milliseconds', 'core' ); ?>
+							<p class="description"><?php esc_html_e( 'How long each card is held. Minimum 1000.', 'core' ); ?></p>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Loop', 'dentist-exchange' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Loop', 'core' ); ?></th>
 						<td>
 							<label>
 								<input
 									type="checkbox"
-									name="<?php echo esc_attr( DNTE_TESTIMONIAL_OPTION ); ?>[loop]"
+									name="<?php echo esc_attr( CORE_THEME_TESTIMONIAL_OPTION ); ?>[loop]"
 									value="1"
 									<?php checked( $settings['loop'] ); ?>
 								/>
-								<?php esc_html_e( 'Wrap around from the last card to the first', 'dentist-exchange' ); ?>
+								<?php esc_html_e( 'Wrap around from the last card to the first', 'core' ); ?>
 							</label>
 							<p class="description">
-								<?php esc_html_e( 'Off by default. Looping makes the deck start part-way in rather than flush with the left edge, because an endless track has no start or end to align to.', 'dentist-exchange' ); ?>
+								<?php esc_html_e( 'Off by default. Looping makes the deck start part-way in rather than flush with the left edge, because an endless track has no start or end to align to.', 'core' ); ?>
 							</p>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Pagination', 'dentist-exchange' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Pagination', 'core' ); ?></th>
 						<td>
 							<label>
 								<input
 									type="checkbox"
-									name="<?php echo esc_attr( DNTE_TESTIMONIAL_OPTION ); ?>[pagination]"
+									name="<?php echo esc_attr( CORE_THEME_TESTIMONIAL_OPTION ); ?>[pagination]"
 									value="1"
 									<?php checked( $settings['pagination'] ); ?>
 								/>
-								<?php esc_html_e( 'Show the dots beneath the carousel', 'dentist-exchange' ); ?>
+								<?php esc_html_e( 'Show the dots beneath the carousel', 'core' ); ?>
 							</label>
 						</td>
 					</tr>
@@ -561,18 +561,18 @@ endif;
 // Shortcode
 // =============================================================================
 
-if ( ! function_exists( 'dnte_testimonials_shortcode' ) ) :
+if ( ! function_exists( 'core_theme_testimonials_shortcode' ) ) :
 	/**
 	 * Renders the testimonials carousel.
 	 *
-	 * Usage: [dnte_testimonials count="-1" order="DESC" orderby="date" autoplay="yes" speed="5000"]
+	 * Usage: [core_theme_testimonials count="-1" order="DESC" orderby="date" autoplay="yes" speed="5000"]
 	 *
 	 * @param array $atts Shortcode attributes.
 	 * @return string Markup, or '' when there is nothing to show.
 	 */
-	function dnte_testimonials_shortcode( $atts ) {
+	function core_theme_testimonials_shortcode( $atts ) {
 		// Settings supply the defaults; a shortcode attribute overrides them.
-		$settings = dnte_testimonial_settings();
+		$settings = core_theme_testimonial_settings();
 
 		$atts = shortcode_atts(
 			array(
@@ -585,12 +585,12 @@ if ( ! function_exists( 'dnte_testimonials_shortcode' ) ) :
 				'pagination' => $settings['pagination'] ? 'yes' : 'no',
 			),
 			$atts,
-			'dnte_testimonials'
+			'core_theme_testimonials'
 		);
 
 		$query = new WP_Query(
 			array(
-				'post_type'              => DNTE_TESTIMONIAL_POST_TYPE,
+				'post_type'              => CORE_THEME_TESTIMONIAL_POST_TYPE,
 				'post_status'            => 'publish',
 				'posts_per_page'         => (int) $atts['count'],
 				'order'                  => 'ASC' === strtoupper( $atts['order'] ) ? 'ASC' : 'DESC',
@@ -605,7 +605,7 @@ if ( ! function_exists( 'dnte_testimonials_shortcode' ) ) :
 			return '';
 		}
 
-		dnte_enqueue_testimonial_assets();
+		core_theme_enqueue_testimonial_assets();
 
 		$options = wp_json_encode(
 			array(
@@ -617,8 +617,8 @@ if ( ! function_exists( 'dnte_testimonials_shortcode' ) ) :
 
 		ob_start();
 		?>
-		<div class="dnte-testimonials">
-			<div class="swiper dnte-testimonials__swiper" data-dnte-testimonials="<?php echo esc_attr( $options ); ?>">
+		<div class="core-theme-testimonials">
+			<div class="swiper core-theme-testimonials__swiper" data-core-theme-testimonials="<?php echo esc_attr( $options ); ?>">
 				<div class="swiper-wrapper">
 					<?php
 					$index = 0;
@@ -626,26 +626,26 @@ if ( ! function_exists( 'dnte_testimonials_shortcode' ) ) :
 						$query->the_post();
 						$post_id = get_the_ID();
 
-						$variant = dnte_testimonial_variant_for_index(
+						$variant = core_theme_testimonial_variant_for_index(
 							$index,
-							(string) get_post_meta( $post_id, DNTE_TESTIMONIAL_VARIANT_KEY, true )
+							(string) get_post_meta( $post_id, CORE_THEME_TESTIMONIAL_VARIANT_KEY, true )
 						);
 
-						$message     = (string) get_post_meta( $post_id, DNTE_TESTIMONIAL_MESSAGE_KEY, true );
-						$designation = (string) get_post_meta( $post_id, DNTE_TESTIMONIAL_DESIGNATION_KEY, true );
+						$message     = (string) get_post_meta( $post_id, CORE_THEME_TESTIMONIAL_MESSAGE_KEY, true );
+						$designation = (string) get_post_meta( $post_id, CORE_THEME_TESTIMONIAL_DESIGNATION_KEY, true );
 						?>
-						<div class="swiper-slide dnte-testimonial is-<?php echo esc_attr( $variant ); ?>">
-							<figure class="dnte-testimonial__card">
-								<span class="dnte-testimonial__quote" aria-hidden="true"></span>
+						<div class="swiper-slide core-theme-testimonial is-<?php echo esc_attr( $variant ); ?>">
+							<figure class="core-theme-testimonial__card">
+								<span class="core-theme-testimonial__quote" aria-hidden="true"></span>
 								<?php if ( '' !== $message ) : ?>
-									<blockquote class="dnte-testimonial__message">
+									<blockquote class="core-theme-testimonial__message">
 										<?php echo nl2br( esc_html( $message ) ); ?>
 									</blockquote>
 								<?php endif; ?>
-								<figcaption class="dnte-testimonial__author">
-									<span class="dnte-testimonial__name"><?php the_title(); ?></span>
+								<figcaption class="core-theme-testimonial__author">
+									<span class="core-theme-testimonial__name"><?php the_title(); ?></span>
 									<?php if ( '' !== $designation ) : ?>
-										<span class="dnte-testimonial__designation"><?php echo esc_html( $designation ); ?></span>
+										<span class="core-theme-testimonial__designation"><?php echo esc_html( $designation ); ?></span>
 									<?php endif; ?>
 								</figcaption>
 							</figure>
@@ -658,39 +658,39 @@ if ( ! function_exists( 'dnte_testimonials_shortcode' ) ) :
 				</div>
 			</div>
 			<?php if ( 'yes' === $atts['pagination'] ) : ?>
-				<div class="dnte-testimonials__pagination swiper-pagination"></div>
+				<div class="core-theme-testimonials__pagination swiper-pagination"></div>
 			<?php endif; ?>
 		</div>
 		<?php
 		return (string) ob_get_clean();
 	}
 endif;
-add_shortcode( 'dnte_testimonials', 'dnte_testimonials_shortcode' );
+add_shortcode( 'core_theme_testimonials', 'core_theme_testimonials_shortcode' );
 
 
-if ( ! function_exists( 'dnte_enqueue_testimonial_assets' ) ) :
+if ( ! function_exists( 'core_theme_enqueue_testimonial_assets' ) ) :
 	/**
 	 * Enqueues the carousel assets, and hands the stylesheet the quote glyph
 	 * URL so the badge can be tinted per card colour rather than shipping a
 	 * separate icon for each.
 	 */
-	function dnte_enqueue_testimonial_assets() {
+	function core_theme_enqueue_testimonial_assets() {
 		$version = wp_get_theme()->get( 'Version' );
 
-		wp_enqueue_style( 'dnte-swiper-style' );
-		wp_enqueue_script( 'dnte-swiper-script' );
+		wp_enqueue_style( 'core-theme-swiper-style' );
+		wp_enqueue_script( 'core-theme-swiper-script' );
 
 		wp_enqueue_style(
-			'dnte-testimonials',
+			'core-theme-testimonials',
 			get_theme_file_uri( 'assets/css/testimonials.css' ),
-			array( 'dnte-swiper-style' ),
+			array( 'core-theme-swiper-style' ),
 			$version
 		);
 
 		wp_enqueue_script(
-			'dnte-testimonials',
+			'core-theme-testimonials',
 			get_theme_file_uri( 'assets/js/testimonials.js' ),
-			array( 'dnte-swiper-script' ),
+			array( 'core-theme-swiper-script' ),
 			$version,
 			true
 		);
@@ -698,8 +698,8 @@ if ( ! function_exists( 'dnte_enqueue_testimonial_assets' ) ) :
 		$glyph = get_theme_file_uri( 'assets/images/testimonials/quote-glyph.png' );
 
 		wp_add_inline_style(
-			'dnte-testimonials',
-			'.dnte-testimonials{--dnte-testimonial-quote:url("' . esc_url_raw( $glyph ) . '");}'
+			'core-theme-testimonials',
+			'.core-theme-testimonials{--core-theme-testimonial-quote:url("' . esc_url_raw( $glyph ) . '");}'
 		);
 	}
 endif;

@@ -1,7 +1,7 @@
 /**
  * core/read-more — styled as the theme's default button.
  *
- * The visual identity is not duplicated here. dnte_render_read_more_button()
+ * The visual identity is not duplicated here. core_theme_render_read_more_button()
  * adds the `wp-element-button` class, which is the selector theme.json's
  * `styles.elements.button` compiles to — so the block picks up the theme
  * button's background, radius, padding, typography, hover and focus, and
@@ -14,7 +14,7 @@
 .wp-block-read-more.wp-element-button {
     display: inline-flex;
     align-items: center;
-    gap: var(--dnte-read-more-gap, 8px);
+    gap: var(--core-theme-read-more-gap, 8px);
     width: fit-content;
 
     /*
@@ -40,31 +40,31 @@
  * square, so the arrow keeps its proportions instead of being letterboxed
  * inside a 1em square.
  */
-.wp-block-read-more.dnte-has-arrow::after {
-    --dnte-read-more-arrow-height: 0.72em;
+.wp-block-read-more.core-theme-has-arrow::after {
+    --core-theme-read-more-arrow-height: 0.72em;
 
     content: '';
     flex: none;
-    height: var(--dnte-read-more-arrow-height);
-    width: calc(var(--dnte-read-more-arrow-height) * 28 / 18);
+    height: var(--core-theme-read-more-arrow-height);
+    width: calc(var(--core-theme-read-more-arrow-height) * 28 / 18);
 
     background-color: currentColor;
-    mask: var(--dnte-read-more-arrow) no-repeat center / contain;
-    -webkit-mask: var(--dnte-read-more-arrow) no-repeat center / contain;
+    mask: var(--core-theme-read-more-arrow) no-repeat center / contain;
+    -webkit-mask: var(--core-theme-read-more-arrow) no-repeat center / contain;
 
     transition: transform 0.2s ease;
 }
 
-.wp-block-read-more.dnte-has-arrow:hover::after {
+.wp-block-read-more.core-theme-has-arrow:hover::after {
     transform: translateX(3px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .wp-block-read-more.dnte-has-arrow::after {
+    .wp-block-read-more.core-theme-has-arrow::after {
         transition: none;
     }
 
-    .wp-block-read-more.dnte-has-arrow:hover::after {
+    .wp-block-read-more.core-theme-has-arrow:hover::after {
         transform: none;
     }
 }

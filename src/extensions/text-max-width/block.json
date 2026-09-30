@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "dnte/text-max-width-extension",
+    "name": "core-theme/text-max-width-extension",
     "title": "Text Max Width Extension",
     "editorScript": "file:./index.js",
     "style": "file:./style-index.css"

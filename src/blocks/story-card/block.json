@@ -1,13 +1,13 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "dnte/story-card",
-    "version": "0.9.0",
+    "name": "core-theme/story-card",
+    "version": "0.0.1",
     "title": "Story Card",
-    "category": "dnte",
+    "category": "core-theme",
     "icon": "index-card",
     "description": "One card in a Story Cards section: badge icon, image, heading, description and the hand-drawn arrow leading to the next card.",
-    "parent": ["dnte/story-cards"],
+    "parent": ["core-theme/story-cards"],
     "supports": {
         "anchor": true,
         "html": false,
@@ -83,7 +83,7 @@
             "default": "auto"
         }
     },
-    "textdomain": "dentist-exchange",
+    "textdomain": "core",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",

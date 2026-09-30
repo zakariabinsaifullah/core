@@ -24,14 +24,14 @@ const TOP_ATTRIBUTE = 'enableTopDivider';
 const BOTTOM_ATTRIBUTE = 'enableBottomDivider';
 
 /**
- * Divider artwork URL, injected by dnte_enqueue_kadence_row_divider_editor_assets().
+ * Divider artwork URL, injected by core_theme_enqueue_kadence_row_divider_editor_assets().
  * Only the editor preview needs it; the front end gets the same value from PHP.
  *
  * @return {string} Image URL, or '' when the asset is missing.
  */
-const getDividerImage = () => window.dnteRowDivider?.image || '';
+const getDividerImage = () => window.coreThemeRowDivider?.image || '';
 
-addFilter('blocks.registerBlockType', 'dnte/kadence-row-divider-add-attributes', (settings, name) => {
+addFilter('blocks.registerBlockType', 'core-theme/kadence-row-divider-add-attributes', (settings, name) => {
     if (name !== BLOCK_NAME) {
         return settings;
     }
@@ -54,7 +54,7 @@ addFilter('blocks.registerBlockType', 'dnte/kadence-row-divider-add-attributes',
 
 addFilter(
     'editor.BlockEdit',
-    'dnte/kadence-row-divider-add-inspector-controls',
+    'core-theme/kadence-row-divider-add-inspector-controls',
     createHigherOrderComponent(BlockEdit => {
         return props => {
             const { name, attributes, setAttributes } = props;
@@ -68,12 +68,12 @@ addFilter(
                     <BlockEdit {...props} />
                     <InspectorAdvancedControls>
                         <NativeToggleControl
-                            label={__('Enable top divider', 'dentist-exchange')}
+                            label={__('Enable top divider', 'core')}
                             checked={!!attributes[TOP_ATTRIBUTE]}
                             onChange={value => setAttributes({ [TOP_ATTRIBUTE]: value })}
                         />
                         <NativeToggleControl
-                            label={__('Enable bottom divider', 'dentist-exchange')}
+                            label={__('Enable bottom divider', 'core')}
                             checked={!!attributes[BOTTOM_ATTRIBUTE]}
                             onChange={value => setAttributes({ [BOTTOM_ATTRIBUTE]: value })}
                         />
@@ -86,7 +86,7 @@ addFilter(
 
 addFilter(
     'editor.BlockListBlock',
-    'dnte/kadence-row-divider-add-styles',
+    'core-theme/kadence-row-divider-add-styles',
     createHigherOrderComponent(BlockListBlock => {
         return props => {
             const { name, attributes } = props;
@@ -97,7 +97,7 @@ addFilter(
                 return <BlockListBlock {...props} />;
             }
 
-            const classes = [props.className, hasTop && 'dnte-has-top-divider', hasBottom && 'dnte-has-bottom-divider']
+            const classes = [props.className, hasTop && 'core-theme-has-top-divider', hasBottom && 'core-theme-has-bottom-divider']
                 .filter(Boolean)
                 .join(' ');
 
@@ -105,7 +105,7 @@ addFilter(
                 ...props.wrapperProps,
                 style: {
                     ...props.wrapperProps?.style,
-                    '--dnte-divider-image': `url(${getDividerImage()})`
+                    '--core-theme-divider-image': `url(${getDividerImage()})`
                 }
             };
 

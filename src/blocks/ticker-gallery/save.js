@@ -26,7 +26,7 @@ import classNames from 'classnames';
  */
 const Tile = (image, index, keyPrefix, hidden) => (
     <div
-        className={classNames('dnte-ticker__item', `is-v${(index % 4) + 1}`)}
+        className={classNames('core-theme-ticker__item', `is-v${(index % 4) + 1}`)}
         key={`${keyPrefix}-${image.id || index}`}
         {...(hidden ? { 'aria-hidden': 'true' } : {})}
     >
@@ -57,7 +57,7 @@ const Save = ({ attributes }) => {
 
     return (
         <div {...blockProps}>
-            <div className="dnte-ticker__track">
+            <div className="core-theme-ticker__track">
                 {images.map((image, i) => Tile(image, i, 'a', false))}
                 {images.map((image, i) => Tile(image, i, 'b', true))}
             </div>

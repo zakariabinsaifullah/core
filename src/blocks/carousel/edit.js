@@ -43,14 +43,14 @@ const Edit = props => {
     // Inner blocks configuration — the carousel is always in Rotate Stack mode.
     const innerBlocksProps = useInnerBlocksProps(
         {
-            className: classNames('dnte-editor-slides', 'is-stack', {
+            className: classNames('core-theme-editor-slides', 'is-stack', {
                 [`visible-${visibleItems?.[resMode]}`]: visibleItems?.[resMode],
                 [`gap-${gaps[resMode]}`]: gaps[resMode]
             })
         },
         {
-            allowedBlocks: ['dnte/slide'],
-            template: [['dnte/slide'], ['dnte/slide']],
+            allowedBlocks: ['core-theme/slide'],
+            template: [['core-theme/slide'], ['core-theme/slide']],
             templateLock: false
         }
     );
@@ -69,10 +69,10 @@ const Edit = props => {
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="insert"
-                        label={__('Add Slide', 'dentist-exchange')}
+                        label={__('Add Slide', 'core')}
                         onClick={() => {
                             const innerBlocks = wp.data.select('core/block-editor').getBlocks(clientId);
-                            const newBlock = wp.blocks.createBlock('dnte/slide');
+                            const newBlock = wp.blocks.createBlock('core-theme/slide');
                             wp.data.dispatch('core/block-editor').insertBlock(newBlock, innerBlocks.length, clientId);
                         }}
                     />

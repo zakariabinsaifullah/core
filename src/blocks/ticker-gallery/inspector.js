@@ -16,37 +16,37 @@ const Inspector = props => {
 
     return (
         <InspectorControls>
-            <PanelBody title={__('Ticker', 'dentist-exchange')} initialOpen={true}>
+            <PanelBody title={__('Ticker', 'core')} initialOpen={true}>
                 <NativeSelectControl
-                    label={__('Direction', 'dentist-exchange')}
+                    label={__('Direction', 'core')}
                     value={direction}
                     onChange={value => setAttributes({ direction: value })}
                     options={[
-                        { label: __('Left', 'dentist-exchange'), value: 'left' },
-                        { label: __('Right', 'dentist-exchange'), value: 'right' }
+                        { label: __('Left', 'core'), value: 'left' },
+                        { label: __('Right', 'core'), value: 'right' }
                     ]}
                 />
                 <RangeControl
-                    label={__('Duration (seconds)', 'dentist-exchange')}
+                    label={__('Duration (seconds)', 'core')}
                     value={speed}
                     onChange={value => setAttributes({ speed: value })}
                     min={5}
                     max={180}
                     step={1}
-                    help={__('How long one full pass takes. Higher is slower.', 'dentist-exchange')}
+                    help={__('How long one full pass takes. Higher is slower.', 'core')}
                     __next40pxDefaultSize
                     __nextHasNoMarginBottom
                 />
                 <NativeToggleControl
-                    label={__('Pause on hover', 'dentist-exchange')}
+                    label={__('Pause on hover', 'core')}
                     checked={pauseOnHover}
                     onChange={value => setAttributes({ pauseOnHover: value })}
                 />
             </PanelBody>
 
-            <PanelBody title={__('Layout', 'dentist-exchange')} initialOpen={false}>
+            <PanelBody title={__('Layout', 'core')} initialOpen={false}>
                 <RangeControl
-                    label={__('Tall image height (px)', 'dentist-exchange')}
+                    label={__('Tall image height (px)', 'core')}
                     value={tallHeight}
                     onChange={value => setAttributes({ tallHeight: value })}
                     min={120}
@@ -56,18 +56,18 @@ const Inspector = props => {
                     __nextHasNoMarginBottom
                 />
                 <RangeControl
-                    label={__('Short image ratio', 'dentist-exchange')}
+                    label={__('Short image ratio', 'core')}
                     value={shortRatio}
                     onChange={value => setAttributes({ shortRatio: value })}
                     min={0.5}
                     max={1}
                     step={0.01}
-                    help={__('Height of the tilted images relative to the tall ones.', 'dentist-exchange')}
+                    help={__('Height of the tilted images relative to the tall ones.', 'core')}
                     __next40pxDefaultSize
                     __nextHasNoMarginBottom
                 />
                 <RangeControl
-                    label={__('Gap (px)', 'dentist-exchange')}
+                    label={__('Gap (px)', 'core')}
                     value={gap}
                     onChange={value => setAttributes({ gap: value })}
                     min={0}
@@ -77,7 +77,7 @@ const Inspector = props => {
                     __nextHasNoMarginBottom
                 />
                 <RangeControl
-                    label={__('Corner radius (px)', 'dentist-exchange')}
+                    label={__('Corner radius (px)', 'core')}
                     value={radius}
                     onChange={value => setAttributes({ radius: value })}
                     min={0}
@@ -90,7 +90,7 @@ const Inspector = props => {
                     <p style={{ color: '#646970', fontSize: '12px', marginTop: '12px' }}>
                         {__(
                             'The tilt pattern repeats every 4 images. With a multiple of 4 the rhythm never repeats a shape back to back.',
-                            'dentist-exchange'
+                            'core'
                         )}
                     </p>
                 )}

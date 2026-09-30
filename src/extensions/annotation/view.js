@@ -5,12 +5,12 @@
  * full length, and add `.is-drawn` when the phrase scrolls into view, which
  * starts the CSS animation that walks the stroke on.
  *
- * Enqueued by dnte_render_annotation() only on pages that render an annotation.
+ * Enqueued by core_theme_render_annotation() only on pages that render an annotation.
  */
 
-const SELECTOR = '.dnte-annotation';
+const SELECTOR = '.core-theme-annotation';
 const DRAWN_CLASS = 'is-drawn';
-const LENGTH_VARIABLE = '--dnte-stroke-length';
+const LENGTH_VARIABLE = '--core-theme-stroke-length';
 
 /**
  * Publishes each path's own length so the stylesheet can dash exactly one
@@ -23,7 +23,7 @@ const LENGTH_VARIABLE = '--dnte-stroke-length';
  * @param {Element} annotation An annotated span.
  */
 const measure = annotation => {
-    annotation.querySelectorAll('.dnte-annotation__stroke path').forEach(path => {
+    annotation.querySelectorAll('.core-theme-annotation__stroke path').forEach(path => {
         if (typeof path.getTotalLength !== 'function') {
             return;
         }

@@ -22,7 +22,7 @@ const InheritReset = ({ device, value, onReset }) => {
 
     return (
         <Button variant="link" onClick={onReset}>
-            {__('Use desktop value', 'dentist-exchange')}
+            {__('Use desktop value', 'core')}
         </Button>
     );
 };
@@ -38,14 +38,14 @@ const Inspector = props => {
 
     return (
         <InspectorControls group="settings">
-            <PanelBody title={__('General', 'dentist-exchange')} initialOpen={true}>
-                <NativeResponsiveControl label={__('Height Type', 'dentist-exchange')} props={props}>
+            <PanelBody title={__('General', 'core')} initialOpen={true}>
+                <NativeResponsiveControl label={__('Height Type', 'core')} props={props}>
                     <NativeToggleGroupControl
                         value={currentHeightType}
                         onChange={value => setAttributes({ heightType: { ...heightType, [resMode]: value } })}
                         options={[
-                            { label: __('Adaptive', 'dentist-exchange'), value: 'adaptive' },
-                            { label: __('Fixed', 'dentist-exchange'), value: 'fixed' }
+                            { label: __('Adaptive', 'core'), value: 'adaptive' },
+                            { label: __('Fixed', 'core'), value: 'fixed' }
                         ]}
                     />
                     <InheritReset
@@ -56,9 +56,9 @@ const Inspector = props => {
                 </NativeResponsiveControl>
                 {currentHeightType === 'fixed' && (
                     <>
-                        <NativeResponsiveControl label={__('Height', 'dentist-exchange')} props={props}>
+                        <NativeResponsiveControl label={__('Height', 'core')} props={props}>
                             <NativeUnitControl
-                                label={__('Height', 'dentist-exchange')}
+                                label={__('Height', 'core')}
                                 value={currentHeight}
                                 onChange={value => {
                                     const newHeights = { ...heights, [resMode]: value };
@@ -71,14 +71,14 @@ const Inspector = props => {
                                 onReset={() => setAttributes({ heights: { ...heights, [resMode]: undefined } })}
                             />
                         </NativeResponsiveControl>
-                        <NativeResponsiveControl label={__('Vertical Align', 'dentist-exchange')} props={props}>
+                        <NativeResponsiveControl label={__('Vertical Align', 'core')} props={props}>
                             <NativeToggleGroupControl
                                 value={currentVAlign}
                                 onChange={value => setAttributes({ vAligns: { ...vAligns, [resMode]: value } })}
                                 options={[
-                                    { label: __('Top', 'dentist-exchange'), value: 'top' },
-                                    { label: __('Middle', 'dentist-exchange'), value: 'middle' },
-                                    { label: __('Bottom', 'dentist-exchange'), value: 'bottom' }
+                                    { label: __('Top', 'core'), value: 'top' },
+                                    { label: __('Middle', 'core'), value: 'middle' },
+                                    { label: __('Bottom', 'core'), value: 'bottom' }
                                 ]}
                             />
                             <InheritReset
@@ -90,8 +90,8 @@ const Inspector = props => {
                     </>
                 )}
             </PanelBody>
-            <PanelBody title={__('Options', 'dentist-exchange')} initialOpen={false}>
-                <NativeResponsiveControl label={__('Visible Items', 'dentist-exchange')} props={props}>
+            <PanelBody title={__('Options', 'core')} initialOpen={false}>
+                <NativeResponsiveControl label={__('Visible Items', 'core')} props={props}>
                     <NativeRangeControl
                         value={visibleItems?.[resMode]}
                         onChange={value => setAttributes({ visibleItems: { ...visibleItems, [resMode]: value } })}
@@ -101,26 +101,26 @@ const Inspector = props => {
                     />
                 </NativeResponsiveControl>
                 <p style={{ fontSize: '12px', fontStyle: 'italic', color: '#757575' }}>
-                    {__('Rotate, offset and z-index are set per card — select a Slide and open its own settings.', 'dentist-exchange')}
+                    {__('Rotate, offset and z-index are set per card — select a Slide and open its own settings.', 'core')}
                 </p>
                 <NativeToggleControl
-                    label={__('Loop', 'dentist-exchange')}
+                    label={__('Loop', 'core')}
                     checked={loop}
                     onChange={value => setAttributes({ loop: value })}
                 />
                 <NativeToggleControl
-                    label={__('Autoplay', 'dentist-exchange')}
+                    label={__('Autoplay', 'core')}
                     checked={autoplay}
                     onChange={value => setAttributes({ autoplay: value })}
                 />
                 <NativeToggleControl
-                    label={__('Make overflow visible', 'dentist-exchange')}
+                    label={__('Make overflow visible', 'core')}
                     checked={overflowVisible}
                     onChange={value => setAttributes({ overflowVisible: value })}
                 />
                 {autoplay && (
                     <NativeRangeControl
-                        label={__('Delay (ms)', 'dentist-exchange')}
+                        label={__('Delay (ms)', 'core')}
                         value={delay}
                         onChange={value => setAttributes({ delay: value })}
                         min={1000}

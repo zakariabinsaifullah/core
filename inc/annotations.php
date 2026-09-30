@@ -6,21 +6,21 @@
  * inside a heading — not over the whole block. Authors apply them from the
  * block toolbar like bold or italic.
  *
- * The editor side is a RichText format (`dnte/annotation`, registered in
+ * The editor side is a RichText format (`core-theme/annotation`, registered in
  * src/extensions/annotation/index.js) which saves markup like:
  *
- *     <span class="dnte-annotation" data-annotation="underline-1"
- *           style="--dnte-annotation-color:…">Zero commissions.</span>
+ *     <span class="core-theme-annotation" data-annotation="underline-1"
+ *           style="--core-theme-annotation-color:…">Zero commissions.</span>
  *
  * The Format API cannot emit child nodes into a RichText value — anything it
  * injected would become editable content and get saved into the post — so the
- * actual <svg> is appended here, at render time, by dnte_render_annotation().
+ * actual <svg> is appended here, at render time, by core_theme_render_annotation().
  *
  * This lives in its own file rather than in inc/extensions.php because it
  * carries a registry and an HTML scanner; inc/my-icons.php sets the precedent
  * for a standalone subsystem file.
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -30,15 +30,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Directory holding the stroke artwork, relative to the theme root.
  */
-const DNTE_ANNOTATION_DIR = 'assets/svg/annotations';
+const CORE_THEME_ANNOTATION_DIR = 'assets/svg/annotations';
 
 /**
  * Class marking an annotated selection in saved post content.
  */
-const DNTE_ANNOTATION_CLASS = 'dnte-annotation';
+const CORE_THEME_ANNOTATION_CLASS = 'core-theme-annotation';
 
 
-if ( ! function_exists( 'dnte_annotation_variants' ) ) :
+if ( ! function_exists( 'core_theme_annotation_variants' ) ) :
 	/**
 	 * The available stroke variants, keyed by slug.
 	 *
@@ -59,7 +59,7 @@ if ( ! function_exists( 'dnte_annotation_variants' ) ) :
 	 *
 	 * @return array<string, array{label: string, path: string}> Variants by slug.
 	 */
-	function dnte_annotation_variants() {
+	function core_theme_annotation_variants() {
 		static $variants = null;
 
 		if ( null !== $variants ) {
@@ -67,7 +67,7 @@ if ( ! function_exists( 'dnte_annotation_variants' ) ) :
 		}
 
 		$variants = array();
-		$files    = glob( get_theme_file_path( DNTE_ANNOTATION_DIR ) . '/*.svg' );
+		$files    = glob( get_theme_file_path( CORE_THEME_ANNOTATION_DIR ) . '/*.svg' );
 
 		if ( empty( $files ) ) {
 			return $variants;
@@ -95,20 +95,20 @@ if ( ! function_exists( 'dnte_annotation_variants' ) ) :
 endif;
 
 
-if ( ! function_exists( 'dnte_annotation_markup' ) ) :
+if ( ! function_exists( 'core_theme_annotation_markup' ) ) :
 	/**
 	 * The inline <svg> for a variant, ready to splice into block markup.
 	 *
 	 * The slug arrives from post content, so it is sanitised and then looked up
 	 * in the registry — it is never concatenated into a path. The files
 	 * themselves are theme-owned and trusted, so they need no wp_kses() pass.
-	 * (dnte_iconic_button_svg_kses_args() in inc/extensions.php is the helper to
+	 * (core_theme_iconic_button_svg_kses_args() in inc/extensions.php is the helper to
 	 * reach for if a variant ever accepts user-supplied SVG.)
 	 *
 	 * @param string $slug Variant slug from the `data-annotation` attribute.
 	 * @return string SVG markup, or '' for an unknown slug or unreadable file.
 	 */
-	function dnte_annotation_markup( $slug ) {
+	function core_theme_annotation_markup( $slug ) {
 		static $cache = array();
 
 		$slug = sanitize_key( (string) $slug );
@@ -117,7 +117,7 @@ if ( ! function_exists( 'dnte_annotation_markup' ) ) :
 			return $cache[ $slug ];
 		}
 
-		$variants = dnte_annotation_variants();
+		$variants = core_theme_annotation_variants();
 
 		if ( ! isset( $variants[ $slug ] ) ) {
 			$cache[ $slug ] = '';
@@ -139,7 +139,7 @@ if ( ! function_exists( 'dnte_annotation_markup' ) ) :
 		// assistive tech — the stroke is decorative, the text carries meaning.
 		$processor = new WP_HTML_Tag_Processor( $svg );
 		if ( $processor->next_tag( array( 'tag_name' => 'SVG' ) ) ) {
-			$processor->set_attribute( 'class', 'dnte-annotation__stroke' );
+			$processor->set_attribute( 'class', 'core-theme-annotation__stroke' );
 			$processor->set_attribute( 'aria-hidden', 'true' );
 			$processor->set_attribute( 'focusable', 'false' );
 			$svg = $processor->get_updated_html();
@@ -152,11 +152,11 @@ if ( ! function_exists( 'dnte_annotation_markup' ) ) :
 endif;
 
 
-if ( ! function_exists( 'dnte_annotation_close_tag_offset' ) ) :
+if ( ! function_exists( 'core_theme_annotation_close_tag_offset' ) ) :
 	/**
 	 * Byte offset of the `</span>` that closes the span opening at $open_end.
 	 *
-	 * A lazy regex (`<span[^>]*dnte-annotation[^>]*>(.*?)</span>`) would stop at
+	 * A lazy regex (`<span[^>]*core-theme-annotation[^>]*>(.*?)</span>`) would stop at
 	 * the first close tag, which is wrong the moment an author bolds or links
 	 * part of an annotated phrase and nests a span inside it. So walk forward
 	 * counting depth instead.
@@ -165,7 +165,7 @@ if ( ! function_exists( 'dnte_annotation_close_tag_offset' ) ) :
 	 * @param int    $open_end Offset just past the opening span's `>`.
 	 * @return int|false Offset of the matching `</span>`, or false if unbalanced.
 	 */
-	function dnte_annotation_close_tag_offset( $html, $open_end ) {
+	function core_theme_annotation_close_tag_offset( $html, $open_end ) {
 		$depth  = 1;
 		$cursor = $open_end;
 
@@ -196,7 +196,7 @@ if ( ! function_exists( 'dnte_annotation_close_tag_offset' ) ) :
 endif;
 
 
-if ( ! function_exists( 'dnte_render_annotation' ) ) :
+if ( ! function_exists( 'core_theme_render_annotation' ) ) :
 	/**
 	 * Appends the stroke <svg> inside every annotated span in a heading.
 	 *
@@ -211,18 +211,18 @@ if ( ! function_exists( 'dnte_render_annotation' ) ) :
 	 * @param array  $block         The block data including attributes.
 	 * @return string Modified block HTML.
 	 */
-	function dnte_render_annotation( $block_content, $block ) {
+	function core_theme_render_annotation( $block_content, $block ) {
 		// Blocks whose text can carry an annotation. The scanner below is
 		// block-agnostic — it only looks for the annotation span — so adding a
 		// block here is all it takes. Mirrors SUPPORTED_BLOCKS in
 		// src/extensions/annotation/index.js, which gates the toolbar button.
-		$supported = array( 'core/heading', 'dnte/story-card' );
+		$supported = array( 'core/heading', 'core-theme/story-card' );
 
 		if ( empty( $block_content ) || ! in_array( $block['blockName'] ?? '', $supported, true ) ) {
 			return $block_content;
 		}
 
-		if ( false === strpos( $block_content, DNTE_ANNOTATION_CLASS ) ) {
+		if ( false === strpos( $block_content, CORE_THEME_ANNOTATION_CLASS ) ) {
 			return $block_content;
 		}
 
@@ -245,7 +245,7 @@ if ( ! function_exists( 'dnte_render_annotation' ) ) :
 			$slug     = '';
 
 			$processor = new WP_HTML_Tag_Processor( $tag );
-			if ( $processor->next_tag() && $processor->has_class( DNTE_ANNOTATION_CLASS ) ) {
+			if ( $processor->next_tag() && $processor->has_class( CORE_THEME_ANNOTATION_CLASS ) ) {
 				$slug = (string) $processor->get_attribute( 'data-annotation' );
 			}
 
@@ -254,13 +254,13 @@ if ( ! function_exists( 'dnte_render_annotation' ) ) :
 				continue;
 			}
 
-			$close_at = dnte_annotation_close_tag_offset( $block_content, $open_end );
+			$close_at = core_theme_annotation_close_tag_offset( $block_content, $open_end );
 
 			if ( false === $close_at ) {
 				break;
 			}
 
-			$svg = dnte_annotation_markup( $slug );
+			$svg = core_theme_annotation_markup( $slug );
 
 			if ( '' !== $svg ) {
 				$insertions[] = array( $close_at, $svg );
@@ -280,22 +280,22 @@ if ( ! function_exists( 'dnte_render_annotation' ) ) :
 		}
 
 		// Only pages that actually use an annotation pay for the scroll script.
-		if ( ! is_admin() && wp_script_is( 'dnte-annotation-view', 'registered' ) ) {
-			wp_enqueue_script( 'dnte-annotation-view' );
+		if ( ! is_admin() && wp_script_is( 'core-theme-annotation-view', 'registered' ) ) {
+			wp_enqueue_script( 'core-theme-annotation-view' );
 		}
 
 		return $block_content;
 	}
 endif;
-add_filter( 'render_block', 'dnte_render_annotation', 10, 2 );
+add_filter( 'render_block', 'core_theme_render_annotation', 10, 2 );
 
 
-if ( ! function_exists( 'dnte_register_annotation_view_script' ) ) :
+if ( ! function_exists( 'core_theme_register_annotation_view_script' ) ) :
 	/**
 	 * Registers (but does not enqueue) the scroll-draw script, so
-	 * dnte_render_annotation() can pull it in only when a stroke is rendered.
+	 * core_theme_render_annotation() can pull it in only when a stroke is rendered.
 	 */
-	function dnte_register_annotation_view_script() {
+	function core_theme_register_annotation_view_script() {
 		$asset_file = get_theme_file_path( 'build/extensions/annotation/view.asset.php' );
 
 		if ( ! file_exists( $asset_file ) ) {
@@ -305,7 +305,7 @@ if ( ! function_exists( 'dnte_register_annotation_view_script' ) ) :
 		$assets = require $asset_file;
 
 		wp_register_script(
-			'dnte-annotation-view',
+			'core-theme-annotation-view',
 			get_theme_file_uri( 'build/extensions/annotation/view.js' ),
 			$assets['dependencies'],
 			wp_get_theme()->get( 'Version' ),
@@ -313,10 +313,10 @@ if ( ! function_exists( 'dnte_register_annotation_view_script' ) ) :
 		);
 	}
 endif;
-add_action( 'init', 'dnte_register_annotation_view_script' );
+add_action( 'init', 'core_theme_register_annotation_view_script' );
 
 
-if ( ! function_exists( 'dnte_enqueue_annotation_preview_styles' ) ) :
+if ( ! function_exists( 'core_theme_enqueue_annotation_preview_styles' ) ) :
 	/**
 	 * Enqueues the editor preview stylesheet and its generated mask CSS under
 	 * the given handle.
@@ -330,7 +330,7 @@ if ( ! function_exists( 'dnte_enqueue_annotation_preview_styles' ) ) :
 	 *
 	 * @param string $handle Style handle to register under.
 	 */
-	function dnte_enqueue_annotation_preview_styles( $handle ) {
+	function core_theme_enqueue_annotation_preview_styles( $handle ) {
 		$editor_css = get_theme_file_path( 'build/extensions/annotation/index.css' );
 
 		if ( ! file_exists( $editor_css ) ) {
@@ -344,7 +344,7 @@ if ( ! function_exists( 'dnte_enqueue_annotation_preview_styles' ) ) :
 			wp_get_theme()->get( 'Version' )
 		);
 
-		$preview_css = dnte_annotation_editor_preview_css();
+		$preview_css = core_theme_annotation_editor_preview_css();
 
 		if ( '' !== $preview_css ) {
 			wp_add_inline_style( $handle, $preview_css );
@@ -353,12 +353,12 @@ if ( ! function_exists( 'dnte_enqueue_annotation_preview_styles' ) ) :
 endif;
 
 
-if ( ! function_exists( 'dnte_enqueue_annotation_frontend_assets' ) ) :
+if ( ! function_exists( 'core_theme_enqueue_annotation_frontend_assets' ) ) :
 	/**
 	 * Enqueues the annotation stylesheet.
 	 * Runs on `enqueue_block_assets` (editor + front end).
 	 */
-	function dnte_enqueue_annotation_frontend_assets() {
+	function core_theme_enqueue_annotation_frontend_assets() {
 		$style_file = get_theme_file_path( 'build/extensions/annotation/style-index.css' );
 
 		if ( ! file_exists( $style_file ) ) {
@@ -366,7 +366,7 @@ if ( ! function_exists( 'dnte_enqueue_annotation_frontend_assets' ) ) :
 		}
 
 		wp_enqueue_style(
-			'dnte-annotation-extension-style',
+			'core-theme-annotation-extension-style',
 			get_theme_file_uri( 'build/extensions/annotation/style-index.css' ),
 			array(),
 			wp_get_theme()->get( 'Version' )
@@ -375,14 +375,14 @@ if ( ! function_exists( 'dnte_enqueue_annotation_frontend_assets' ) ) :
 		// This hook is the one that reaches inside the editor canvas iframe, so
 		// it is where the canvas gets its stroke previews.
 		if ( is_admin() ) {
-			dnte_enqueue_annotation_preview_styles( 'dnte-annotation-extension-canvas' );
+			core_theme_enqueue_annotation_preview_styles( 'core-theme-annotation-extension-canvas' );
 		}
 	}
 endif;
-add_action( 'enqueue_block_assets', 'dnte_enqueue_annotation_frontend_assets' );
+add_action( 'enqueue_block_assets', 'core_theme_enqueue_annotation_frontend_assets' );
 
 
-if ( ! function_exists( 'dnte_enqueue_annotation_editor_assets' ) ) :
+if ( ! function_exists( 'core_theme_enqueue_annotation_editor_assets' ) ) :
 	/**
 	 * Enqueues the annotation format script and editor stylesheet, plus the
 	 * two things the editor needs that only PHP can supply.
@@ -394,7 +394,7 @@ if ( ! function_exists( 'dnte_enqueue_annotation_editor_assets' ) ) :
 	 *
 	 * Runs on `enqueue_block_editor_assets` (editor only).
 	 */
-	function dnte_enqueue_annotation_editor_assets() {
+	function core_theme_enqueue_annotation_editor_assets() {
 		$asset_file = get_theme_file_path( 'build/extensions/annotation/index.asset.php' );
 
 		if ( ! file_exists( $asset_file ) ) {
@@ -402,10 +402,10 @@ if ( ! function_exists( 'dnte_enqueue_annotation_editor_assets' ) ) :
 		}
 
 		$assets   = require $asset_file;
-		$variants = dnte_annotation_variants();
+		$variants = core_theme_annotation_variants();
 
 		wp_enqueue_script(
-			'dnte-annotation-extension',
+			'core-theme-annotation-extension',
 			get_theme_file_uri( 'build/extensions/annotation/index.js' ),
 			$assets['dependencies'],
 			wp_get_theme()->get( 'Version' ),
@@ -413,7 +413,7 @@ if ( ! function_exists( 'dnte_enqueue_annotation_editor_assets' ) ) :
 		);
 
 		// Admin-document copy, for the swatches in the toolbar popover.
-		dnte_enqueue_annotation_preview_styles( 'dnte-annotation-extension' );
+		core_theme_enqueue_annotation_preview_styles( 'core-theme-annotation-extension' );
 
 		$list = array();
 		foreach ( $variants as $slug => $variant ) {
@@ -424,16 +424,16 @@ if ( ! function_exists( 'dnte_enqueue_annotation_editor_assets' ) ) :
 		}
 
 		wp_add_inline_script(
-			'dnte-annotation-extension',
-			'window.dnteAnnotations = ' . wp_json_encode( $list ) . ';',
+			'core-theme-annotation-extension',
+			'window.coreThemeAnnotations = ' . wp_json_encode( $list ) . ';',
 			'before'
 		);
 	}
 endif;
-add_action( 'enqueue_block_editor_assets', 'dnte_enqueue_annotation_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'core_theme_enqueue_annotation_editor_assets' );
 
 
-if ( ! function_exists( 'dnte_annotation_editor_preview_css' ) ) :
+if ( ! function_exists( 'core_theme_annotation_editor_preview_css' ) ) :
 	/**
 	 * CSS painting each stroke as a mask, for the editor canvas and the
 	 * variant swatches in the toolbar popover.
@@ -443,10 +443,10 @@ if ( ! function_exists( 'dnte_annotation_editor_preview_css' ) ) :
 	 *
 	 * @return string Inline CSS, or '' when there is no artwork.
 	 */
-	function dnte_annotation_editor_preview_css() {
+	function core_theme_annotation_editor_preview_css() {
 		$rules = array();
 
-		foreach ( dnte_annotation_variants() as $slug => $variant ) {
+		foreach ( core_theme_annotation_variants() as $slug => $variant ) {
 			$svg = file_get_contents( $variant['path'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local theme file, not a remote request.
 
 			if ( false === $svg ) {
@@ -460,12 +460,12 @@ if ( ! function_exists( 'dnte_annotation_editor_preview_css' ) ) :
 			$uri = 'data:image/svg+xml;utf8,' . rawurlencode( trim( $svg ) );
 
 			$rules[] = sprintf(
-				'.dnte-annotation[data-annotation="%1$s"]::after{--dnte-annotation-mask:url("%2$s");}',
+				'.core-theme-annotation[data-annotation="%1$s"]::after{--core-theme-annotation-mask:url("%2$s");}',
 				esc_attr( $slug ),
 				$uri
 			);
 			$rules[] = sprintf(
-				'.dnte-annotation-swatch[data-annotation="%1$s"]::after{--dnte-annotation-mask:url("%2$s");}',
+				'.core-theme-annotation-swatch[data-annotation="%1$s"]::after{--core-theme-annotation-mask:url("%2$s");}',
 				esc_attr( $slug ),
 				$uri
 			);

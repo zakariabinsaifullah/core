@@ -1,7 +1,7 @@
 {
-    "name": "dentist-exchange",
-    "version": "0.1.0",
-    "description": "Dentist Exchange — A Full Site Editing Theme for Dentist Exchange",
+    "name": "core",
+    "version": "0.0.1",
+    "description": "Core — A Full Site Editing block theme",
     "author": "binsaifullah",
     "license": "GPL-2.0-or-later",
     "main": "build/index.js",

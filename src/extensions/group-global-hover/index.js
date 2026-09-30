@@ -20,7 +20,7 @@ const BLOCK_NAME = 'core/group';
 /**
  * Add global hover attributes to core/group.
  */
-addFilter( 'blocks.registerBlockType', 'dnte/group-global-hover-add-attributes', ( settings, name ) => {
+addFilter( 'blocks.registerBlockType', 'core-theme/group-global-hover-add-attributes', ( settings, name ) => {
     if ( name !== BLOCK_NAME ) {
         return settings;
     }
@@ -54,7 +54,7 @@ addFilter( 'blocks.registerBlockType', 'dnte/group-global-hover-add-attributes',
  */
 addFilter(
     'editor.BlockEdit',
-    'dnte/group-global-hover-add-inspector-controls',
+    'core-theme/group-global-hover-add-inspector-controls',
     createHigherOrderComponent( BlockEdit => {
         return props => {
             const { name, attributes, setAttributes, clientId } = props;
@@ -71,7 +71,7 @@ addFilter(
                     <InspectorControls>
                         <PanelBody>
                             <NativeToggleControl
-                                label={ __( 'Enable global hover', 'dentist-exchange' ) }
+                                label={ __( 'Enable global hover', 'core' ) }
                                 checked={ !! attributes.globalHoverEnabled }
                                 onChange={ value => setAttributes( { globalHoverEnabled: value } ) }
                             />
@@ -91,11 +91,11 @@ addFilter(
 );
 
 /**
- * Apply `dnte-global-hover` class + CSS variables in the editor preview.
+ * Apply `core-theme-global-hover` class + CSS variables in the editor preview.
  */
 addFilter(
     'editor.BlockListBlock',
-    'dnte/group-global-hover-add-styles',
+    'core-theme/group-global-hover-add-styles',
     createHigherOrderComponent( BlockListBlock => {
         return props => {
             const { name, attributes } = props;
@@ -116,13 +116,13 @@ addFilter(
             const style = {};
 
             if ( hasBg ) {
-                style[ '--dnte-ghover-bg' ] = globalHoverBgColor
+                style[ '--core-theme-ghover-bg' ] = globalHoverBgColor
                     ? `var(--wp--preset--color--${ globalHoverBgColor })`
                     : customGlobalHoverBgColor;
             }
 
             if ( hasColor ) {
-                style[ '--dnte-ghover-color' ] = globalHoverColor
+                style[ '--core-theme-ghover-color' ] = globalHoverColor
                     ? `var(--wp--preset--color--${ globalHoverColor })`
                     : customGlobalHoverColor;
             }
@@ -135,7 +135,7 @@ addFilter(
                 }
             };
 
-            const classes = [ props.className, 'dnte-global-hover' ].filter( Boolean ).join( ' ' );
+            const classes = [ props.className, 'core-theme-global-hover' ].filter( Boolean ).join( ' ' );
 
             return <BlockListBlock { ...props } className={ classes } wrapperProps={ wrapperProps } />;
         };

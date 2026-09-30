@@ -15,15 +15,15 @@
 (function () {
     'use strict';
 
-    var SELECTOR = '.wp-block-dnte-ticker-gallery';
-    var CLONE_ATTR = 'data-dnte-ticker-clone';
+    var SELECTOR = '.wp-block-core-theme-ticker-gallery';
+    var CLONE_ATTR = 'data-core-theme-ticker-clone';
 
     /* Stops a stray configuration — tiny images on a huge screen — from
      * cloning the DOM into the thousands. */
     var MAX_REPEATS = 24;
 
     function fit(root) {
-        var track = root.querySelector('.dnte-ticker__track');
+        var track = root.querySelector('.core-theme-ticker__track');
 
         if (!track) {
             return;
@@ -77,7 +77,7 @@
          * scales with it — otherwise adding copies would silently speed the
          * ticker up.
          */
-        var speed = parseFloat(window.getComputedStyle(root).getPropertyValue('--dnte-ticker-speed')) || 40;
+        var speed = parseFloat(window.getComputedStyle(root).getPropertyValue('--core-theme-ticker-speed')) || 40;
         track.style.animationDuration = speed * repeats + 's';
     }
 

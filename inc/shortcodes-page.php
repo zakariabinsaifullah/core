@@ -1,11 +1,11 @@
 <?php
 /**
- * Dentist Exchange — Shortcodes Reference Page
+ * Core — Shortcodes Reference Page
  *
  * Adds an admin page under Appearance that showcases the shortcodes
  * bundled with this theme, each with a one-click copy button.
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ── Register the shortcode catalogue ──────────────────────────────────────────
 
-if ( ! function_exists( 'dnte_get_shortcodes' ) ) :
+if ( ! function_exists( 'core_theme_get_shortcodes' ) ) :
 	/**
 	 * Returns the list of theme shortcodes to display on the reference page.
 	 *
@@ -24,122 +24,122 @@ if ( ! function_exists( 'dnte_get_shortcodes' ) ) :
 	 * Examples run from the bare tag — every attribute is optional on both
 	 * shortcodes — to a form spelling out each attribute at its default.
 	 */
-	function dnte_get_shortcodes() {
+	function core_theme_get_shortcodes() {
 		return array(
 			array(
-				'title'       => __( 'Opening Roles', 'dentist-exchange' ),
+				'title'       => __( 'Opening Roles', 'core' ),
 				'tag'         => 'opening_roles',
-				'description' => __( 'Renders the job board: a search bar, Job Type tabs and a grid of role cards showing the symbolic icon, the role title and its job type with the vacancy count. Only roles switched on in the Active column of All Open Roles are listed. Add roles under <code>Open Roles</code>, and their categories under <code>Open Roles &rarr; Job Types</code>.', 'dentist-exchange' ),
+				'description' => __( 'Renders the job board: a search bar, Job Type tabs and a grid of role cards showing the symbolic icon, the role title and its job type with the vacancy count. Only roles switched on in the Active column of All Open Roles are listed. Add roles under <code>Open Roles</code>, and their categories under <code>Open Roles &rarr; Job Types</code>.', 'core' ),
 				'examples'    => array(
 					array(
-						'label' => __( 'Basic usage', 'dentist-exchange' ),
-						'note'  => __( 'Every attribute is optional — this shows all active roles in 4 columns, newest first, with the search bar and tabs.', 'dentist-exchange' ),
+						'label' => __( 'Basic usage', 'core' ),
+						'note'  => __( 'Every attribute is optional — this shows all active roles in 4 columns, newest first, with the search bar and tabs.', 'core' ),
 						'code'  => '[opening_roles]',
 					),
 					array(
-						'label' => __( 'Just the grid', 'dentist-exchange' ),
-						'note'  => __( 'Drops the search bar and the tabs, for a section that only lists roles.', 'dentist-exchange' ),
+						'label' => __( 'Just the grid', 'core' ),
+						'note'  => __( 'Drops the search bar and the tabs, for a section that only lists roles.', 'core' ),
 						'code'  => '[opening_roles search="no" tabs="no" per_page="8"]',
 					),
 					array(
-						'label' => __( 'All optional attributes', 'dentist-exchange' ),
-						'note'  => __( 'Each attribute shown at its default value.', 'dentist-exchange' ),
+						'label' => __( 'All optional attributes', 'core' ),
+						'note'  => __( 'Each attribute shown at its default value.', 'core' ),
 						'code'  => '[opening_roles columns="4" per_page="-1" order="DESC" orderby="date" search="yes" tabs="yes"]',
 					),
 				),
 				'attrs'       => array(
-					array( 'name' => 'columns',  'default' => '4',    'desc' => __( 'Columns on desktop, 1&ndash;4. Drops to 2 below 1024px and to 1 below 600px.', 'dentist-exchange' ) ),
-					array( 'name' => 'per_page', 'default' => '-1',   'desc' => __( 'How many roles to show. <code>-1</code> shows every active one.', 'dentist-exchange' ) ),
-					array( 'name' => 'order',    'default' => 'DESC', 'desc' => __( 'Sort direction &mdash; <code>ASC</code> or <code>DESC</code>.', 'dentist-exchange' ) ),
-					array( 'name' => 'orderby',  'default' => 'date', 'desc' => __( 'Any WP_Query orderby value. Use <code>menu_order</code> with each role&rsquo;s Order field to sequence them by hand.', 'dentist-exchange' ) ),
-					array( 'name' => 'search',   'default' => 'yes',  'desc' => __( 'Show the search bar &mdash; <code>yes</code> or <code>no</code>. It filters by keyword (title and Tags), by city and by job type.', 'dentist-exchange' ) ),
-					array( 'name' => 'tabs',     'default' => 'yes',  'desc' => __( 'Show the Job Type tabs &mdash; <code>yes</code> or <code>no</code>. Only job types that have an active role behind them appear.', 'dentist-exchange' ) ),
+					array( 'name' => 'columns',  'default' => '4',    'desc' => __( 'Columns on desktop, 1&ndash;4. Drops to 2 below 1024px and to 1 below 600px.', 'core' ) ),
+					array( 'name' => 'per_page', 'default' => '-1',   'desc' => __( 'How many roles to show. <code>-1</code> shows every active one.', 'core' ) ),
+					array( 'name' => 'order',    'default' => 'DESC', 'desc' => __( 'Sort direction &mdash; <code>ASC</code> or <code>DESC</code>.', 'core' ) ),
+					array( 'name' => 'orderby',  'default' => 'date', 'desc' => __( 'Any WP_Query orderby value. Use <code>menu_order</code> with each role&rsquo;s Order field to sequence them by hand.', 'core' ) ),
+					array( 'name' => 'search',   'default' => 'yes',  'desc' => __( 'Show the search bar &mdash; <code>yes</code> or <code>no</code>. It filters by keyword (title and Tags), by city and by job type.', 'core' ) ),
+					array( 'name' => 'tabs',     'default' => 'yes',  'desc' => __( 'Show the Job Type tabs &mdash; <code>yes</code> or <code>no</code>. Only job types that have an active role behind them appear.', 'core' ) ),
 				),
 			),
 			array(
-				'title'       => __( 'Posts Grid', 'dentist-exchange' ),
-				'tag'         => 'dnte_posts_grid',
-				'description' => __( 'Renders posts as a three-column grid of cards: featured image, a category pill beside the date, the title, the excerpt and a Learn More button. Category tabs and pagination filter the grid in place, without reloading the page. The card text is white, so place this on a dark section.', 'dentist-exchange' ),
+				'title'       => __( 'Posts Grid', 'core' ),
+				'tag'         => 'core_theme_posts_grid',
+				'description' => __( 'Renders posts as a three-column grid of cards: featured image, a category pill beside the date, the title, the excerpt and a Learn More button. Category tabs and pagination filter the grid in place, without reloading the page. The card text is white, so place this on a dark section.', 'core' ),
 				'examples'    => array(
 					array(
-						'label' => __( 'Basic usage', 'dentist-exchange' ),
-						'note'  => __( 'Every attribute is optional — this shows the 6 newest posts with tabs for every category that has posts in it.', 'dentist-exchange' ),
-						'code'  => '[dnte_posts_grid]',
+						'label' => __( 'Basic usage', 'core' ),
+						'note'  => __( 'Every attribute is optional — this shows the 6 newest posts with tabs for every category that has posts in it.', 'core' ),
+						'code'  => '[core_theme_posts_grid]',
 					),
 					array(
-						'label' => __( 'Only certain categories', 'dentist-exchange' ),
-						'note'  => __( 'Limits both the posts and the tabs to the categories you name, by slug or by ID.', 'dentist-exchange' ),
-						'code'  => '[dnte_posts_grid per_page="9" categories="buying-a-practice,valuation"]',
+						'label' => __( 'Only certain categories', 'core' ),
+						'note'  => __( 'Limits both the posts and the tabs to the categories you name, by slug or by ID.', 'core' ),
+						'code'  => '[core_theme_posts_grid per_page="9" categories="buying-a-practice,valuation"]',
 					),
 					array(
-						'label' => __( 'Tabs somewhere else on the page', 'dentist-exchange' ),
-						'note'  => __( 'Give the grid an <code>id</code> and it renders without tabs; a separate [dnte_posts_tabs] block with a matching <code>for</code> then drives it. Useful when the tabs belong in their own row above a full-width grid.', 'dentist-exchange' ),
-						'code'  => '[dnte_posts_grid id="blog" per_page="6"]',
+						'label' => __( 'Tabs somewhere else on the page', 'core' ),
+						'note'  => __( 'Give the grid an <code>id</code> and it renders without tabs; a separate [core_theme_posts_tabs] block with a matching <code>for</code> then drives it. Useful when the tabs belong in their own row above a full-width grid.', 'core' ),
+						'code'  => '[core_theme_posts_grid id="blog" per_page="6"]',
 					),
 					array(
-						'label' => __( 'All optional attributes', 'dentist-exchange' ),
-						'note'  => __( 'Each attribute shown at its default value.', 'dentist-exchange' ),
-						'code'  => '[dnte_posts_grid per_page="6" post_type="post" categories="" id=""]',
+						'label' => __( 'All optional attributes', 'core' ),
+						'note'  => __( 'Each attribute shown at its default value.', 'core' ),
+						'code'  => '[core_theme_posts_grid per_page="6" post_type="post" categories="" id=""]',
 					),
 				),
 				'attrs'       => array(
-					array( 'name' => 'per_page',   'default' => '6',    'desc' => __( 'Posts per page, up to 50. Anything beyond that count is reached through the pagination beneath the grid.', 'dentist-exchange' ) ),
-					array( 'name' => 'post_type',  'default' => 'post', 'desc' => __( 'Which post type to list. The tabs follow that type&rsquo;s own hierarchical taxonomy.', 'dentist-exchange' ) ),
-					array( 'name' => 'categories', 'default' => '',     'desc' => __( 'Comma-separated term slugs or IDs. Leave empty for every category that has posts in it.', 'dentist-exchange' ) ),
-					array( 'name' => 'id',         'default' => '',     'desc' => __( 'Set this to move the tabs out of the grid and into a [dnte_posts_tabs] block with the same value in its <code>for</code> attribute.', 'dentist-exchange' ) ),
+					array( 'name' => 'per_page',   'default' => '6',    'desc' => __( 'Posts per page, up to 50. Anything beyond that count is reached through the pagination beneath the grid.', 'core' ) ),
+					array( 'name' => 'post_type',  'default' => 'post', 'desc' => __( 'Which post type to list. The tabs follow that type&rsquo;s own hierarchical taxonomy.', 'core' ) ),
+					array( 'name' => 'categories', 'default' => '',     'desc' => __( 'Comma-separated term slugs or IDs. Leave empty for every category that has posts in it.', 'core' ) ),
+					array( 'name' => 'id',         'default' => '',     'desc' => __( 'Set this to move the tabs out of the grid and into a [core_theme_posts_tabs] block with the same value in its <code>for</code> attribute.', 'core' ) ),
 				),
 			),
 			array(
-				'title'       => __( 'Posts Tabs', 'dentist-exchange' ),
-				'tag'         => 'dnte_posts_tabs',
-				'description' => __( 'The category tabs on their own, for driving a [dnte_posts_grid] placed elsewhere on the page. Only needed when the two have to sit in separate blocks &mdash; a grid without an <code>id</code> already draws its own tabs.', 'dentist-exchange' ),
+				'title'       => __( 'Posts Tabs', 'core' ),
+				'tag'         => 'core_theme_posts_tabs',
+				'description' => __( 'The category tabs on their own, for driving a [core_theme_posts_grid] placed elsewhere on the page. Only needed when the two have to sit in separate blocks &mdash; a grid without an <code>id</code> already draws its own tabs.', 'core' ),
 				'examples'    => array(
 					array(
-						'label' => __( 'Paired with a grid', 'dentist-exchange' ),
-						'note'  => __( 'The <code>for</code> here must match the <code>id</code> on the grid, and <code>categories</code> and <code>post_type</code> must match what the grid was given.', 'dentist-exchange' ),
-						'code'  => '[dnte_posts_tabs for="blog"]',
+						'label' => __( 'Paired with a grid', 'core' ),
+						'note'  => __( 'The <code>for</code> here must match the <code>id</code> on the grid, and <code>categories</code> and <code>post_type</code> must match what the grid was given.', 'core' ),
+						'code'  => '[core_theme_posts_tabs for="blog"]',
 					),
 					array(
-						'label' => __( 'All optional attributes', 'dentist-exchange' ),
-						'note'  => __( 'Only <code>for</code> is required — without it nothing renders.', 'dentist-exchange' ),
-						'code'  => '[dnte_posts_tabs for="blog" post_type="post" categories=""]',
+						'label' => __( 'All optional attributes', 'core' ),
+						'note'  => __( 'Only <code>for</code> is required — without it nothing renders.', 'core' ),
+						'code'  => '[core_theme_posts_tabs for="blog" post_type="post" categories=""]',
 					),
 				),
 				'attrs'       => array(
-					array( 'name' => 'for',        'default' => '',     'desc' => __( 'Required. The <code>id</code> of the grid these tabs control.', 'dentist-exchange' ) ),
-					array( 'name' => 'post_type',  'default' => 'post', 'desc' => __( 'Must match the grid&rsquo;s <code>post_type</code>.', 'dentist-exchange' ) ),
-					array( 'name' => 'categories', 'default' => '',     'desc' => __( 'Must match the grid&rsquo;s <code>categories</code>, so both show the same set of tabs.', 'dentist-exchange' ) ),
+					array( 'name' => 'for',        'default' => '',     'desc' => __( 'Required. The <code>id</code> of the grid these tabs control.', 'core' ) ),
+					array( 'name' => 'post_type',  'default' => 'post', 'desc' => __( 'Must match the grid&rsquo;s <code>post_type</code>.', 'core' ) ),
+					array( 'name' => 'categories', 'default' => '',     'desc' => __( 'Must match the grid&rsquo;s <code>categories</code>, so both show the same set of tabs.', 'core' ) ),
 				),
 			),
 			array(
-				'title'       => __( 'Testimonials', 'dentist-exchange' ),
-				'tag'         => 'dnte_testimonials',
-				'description' => __( 'Renders published testimonials as a swipeable deck of tilted cards, each showing the quote icon, the review message, the reviewer name and their designation. Add entries under <code>Testimonials</code> in the admin menu. Autoplay, speed, loop and pagination default to whatever is set in <code>Testimonials &rarr; Settings</code>; the attributes below override them per shortcode.', 'dentist-exchange' ),
+				'title'       => __( 'Testimonials', 'core' ),
+				'tag'         => 'core_theme_testimonials',
+				'description' => __( 'Renders published testimonials as a swipeable deck of tilted cards, each showing the quote icon, the review message, the reviewer name and their designation. Add entries under <code>Testimonials</code> in the admin menu. Autoplay, speed, loop and pagination default to whatever is set in <code>Testimonials &rarr; Settings</code>; the attributes below override them per shortcode.', 'core' ),
 				'examples'    => array(
 					array(
-						'label' => __( 'Basic usage', 'dentist-exchange' ),
-						'note'  => __( 'Every attribute is optional — this shows all published testimonials, newest first, autoplaying.', 'dentist-exchange' ),
-						'code'  => '[dnte_testimonials]',
+						'label' => __( 'Basic usage', 'core' ),
+						'note'  => __( 'Every attribute is optional — this shows all published testimonials, newest first, autoplaying.', 'core' ),
+						'code'  => '[core_theme_testimonials]',
 					),
 					array(
-						'label' => __( 'A fixed set, in the order you arranged them', 'dentist-exchange' ),
-						'note'  => __( 'Pair <code>orderby="menu_order"</code> with the Order field on each testimonial to control the sequence by hand.', 'dentist-exchange' ),
-						'code'  => '[dnte_testimonials count="6" order="ASC" orderby="menu_order"]',
+						'label' => __( 'A fixed set, in the order you arranged them', 'core' ),
+						'note'  => __( 'Pair <code>orderby="menu_order"</code> with the Order field on each testimonial to control the sequence by hand.', 'core' ),
+						'code'  => '[core_theme_testimonials count="6" order="ASC" orderby="menu_order"]',
 					),
 					array(
-						'label' => __( 'Overriding the settings for one carousel', 'dentist-exchange' ),
-						'note'  => __( 'Autoplay this instance regardless of what <code>Testimonials &rarr; Settings</code> says.', 'dentist-exchange' ),
-						'code'  => '[dnte_testimonials autoplay="yes" speed="4000" loop="yes" pagination="yes"]',
+						'label' => __( 'Overriding the settings for one carousel', 'core' ),
+						'note'  => __( 'Autoplay this instance regardless of what <code>Testimonials &rarr; Settings</code> says.', 'core' ),
+						'code'  => '[core_theme_testimonials autoplay="yes" speed="4000" loop="yes" pagination="yes"]',
 					),
 				),
 				'attrs'       => array(
-					array( 'name' => 'count',      'default' => '-1',         'desc' => __( 'How many testimonials to show. <code>-1</code> shows every published one.', 'dentist-exchange' ) ),
-					array( 'name' => 'order',      'default' => 'DESC',       'desc' => __( 'Sort direction &mdash; <code>ASC</code> or <code>DESC</code>.', 'dentist-exchange' ) ),
-					array( 'name' => 'orderby',    'default' => 'date',       'desc' => __( 'Any WP_Query orderby value. Use <code>menu_order</code> to order them by hand, or <code>rand</code> to shuffle.', 'dentist-exchange' ) ),
-					array( 'name' => 'autoplay',   'default' => '(settings)', 'desc' => __( 'Advance on its own &mdash; <code>yes</code> or <code>no</code>. Off by default, and always off for visitors who have asked for reduced motion.', 'dentist-exchange' ) ),
-					array( 'name' => 'speed',      'default' => '(settings)', 'desc' => __( 'Milliseconds each card is held when autoplaying. Values below 1000 are raised to 1000.', 'dentist-exchange' ) ),
-					array( 'name' => 'loop',       'default' => '(settings)', 'desc' => __( 'Wrap around from the last card to the first &mdash; <code>yes</code> or <code>no</code>.', 'dentist-exchange' ) ),
-					array( 'name' => 'pagination', 'default' => '(settings)', 'desc' => __( 'Show the dots beneath the carousel &mdash; <code>yes</code> or <code>no</code>.', 'dentist-exchange' ) ),
+					array( 'name' => 'count',      'default' => '-1',         'desc' => __( 'How many testimonials to show. <code>-1</code> shows every published one.', 'core' ) ),
+					array( 'name' => 'order',      'default' => 'DESC',       'desc' => __( 'Sort direction &mdash; <code>ASC</code> or <code>DESC</code>.', 'core' ) ),
+					array( 'name' => 'orderby',    'default' => 'date',       'desc' => __( 'Any WP_Query orderby value. Use <code>menu_order</code> to order them by hand, or <code>rand</code> to shuffle.', 'core' ) ),
+					array( 'name' => 'autoplay',   'default' => '(settings)', 'desc' => __( 'Advance on its own &mdash; <code>yes</code> or <code>no</code>. Off by default, and always off for visitors who have asked for reduced motion.', 'core' ) ),
+					array( 'name' => 'speed',      'default' => '(settings)', 'desc' => __( 'Milliseconds each card is held when autoplaying. Values below 1000 are raised to 1000.', 'core' ) ),
+					array( 'name' => 'loop',       'default' => '(settings)', 'desc' => __( 'Wrap around from the last card to the first &mdash; <code>yes</code> or <code>no</code>.', 'core' ) ),
+					array( 'name' => 'pagination', 'default' => '(settings)', 'desc' => __( 'Show the dots beneath the carousel &mdash; <code>yes</code> or <code>no</code>.', 'core' ) ),
 				),
 			),
 		);
@@ -148,32 +148,32 @@ endif;
 
 // ── Add page under Appearance ─────────────────────────────────────────────────
 
-add_action( 'admin_menu', 'dnte_shortcodes_add_menu' );
+add_action( 'admin_menu', 'core_theme_shortcodes_add_menu' );
 
-if ( ! function_exists( 'dnte_shortcodes_add_menu' ) ) :
-	function dnte_shortcodes_add_menu() {
+if ( ! function_exists( 'core_theme_shortcodes_add_menu' ) ) :
+	function core_theme_shortcodes_add_menu() {
 		add_theme_page(
-			__( 'Dentist Exchange Shortcodes', 'dentist-exchange' ),
-			__( 'Dentist Exchange', 'dentist-exchange' ),
+			__( 'Core Shortcodes', 'core' ),
+			__( 'Core', 'core' ),
 			'edit_theme_options',
-			'dnte-shortcodes',
-			'dnte_shortcodes_render_page'
+			'core-theme-shortcodes',
+			'core_theme_shortcodes_render_page'
 		);
 	}
 endif;
 
 // ── Enqueue admin assets on the Shortcodes page ────────────────────────────────
 
-add_action( 'admin_enqueue_scripts', 'dnte_shortcodes_admin_assets' );
+add_action( 'admin_enqueue_scripts', 'core_theme_shortcodes_admin_assets' );
 
-if ( ! function_exists( 'dnte_shortcodes_admin_assets' ) ) :
-	function dnte_shortcodes_admin_assets( $hook ) {
-		if ( 'appearance_page_dnte-shortcodes' !== $hook ) {
+if ( ! function_exists( 'core_theme_shortcodes_admin_assets' ) ) :
+	function core_theme_shortcodes_admin_assets( $hook ) {
+		if ( 'appearance_page_core-theme-shortcodes' !== $hook ) {
 			return;
 		}
 
 		wp_enqueue_script(
-			'dnte-shortcodes-copy',
+			'core-theme-shortcodes-copy',
 			get_theme_file_uri( 'assets/js/shortcodes-copy.js' ),
 			array(),
 			wp_get_theme()->get( 'Version' ),
@@ -184,13 +184,13 @@ endif;
 
 // ── Render the page ───────────────────────────────────────────────────────────
 
-if ( ! function_exists( 'dnte_shortcodes_render_page' ) ) :
-	function dnte_shortcodes_render_page() {
+if ( ! function_exists( 'core_theme_shortcodes_render_page' ) ) :
+	function core_theme_shortcodes_render_page() {
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			return;
 		}
 
-		$shortcodes = dnte_get_shortcodes();
+		$shortcodes = core_theme_get_shortcodes();
 		?>
 		<div class="wrap psr-wrap">
 
@@ -431,8 +431,8 @@ if ( ! function_exists( 'dnte_shortcodes_render_page' ) ) :
 					</svg>
 				</div>
 				<div class="psr-header__text">
-					<h1><?php esc_html_e( 'Dentist Exchange Shortcodes', 'dentist-exchange' ); ?></h1>
-					<p><?php esc_html_e( 'All shortcodes available in this theme. Click Copy to grab the code.', 'dentist-exchange' ); ?></p>
+					<h1><?php esc_html_e( 'Core Shortcodes', 'core' ); ?></h1>
+					<p><?php esc_html_e( 'All shortcodes available in this theme. Click Copy to grab the code.', 'core' ); ?></p>
 				</div>
 			</div>
 
@@ -464,18 +464,18 @@ if ( ! function_exists( 'dnte_shortcodes_render_page' ) ) :
 									<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
 									<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
 								</svg>
-								<?php esc_html_e( 'Copy', 'dentist-exchange' ); ?>
+								<?php esc_html_e( 'Copy', 'core' ); ?>
 							</button>
 						</div>
 						<?php endforeach; ?>
 
 						<?php if ( ! empty( $sc['attrs'] ) ) : ?>
-						<p class="psr-attrs-label"><?php esc_html_e( 'Attributes', 'dentist-exchange' ); ?></p>
+						<p class="psr-attrs-label"><?php esc_html_e( 'Attributes', 'core' ); ?></p>
 						<div class="psr-attrs">
 							<div class="psr-attr-head">
-								<span><?php esc_html_e( 'Attribute', 'dentist-exchange' ); ?></span>
-								<span><?php esc_html_e( 'Default', 'dentist-exchange' ); ?></span>
-								<span><?php esc_html_e( 'Description', 'dentist-exchange' ); ?></span>
+								<span><?php esc_html_e( 'Attribute', 'core' ); ?></span>
+								<span><?php esc_html_e( 'Default', 'core' ); ?></span>
+								<span><?php esc_html_e( 'Description', 'core' ); ?></span>
 							</div>
 							<?php foreach ( $sc['attrs'] as $attr ) : ?>
 							<div class="psr-attr">
@@ -492,8 +492,8 @@ if ( ! function_exists( 'dnte_shortcodes_render_page' ) ) :
 			</div>
 
 			<div class="psr-footer">
-				<strong><?php esc_html_e( 'Tip:', 'dentist-exchange' ); ?></strong>
-				<?php esc_html_e( 'Shortcodes can be placed in any post, page, or widget that supports shortcodes. In the block editor, use the Shortcode block.', 'dentist-exchange' ); ?>
+				<strong><?php esc_html_e( 'Tip:', 'core' ); ?></strong>
+				<?php esc_html_e( 'Shortcodes can be placed in any post, page, or widget that supports shortcodes. In the block editor, use the Shortcode block.', 'core' ); ?>
 			</div>
 
 		</div>

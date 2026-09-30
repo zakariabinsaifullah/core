@@ -14,7 +14,7 @@
     }
 
     document.addEventListener('click', function (event) {
-        var button = event.target.closest('.dnte-role-toggle');
+        var button = event.target.closest('.core-theme-role-toggle');
 
         if (!button || button.disabled || button.classList.contains('is-busy')) {
             return;
@@ -28,7 +28,7 @@
         button.classList.add('is-busy');
 
         var body = new URLSearchParams();
-        body.append('action', 'dnte_toggle_open_role_active');
+        body.append('action', 'core_theme_toggle_open_role_active');
         body.append('nonce', config.nonce);
         body.append('post_id', button.dataset.id);
         body.append('active', next ? '1' : '0');

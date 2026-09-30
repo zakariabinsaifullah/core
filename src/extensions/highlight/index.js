@@ -10,8 +10,8 @@ import { ToolbarButton } from '@wordpress/components';
 import './style.scss';
 import './sidebar';
 
-const FORMAT_NAME = 'dnte/highlight';
-const BASE_CLASS = 'dnte-highlight';
+const FORMAT_NAME = 'core-theme/highlight';
+const BASE_CLASS = 'core-theme-highlight';
 
 // Only these blocks expose the Highlight button. Format types have no native
 // per-block restriction, so the toolbar button opts out for anything else.
@@ -31,7 +31,7 @@ const Edit = ({ value, onChange, isActive }) => {
         <BlockControls group="other">
             <ToolbarButton
                 icon="admin-appearance"
-                label={__('Highlight', 'dentist-exchange')}
+                label={__('Highlight', 'core')}
                 onClick={() =>
                     onChange(
                         isActive
@@ -46,7 +46,7 @@ const Edit = ({ value, onChange, isActive }) => {
 };
 
 const highlightFormat = {
-    title: __('Highlight', 'dentist-exchange'),
+    title: __('Highlight', 'core'),
     tagName: 'span',
     className: BASE_CLASS,
     edit: Edit

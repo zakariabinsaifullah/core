@@ -4,29 +4,29 @@
  * Loaded in the editor and on the front end so the two render identically.
  */
 
-.dnte-highlight {
+.core-theme-highlight {
     /*
      * Font family comes from the sidebar setting (Heading/Paragraph →
      * Highlight → Highlight font family) via a CSS custom property on the
      * block. Unset, the highlight simply inherits the block's font.
      */
-    font-family: var(--dnte-highlight-font-family, inherit);
+    font-family: var(--core-theme-highlight-font-family, inherit);
 
     /*
      * Fallback for browsers without `background-clip: text`. A solid highlight
      * colour (sidebar setting) wins here too; without one this resolves to the
-     * middle stop of dnte-gradient-two.
+     * middle stop of core-theme-gradient-two.
      */
-    color: var(--dnte-highlight-color, var(--wp--preset--color--dnte-neutral-400, #9CA3AF));
+    color: var(--core-theme-highlight-color, var(--wp--preset--color--core-theme-neutral-light, #b2b3b3));
 }
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
-    .dnte-highlight {
+    .core-theme-highlight {
         /*
          * The gradient is the default fill; a solid highlight colour suppresses
-         * it by setting `--dnte-highlight-gradient: none` on the block.
+         * it by setting `--core-theme-highlight-gradient: none` on the block.
          */
-        background-image: var(--dnte-highlight-gradient, var(--wp--preset--gradient--dnte-gradient-two, none));
+        background-image: var(--core-theme-highlight-gradient, var(--wp--preset--gradient--core-theme-gradient-two, none));
 
         /*
          * `-webkit-text-fill-color` wins over `color` where it is supported,
@@ -36,6 +36,6 @@
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        -webkit-text-fill-color: var(--dnte-highlight-color, transparent);
+        -webkit-text-fill-color: var(--core-theme-highlight-color, transparent);
     }
 }

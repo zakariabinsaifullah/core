@@ -10,7 +10,7 @@ const CustomiconModal = ({ customiconPanel, setCustomiconPanel, onInsert, value 
 
     const handleInsert = () => {
         if (code.trim() === '') {
-            wp.data.dispatch('core/notices').createNotice('error', __('Please enter SVG code', 'dentist-exchange'), {
+            wp.data.dispatch('core/notices').createNotice('error', __('Please enter SVG code', 'core'), {
                 isDismissible: true
             });
             return;
@@ -21,12 +21,12 @@ const CustomiconModal = ({ customiconPanel, setCustomiconPanel, onInsert, value 
     return (
         <Modal
             className="svgib__modal custom-svg"
-            title={__('Custom SVG', 'dentist-exchange')}
+            title={__('Custom SVG', 'core')}
             onRequestClose={() => setCustomiconPanel(false)}
         >
             <div className="svg-controls">
                 <RangeControl
-                    label={__('SVG Preview Size', 'dentist-exchange')}
+                    label={__('SVG Preview Size', 'core')}
                     value={size}
                     onChange={v => setSize(v)}
                     min={20}
@@ -36,11 +36,11 @@ const CustomiconModal = ({ customiconPanel, setCustomiconPanel, onInsert, value 
             <div className="svgib-modal__wrapper">
                 <div className="svg-code">
                     <TextareaControl
-                        label={__('SVG Code', 'dentist-exchange')}
-                        help={__('Paste your SVG code here.', 'dentist-exchange')}
+                        label={__('SVG Code', 'core')}
+                        help={__('Paste your SVG code here.', 'core')}
                         value={code}
                         onChange={v => setCode(v)}
-                        placeholder={__('<svg>...</svg>', 'dentist-exchange')}
+                        placeholder={__('<svg>...</svg>', 'core')}
                         rows={10}
                     />
                 </div>
@@ -48,13 +48,13 @@ const CustomiconModal = ({ customiconPanel, setCustomiconPanel, onInsert, value 
                     {code ? (
                         <div dangerouslySetInnerHTML={{ __html: code }} />
                     ) : (
-                        <div className="preview-text">{__('SVG Preview', 'dentist-exchange')}</div>
+                        <div className="preview-text">{__('SVG Preview', 'core')}</div>
                     )}
                 </div>
             </div>
             <div className="insert-svg">
                 <Button variant="primary" onClick={handleInsert}>
-                    {__('Insert SVG', 'dentist-exchange')}
+                    {__('Insert SVG', 'core')}
                 </Button>
             </div>
         </Modal>

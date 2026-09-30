@@ -23,7 +23,7 @@ $icon_svg    = '';
 /*
  * Inline the uploaded SVG rather than referencing it from an <img>: as part of
  * the document it can inherit currentColor and needs no extra request. The
- * file was sanitised on upload by dnte_sanitize_svg_upload(), and is passed
+ * file was sanitised on upload by core_theme_sanitize_svg_upload(), and is passed
  * through kses again here in case it was uploaded before that filter existed.
  */
 if ( ! empty( $icon['id'] ) ) {
@@ -43,7 +43,7 @@ $lane        = $attributes['lane'] ?? 'auto';
 $offset_y    = isset( $attributes['offsetY'] ) && is_numeric( $attributes['offsetY'] ) ? (float) $attributes['offsetY'] : null;
 
 $arrow        = $attributes['arrow'] ?? '';
-$arrow_markup = $arrow ? dnte_arrow_svg( $arrow ) : '';
+$arrow_markup = $arrow ? core_theme_arrow_svg( $arrow ) : '';
 $arrow_mobile = $attributes['arrowMobile'] ?? 'auto';
 
 // Only h2–h6 and p may carry the heading; anything else falls back to h3.
@@ -52,7 +52,7 @@ if ( ! in_array( $heading_tag, $allowed_tags, true ) ) {
 	$heading_tag = 'h3';
 }
 
-$classes = array( 'dnte-story-card', 'has-badge-' . $badge_side );
+$classes = array( 'core-theme-story-card', 'has-badge-' . $badge_side );
 
 if ( in_array( $lane, array( 'left', 'right' ), true ) ) {
 	$classes[] = 'is-lane-' . $lane;
@@ -71,7 +71,7 @@ if ( null !== $offset_y ) {
 	 * card. In the no-JS fallback the cards render as a plain column and this
 	 * is ignored.
 	 */
-	$styles[] = '--dnte-card-top:' . $offset_y . '%';
+	$styles[] = '--core-theme-card-top:' . $offset_y . '%';
 }
 
 $wrapper_attributes = get_block_wrapper_attributes(
@@ -89,20 +89,20 @@ $wrapper_attributes = get_block_wrapper_attributes(
 ?>
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by get_block_wrapper_attributes(). ?>>
 	<?php if ( $icon_svg ) : ?>
-		<span class="dnte-story-card__badge" aria-hidden="true">
-			<?php echo wp_kses( $icon_svg, dnte_iconic_button_svg_kses_args() ); ?>
+		<span class="core-theme-story-card__badge" aria-hidden="true">
+			<?php echo wp_kses( $icon_svg, core_theme_iconic_button_svg_kses_args() ); ?>
 		</span>
 	<?php elseif ( ! empty( $icon['url'] ) ) : ?>
-		<span class="dnte-story-card__badge" aria-hidden="true">
+		<span class="core-theme-story-card__badge" aria-hidden="true">
 			<?php // A raster icon has no markup to inline. ?>
 			<img src="<?php echo esc_url( $icon['url'] ); ?>" alt="" />
 		</span>
 	<?php endif; ?>
 
 	<?php if ( ! empty( $image['url'] ) ) : ?>
-		<figure class="dnte-story-card__media">
+		<figure class="core-theme-story-card__media">
 			<img
-				class="dnte-story-card__image"
+				class="core-theme-story-card__image"
 				src="<?php echo esc_url( $image['url'] ); ?>"
 				alt="<?php echo esc_attr( $image['alt'] ?? '' ); ?>"
 				loading="lazy"
@@ -111,21 +111,21 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		</figure>
 	<?php endif; ?>
 
-	<div class="dnte-story-card__content">
+	<div class="core-theme-story-card__content">
 		<?php if ( $heading ) : ?>
-			<<?php echo esc_html( $heading_tag ); ?> class="dnte-story-card__heading">
+			<<?php echo esc_html( $heading_tag ); ?> class="core-theme-story-card__heading">
 				<?php echo wp_kses_post( $heading ); ?>
 			</<?php echo esc_html( $heading_tag ); ?>>
 		<?php endif; ?>
 
 		<?php if ( $description ) : ?>
-			<p class="dnte-story-card__desc"><?php echo wp_kses_post( $description ); ?></p>
+			<p class="core-theme-story-card__desc"><?php echo wp_kses_post( $description ); ?></p>
 		<?php endif; ?>
 	</div>
 
 	<?php
 	if ( $arrow_markup ) :
-		$connector_classes = array( 'dnte-story-card__connector' );
+		$connector_classes = array( 'core-theme-story-card__connector' );
 
 		// 'auto' leaves the breakpoint rule in style.scss to decide — which
 		// drops every card's arrow on a phone and keeps only the section's
@@ -137,12 +137,12 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		}
 
 		$connector_styles = array(
-			'--dnte-arrow-top:' . (float) ( $attributes['arrowTop'] ?? 0 ) . '%',
-			'--dnte-arrow-left:' . (float) ( $attributes['arrowLeft'] ?? 100 ) . '%',
-			'--dnte-arrow-width:' . (float) ( $attributes['arrowWidth'] ?? 45 ) . '%',
-			'--dnte-arrow-rotate:' . (float) ( $attributes['arrowRotate'] ?? 0 ) . 'deg',
-			'--dnte-arrow-flip:' . ( ! empty( $attributes['arrowFlipX'] ) ? '-1' : '1' ),
-			'--dnte-arrow-angle:' . dnte_arrow_angle( $arrow ) . 'deg',
+			'--core-theme-arrow-top:' . (float) ( $attributes['arrowTop'] ?? 0 ) . '%',
+			'--core-theme-arrow-left:' . (float) ( $attributes['arrowLeft'] ?? 100 ) . '%',
+			'--core-theme-arrow-width:' . (float) ( $attributes['arrowWidth'] ?? 45 ) . '%',
+			'--core-theme-arrow-rotate:' . (float) ( $attributes['arrowRotate'] ?? 0 ) . 'deg',
+			'--core-theme-arrow-flip:' . ( ! empty( $attributes['arrowFlipX'] ) ? '-1' : '1' ),
+			'--core-theme-arrow-angle:' . core_theme_arrow_angle( $arrow ) . 'deg',
 		);
 		?>
 		<span
@@ -151,8 +151,8 @@ $wrapper_attributes = get_block_wrapper_attributes(
 			data-arrow-delay="<?php echo esc_attr( (int) ( $attributes['arrowDelay'] ?? 180 ) ); ?>"
 			aria-hidden="true"
 		>
-			<span class="dnte-story-card__connector-art">
-				<?php echo dnte_arrow_svg( $arrow ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-owned artwork from assets/svg/arrows/. ?>
+			<span class="core-theme-story-card__connector-art">
+				<?php echo core_theme_arrow_svg( $arrow ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-owned artwork from assets/svg/arrows/. ?>
 			</span>
 		</span>
 	<?php endif; ?>

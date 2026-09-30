@@ -9,18 +9,18 @@
  * All SVG markup is sanitised against an allow-list before it is stored, so a
  * saved icon can never carry scripts or event handlers into the editor.
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
-if ( ! defined( 'DNTE_MY_ICONS_OPTION' ) ) {
-	define( 'DNTE_MY_ICONS_OPTION', 'dnte_my_icons' );
+if ( ! defined( 'CORE_THEME_MY_ICONS_OPTION' ) ) {
+	define( 'CORE_THEME_MY_ICONS_OPTION', 'core_theme_my_icons' );
 }
 
-if ( ! defined( 'DNTE_MY_ICONS_MAX' ) ) {
-	define( 'DNTE_MY_ICONS_MAX', 500 );
+if ( ! defined( 'CORE_THEME_MY_ICONS_MAX' ) ) {
+	define( 'CORE_THEME_MY_ICONS_MAX', 500 );
 }
 
-if ( ! function_exists( 'dnte_my_icons_permissions_check' ) ) :
+if ( ! function_exists( 'core_theme_my_icons_permissions_check' ) ) :
 	/**
 	 * Permission callback for every My Icons route.
 	 *
@@ -29,19 +29,19 @@ if ( ! function_exists( 'dnte_my_icons_permissions_check' ) ) :
 	 *
 	 * @return bool
 	 */
-	function dnte_my_icons_permissions_check() {
+	function core_theme_my_icons_permissions_check() {
 		return current_user_can( 'edit_posts' );
 	}
 endif;
 
-if ( ! function_exists( 'dnte_get_my_icons' ) ) :
+if ( ! function_exists( 'core_theme_get_my_icons' ) ) :
 	/**
 	 * Returns the stored icon library as a clean, sequential array.
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	function dnte_get_my_icons() {
-		$icons = get_option( DNTE_MY_ICONS_OPTION, array() );
+	function core_theme_get_my_icons() {
+		$icons = get_option( CORE_THEME_MY_ICONS_OPTION, array() );
 
 		if ( ! is_array( $icons ) ) {
 			return array();
@@ -62,13 +62,13 @@ endif;
  * SVG sanitisation
  * ---------------------------------------------------------------------- */
 
-if ( ! function_exists( 'dnte_svg_allowed_elements' ) ) :
+if ( ! function_exists( 'core_theme_svg_allowed_elements' ) ) :
 	/**
 	 * Lower-cased list of SVG elements that may be stored.
 	 *
 	 * @return array<int, string>
 	 */
-	function dnte_svg_allowed_elements() {
+	function core_theme_svg_allowed_elements() {
 		return array(
 			'svg',
 			'g',
@@ -111,13 +111,13 @@ if ( ! function_exists( 'dnte_svg_allowed_elements' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'dnte_svg_allowed_attributes' ) ) :
+if ( ! function_exists( 'core_theme_svg_allowed_attributes' ) ) :
 	/**
 	 * Lower-cased list of attributes that may be stored.
 	 *
 	 * @return array<int, string>
 	 */
-	function dnte_svg_allowed_attributes() {
+	function core_theme_svg_allowed_attributes() {
 		return array(
 			// Structure.
 			'id',
@@ -232,7 +232,7 @@ if ( ! function_exists( 'dnte_svg_allowed_attributes' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'dnte_sanitize_svg_css' ) ) :
+if ( ! function_exists( 'core_theme_sanitize_svg_css' ) ) :
 	/**
 	 * Strips anything that can reach the network or a script from CSS found in a
 	 * `style` attribute or an inline `<style>` element.
@@ -240,7 +240,7 @@ if ( ! function_exists( 'dnte_sanitize_svg_css' ) ) :
 	 * @param string $css Raw CSS.
 	 * @return string Sanitised CSS.
 	 */
-	function dnte_sanitize_svg_css( $css ) {
+	function core_theme_sanitize_svg_css( $css ) {
 		$css = (string) $css;
 
 		// Remove at-rules that can load remote resources.
@@ -262,16 +262,16 @@ if ( ! function_exists( 'dnte_sanitize_svg_css' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'dnte_sanitize_svg_node' ) ) :
+if ( ! function_exists( 'core_theme_sanitize_svg_node' ) ) :
 	/**
 	 * Recursively removes disallowed elements and attributes from a DOM node.
 	 *
 	 * @param DOMNode $node Node to clean.
 	 * @return void
 	 */
-	function dnte_sanitize_svg_node( DOMNode $node ) {
-		$allowed_elements   = dnte_svg_allowed_elements();
-		$allowed_attributes = dnte_svg_allowed_attributes();
+	function core_theme_sanitize_svg_node( DOMNode $node ) {
+		$allowed_elements   = core_theme_svg_allowed_elements();
+		$allowed_attributes = core_theme_svg_allowed_attributes();
 
 		// Walk backwards so removals do not shift the live NodeList.
 		for ( $i = $node->childNodes->length - 1; $i >= 0; $i-- ) {
@@ -299,7 +299,7 @@ if ( ! function_exists( 'dnte_sanitize_svg_node' ) ) :
 			}
 
 			if ( 'style' === $tag ) {
-				$child->nodeValue = dnte_sanitize_svg_css( $child->textContent ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				$child->nodeValue = core_theme_sanitize_svg_css( $child->textContent ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 				continue;
 			}
 
@@ -324,7 +324,7 @@ if ( ! function_exists( 'dnte_sanitize_svg_node' ) ) :
 					}
 
 					if ( 'style' === $name ) {
-						$child->setAttribute( $attribute->nodeName, dnte_sanitize_svg_css( $value ) );
+						$child->setAttribute( $attribute->nodeName, core_theme_sanitize_svg_css( $value ) );
 						continue;
 					}
 
@@ -341,13 +341,13 @@ if ( ! function_exists( 'dnte_sanitize_svg_node' ) ) :
 			}
 
 			if ( $child->hasChildNodes() ) {
-				dnte_sanitize_svg_node( $child );
+				core_theme_sanitize_svg_node( $child );
 			}
 		}
 	}
 endif;
 
-if ( ! function_exists( 'dnte_svg_restore_camel_case' ) ) :
+if ( ! function_exists( 'core_theme_svg_restore_camel_case' ) ) :
 	/**
 	 * Restores camel-cased SVG element and attribute names.
 	 *
@@ -358,7 +358,7 @@ if ( ! function_exists( 'dnte_svg_restore_camel_case' ) ) :
 	 * @param string $markup Serialised SVG markup.
 	 * @return string
 	 */
-	function dnte_svg_restore_camel_case( $markup ) {
+	function core_theme_svg_restore_camel_case( $markup ) {
 		$elements = array(
 			'lineargradient' => 'linearGradient',
 			'radialgradient' => 'radialGradient',
@@ -410,14 +410,14 @@ if ( ! function_exists( 'dnte_svg_restore_camel_case' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'dnte_sanitize_svg_markup' ) ) :
+if ( ! function_exists( 'core_theme_sanitize_svg_markup' ) ) :
 	/**
 	 * Sanitises pasted SVG markup down to a safe, storable `<svg>` element.
 	 *
 	 * @param string $svg Raw SVG markup.
 	 * @return string Sanitised markup, or an empty string when the input is not usable SVG.
 	 */
-	function dnte_sanitize_svg_markup( $svg ) {
+	function core_theme_sanitize_svg_markup( $svg ) {
 		$svg = trim( (string) $svg );
 
 		if ( '' === $svg || ! class_exists( 'DOMDocument' ) ) {
@@ -466,7 +466,7 @@ if ( ! function_exists( 'dnte_sanitize_svg_markup' ) ) :
 		// Clean the root element itself, then everything below it.
 		$fragment = $document->createElement( 'wrapper' );
 		$fragment->appendChild( $root->cloneNode( true ) );
-		dnte_sanitize_svg_node( $fragment );
+		core_theme_sanitize_svg_node( $fragment );
 
 		$clean_root = $fragment->firstChild;
 
@@ -483,7 +483,7 @@ if ( ! function_exists( 'dnte_sanitize_svg_markup' ) ) :
 		$markup = trim( $markup );
 
 		if ( 'html' === $used_parser ) {
-			$markup = dnte_svg_restore_camel_case( $markup );
+			$markup = core_theme_svg_restore_camel_case( $markup );
 		}
 
 		// Serialising may or may not have emitted the namespace; never emit it twice.
@@ -499,44 +499,44 @@ endif;
  * REST API
  * ---------------------------------------------------------------------- */
 
-if ( ! function_exists( 'dnte_rest_get_my_icons' ) ) :
+if ( ! function_exists( 'core_theme_rest_get_my_icons' ) ) :
 	/**
-	 * GET /dnte/v1/my-icons
+	 * GET /core-theme/v1/my-icons
 	 *
 	 * @return WP_REST_Response
 	 */
-	function dnte_rest_get_my_icons() {
-		return rest_ensure_response( dnte_get_my_icons() );
+	function core_theme_rest_get_my_icons() {
+		return rest_ensure_response( core_theme_get_my_icons() );
 	}
 endif;
 
-if ( ! function_exists( 'dnte_rest_add_my_icon' ) ) :
+if ( ! function_exists( 'core_theme_rest_add_my_icon' ) ) :
 	/**
-	 * POST /dnte/v1/my-icons
+	 * POST /core-theme/v1/my-icons
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @return WP_REST_Response|WP_Error
 	 */
-	function dnte_rest_add_my_icon( WP_REST_Request $request ) {
-		$svg = dnte_sanitize_svg_markup( $request->get_param( 'svg' ) );
+	function core_theme_rest_add_my_icon( WP_REST_Request $request ) {
+		$svg = core_theme_sanitize_svg_markup( $request->get_param( 'svg' ) );
 
 		if ( '' === $svg ) {
 			return new WP_Error(
-				'dnte_invalid_svg',
-				__( 'That does not look like valid SVG markup, or everything in it was disallowed.', 'dentist-exchange' ),
+				'core_theme_invalid_svg',
+				__( 'That does not look like valid SVG markup, or everything in it was disallowed.', 'core' ),
 				array( 'status' => 400 )
 			);
 		}
 
-		$icons = dnte_get_my_icons();
+		$icons = core_theme_get_my_icons();
 
-		if ( count( $icons ) >= DNTE_MY_ICONS_MAX ) {
+		if ( count( $icons ) >= CORE_THEME_MY_ICONS_MAX ) {
 			return new WP_Error(
-				'dnte_icon_limit_reached',
+				'core_theme_icon_limit_reached',
 				sprintf(
 					/* translators: %d: maximum number of saved icons. */
-					__( 'The icon library is full (%d icons). Delete an icon before adding another.', 'dentist-exchange' ),
-					DNTE_MY_ICONS_MAX
+					__( 'The icon library is full (%d icons). Delete an icon before adding another.', 'core' ),
+					CORE_THEME_MY_ICONS_MAX
 				),
 				array( 'status' => 400 )
 			);
@@ -545,11 +545,11 @@ if ( ! function_exists( 'dnte_rest_add_my_icon' ) ) :
 		foreach ( $icons as $existing ) {
 			if ( isset( $existing['svg'] ) && $existing['svg'] === $svg ) {
 				return new WP_Error(
-					'dnte_duplicate_icon',
+					'core_theme_duplicate_icon',
 					sprintf(
 						/* translators: %s: name of the icon already stored. */
-						__( 'This icon is already saved as “%s”.', 'dentist-exchange' ),
-						isset( $existing['label'] ) ? $existing['label'] : __( 'Untitled', 'dentist-exchange' )
+						__( 'This icon is already saved as “%s”.', 'core' ),
+						isset( $existing['label'] ) ? $existing['label'] : __( 'Untitled', 'core' )
 					),
 					array( 'status' => 409 )
 				);
@@ -559,7 +559,7 @@ if ( ! function_exists( 'dnte_rest_add_my_icon' ) ) :
 		$label = sanitize_text_field( (string) $request->get_param( 'label' ) );
 
 		if ( '' === $label ) {
-			$label = __( 'Custom Icon', 'dentist-exchange' );
+			$label = __( 'Custom Icon', 'core' );
 		}
 
 		$icon_type = 'line' === $request->get_param( 'iconType' ) ? 'line' : 'fill';
@@ -579,22 +579,22 @@ if ( ! function_exists( 'dnte_rest_add_my_icon' ) ) :
 
 		$icons[] = $icon;
 
-		update_option( DNTE_MY_ICONS_OPTION, $icons, false );
+		update_option( CORE_THEME_MY_ICONS_OPTION, $icons, false );
 
 		return rest_ensure_response( $icon );
 	}
 endif;
 
-if ( ! function_exists( 'dnte_rest_delete_my_icon' ) ) :
+if ( ! function_exists( 'core_theme_rest_delete_my_icon' ) ) :
 	/**
-	 * DELETE /dnte/v1/my-icons/<id>
+	 * DELETE /core-theme/v1/my-icons/<id>
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @return WP_REST_Response|WP_Error
 	 */
-	function dnte_rest_delete_my_icon( WP_REST_Request $request ) {
+	function core_theme_rest_delete_my_icon( WP_REST_Request $request ) {
 		$id    = (string) $request->get_param( 'id' );
-		$icons = dnte_get_my_icons();
+		$icons = core_theme_get_my_icons();
 
 		$remaining = array_values(
 			array_filter(
@@ -607,13 +607,13 @@ if ( ! function_exists( 'dnte_rest_delete_my_icon' ) ) :
 
 		if ( count( $remaining ) === count( $icons ) ) {
 			return new WP_Error(
-				'dnte_icon_not_found',
-				__( 'That icon is no longer in the library.', 'dentist-exchange' ),
+				'core_theme_icon_not_found',
+				__( 'That icon is no longer in the library.', 'core' ),
 				array( 'status' => 404 )
 			);
 		}
 
-		update_option( DNTE_MY_ICONS_OPTION, $remaining, false );
+		update_option( CORE_THEME_MY_ICONS_OPTION, $remaining, false );
 
 		return rest_ensure_response(
 			array(
@@ -624,26 +624,26 @@ if ( ! function_exists( 'dnte_rest_delete_my_icon' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'dnte_register_my_icons_routes' ) ) :
+if ( ! function_exists( 'core_theme_register_my_icons_routes' ) ) :
 	/**
 	 * Registers the My Icons REST routes.
 	 *
 	 * @return void
 	 */
-	function dnte_register_my_icons_routes() {
+	function core_theme_register_my_icons_routes() {
 		register_rest_route(
-			'dnte/v1',
+			'core-theme/v1',
 			'/my-icons',
 			array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => 'dnte_rest_get_my_icons',
-					'permission_callback' => 'dnte_my_icons_permissions_check',
+					'callback'            => 'core_theme_rest_get_my_icons',
+					'permission_callback' => 'core_theme_my_icons_permissions_check',
 				),
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
-					'callback'            => 'dnte_rest_add_my_icon',
-					'permission_callback' => 'dnte_my_icons_permissions_check',
+					'callback'            => 'core_theme_rest_add_my_icon',
+					'permission_callback' => 'core_theme_my_icons_permissions_check',
 					'args'                => array(
 						'svg'         => array(
 							'type'     => 'string',
@@ -665,13 +665,13 @@ if ( ! function_exists( 'dnte_register_my_icons_routes' ) ) :
 		);
 
 		register_rest_route(
-			'dnte/v1',
+			'core-theme/v1',
 			'/my-icons/(?P<id>[A-Za-z0-9\-]+)',
 			array(
 				array(
 					'methods'             => WP_REST_Server::DELETABLE,
-					'callback'            => 'dnte_rest_delete_my_icon',
-					'permission_callback' => 'dnte_my_icons_permissions_check',
+					'callback'            => 'core_theme_rest_delete_my_icon',
+					'permission_callback' => 'core_theme_my_icons_permissions_check',
 					'args'                => array(
 						'id' => array(
 							'type'     => 'string',
@@ -683,4 +683,4 @@ if ( ! function_exists( 'dnte_register_my_icons_routes' ) ) :
 		);
 	}
 endif;
-add_action( 'rest_api_init', 'dnte_register_my_icons_routes' );
+add_action( 'rest_api_init', 'core_theme_register_my_icons_routes' );

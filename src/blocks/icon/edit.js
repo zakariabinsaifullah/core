@@ -49,17 +49,18 @@ import { RenderIcon } from '../../helpers';
 import './editor.scss';
 
 /*
- * The theme ships Inter at 300-700, so those are the weights offered. "Default"
- * writes nothing, leaving the title at whatever its tag gives it — bold for a
- * heading, regular for a paragraph.
+ * The theme ships Titling Gothic FB Wide (300-700) and Instrument Sans
+ * (400-700), so those are the weights offered. "Default" writes nothing,
+ * leaving the title at whatever its tag gives it — bold for a heading,
+ * regular for a paragraph.
  */
 const TITLE_FONT_WEIGHTS = [
-    { label: __('Default', 'dentist-exchange'), value: '' },
-    { label: __('Light (300)', 'dentist-exchange'), value: '300' },
-    { label: __('Regular (400)', 'dentist-exchange'), value: '400' },
-    { label: __('Medium (500)', 'dentist-exchange'), value: '500' },
-    { label: __('Semi Bold (600)', 'dentist-exchange'), value: '600' },
-    { label: __('Bold (700)', 'dentist-exchange'), value: '700' }
+    { label: __('Default', 'core'), value: '' },
+    { label: __('Light (300)', 'core'), value: '300' },
+    { label: __('Regular (400)', 'core'), value: '400' },
+    { label: __('Medium (500)', 'core'), value: '500' },
+    { label: __('Semi Bold (600)', 'core'), value: '600' },
+    { label: __('Bold (700)', 'core'), value: '700' }
 ];
 
 export default function Edit(props) {
@@ -131,11 +132,11 @@ export default function Edit(props) {
     }, []);
 
     const fontFamilyOptions = [
-        { label: __('Default', 'dentist-exchange'), value: '' },
+        { label: __('Default', 'core'), value: '' },
         ...fontFamilies.map(f => {
             const value = f.fontFamily || (f.slug ? `var(--wp--preset--font-family--${f.slug})` : f.slug);
             return {
-                label: f.name || f.slug || __('Unknown', 'dentist-exchange'),
+                label: f.name || f.slug || __('Unknown', 'core'),
                 value: value
             };
         })
@@ -226,7 +227,7 @@ export default function Edit(props) {
                     ref={setPopoverAnchor}
                     name="link"
                     icon={link}
-                    title={__('Link', 'dentist-exchange')}
+                    title={__('Link', 'core')}
                     onClick={() => setIsEditingURL(true)}
                     isActive={!!href || isEditingURL}
                 />
@@ -237,7 +238,7 @@ export default function Edit(props) {
                         placement="bottom"
                         focusOnMount={true}
                         offset={12}
-                        className="dnte-icon__link-popover"
+                        className="core-theme-icon__link-popover"
                         variant="alternate"
                     >
                         <LinkControl
@@ -266,19 +267,19 @@ export default function Edit(props) {
                 )} */}
             </BlockControls>
             <InspectorControls>
-                <PanelBody title={__('Settings', 'dentist-exchange')}>
+                <PanelBody title={__('Settings', 'core')}>
                     <NativeToggleControl
-                        label={__('Add List Title', 'dentist-exchange')}
+                        label={__('Add List Title', 'core')}
                         checked={showTitle}
                         onChange={value => setAttributes({ showTitle: value })}
                     />
                     <NativeToggleControl
-                        label={__('Add Description', 'dentist-exchange')}
+                        label={__('Add Description', 'core')}
                         checked={showDesc}
                         onChange={value => setAttributes({ showDesc: value })}
                     />
                     <NativeToggleControl
-                        label={__('Add Button', 'dentist-exchange')}
+                        label={__('Add Button', 'core')}
                         checked={showButton}
                         onChange={value => setAttributes({ showButton: value })}
                     />
@@ -294,7 +295,7 @@ export default function Edit(props) {
                         iconSize={iconSize}
                         strokeWidth={strokeWidth}
                     />
-                    <NativeResponsiveControl label={__('Icon Size (px)', 'dentist-exchange')} props={props}>
+                    <NativeResponsiveControl label={__('Icon Size (px)', 'core')} props={props}>
                         <RangeControl
                             value={resolvedSizes[resMode]}
                             onChange={value => setAttributes({ sizes: { ...sizes, [resMode]: value } })}
@@ -305,7 +306,7 @@ export default function Edit(props) {
                                 'Desktop' !== resMode && isInheritedSize
                                     ? __(
                                           'Inherited from the larger screen size. Change it to set a size just for this device.',
-                                          'dentist-exchange'
+                                          'core'
                                       )
                                     : undefined
                             }
@@ -314,91 +315,91 @@ export default function Edit(props) {
                     </NativeResponsiveControl>
                     {/* Nudges the icon down — mainly for top-aligned icons beside multi-line text. */}
                     <NativeUnitControl
-                        label={__('Icon Top Margin', 'dentist-exchange')}
+                        label={__('Icon Top Margin', 'core')}
                         value={iconMarginTop}
                         onChange={value => setAttributes({ iconMarginTop: value })}
                     />
                 </PanelBody>
                 {hasContent && (
-                    <PanelBody title={__('Title & Description', 'dentist-exchange')} initialOpen={false}>
+                    <PanelBody title={__('Title & Description', 'core')} initialOpen={false}>
                         <NativeUnitControl
-                            label={__('Gap ', 'dentist-exchange')}
+                            label={__('Gap ', 'core')}
                             value={listGap}
                             onChange={value => setAttributes({ listGap: value })}
                         />
                         <NativeSelectControl
-                            label={__('Vertical Alignment', 'dentist-exchange')}
+                            label={__('Vertical Alignment', 'core')}
                             value={iconVerticalAlign}
                             onChange={value => setAttributes({ iconVerticalAlign: value })}
                             options={[
-                                { label: __('Top', 'dentist-exchange'), value: 'top' },
-                                { label: __('Center', 'dentist-exchange'), value: 'center' },
-                                { label: __('Bottom', 'dentist-exchange'), value: 'bottom' }
+                                { label: __('Top', 'core'), value: 'top' },
+                                { label: __('Center', 'core'), value: 'center' },
+                                { label: __('Bottom', 'core'), value: 'bottom' }
                             ]}
                         />
                         {showTitle && (
                             <>
                                 <NativeSelectControl
-                                    label={__('Title Tag', 'dentist-exchange')}
+                                    label={__('Title Tag', 'core')}
                                     value={headingTag}
                                     onChange={value => setAttributes({ headingTag: value })}
                                     options={[
-                                        { label: __('H1', 'dentist-exchange'), value: 'h1' },
-                                        { label: __('H2', 'dentist-exchange'), value: 'h2' },
-                                        { label: __('H3', 'dentist-exchange'), value: 'h3' },
-                                        { label: __('H4', 'dentist-exchange'), value: 'h4' },
-                                        { label: __('H5', 'dentist-exchange'), value: 'h5' },
-                                        { label: __('H6', 'dentist-exchange'), value: 'h6' },
-                                        { label: __('Paragraph', 'dentist-exchange'), value: 'p' },
-                                        { label: __('Div', 'dentist-exchange'), value: 'div' }
+                                        { label: __('H1', 'core'), value: 'h1' },
+                                        { label: __('H2', 'core'), value: 'h2' },
+                                        { label: __('H3', 'core'), value: 'h3' },
+                                        { label: __('H4', 'core'), value: 'h4' },
+                                        { label: __('H5', 'core'), value: 'h5' },
+                                        { label: __('H6', 'core'), value: 'h6' },
+                                        { label: __('Paragraph', 'core'), value: 'p' },
+                                        { label: __('Div', 'core'), value: 'div' }
                                     ]}
                                 />
                                 <NativeTextControl
-                                    label={__('Title Text', 'dentist-exchange')}
+                                    label={__('Title Text', 'core')}
                                     value={heading}
                                     onChange={value => setAttributes({ heading: value })}
-                                    placeholder={__('List title...', 'dentist-exchange')}
+                                    placeholder={__('List title...', 'core')}
                                 />
                             </>
                         )}
                         {showDesc && (
                             <>
                                 <NativeSelectControl
-                                    label={__('Description Tag', 'dentist-exchange')}
+                                    label={__('Description Tag', 'core')}
                                     value={descTag}
                                     onChange={value => setAttributes({ descTag: value })}
                                     options={[
-                                        { label: __('Paragraph', 'dentist-exchange'), value: 'p' },
-                                        { label: __('Div', 'dentist-exchange'), value: 'div' },
-                                        { label: __('Span', 'dentist-exchange'), value: 'span' }
+                                        { label: __('Paragraph', 'core'), value: 'p' },
+                                        { label: __('Div', 'core'), value: 'div' },
+                                        { label: __('Span', 'core'), value: 'span' }
                                     ]}
                                 />
                                 <NativeTextareaControl
-                                    label={__('Description Text', 'dentist-exchange')}
+                                    label={__('Description Text', 'core')}
                                     value={description}
                                     onChange={value => setAttributes({ description: value })}
-                                    placeholder={__('Description...', 'dentist-exchange')}
+                                    placeholder={__('Description...', 'core')}
                                 />
                             </>
                         )}
                     </PanelBody>
                 )}
                 {showButton && (
-                    <PanelBody title={__('Button', 'dentist-exchange')} initialOpen={false}>
+                    <PanelBody title={__('Button', 'core')} initialOpen={false}>
                         <NativeTextControl
-                            label={__('Button Text', 'dentist-exchange')}
+                            label={__('Button Text', 'core')}
                             value={buttonText}
                             onChange={value => setAttributes({ buttonText: value })}
-                            placeholder={__('Learn more', 'dentist-exchange')}
+                            placeholder={__('Learn more', 'core')}
                         />
                         <NativeTextControl
-                            label={__('Button URL', 'dentist-exchange')}
+                            label={__('Button URL', 'core')}
                             value={buttonUrl}
                             onChange={value => setAttributes({ buttonUrl: value })}
-                            placeholder={__('https://…', 'dentist-exchange')}
+                            placeholder={__('https://…', 'core')}
                         />
                         <NativeToggleControl
-                            label={__('Open in New Tab', 'dentist-exchange')}
+                            label={__('Open in New Tab', 'core')}
                             checked={'_blank' === buttonLinkTarget}
                             onChange={value =>
                                 setAttributes({
@@ -410,7 +411,7 @@ export default function Edit(props) {
                         />
                         {/* Same picker the block's main icon uses, so the icon sets match. */}
                         <NativeIconPicker
-                            label={__('Button Icon', 'dentist-exchange')}
+                            label={__('Button Icon', 'core')}
                             onIconSelect={(iconName, iconType) => {
                                 setAttributes({
                                     buttonIconName: iconName,
@@ -443,11 +444,11 @@ export default function Edit(props) {
                                     })
                                 }
                             >
-                                {__('Remove Button Icon', 'dentist-exchange')}
+                                {__('Remove Button Icon', 'core')}
                             </Button>
                         )}
                         <NativeUnitControl
-                            label={__('Top Margin', 'dentist-exchange')}
+                            label={__('Top Margin', 'core')}
                             value={buttonMarginTop}
                             onChange={value => setAttributes({ buttonMarginTop: value })}
                         />
@@ -457,7 +458,7 @@ export default function Edit(props) {
             <InspectorControls group="styles">
                 {showTitle && (
                     <ToolsPanel
-                        label={__('Title', 'dentist-exchange')}
+                        label={__('Title', 'core')}
                         resetAll={() =>
                             setAttributes({
                                 titleSize: undefined,
@@ -470,7 +471,7 @@ export default function Edit(props) {
                     >
                         <ToolsPanelItem
                             hasValue={() => !!titleSize}
-                            label={__('Size', 'dentist-exchange')}
+                            label={__('Size', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     titleSize: undefined
@@ -479,7 +480,7 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Font Size', 'dentist-exchange')}
+                                label={__('Font Size', 'core')}
                                 value={titleSize}
                                 onChange={value => setAttributes({ titleSize: value })}
                             />
@@ -487,7 +488,7 @@ export default function Edit(props) {
 
                         <ToolsPanelItem
                             hasValue={() => !!titleColor}
-                            label={__('Color', 'dentist-exchange')}
+                            label={__('Color', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     titleColor: undefined
@@ -496,12 +497,12 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <PanelColorControl
-                                label={__('Color', 'dentist-exchange')}
+                                label={__('Color', 'core')}
                                 colorSettings={[
                                     {
                                         value: titleColor,
                                         onChange: color => setAttributes({ titleColor: color }),
-                                        label: __('Color', 'dentist-exchange')
+                                        label: __('Color', 'core')
                                     }
                                 ]}
                             />
@@ -509,7 +510,7 @@ export default function Edit(props) {
 
                         <ToolsPanelItem
                             hasValue={() => !!titleFontFamily}
-                            label={__('Font', 'dentist-exchange')}
+                            label={__('Font', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     titleFontFamily: undefined
@@ -518,7 +519,7 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <NativeSelectControl
-                                label={__('Font', 'dentist-exchange')}
+                                label={__('Font', 'core')}
                                 value={titleFontFamily}
                                 onChange={value => setAttributes({ titleFontFamily: value })}
                                 options={fontFamilyOptions}
@@ -527,7 +528,7 @@ export default function Edit(props) {
 
                         <ToolsPanelItem
                             hasValue={() => !!titleFontWeight}
-                            label={__('Weight', 'dentist-exchange')}
+                            label={__('Weight', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     titleFontWeight: undefined
@@ -536,7 +537,7 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <NativeSelectControl
-                                label={__('Weight', 'dentist-exchange')}
+                                label={__('Weight', 'core')}
                                 value={titleFontWeight}
                                 onChange={value => setAttributes({ titleFontWeight: value })}
                                 options={TITLE_FONT_WEIGHTS}
@@ -545,7 +546,7 @@ export default function Edit(props) {
 
                         <ToolsPanelItem
                             hasValue={() => !!titleMarginBottom}
-                            label={__('Bottom Margin', 'dentist-exchange')}
+                            label={__('Bottom Margin', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     titleMarginBottom: undefined
@@ -554,7 +555,7 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Bottom Margin', 'dentist-exchange')}
+                                label={__('Bottom Margin', 'core')}
                                 value={titleMarginBottom}
                                 onChange={value => setAttributes({ titleMarginBottom: value })}
                             />
@@ -563,7 +564,7 @@ export default function Edit(props) {
                 )}
                 {showDesc && (
                     <ToolsPanel
-                        label={__('Description', 'dentist-exchange')}
+                        label={__('Description', 'core')}
                         resetAll={() =>
                             setAttributes({
                                 descSize: undefined,
@@ -574,7 +575,7 @@ export default function Edit(props) {
                     >
                         <ToolsPanelItem
                             hasValue={() => !!descSize}
-                            label={__('Size', 'dentist-exchange')}
+                            label={__('Size', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     descSize: undefined
@@ -583,7 +584,7 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Font Size', 'dentist-exchange')}
+                                label={__('Font Size', 'core')}
                                 value={descSize}
                                 onChange={value => setAttributes({ descSize: value })}
                             />
@@ -591,7 +592,7 @@ export default function Edit(props) {
 
                         <ToolsPanelItem
                             hasValue={() => !!descColor}
-                            label={__('Color', 'dentist-exchange')}
+                            label={__('Color', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     descColor: undefined
@@ -600,12 +601,12 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <PanelColorControl
-                                label={__('Color', 'dentist-exchange')}
+                                label={__('Color', 'core')}
                                 colorSettings={[
                                     {
                                         value: descColor,
                                         onChange: color => setAttributes({ descColor: color }),
-                                        label: __('Color', 'dentist-exchange')
+                                        label: __('Color', 'core')
                                     }
                                 ]}
                             />
@@ -613,7 +614,7 @@ export default function Edit(props) {
 
                         <ToolsPanelItem
                             hasValue={() => !!descFontFamily}
-                            label={__('Font', 'dentist-exchange')}
+                            label={__('Font', 'core')}
                             onDeselect={() => {
                                 setAttributes({
                                     descFontFamily: undefined
@@ -622,7 +623,7 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <NativeSelectControl
-                                label={__('Font', 'dentist-exchange')}
+                                label={__('Font', 'core')}
                                 value={descFontFamily}
                                 onChange={value => setAttributes({ descFontFamily: value })}
                                 options={fontFamilyOptions}
@@ -633,7 +634,7 @@ export default function Edit(props) {
             </InspectorControls>
             <div {...blockProps}>
                 <div
-                    className={classNames('dnte-icon-block-wrapper', {
+                    className={classNames('core-theme-icon-block-wrapper', {
                         [`icon-valign-${iconVerticalAlign}`]: iconVerticalAlign
                     })}
                 >
@@ -656,7 +657,7 @@ export default function Edit(props) {
                                     tagName={headingTag}
                                     value={heading}
                                     onChange={value => setAttributes({ heading: value })}
-                                    placeholder={__('List title...', 'dentist-exchange')}
+                                    placeholder={__('List title...', 'core')}
                                     className="icon-heading"
                                     withoutInteractiveFormatting
                                 />
@@ -666,7 +667,7 @@ export default function Edit(props) {
                                     tagName={descTag}
                                     value={description}
                                     onChange={value => setAttributes({ description: value })}
-                                    placeholder={__('Description...', 'dentist-exchange')}
+                                    placeholder={__('Description...', 'core')}
                                     className="icon-description"
                                     withoutInteractiveFormatting
                                 />
@@ -678,7 +679,7 @@ export default function Edit(props) {
                                         tagName="span"
                                         value={buttonText}
                                         onChange={value => setAttributes({ buttonText: value })}
-                                        placeholder={__('Learn more', 'dentist-exchange')}
+                                        placeholder={__('Learn more', 'core')}
                                         className="icon-button__text"
                                         withoutInteractiveFormatting
                                     />

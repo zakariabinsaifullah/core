@@ -11,14 +11,14 @@ import { __ } from '@wordpress/i18n';
 import { NativeToggleControl, NativeSelectControl, NativeResponsiveControl, NativeUnitControl } from '../../components';
 
 const HEADING_TAGS = [
-    { label: __('H1', 'dentist-exchange'), value: 'h1' },
-    { label: __('H2', 'dentist-exchange'), value: 'h2' },
-    { label: __('H3', 'dentist-exchange'), value: 'h3' },
-    { label: __('H4', 'dentist-exchange'), value: 'h4' },
-    { label: __('H5', 'dentist-exchange'), value: 'h5' },
-    { label: __('H6', 'dentist-exchange'), value: 'h6' },
-    { label: __('Paragraph', 'dentist-exchange'), value: 'p' },
-    { label: __('Div', 'dentist-exchange'), value: 'div' }
+    { label: __('H1', 'core'), value: 'h1' },
+    { label: __('H2', 'core'), value: 'h2' },
+    { label: __('H3', 'core'), value: 'h3' },
+    { label: __('H4', 'core'), value: 'h4' },
+    { label: __('H5', 'core'), value: 'h5' },
+    { label: __('H6', 'core'), value: 'h6' },
+    { label: __('Paragraph', 'core'), value: 'p' },
+    { label: __('Div', 'core'), value: 'div' }
 ];
 
 const Inspector = props => {
@@ -27,38 +27,38 @@ const Inspector = props => {
 
     return (
         <InspectorControls>
-            <PanelBody title={__('Settings', 'dentist-exchange')} initialOpen={true}>
+            <PanelBody title={__('Settings', 'core')} initialOpen={true}>
                 <NativeToggleControl
-                    label={__('Show Title', 'dentist-exchange')}
+                    label={__('Show Title', 'core')}
                     checked={showTitle}
                     onChange={value => setAttributes({ showTitle: value })}
                 />
                 <NativeToggleControl
-                    label={__('Show Description', 'dentist-exchange')}
+                    label={__('Show Description', 'core')}
                     checked={showDesc}
                     onChange={value => setAttributes({ showDesc: value })}
                 />
                 <NativeToggleControl
-                    label={__('Show Button', 'dentist-exchange')}
+                    label={__('Show Button', 'core')}
                     checked={showBtn}
                     onChange={value => setAttributes({ showBtn: value })}
                 />
                 {showTitle && (
                     <NativeSelectControl
-                        label={__('Select Title Tag', 'dentist-exchange')}
+                        label={__('Select Title Tag', 'core')}
                         value={titleTag}
                         onChange={value => setAttributes({ titleTag: value })}
                         options={HEADING_TAGS}
                     />
                 )}
-                <NativeResponsiveControl label={__('Items Gap', 'dentist-exchange')} props={props}>
+                <NativeResponsiveControl label={__('Items Gap', 'core')} props={props}>
                     <NativeUnitControl
                         value={itemsGap?.[resMode]}
                         onChange={value => setAttributes({ itemsGap: { ...itemsGap, [resMode]: value } })}
                     />
                 </NativeResponsiveControl>
                 {/* Spacing between an expanded item's title, description and button. */}
-                <NativeResponsiveControl label={__('Content Margin', 'dentist-exchange')} props={props}>
+                <NativeResponsiveControl label={__('Content Margin', 'core')} props={props}>
                     <NativeUnitControl
                         value={contentMargin?.[resMode]}
                         onChange={value => setAttributes({ contentMargin: { ...contentMargin, [resMode]: value } })}
@@ -67,17 +67,17 @@ const Inspector = props => {
                 </NativeResponsiveControl>
                 {/* Where the content sits vertically once an item is expanded. */}
                 <NativeSelectControl
-                    label={__('Content Vertical Position', 'dentist-exchange')}
+                    label={__('Content Vertical Position', 'core')}
                     value={contentVAlign}
                     onChange={value => setAttributes({ contentVAlign: value })}
                     options={[
-                        { label: __('Top', 'dentist-exchange'), value: 'top' },
-                        { label: __('Middle', 'dentist-exchange'), value: 'center' },
-                        { label: __('Bottom', 'dentist-exchange'), value: 'bottom' }
+                        { label: __('Top', 'core'), value: 'top' },
+                        { label: __('Middle', 'core'), value: 'center' },
+                        { label: __('Bottom', 'core'), value: 'bottom' }
                     ]}
                 />
                 <NativeUnitControl
-                    label={__('Content Max Width', 'dentist-exchange')}
+                    label={__('Content Max Width', 'core')}
                     value={contentMaxWidth}
                     onChange={value => setAttributes({ contentMaxWidth: value })}
                     units={[

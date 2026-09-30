@@ -5,34 +5,34 @@
  * Registers custom block binding sources that allow blocks to pull
  * dynamic data from theme-specific callbacks.
  *
- * @package Dentist_Exchange
+ * @package Core
  */
 
-if ( ! function_exists( 'dnte_register_block_bindings' ) ) :
+if ( ! function_exists( 'core_theme_register_block_bindings' ) ) :
 	/**
 	 * Registers the "Post Format Name" block binding source.
 	 *
 	 * Allows blocks to display the human-readable post format label
 	 * (e.g. "Video", "Gallery") via the block bindings API.
 	 */
-	function dnte_register_block_bindings() {
+	function core_theme_register_block_bindings() {
 		register_block_bindings_source(
-			'dnte/format',
+			'core-theme/format',
 			array(
 				'label'              => _x(
 					'Post format name',
 					'Label for the block binding placeholder in the editor',
-					'dentist-exchange'
+					'core'
 				),
-				'get_value_callback' => 'dnte_format_binding',
+				'get_value_callback' => 'core_theme_format_binding',
 			)
 		);
 	}
 endif;
-add_action( 'init', 'dnte_register_block_bindings' );
+add_action( 'init', 'core_theme_register_block_bindings' );
 
 
-if ( ! function_exists( 'dnte_format_binding' ) ) :
+if ( ! function_exists( 'core_theme_format_binding' ) ) :
 	/**
 	 * Returns the human-readable post format name for the current post.
 	 *
@@ -41,7 +41,7 @@ if ( ! function_exists( 'dnte_format_binding' ) ) :
 	 *
 	 * @return string|void Post format name, or nothing for the standard format.
 	 */
-	function dnte_format_binding() {
+	function core_theme_format_binding() {
 		$post_format_slug = get_post_format();
 
 		if ( $post_format_slug && 'standard' !== $post_format_slug ) {

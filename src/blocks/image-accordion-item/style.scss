@@ -1,5 +1,5 @@
 // styles
-.wp-block-dnte-image-accordion-item {
+.wp-block-core-theme-image-accordion-item {
     /*
      * Spacing between the title, description and button of an expanded item.
      *
@@ -8,7 +8,7 @@
      * breakpoint falls back to the next larger one, matching how the parent
      * cascades its items gap.
      */
-    --dnte-content-margin: var(--dcm, 24px);
+    --core-theme-content-margin: var(--dcm, 24px);
 
     position: relative;
     flex-grow: 1;
@@ -138,7 +138,7 @@
         font-size: 16px;
         font-weight: 500;
         border-radius: 152px;
-        background: var(--btn-bg, #2234b0);
+        background: var(--btn-bg, var(--wp--preset--color--core-theme-tiber, #04262f));
         color: var(--btn-color, #fff);
         transition: all 0.35s ease;
 
@@ -174,14 +174,14 @@
 
         .description {
             opacity: 1;
-            margin-top: var(--dnte-content-margin);
+            margin-top: var(--core-theme-content-margin);
         }
 
         .btn {
             max-height: 60px;
             opacity: 1;
             padding: var(--btn-padding, 10px 22px);
-            margin-top: var(--dnte-content-margin);
+            margin-top: var(--core-theme-content-margin);
             pointer-events: auto;
         }
     }
@@ -189,7 +189,7 @@
     // Stacked layout (see the parent block's style.scss): the item fills the
     // full width and grows in height instead of width when it becomes active.
     @media (max-width: 781px) {
-        --dnte-content-margin: var(--tcm, var(--dcm, 24px));
+        --core-theme-content-margin: var(--tcm, var(--dcm, 24px));
 
         .img {
             background-image: var(--timg, var(--dimg, none));
@@ -259,7 +259,7 @@
 
     // Mobile falls back through tablet, then desktop.
     @media (max-width: 599px) {
-        --dnte-content-margin: var(--mcm, var(--tcm, var(--dcm, 24px)));
+        --core-theme-content-margin: var(--mcm, var(--tcm, var(--dcm, 24px)));
 
         .img {
             background-image: var(--mimg, var(--timg, var(--dimg, none)));

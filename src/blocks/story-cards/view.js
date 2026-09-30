@@ -2,7 +2,7 @@
  * Story Cards — absolute layout and scroll reveal.
  *
  * LAYOUT. The design's vertical rhythm is absolute: each card's top is a fixed
- * share of the section's width (its `--dnte-card-top`), independent of how
+ * share of the section's width (its `--core-theme-card-top`), independent of how
  * tall any other card renders. CSS alone cannot finish the job — the section
  * must be exactly as tall as its lowest card, and absolutely positioned
  * children contribute no height — so this script adds `.is-positioned`, lets
@@ -19,8 +19,8 @@
 (function () {
     'use strict';
 
-    var SECTION = '.dnte-story-cards';
-    var CARD = '.dnte-story-card';
+    var SECTION = '.core-theme-story-cards';
+    var CARD = '.core-theme-story-card';
 
     /* Matches the brief: a card counts as arrived once ~30% of it is on
      * screen. */
@@ -39,7 +39,7 @@
                 card.style.marginTop = '';
             });
 
-            var flowTrailing = section.querySelector('.dnte-story-cards__trailing');
+            var flowTrailing = section.querySelector('.core-theme-story-cards__trailing');
             if (flowTrailing) {
                 flowTrailing.style.top = '';
             }
@@ -50,7 +50,7 @@
 
         /*
          * Cards are measured and placed in order: an explicit top comes from
-         * the card's own --dnte-card-top (already applied by the stylesheet);
+         * the card's own --core-theme-card-top (already applied by the stylesheet);
          * a card without one is dropped just below the lowest card so far.
          * Reading each rect right after writing the previous margin forces a
          * reflow per card, but the section holds a handful of cards, not
@@ -60,7 +60,7 @@
         var lowest = 0;
 
         cards.forEach(function (card) {
-            if (card.style.getPropertyValue('--dnte-card-top')) {
+            if (card.style.getPropertyValue('--core-theme-card-top')) {
                 card.style.marginTop = '';
             } else {
                 card.style.marginTop = Math.round(lowest) + 'px';
@@ -77,7 +77,7 @@
          * cards, the section grows to cover it too, or it would run over
          * whatever content follows.
          */
-        var trailing = section.querySelector('.dnte-story-cards__trailing');
+        var trailing = section.querySelector('.core-theme-story-cards__trailing');
 
         if (trailing) {
             /*
@@ -156,13 +156,13 @@
         var timer = null;
 
         function revealTrailing() {
-            var trailing = section.querySelector('.dnte-story-cards__trailing');
+            var trailing = section.querySelector('.core-theme-story-cards__trailing');
 
             if (!trailing) {
                 return;
             }
 
-            var art = trailing.querySelector('.dnte-story-card__connector-art');
+            var art = trailing.querySelector('.core-theme-story-card__connector-art');
             var delay = parseInt(trailing.getAttribute('data-arrow-delay'), 10);
 
             if (art && !isNaN(delay)) {
@@ -179,8 +179,8 @@
              * card's own transition must not inherit it. Set before the class,
              * so the delay is in place for the transition it governs.
              */
-            var connector = card.querySelector('.dnte-story-card__connector');
-            var art = card.querySelector('.dnte-story-card__connector-art');
+            var connector = card.querySelector('.core-theme-story-card__connector');
+            var art = card.querySelector('.core-theme-story-card__connector-art');
 
             if (connector && art) {
                 var delay = parseInt(connector.getAttribute('data-arrow-delay'), 10);

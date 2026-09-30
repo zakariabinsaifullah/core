@@ -20,7 +20,7 @@ p.wp-block-post-excerpt__excerpt {
 }
 
 .is-style-post-typo.wp-block-post-content h2 {
-    font-size: var(--wp--preset--font-size--dnte-heading-three);
+    font-size: var(--wp--preset--font-size--core-theme-heading-three);
 }
 
 .wp-block-post-title a {
@@ -33,7 +33,7 @@ p.wp-block-post-excerpt__excerpt {
     gap: 8px;
     border: none;
     color: #fff;
-    background: #2234b0;
+    background: var(--wp--preset--color--core-theme-tiber, #04262f);
     padding: 10px 16px;
     border-radius: 100px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,7 +90,7 @@ header.wp-block-kadence-rowlayout::before {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.175) 0%, rgba(255, 255, 255, 0.04) 35%, rgba(255, 255, 255, 0) 60%);
 }
 
-.dnte-icon-pos .kt-svg-icon-link {
+.core-theme-icon-pos .kt-svg-icon-link {
     flex-direction: row-reverse !important;
     gap: 12px;
 }
@@ -137,7 +137,7 @@ header.wp-block-kadence-rowlayout::before {
  * are defined here rather than there.
  *
  * The only hover state is `styles.elements.button[":hover"]` in theme.json,
- * which sets the background to `dnte-primary-900` and the text to white. Do not
+ * which sets the background to `core-theme-mantis-dark` and the text to white. Do not
  * add hover rules here without checking theme.json, or the two will disagree.
  */
 
@@ -152,33 +152,38 @@ header.wp-block-kadence-rowlayout::before {
  * restated here. Keep the two in sync.
  */
 .wp-block-button.is-style-alternative .wp-block-button__link {
-    background-color: var(--wp--preset--color--dnte-primary-200);
-    color: var(--wp--preset--color--dnte-primary-950);
+    background-color: var(--wp--preset--color--core-theme-mantis-lighter);
+    color: var(--wp--preset--color--core-theme-mantis-darkest);
 }
 
-/* Overrides the default button's hover with the darker fill and white text. */
+/* Overrides the default button's hover with the stronger Mantis fill. Text   turns Tiber: white on Mantis is only 2.1:1. */
 .wp-block-button.is-style-alternative .wp-block-button__link:hover {
-    background-color: var(--wp--preset--color--dnte-primary-400);
-    color: var(--wp--preset--color--dnte-white);
+    background-color: var(--wp--preset--color--core-theme-mantis);
+    color: var(--wp--preset--color--core-theme-tiber);
 }
 
 /*
  * Outline — registered by core, not by the theme. Core ships its own CSS for
- * this variation (`border: 2px solid`, `color: currentColor`) wrapped in
- * `:root :where(...)`, so these plain class selectors outrank it.
+ * this variation (`border: 2px solid`, `color: currentColor`, `padding:
+ * .667em 1.33em`) wrapped in `:root :where(...)`, so these plain class
+ * selectors outrank it. Padding is restated to match `styles.elements.button`.
  *
- * The fill is transparent with `dnte-primary-800` text and border.
+ * The fill is transparent with `core-theme-mantis` text and border; hover
+ * deepens both to `core-theme-mantis-dark`. Mirrors
+ * `styles.blocks.core/button.variations.outline` in theme.json.
  */
 .wp-block-button.is-style-outline .wp-block-button__link {
     background-color: transparent;
     background-image: none;
-    border: 1px solid var(--wp--preset--color--dnte-primary-800);
-    color: var(--wp--preset--color--dnte-primary-800);
+    border: 1px solid var(--wp--preset--color--core-theme-mantis);
+    color: var(--wp--preset--color--core-theme-mantis);
+    padding: 12px 42px;
 }
 
 .wp-block-button.is-style-outline .wp-block-button__link:hover {
-    border-color: #000000;
-    color: #000000;
+    background-color: transparent;
+    border-color: var(--wp--preset--color--core-theme-mantis-dark);
+    color: var(--wp--preset--color--core-theme-mantis-dark);
 }
 
 /*
@@ -209,7 +214,7 @@ header.wp-block-kadence-rowlayout::before {
 }
 
 .wp-block-button.is-style-link .wp-block-button__link:hover {
-    color: var(--wp--preset--color--dnte-primary-600);
+    color: var(--wp--preset--color--core-theme-tiber-light);
 }
 
 /* Kadence Table */
@@ -268,9 +273,9 @@ th.kb-table-data p {
     border: 0 !important;
     border-radius: 999px;
     background-color: transparent !important;
-    color: var(--wp--preset--color--dnte-neutral-950);
-    font-family: var(--wp--preset--font-family--inter);
-    font-size: var(--wp--preset--font-size--dnte-extra-small);
+    color: var(--wp--preset--color--core-theme-neutral-dark);
+    font-family: var(--wp--preset--font-family--instrument-sans);
+    font-size: var(--wp--preset--font-size--core-theme-small);
     font-weight: 400;
     line-height: 1;
     white-space: nowrap;
@@ -279,13 +284,13 @@ th.kb-table-data p {
 }
 
 .wp-block-tabs .wp-block-tab-list > [role='tab']:hover {
-    color: var(--wp--preset--color--dnte-primary-800);
+    color: var(--wp--preset--color--core-theme-tiber);
 }
 
 .wp-block-tabs .wp-block-tab-list > [role='tab'][aria-selected='true'],
 .wp-block-tabs .wp-block-tab-list > [role='tab'][aria-selected='true']:hover {
-    background-color: var(--wp--preset--color--dnte-primary-800) !important;
-    color: var(--wp--preset--color--dnte-white);
+    background-color: var(--wp--preset--color--core-theme-tiber) !important;
+    color: var(--wp--preset--color--core-theme-white);
 }
 
 /*
@@ -298,7 +303,7 @@ th.kb-table-data p {
  *   }
  *
  * Pinned to `bottom: 0` at full width, it runs corner to corner straight
- * through the pill's rounded bottom — in `currentColor`, so white on the blue
+ * through the pill's rounded bottom — in `currentColor`, so white on the tiber
  * fill — and reads as the pill having its bottom sliced off. The fill is the
  * selected state in this design, so the underline just goes. `border: 0` on
  * the button above does not reach a pseudo-element; only `content` removes it.
@@ -319,7 +324,7 @@ th.kb-table-data p {
 }
 
 .wp-block-tabs .wp-block-tab-list > [role='tab']:focus-visible {
-    outline: 1px solid var(--wp--preset--color--dnte-neutral-800);
+    outline: 1px solid var(--wp--preset--color--core-theme-neutral-dark);
     outline-offset: 2px;
 }
 
@@ -333,5 +338,11 @@ th.kb-table-data p {
         flex-wrap: wrap;
         justify-content: center;
         border-radius: 24px;
+        flex-direction: column;
+        width: 100% !important;
+    }
+
+    .wp-block-tabs .wp-block-tab-list button {
+        width: 100% !important;
     }
 }

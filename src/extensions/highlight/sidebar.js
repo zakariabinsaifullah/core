@@ -2,9 +2,9 @@
  * Highlight font family — sidebar setting for Heading & Paragraph blocks.
  *
  * Stores the chosen font stack on the block (`highlightFontFamily`) and feeds
- * it to `.dnte-highlight` spans as a CSS custom property. The editor receives
+ * it to `.core-theme-highlight` spans as a CSS custom property. The editor receives
  * the variable through the BlockListBlock wrapper below; the front end gets it
- * via `dnte_render_highlight_font_family()` in inc/extensions.php.
+ * via `core_theme_render_highlight_font_family()` in inc/extensions.php.
  */
 
 /**
@@ -20,11 +20,11 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 const SUPPORTED_BLOCKS = ['core/heading', 'core/paragraph'];
 const ATTRIBUTE = 'highlightFontFamily';
 const COLOR_ATTRIBUTE = 'highlightColor';
-const FONT_FAMILY_VARIABLE = '--dnte-highlight-font-family';
-const COLOR_VARIABLE = '--dnte-highlight-color';
-const GRADIENT_VARIABLE = '--dnte-highlight-gradient';
+const FONT_FAMILY_VARIABLE = '--core-theme-highlight-font-family';
+const COLOR_VARIABLE = '--core-theme-highlight-color';
+const GRADIENT_VARIABLE = '--core-theme-highlight-gradient';
 
-addFilter('blocks.registerBlockType', 'dnte-highlight-add-attributes', (settings, name) => {
+addFilter('blocks.registerBlockType', 'core-theme-highlight-add-attributes', (settings, name) => {
     if (!SUPPORTED_BLOCKS.includes(name)) {
         return settings;
     }
@@ -66,9 +66,9 @@ const withHighlightFontFamilyControls = createHigherOrderComponent(BlockEdit => 
             }
 
             return [
-                { label: __('Default', 'dentist-exchange'), value: '' },
+                { label: __('Default', 'core'), value: '' },
                 ...families.map(family => ({
-                    label: family.name || family.slug || __('Unknown', 'dentist-exchange'),
+                    label: family.name || family.slug || __('Unknown', 'core'),
                     value: family.fontFamily || (family.slug ? `var(--wp--preset--font-family--${family.slug})` : family.slug)
                 }))
             ];
@@ -98,10 +98,10 @@ const withHighlightFontFamilyControls = createHigherOrderComponent(BlockEdit => 
             <>
                 <BlockEdit {...props} />
                 <InspectorControls>
-                    <PanelBody title={__('Highlight', 'dentist-exchange')} initialOpen={false}>
+                    <PanelBody title={__('Highlight', 'core')} initialOpen={false}>
                         <SelectControl
-                            label={__('Highlight font family', 'dentist-exchange')}
-                            help={__('Font family for highlighted text in this block.', 'dentist-exchange')}
+                            label={__('Highlight font family', 'core')}
+                            help={__('Font family for highlighted text in this block.', 'core')}
                             value={attributes[ATTRIBUTE] || ''}
                             options={fontFamilyOptions}
                             onChange={value => setAttributes({ [ATTRIBUTE]: value })}
@@ -109,8 +109,8 @@ const withHighlightFontFamilyControls = createHigherOrderComponent(BlockEdit => 
                             __next40pxDefaultSize
                         />
                         <ColorPalette
-                            label={__('Highlight color', 'dentist-exchange')}
-                            help={__('Solid color replacing the gradient fill. Clear to use the default gradient.', 'dentist-exchange')}
+                            label={__('Highlight color', 'core')}
+                            help={__('Solid color replacing the gradient fill. Clear to use the default gradient.', 'core')}
                             colors={paletteColors}
                             value={attributes[COLOR_ATTRIBUTE] || ''}
                             onChange={value => setAttributes({ [COLOR_ATTRIBUTE]: value || undefined })}
@@ -121,7 +121,7 @@ const withHighlightFontFamilyControls = createHigherOrderComponent(BlockEdit => 
         );
     };
 });
-addFilter('editor.BlockEdit', 'dnte-highlight-font-family-controls', withHighlightFontFamilyControls);
+addFilter('editor.BlockEdit', 'core-theme-highlight-font-family-controls', withHighlightFontFamilyControls);
 
 const withHighlightFontFamilyWrapper = createHigherOrderComponent(BlockListBlock => {
     return props => {
@@ -149,4 +149,4 @@ const withHighlightFontFamilyWrapper = createHigherOrderComponent(BlockListBlock
         return <BlockListBlock {...props} wrapperProps={{ ...props.wrapperProps, style }} />;
     };
 });
-addFilter('editor.BlockListBlock', 'dnte-highlight-font-family-wrapper', withHighlightFontFamilyWrapper);
+addFilter('editor.BlockListBlock', 'core-theme-highlight-font-family-wrapper', withHighlightFontFamilyWrapper);

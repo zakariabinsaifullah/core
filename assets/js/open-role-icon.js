@@ -9,15 +9,15 @@
     'use strict';
 
     $(function () {
-        var $input = $('#dnte-role-icon');
+        var $input = $('#core-theme-role-icon');
 
         if (!$input.length) {
             return;
         }
 
-        var $preview = $('.dnte-role-icon-preview');
-        var $select = $('.dnte-role-icon-select');
-        var $remove = $('.dnte-role-icon-remove');
+        var $preview = $('.core-theme-role-icon-preview');
+        var $select = $('.core-theme-role-icon-select');
+        var $remove = $('.core-theme-role-icon-remove');
         var frame;
 
         $select.on('click', function (e) {

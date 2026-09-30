@@ -8,16 +8,16 @@
     'use strict';
 
     function init(root) {
-        var grid = root.querySelector('.dnte-jobs__grid');
+        var grid = root.querySelector('.core-theme-jobs__grid');
 
         if (!grid) {
             return;
         }
 
-        var cards = [].slice.call(grid.querySelectorAll('.dnte-job'));
-        var tabs = [].slice.call(root.querySelectorAll('.dnte-jobs__tab'));
-        var form = root.querySelector('.dnte-jobs__search');
-        var empty = root.querySelector('.dnte-jobs__empty');
+        var cards = [].slice.call(grid.querySelectorAll('.core-theme-job'));
+        var tabs = [].slice.call(root.querySelectorAll('.core-theme-jobs__tab'));
+        var form = root.querySelector('.core-theme-jobs__search');
+        var empty = root.querySelector('.core-theme-jobs__empty');
 
         var state = { type: '', keyword: '', location: '' };
 
@@ -117,7 +117,7 @@
     }
 
     function boot() {
-        [].slice.call(document.querySelectorAll('[data-dnte-jobs]')).forEach(init);
+        [].slice.call(document.querySelectorAll('[data-core-theme-jobs]')).forEach(init);
     }
 
     if (document.readyState === 'loading') {

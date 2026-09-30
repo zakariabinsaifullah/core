@@ -14,7 +14,7 @@ const Save = props => {
 
     return (
         <div {...blockProps}>
-            <div className="dnte-image-accordion">
+            <div className="core-theme-image-accordion">
                 <InnerBlocks.Content />
             </div>
         </div>
