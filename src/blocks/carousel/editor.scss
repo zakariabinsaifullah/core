@@ -45,13 +45,13 @@
         overflow: visible;
         padding: 60px 0;
 
-        .wp-block-core-theme-slide {
+        .wp-block-theme-slide {
             flex-shrink: 0;
             transition: transform 0.2s ease;
         }
 
         @for $i from 1 through 10 {
-            &.visible-#{$i} .wp-block-core-theme-slide {
+            &.visible-#{$i} .wp-block-theme-slide {
                 width: calc(100% / #{$i});
             }
         }

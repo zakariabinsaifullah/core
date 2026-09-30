@@ -1,4 +1,4 @@
-.wp-block-core-theme-carousel {
+.wp-block-theme-carousel {
     border: none !important;
     position: relative;
 
@@ -8,7 +8,7 @@
      * device only misses its property when it is genuinely adaptive — hence the
      * `auto` fallback here rather than a `.fixed` gate on the wrapper.
      */
-    .wp-block-core-theme-slide {
+    .wp-block-theme-slide {
         display: flex;
         flex-direction: column;
         height: var(--mheight, auto);
@@ -17,7 +17,7 @@
 
     // tablet view
     @media (max-width: 1024px) and (min-width: 768px) {
-        .wp-block-core-theme-slide {
+        .wp-block-theme-slide {
             height: var(--theight, auto);
             justify-content: var(--tvalign, flex-start);
         }
@@ -25,7 +25,7 @@
 
     // desktop
     @media (min-width: 1025px) {
-        .wp-block-core-theme-slide {
+        .wp-block-theme-slide {
             height: var(--dheight, auto);
             justify-content: var(--dvalign, flex-start);
         }

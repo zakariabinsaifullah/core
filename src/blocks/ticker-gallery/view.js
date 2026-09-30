@@ -15,7 +15,7 @@
 (function () {
     'use strict';
 
-    var SELECTOR = '.wp-block-core-theme-ticker-gallery';
+    var SELECTOR = '.wp-block-theme-ticker-gallery';
     var CLONE_ATTR = 'data-core-theme-ticker-clone';
 
     /* Stops a stray configuration — tiny images on a huge screen — from

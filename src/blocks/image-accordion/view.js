@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const accordions = document.querySelectorAll('.wp-block-core-theme-image-accordion');
+    const accordions = document.querySelectorAll('.wp-block-theme-image-accordion');
 
     accordions.forEach(function (accordion) {
-        const items = accordion.querySelectorAll('.wp-block-core-theme-image-accordion-item');
+        const items = accordion.querySelectorAll('.wp-block-theme-image-accordion-item');
 
         items.forEach(function (item, index) {
             if (index === 0) {

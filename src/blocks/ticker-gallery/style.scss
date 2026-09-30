@@ -10,7 +10,7 @@
  * without touching this file.
  */
 
-.wp-block-core-theme-ticker-gallery {
+.wp-block-theme-ticker-gallery {
     /* Cycle of four tilts. The design hand-jitters these; these are its means. */
     --core-theme-ticker-tilt-1: 5deg;
     --core-theme-ticker-tilt-2: 2deg;
@@ -57,11 +57,11 @@
     animation: core-theme-ticker-scroll var(--core-theme-ticker-speed) linear infinite;
 }
 
-.wp-block-core-theme-ticker-gallery.is-direction-right .core-theme-ticker__track {
+.wp-block-theme-ticker-gallery.is-direction-right .core-theme-ticker__track {
     animation-direction: reverse;
 }
 
-.wp-block-core-theme-ticker-gallery.is-pause-on-hover:hover .core-theme-ticker__track,
+.wp-block-theme-ticker-gallery.is-pause-on-hover:hover .core-theme-ticker__track,
 .core-theme-ticker__track:focus-within {
     animation-play-state: paused;
 }
@@ -136,7 +136,7 @@
 }
 
 @media (max-width: 781px) {
-    .wp-block-core-theme-ticker-gallery {
+    .wp-block-theme-ticker-gallery {
         --core-theme-ticker-height: 220px;
         --core-theme-ticker-gap: 24px;
         --core-theme-ticker-radius: 16px;
@@ -152,7 +152,7 @@
         animation: none;
     }
 
-    .wp-block-core-theme-ticker-gallery {
+    .wp-block-theme-ticker-gallery {
         overflow-x: auto;
     }
 }
