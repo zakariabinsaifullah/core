@@ -218,14 +218,6 @@ header.wp-block-kadence-rowlayout::before {
 }
 
 /* Kadence Table */
-th.kb-table-data {
-    border-bottom: 2px solid #551c25;
-}
-
-th.kb-table-data p {
-    color: #551c25 !important;
-}
-
 @media (max-width: 600px) {
     .kb-table {
         table-layout: auto !important;
@@ -344,5 +336,125 @@ th.kb-table-data p {
 
     .wp-block-tabs .wp-block-tab-list button {
         width: 100% !important;
+    }
+}
+
+/*
+ * Comparison table — Kadence Table (Adv) with the `core-theme-compare-table`
+ * class, first row as header. Three columns: a row label, the "two separate
+ * firms" column on the dark section background, and the highlighted Core
+ * column in Mantis.
+ *
+ * `border-collapse: separate` is what lets the outer cells take rounded
+ * corners; with it, every cell draws only its right and bottom edge, and the
+ * cells on the outside of the grid add the missing top/left edge.
+ *
+ * The `!important`s in the mobile query answer the older site-wide `.kb-table`
+ * rule above (table-layout and min-width), which is forced.
+ */
+.core-theme-compare-table {
+    --compare-line: color-mix(in srgb, var(--wp--preset--color--core-theme-neutral-light) 40%, transparent);
+    --compare-line-light: var(--wp--preset--color--core-theme-neutral-lighter);
+    --compare-radius: 16px;
+    border-radius: 0;
+}
+
+.core-theme-compare-table .kb-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Doubled class: Kadence prints its own per-table cell padding later in the
+   page at the same specificity, so this has to outrank it rather than tie. */
+.wp-block-kadence-table.core-theme-compare-table .kb-table :is(th, td) {
+    padding: 26px;
+    border: 0;
+    border-right: 1px solid var(--compare-line);
+    border-bottom: 1px solid var(--compare-line);
+    text-align: left;
+    vertical-align: middle;
+    font-family: var(--wp--preset--font-family--instrument-sans);
+    font-size: var(--wp--preset--font-size--core-theme-medium);
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-white);
+}
+
+/* Cell text is a Paragraph block, which carries theme.json's own colour and
+   size; let it take the cell's instead. */
+.core-theme-compare-table .kb-table :is(th, td) p {
+    color: inherit;
+    font: inherit;
+}
+
+/* Header row */
+.core-theme-compare-table .kb-table tr:first-child th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 1px solid var(--compare-line);
+}
+
+.core-theme-compare-table .kb-table tr:first-child th p {
+    font-family: var(--wp--preset--font-family--titling-gothic-fb-wide);
+    font-size: var(--wp--preset--font-size--core-theme-heading-six);
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--wp--preset--color--core-theme-white);
+}
+
+/* The empty corner cell above the row labels. */
+.core-theme-compare-table .kb-table tr:first-child th:first-child {
+    background: transparent;
+    border: 0;
+}
+
+.core-theme-compare-table .kb-table tr:first-child th:nth-child(2) {
+    background: var(--wp--preset--color--core-theme-tiber);
+    border-left: 1px solid var(--compare-line);
+    border-top-left-radius: var(--compare-radius);
+}
+
+.core-theme-compare-table .kb-table tr:first-child th:last-child {
+    background: var(--wp--preset--color--core-theme-mantis);
+    border-color: var(--wp--preset--color--core-theme-mantis);
+    border-top-right-radius: var(--compare-radius);
+}
+
+/* Row labels */
+.core-theme-compare-table .kb-table tr:not(:first-child) td:first-child {
+    font-weight: 700;
+    border-left: 1px solid var(--compare-line);
+}
+
+.core-theme-compare-table .kb-table tr:nth-child(2) td:first-child {
+    border-top: 1px solid var(--compare-line);
+    border-top-left-radius: var(--compare-radius);
+}
+
+/* Highlighted Core column */
+.core-theme-compare-table .kb-table tr:not(:first-child) td:last-child {
+    background: var(--wp--preset--color--core-theme-mantis-lightest);
+    color: var(--wp--preset--color--core-theme-white-darker);
+    border-color: var(--compare-line-light);
+}
+
+.core-theme-compare-table .kb-table tr:last-child td:first-child {
+    border-bottom-left-radius: var(--compare-radius);
+}
+
+.core-theme-compare-table .kb-table tr:last-child td:last-child {
+    border-bottom-right-radius: var(--compare-radius);
+}
+
+/* Too narrow for three readable columns: the container scrolls sideways. */
+@media (max-width: 781px) {
+    .core-theme-compare-table .kb-table {
+        min-width: 720px !important;
+        table-layout: fixed !important;
+    }
+
+    .wp-block-kadence-table.core-theme-compare-table .kb-table :is(th, td) {
+        padding: 20px;
     }
 }

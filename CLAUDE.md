@@ -85,7 +85,16 @@ Style blocks through the options they already have, in this order:
 -   use exact text used in figma design
 -   for each page, you will find its corresponding images at another page of its right side, take them from there, Like: Assets • Homepage
 -   for Icons, always use SVG codes
+-   **Uploading images (global rule):** the site uses **BinsOptimizer**, which converts images to WebP and compresses them **in the browser**, before the upload reaches the server. It hooks the block editor's `mediaUpload` setting. So:
+    -   **Never** upload images with `studio wp media import`, the REST API directly, or by copying files into `uploads/`. Those skip BinsOptimizer and leave JPEG/PNG files unconverted.
+    -   Upload through the block editor in the browser (Claude in Chrome), using the wrapped `mediaUpload` function:
+        1. Put the source file in a temporary folder under `wp-content/uploads/` (e.g. `claude-upload-tmp/`) so the browser can fetch it.
+        2. Open any post or page in the editor and wait until `wp.data.select('core/block-editor').getSettings().mediaUpload.__biioWrapped` is `true`.
+        3. Fetch the file as a blob, wrap it in a `File` with the right name and type, and call `mediaUpload({ filesList: [file], allowedTypes: ['image'], onFileChange, onError })`. Use the returned `id` and `url` (they end in `.webp`) in the blocks.
+        4. Delete the temporary folder afterwards.
+    -   Check the result: the attachment's file should be `.webp` and it should have `_biio_savings` / `_biio_optimized_at` meta.
 -   Icon (SVG) size is always **24px** on every device. Set only the desktop size (`"sizes":{"Desktop":24},"iconSize":24`); tablet and mobile inherit it.
+-   **Icon + title gap (global rule):** when an Icon block shows a title next to the icon, the gap between them is always **16px** (`"listGap":"16px"`). If you set it by script, also set `blockStyle["--list-gap"]` to `"16px"`: the block only recalculates `blockStyle` when it renders in the editor, so changing `listGap` alone can leave the old gap in the saved markup.
 -   When an icon sits in a box (border or background), the inner padding is **15px** on all sides (`"spacing":{"padding":{"top":"15px","right":"15px","bottom":"15px","left":"15px"}}`). Don't add padding to icons without a box.
 
 ## 7. Color, Typography
