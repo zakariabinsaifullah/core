@@ -526,3 +526,13 @@ header.wp-block-kadence-rowlayout::before {
 .wp-block-kadence-accordion.core-theme-faq .kt-accordion-wrap.kt-accodion-icon-style-basiccircle .wp-block-kadence-pane.kt-accordion-pane .kt-accordion-header-wrap .kt-blocks-accordion-header.kt-accordion-panel-active:hover .kt-blocks-accordion-icon-trigger {
     background-color: var(--wp--preset--color--core-theme-mantis);
 }
+
+/*
+ * Smooth scrolling for in-page links (e.g. a button pointing at #contact).
+ * Skipped for visitors who ask their system for reduced motion.
+ */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
