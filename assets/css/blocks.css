@@ -636,9 +636,10 @@ header.wp-block-kadence-rowlayout::before {
     color: var(--wp--preset--color--core-theme-neutral-dark);
 }
 
-/* Label column: fixed 240px plus the 24px gap to the value. */
+/* Label column: 240px, plus the 24px gap to the value as padding (table
+   cells size their content box, so the padding adds on top). */
 .wp-block-table.core-theme-fact-table :is(td, th):first-child {
-    width: 264px;
+    width: 240px;
     padding-right: 24px;
     font-weight: 700;
     color: var(--wp--preset--color--core-theme-tiber);
@@ -646,7 +647,7 @@ header.wp-block-kadence-rowlayout::before {
 
 @media (max-width: 600px) {
     .wp-block-table.core-theme-fact-table :is(td, th):first-child {
-        width: 40%;
+        width: 36%;
         padding-right: 16px;
     }
 }
