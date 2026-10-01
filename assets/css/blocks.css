@@ -538,3 +538,70 @@ header.wp-block-kadence-rowlayout::before {
         scroll-behavior: smooth;
     }
 }
+
+/* ==========================================================================
+   Photo hero overlay
+   Add the `core-overlay` class to a Kadence Row Layout, give it the Tiber
+   background colour and set the photo as the row's overlay image (cover,
+   opacity 100). Desktop: the photo fills the right 57% with a fade into
+   Tiber. Tablet/mobile: it becomes a 380px band along the bottom. The brand
+   arcs sit on top. Selectors include `.kt-row-has-bg` so they outrank
+   Kadence's base overlay rule, in the editor and on the front end.
+   ========================================================================== */
+
+.wp-block-kadence-rowlayout.core-overlay.kt-row-has-bg {
+    overflow: hidden;
+}
+
+.wp-block-kadence-rowlayout.core-overlay.kt-row-has-bg > .kt-row-layout-overlay {
+    right: 0;
+    left: auto;
+    width: 57%;
+}
+
+.wp-block-kadence-rowlayout.core-overlay.kt-row-has-bg > .kt-row-layout-overlay::after {
+    content: "";
+    position: absolute;
+    inset: -2px; /* covers sub-pixel seams at the photo's edges */
+    background:
+        linear-gradient(90deg, var(--wp--preset--color--core-theme-tiber) 0%, color-mix(in srgb, var(--wp--preset--color--core-theme-tiber) 75%, transparent) 30%, color-mix(in srgb, var(--wp--preset--color--core-theme-tiber) 0%, transparent) 80%),
+        color-mix(in srgb, var(--wp--preset--color--core-theme-tiber) 20%, transparent);
+}
+
+/* Brand arcs */
+.wp-block-kadence-rowlayout.core-overlay.kt-row-has-bg::after {
+    content: "";
+    position: absolute;
+    top: -109.4px;
+    right: -184.7px;
+    width: 928.737px;
+    height: 977px;
+    background: url("data:image/svg+xml,%3Csvg width='928.737' height='977' viewBox='0 0 928.737 977' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.1'%3E%3Cpath d='M842.525 965.232C822.269 983.194 790.857 980.249 774.123 958.754C670.788 824.48 614.129 659.287 614.129 488.5C614.129 317.713 670.494 152.52 774.123 18.2462C790.857 -3.24943 822.269 -6.19408 842.525 11.768L912.981 74.1938C931.182 90.3891 934.118 118.068 919.146 137.503C843.112 238.208 801.719 360.998 801.719 488.205C801.719 615.413 843.112 738.497 919.146 838.908C933.824 858.343 931.182 886.022 912.981 902.217L842.525 964.643V965.232Z' fill='url%28%23paint0_linear_0_17%29'/%3E%3Cpath d='M86.2119 964.643L15.7556 902.217C-2.44561 886.022 -5.38126 858.343 9.5907 838.908C85.6248 738.203 127.018 615.413 127.018 488.206C127.018 360.998 85.6248 237.914 9.5907 137.503C-5.08769 118.068 -2.44561 90.3891 15.7556 74.1938L86.2119 11.768C106.468 -6.19408 137.88 -3.24943 154.613 18.2462C257.949 152.52 314.608 317.713 314.608 488.5C314.608 659.287 258.243 824.48 154.613 958.754C137.88 980.249 106.468 983.194 86.2119 965.232V964.643Z' fill='url%28%23paint1_linear_0_17%29'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_0_17' x1='771.433' y1='9.14373e-08' x2='771.433' y2='977' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239ABFDD'/%3E%3Cstop offset='1' stop-color='%239ABFDD' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_0_17' x1='157.304' y1='9.14373e-08' x2='157.304' y2='977' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239ABFDD'/%3E%3Cstop offset='1' stop-color='%239ABFDD' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E") no-repeat center / contain;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .wp-block-kadence-rowlayout.core-overlay.kt-row-has-bg > .kt-row-layout-overlay {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 380px;
+    }
+
+    .wp-block-kadence-rowlayout.core-overlay.kt-row-has-bg > .kt-row-layout-overlay::after {
+        background:
+            linear-gradient(180deg, var(--wp--preset--color--core-theme-tiber) 0%, color-mix(in srgb, var(--wp--preset--color--core-theme-tiber) 60%, transparent) 35%, color-mix(in srgb, var(--wp--preset--color--core-theme-tiber) 0%, transparent) 85%),
+            color-mix(in srgb, var(--wp--preset--color--core-theme-tiber) 15%, transparent);
+    }
+
+    .wp-block-kadence-rowlayout.core-overlay.kt-row-has-bg::after {
+        top: -57.4px;
+        right: auto;
+        left: calc(50% - 190px);
+        width: 396.755px;
+        height: 456.597px;
+        background-image: url("data:image/svg+xml,%3Csvg width='396.755' height='456.597' viewBox='0 0 396.755 456.597' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.1'%3E%3Cpath d='M356.464 451.097C346.998 459.492 332.318 458.116 324.497 448.07C276.204 385.317 249.725 308.115 249.725 228.299C249.725 148.482 276.067 71.2798 324.497 8.52729C332.318 -1.51861 346.998 -2.89478 356.464 5.49974L389.392 34.6742C397.898 42.243 399.27 55.1788 392.273 64.2614C356.739 111.326 337.394 168.711 337.394 228.161C337.394 287.611 356.739 345.134 392.273 392.061C399.133 401.143 397.898 414.079 389.392 421.648L356.464 450.822V451.097Z' fill='url%28%23paint0_linear_0_17%29'/%3E%3Cpath d='M40.2908 450.822L7.36332 421.648C-1.14295 414.079 -2.51491 401.143 4.48218 392.061C40.0164 344.996 59.3613 287.611 59.3613 228.161C59.3613 168.711 40.0164 111.188 4.48218 64.2614C-2.37771 55.1788 -1.14295 42.243 7.36332 34.6742L40.2908 5.49974C49.7574 -2.89478 64.4376 -1.51861 72.2579 8.52729C120.552 71.2798 147.031 148.482 147.031 228.299C147.031 308.115 120.689 385.317 72.2579 448.07C64.4376 458.116 49.7574 459.492 40.2908 451.097V450.822Z' fill='url%28%23paint1_linear_0_17%29'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_0_17' x1='323.24' y1='0' x2='323.24' y2='456.597' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239ABFDD'/%3E%3Cstop offset='1' stop-color='%239ABFDD' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_0_17' x1='73.5154' y1='0' x2='73.5154' y2='456.597' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239ABFDD'/%3E%3Cstop offset='1' stop-color='%239ABFDD' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
+    }
+}
