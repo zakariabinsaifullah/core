@@ -529,6 +529,8 @@ header.wp-block-kadence-rowlayout::before {
 
 /*
  * Smooth scrolling for in-page links (e.g. a button pointing at #contact).
+ * Fallback only: assets/js/smooth-scroll.js handles these links with eased,
+ * distance-based scrolling and switches this off while it animates.
  * Skipped for visitors who ask their system for reduced motion.
  */
 @media (prefers-reduced-motion: no-preference) {

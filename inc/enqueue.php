@@ -38,6 +38,18 @@ if ( ! function_exists( 'core_theme_enqueue_styles' ) ) :
 			$theme_version,
 			true
 		);
+
+		// Eased scrolling for links to a section on the same page.
+		wp_enqueue_script(
+			'core-theme-smooth-scroll',
+			get_parent_theme_file_uri( 'assets/js/smooth-scroll.js' ),
+			array(),
+			$theme_version,
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
+		);
 	}
 endif;
 add_action( 'wp_enqueue_scripts', 'core_theme_enqueue_styles' );
