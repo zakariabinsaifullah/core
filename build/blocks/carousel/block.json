@@ -1,0 +1,106 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "core-theme/carousel",
+  "version": "0.0.6",
+  "title": "Carousel",
+  "category": "core-theme",
+  "icon": "slides",
+  "description": "Create flexible sliders and carousels using any inner blocks",
+  "example": {},
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "color": {
+      "text": false,
+      "background": true,
+      "gradients": true,
+      "__experimentalDefaultControls": {
+        "background": false
+      }
+    },
+    "spacing": {
+      "padding": true,
+      "__experimentalDefaultControls": {
+        "padding": false
+      }
+    }
+  },
+  "attributes": {
+    "status": {
+      "type": "boolean",
+      "default": false
+    },
+    "blockStyle": {
+      "type": "object"
+    },
+    "resMode": {
+      "type": "string",
+      "default": "Desktop"
+    },
+    "heightType": {
+      "type": "object",
+      "default": {
+        "Desktop": "adaptive"
+      }
+    },
+    "gaps": {
+      "type": "object",
+      "default": {
+        "Desktop": 0,
+        "Tablet": 0,
+        "Mobile": 0
+      }
+    },
+    "visibleItems": {
+      "type": "object",
+      "default": {
+        "Desktop": 5,
+        "Tablet": 3,
+        "Mobile": 1
+      }
+    },
+    "heights": {
+      "type": "object",
+      "default": {}
+    },
+    "vAligns": {
+      "type": "object",
+      "default": {}
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "delay": {
+      "type": "number",
+      "default": 3000
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true
+    },
+    "overflowVisible": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "textdomain": "core",
+  "editorScript": [
+    "file:./index.js"
+  ],
+  "editorStyle": [
+    "file:./index.css"
+  ],
+  "style": [
+    "file:./style-index.css",
+    "core-theme-swiper-style"
+  ],
+  "viewScript": [
+    "file:./view.js",
+    "core-theme-swiper-script"
+  ]
+}

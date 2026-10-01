@@ -1,0 +1,1 @@
+.core-theme-overlay-bg{position:relative}.core-theme-overlay-bg:after{background:var(--core-theme-overlay-bg);content:"";inset:0;pointer-events:none;position:absolute;z-index:0}.core-theme-overlay-bg>*{position:relative;z-index:1}

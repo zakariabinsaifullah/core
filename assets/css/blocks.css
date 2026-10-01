@@ -458,3 +458,71 @@ header.wp-block-kadence-rowlayout::before {
         padding: 20px;
     }
 }
+
+/* ==========================================================================
+   FAQ accordion
+   Kadence Accordion with the `core-theme-faq` class (icon style: basic circle).
+   ========================================================================== */
+
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-pane {
+    border-bottom: 1px solid var(--wp--preset--color--core-theme-neutral-lighter);
+}
+
+.wp-block-kadence-accordion.core-theme-faq .kt-blocks-accordion-header {
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.wp-block-kadence-accordion.core-theme-faq .kt-blocks-accordion-header.kt-accordion-panel-active {
+    padding-bottom: 14px;
+}
+
+.wp-block-kadence-accordion.core-theme-faq .kt-blocks-accordion-title {
+    font-family: var(--wp--preset--font-family--titling-gothic-fb-wide);
+    font-size: var(--wp--preset--font-size--core-theme-heading-six);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-panel-inner {
+    border: 0;
+}
+
+/* Toggle: 36px circle with a plus that turns into a minus when open.
+   Kadence paints the bars with the title background through an id + :not()
+   chain (including on hover), so these selectors carry the full wrapper path
+   to outrank it in every state. */
+.wp-block-kadence-accordion.core-theme-faq .kt-blocks-accordion-icon-trigger {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-wrap.kt-accodion-icon-style-basiccircle .wp-block-kadence-pane.kt-accordion-pane .kt-accordion-header-wrap .kt-blocks-accordion-header .kt-blocks-accordion-icon-trigger::before,
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-wrap.kt-accodion-icon-style-basiccircle .wp-block-kadence-pane.kt-accordion-pane .kt-accordion-header-wrap .kt-blocks-accordion-header .kt-blocks-accordion-icon-trigger::after {
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 1.5px;
+    margin: 0;
+    border-radius: 1px;
+    background-color: var(--wp--preset--color--core-theme-mantis-dark);
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-wrap.kt-accodion-icon-style-basiccircle .wp-block-kadence-pane.kt-accordion-pane .kt-accordion-header-wrap .kt-blocks-accordion-header .kt-blocks-accordion-icon-trigger::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-wrap.kt-accodion-icon-style-basiccircle .wp-block-kadence-pane.kt-accordion-pane .kt-accordion-header-wrap .kt-blocks-accordion-header.kt-accordion-panel-active .kt-blocks-accordion-icon-trigger::before,
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-wrap.kt-accodion-icon-style-basiccircle .wp-block-kadence-pane.kt-accordion-pane .kt-accordion-header-wrap .kt-blocks-accordion-header.kt-accordion-panel-active .kt-blocks-accordion-icon-trigger::after {
+    background-color: var(--wp--preset--color--core-theme-white);
+    transform: translate(-50%, -50%);
+}
+
+/* Keep the open toggle green on hover so the white minus stays visible. */
+.wp-block-kadence-accordion.core-theme-faq .kt-accordion-wrap.kt-accodion-icon-style-basiccircle .wp-block-kadence-pane.kt-accordion-pane .kt-accordion-header-wrap .kt-blocks-accordion-header.kt-accordion-panel-active:hover .kt-blocks-accordion-icon-trigger {
+    background-color: var(--wp--preset--color--core-theme-mantis);
+}

@@ -1,0 +1,1 @@
+.wp-block-theme-image-accordion .core-theme-image-accordion{display:flex;gap:var(--dgap,0)}@media(max-width:781px){.wp-block-theme-image-accordion .core-theme-image-accordion{flex-direction:column;gap:var(--tgap,var(--dgap,0))}}@media(max-width:599px){.wp-block-theme-image-accordion .core-theme-image-accordion{gap:var(--mgap,var(--tgap,var(--dgap,0)))}}

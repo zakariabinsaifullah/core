@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "core-theme/image-accordion",
+  "version": "0.0.6",
+  "title": "Image Accordion",
+  "category": "core-theme",
+  "icon": "images-alt2",
+  "description": "Display a series of images in an accordion format.",
+  "example": {},
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "__experimentalDefaultControls": {
+        "margin": false,
+        "padding": false
+      }
+    }
+  },
+  "providesContext": {
+    "core-theme/showTitle": "showTitle",
+    "core-theme/showDesc": "showDesc",
+    "core-theme/showBtn": "showBtn",
+    "core-theme/titleTag": "titleTag"
+  },
+  "attributes": {
+    "resMode": {
+      "type": "string",
+      "default": "Desktop"
+    },
+    "blockStyle": {
+      "type": "object"
+    },
+    "itemsGap": {
+      "type": "object",
+      "default": {}
+    },
+    "contentMargin": {
+      "type": "object",
+      "default": {}
+    },
+    "contentMaxWidth": {
+      "type": "string"
+    },
+    "contentVAlign": {
+      "type": "string",
+      "default": "center"
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDesc": {
+      "type": "boolean",
+      "default": true
+    },
+    "showBtn": {
+      "type": "boolean",
+      "default": true
+    },
+    "titleTag": {
+      "type": "string",
+      "default": "h4"
+    }
+  },
+  "textdomain": "core",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

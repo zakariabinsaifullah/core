@@ -46,6 +46,7 @@ Pick blocks in this order, and move down a level only when the level above can't
 -   Card content is vertically aligned to the **bottom** (`"verticalAlignment":"bottom"`).
 -   Card inner padding is an equal **24px** on all sides (`"padding":[24,24,24,24]`).
 -   The gap between a card's title and its description is always **16px**. Set it with the Section's **Vertical Gap** setting (`"rowGapVariable":["custom","",""],"rowGap":[16,"",""],"rowGapUnit":"px"`), not with block margins.
+-   **Numbered items (global rule):** in a content item made of a number + heading + description (e.g. process steps "01 / 02 / 03"), the three are always **16px** apart. Put them in one vertical Group with `blockGap: 16px` and 0 margins; anything after the item (a divider, a button) sits outside that Group with its own gap.
 -   The heading and paragraph inside a card have **0 margin and 0 padding** (`"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"0","right":"0","bottom":"0","left":"0"}}`), so the Section's gap controls all spacing.
 
 ## 3b. Content columns (nested Row Layout)

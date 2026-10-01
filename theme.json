@@ -341,15 +341,15 @@
                 },
                 {
                     "name": "Heading One",
-                    "size": "72px",
+                    "size": "64px",
                     "slug": "core-theme-heading-one",
-                    "fluid": { "min": "44px", "max": "72px" }
+                    "fluid": { "min": "44px", "max": "64px" }
                 },
                 {
                     "name": "Heading Two",
-                    "size": "56px",
+                    "size": "48px",
                     "slug": "core-theme-heading-two",
-                    "fluid": { "min": "36px", "max": "56px" }
+                    "fluid": { "min": "36px", "max": "48px" }
                 },
                 {
                     "name": "Heading Three",

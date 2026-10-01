@@ -1,0 +1,121 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "core-theme/image-accordion-item",
+  "version": "0.0.6",
+  "title": "Image Accordion Item",
+  "category": "core-theme",
+  "icon": "format-image",
+  "description": "Individual image, title and button for the Image Accordion block.",
+  "example": {},
+  "parent": [
+    "core-theme/image-accordion"
+  ],
+  "usesContext": [
+    "core-theme/showTitle",
+    "core-theme/showDesc",
+    "core-theme/showBtn",
+    "core-theme/titleTag"
+  ],
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false,
+    "reusable": false,
+    "color": {
+      "text": false,
+      "background": true,
+      "gradients": true,
+      "__experimentalDefaultControls": {
+        "background": false
+      }
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": false,
+        "radius": false,
+        "width": false
+      }
+    },
+    "spacing": {
+      "padding": true,
+      "__experimentalDefaultControls": {
+        "padding": false
+      }
+    },
+    "shadow": true
+  },
+  "attributes": {
+    "image": {
+      "type": "object",
+      "default": {
+        "id": "",
+        "url": "",
+        "alt": ""
+      }
+    },
+    "imageTablet": {
+      "type": "object",
+      "default": {
+        "id": "",
+        "url": "",
+        "alt": ""
+      }
+    },
+    "imageMobile": {
+      "type": "object",
+      "default": {
+        "id": "",
+        "url": "",
+        "alt": ""
+      }
+    },
+    "itemStyle": {
+      "type": "object"
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "titleTag": {
+      "type": "string",
+      "default": "h4"
+    },
+    "showDesc": {
+      "type": "boolean",
+      "default": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "showBtn": {
+      "type": "boolean",
+      "default": true
+    },
+    "btnLabel": {
+      "type": "string",
+      "default": "Show More"
+    },
+    "href": {
+      "type": "string",
+      "default": "#"
+    },
+    "linkTarget": {
+      "type": "string"
+    },
+    "linkRel": {
+      "type": "string"
+    }
+  },
+  "textdomain": "core",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
