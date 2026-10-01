@@ -605,3 +605,48 @@ header.wp-block-kadence-rowlayout::before {
         background-image: url("data:image/svg+xml,%3Csvg width='396.755' height='456.597' viewBox='0 0 396.755 456.597' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.1'%3E%3Cpath d='M356.464 451.097C346.998 459.492 332.318 458.116 324.497 448.07C276.204 385.317 249.725 308.115 249.725 228.299C249.725 148.482 276.067 71.2798 324.497 8.52729C332.318 -1.51861 346.998 -2.89478 356.464 5.49974L389.392 34.6742C397.898 42.243 399.27 55.1788 392.273 64.2614C356.739 111.326 337.394 168.711 337.394 228.161C337.394 287.611 356.739 345.134 392.273 392.061C399.133 401.143 397.898 414.079 389.392 421.648L356.464 450.822V451.097Z' fill='url%28%23paint0_linear_0_17%29'/%3E%3Cpath d='M40.2908 450.822L7.36332 421.648C-1.14295 414.079 -2.51491 401.143 4.48218 392.061C40.0164 344.996 59.3613 287.611 59.3613 228.161C59.3613 168.711 40.0164 111.188 4.48218 64.2614C-2.37771 55.1788 -1.14295 42.243 7.36332 34.6742L40.2908 5.49974C49.7574 -2.89478 64.4376 -1.51861 72.2579 8.52729C120.552 71.2798 147.031 148.482 147.031 228.299C147.031 308.115 120.689 385.317 72.2579 448.07C64.4376 458.116 49.7574 459.492 40.2908 451.097V450.822Z' fill='url%28%23paint1_linear_0_17%29'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_0_17' x1='323.24' y1='0' x2='323.24' y2='456.597' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239ABFDD'/%3E%3Cstop offset='1' stop-color='%239ABFDD' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_0_17' x1='73.5154' y1='0' x2='73.5154' y2='456.597' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239ABFDD'/%3E%3Cstop offset='1' stop-color='%239ABFDD' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
     }
 }
+
+/*
+ * Fact list — core Table with the `core-theme-fact-table` class (the
+ * "At a glance" rows on the bio pages). Two columns, no header: a bold Tiber
+ * label and a plain value, each row closed by a Neutral Lighter rule. Empty
+ * values stay as empty cells until the client supplies them.
+ * Loaded in the editor and on the front end, so both read the same.
+ */
+.wp-block-table.core-theme-fact-table {
+    margin: 0;
+}
+
+.wp-block-table.core-theme-fact-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 0;
+}
+
+.wp-block-table.core-theme-fact-table :is(td, th) {
+    padding: 18px 0;
+    border: 0;
+    border-bottom: 1px solid var(--wp--preset--color--core-theme-neutral-lighter);
+    vertical-align: top;
+    text-align: left;
+    font-family: var(--wp--preset--font-family--instrument-sans);
+    font-size: var(--wp--preset--font-size--core-theme-medium);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-neutral-dark);
+}
+
+/* Label column: fixed 240px plus the 24px gap to the value. */
+.wp-block-table.core-theme-fact-table :is(td, th):first-child {
+    width: 264px;
+    padding-right: 24px;
+    font-weight: 700;
+    color: var(--wp--preset--color--core-theme-tiber);
+}
+
+@media (max-width: 600px) {
+    .wp-block-table.core-theme-fact-table :is(td, th):first-child {
+        width: 40%;
+        padding-right: 16px;
+    }
+}

@@ -2,7 +2,7 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "core-theme/slide",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "title": "Slide",
     "category": "core-theme",
     "description": "Slide child block for carousel.",
