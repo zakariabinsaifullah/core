@@ -151,6 +151,27 @@ if ( ! function_exists( 'core_theme_get_shortcodes' ) ) :
 				),
 			),
 			array(
+				'title'       => __( 'Related Posts', 'core' ),
+				'tag'         => 'core_theme_related_posts',
+				'description' => __( 'A row of blog cards for the single post template: posts that share a category with the post being read, newest first, topped up with the newest other posts when there are not enough. Same card as the Posts Grid. Used in the Single Posts template under &ldquo;Related Articles&rdquo;.', 'core' ),
+				'examples'    => array(
+					array(
+						'label' => __( 'Basic usage', 'core' ),
+						'note'  => __( 'Three related cards. Place it in the single post template.', 'core' ),
+						'code'  => '[core_theme_related_posts]',
+					),
+					array(
+						'label' => __( 'All optional attributes', 'core' ),
+						'note'  => __( 'Each attribute shown at its default value.', 'core' ),
+						'code'  => '[core_theme_related_posts count="3" post_type="post"]',
+					),
+				),
+				'attrs'       => array(
+					array( 'name' => 'count',     'default' => '3',    'desc' => __( 'How many cards, up to 12. Laid out three per row on desktop, one per row on tablet and mobile.', 'core' ) ),
+					array( 'name' => 'post_type', 'default' => 'post', 'desc' => __( 'Which post type to pick from.', 'core' ) ),
+				),
+			),
+			array(
 				'title'       => __( 'Testimonials', 'core' ),
 				'tag'         => 'core_theme_testimonials',
 				'description' => __( 'Renders published testimonials as a swipeable deck of tilted cards, each showing the quote icon, the review message, the reviewer name and their designation. Add entries under <code>Testimonials</code> in the admin menu. Autoplay, speed, loop and pagination default to whatever is set in <code>Testimonials &rarr; Settings</code>; the attributes below override them per shortcode.', 'core' ),

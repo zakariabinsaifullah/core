@@ -674,3 +674,83 @@ if ( ! function_exists( 'core_theme_featured_post_shortcode' ) ) :
 	}
 endif;
 add_shortcode( 'core_theme_featured_post', 'core_theme_featured_post_shortcode' );
+
+
+if ( ! function_exists( 'core_theme_related_posts_shortcode' ) ) :
+	/**
+	 * [core_theme_related_posts count="3" post_type="post"]
+	 *
+	 * Cards for posts that share a category with the current post, newest
+	 * first, topped up with the newest other posts when there are not enough.
+	 * Meant for the single post template; outside a single post it simply
+	 * lists the newest posts.
+	 */
+	function core_theme_related_posts_shortcode( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'count'     => 3,
+				'post_type' => 'post',
+			),
+			$atts,
+			'core_theme_related_posts'
+		);
+
+		$count     = min( 12, max( 1, (int) $atts['count'] ) );
+		$post_type = sanitize_key( $atts['post_type'] );
+		if ( ! post_type_exists( $post_type ) ) {
+			$post_type = 'post';
+		}
+
+		$taxonomy = core_theme_posts_grid_resolve_taxonomy( $post_type );
+		$current  = is_singular() ? get_queried_object_id() : 0;
+		$exclude  = $current ? array( $current ) : array();
+		$ids      = array();
+
+		$base = array(
+			'post_type'           => $post_type,
+			'post_status'         => 'publish',
+			'fields'              => 'ids',
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+		);
+
+		if ( $current ) {
+			$terms = wp_get_post_terms( $current, $taxonomy, array( 'fields' => 'ids' ) );
+			if ( $terms && ! is_wp_error( $terms ) ) {
+				$ids = get_posts( $base + array(
+					'posts_per_page' => $count,
+					'post__not_in'   => $exclude,
+					'tax_query'      => array(
+						array(
+							'taxonomy' => $taxonomy,
+							'field'    => 'term_id',
+							'terms'    => $terms,
+						),
+					),
+				) );
+			}
+		}
+
+		if ( count( $ids ) < $count ) {
+			$ids = array_merge( $ids, get_posts( $base + array(
+				'posts_per_page' => $count - count( $ids ),
+				'post__not_in'   => array_merge( $exclude, $ids ),
+			) ) );
+		}
+
+		if ( empty( $ids ) ) {
+			return '';
+		}
+
+		core_theme_posts_grid_enqueue_assets();
+
+		$html = '<div class="ipg-grid ipg-related">';
+		foreach ( $ids as $id ) {
+			$html .= core_theme_posts_grid_render_post_item( $id, $taxonomy );
+		}
+		$html .= '</div>';
+
+		return $html;
+	}
+endif;
+add_shortcode( 'core_theme_related_posts', 'core_theme_related_posts_shortcode' );
