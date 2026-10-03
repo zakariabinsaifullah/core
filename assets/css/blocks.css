@@ -856,3 +856,22 @@ header.wp-block-kadence-rowlayout::before {
         min-width: 720px;
     }
 }
+
+/* ==========================================================================
+   Kadence Section: horizontal on desktop, stacked on mobile
+   When a Section's direction switches to vertical on mobile, Kadence keeps
+   its vertical alignment (e.g. `align-items: flex-start`) as the cross-axis
+   alignment, so children shrink to their content width. An image-only
+   child (a Section with just a background image, like the partner
+   portraits) then collapses to 0px wide. The editor uses different CSS, so
+   it only breaks on the front end. Stretch the stacked children instead.
+   The second selector outranks Kadence's rule inside a Row Layout with
+   "Inner Column Height 100%".
+   ========================================================================== */
+
+@media (max-width: 767px) {
+    .wp-block-kadence-column.kb-section-dir-horizontal.kb-section-sm-dir-vertical > .kt-inside-inner-col,
+    .kt-inner-column-height-full:not(.kt-has-1-columns) > .wp-block-kadence-column.kb-section-dir-horizontal.kb-section-sm-dir-vertical > .kt-inside-inner-col {
+        align-items: stretch;
+    }
+}
