@@ -17,8 +17,7 @@ require_once get_theme_file_path( 'inc/setup.php' );      // Post formats, edito
 require_once get_theme_file_path( 'inc/enqueue.php' );    // Frontend & block styles
 
 // ── Content types ──────────────────────────────────────────────────────────────
-require_once get_theme_file_path( 'inc/post-types.php' );   // Open Role & Testimonial post types
-require_once get_theme_file_path( 'inc/testimonials.php' ); // Testimonial meta, admin UI & shortcode
+require_once get_theme_file_path( 'inc/post-types.php' );   // Open Role post type
 
 // ── Blocks ─────────────────────────────────────────────────────────────────────
 require_once get_theme_file_path( 'inc/blocks.php' );        // Custom block registration

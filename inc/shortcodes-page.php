@@ -176,37 +176,6 @@ if ( ! function_exists( 'core_theme_get_shortcodes' ) ) :
 					array( 'name' => 'post_type', 'default' => 'post', 'desc' => __( 'Which post type to pick from.', 'core' ) ),
 				),
 			),
-			array(
-				'title'       => __( 'Testimonials', 'core' ),
-				'tag'         => 'core_theme_testimonials',
-				'description' => __( 'Renders published testimonials as a swipeable deck of tilted cards, each showing the quote icon, the review message, the reviewer name and their designation. Add entries under <code>Testimonials</code> in the admin menu. Autoplay, speed, loop and pagination default to whatever is set in <code>Testimonials &rarr; Settings</code>; the attributes below override them per shortcode.', 'core' ),
-				'examples'    => array(
-					array(
-						'label' => __( 'Basic usage', 'core' ),
-						'note'  => __( 'Every attribute is optional — this shows all published testimonials, newest first, autoplaying.', 'core' ),
-						'code'  => '[core_theme_testimonials]',
-					),
-					array(
-						'label' => __( 'A fixed set, in the order you arranged them', 'core' ),
-						'note'  => __( 'Pair <code>orderby="menu_order"</code> with the Order field on each testimonial to control the sequence by hand.', 'core' ),
-						'code'  => '[core_theme_testimonials count="6" order="ASC" orderby="menu_order"]',
-					),
-					array(
-						'label' => __( 'Overriding the settings for one carousel', 'core' ),
-						'note'  => __( 'Autoplay this instance regardless of what <code>Testimonials &rarr; Settings</code> says.', 'core' ),
-						'code'  => '[core_theme_testimonials autoplay="yes" speed="4000" loop="yes" pagination="yes"]',
-					),
-				),
-				'attrs'       => array(
-					array( 'name' => 'count',      'default' => '-1',         'desc' => __( 'How many testimonials to show. <code>-1</code> shows every published one.', 'core' ) ),
-					array( 'name' => 'order',      'default' => 'DESC',       'desc' => __( 'Sort direction &mdash; <code>ASC</code> or <code>DESC</code>.', 'core' ) ),
-					array( 'name' => 'orderby',    'default' => 'date',       'desc' => __( 'Any WP_Query orderby value. Use <code>menu_order</code> to order them by hand, or <code>rand</code> to shuffle.', 'core' ) ),
-					array( 'name' => 'autoplay',   'default' => '(settings)', 'desc' => __( 'Advance on its own &mdash; <code>yes</code> or <code>no</code>. Off by default, and always off for visitors who have asked for reduced motion.', 'core' ) ),
-					array( 'name' => 'speed',      'default' => '(settings)', 'desc' => __( 'Milliseconds each card is held when autoplaying. Values below 1000 are raised to 1000.', 'core' ) ),
-					array( 'name' => 'loop',       'default' => '(settings)', 'desc' => __( 'Wrap around from the last card to the first &mdash; <code>yes</code> or <code>no</code>.', 'core' ) ),
-					array( 'name' => 'pagination', 'default' => '(settings)', 'desc' => __( 'Show the dots beneath the carousel &mdash; <code>yes</code> or <code>no</code>.', 'core' ) ),
-				),
-			),
 		);
 	}
 endif;
