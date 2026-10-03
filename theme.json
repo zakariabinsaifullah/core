@@ -343,31 +343,31 @@
                     "name": "Heading One",
                     "size": "64px",
                     "slug": "core-theme-heading-one",
-                    "fluid": { "min": "44px", "max": "64px" }
+                    "fluid": { "min": "36px", "max": "64px" }
                 },
                 {
                     "name": "Heading Two",
                     "size": "48px",
                     "slug": "core-theme-heading-two",
-                    "fluid": { "min": "36px", "max": "48px" }
+                    "fluid": { "min": "32px", "max": "48px" }
                 },
                 {
                     "name": "Heading Three",
                     "size": "44px",
                     "slug": "core-theme-heading-three",
-                    "fluid": { "min": "30px", "max": "44px" }
+                    "fluid": { "min": "28px", "max": "44px" }
                 },
                 {
                     "name": "Heading Four",
                     "size": "36px",
                     "slug": "core-theme-heading-four",
-                    "fluid": { "min": "26px", "max": "36px" }
+                    "fluid": { "min": "24px", "max": "36px" }
                 },
                 {
                     "name": "Heading Five",
                     "size": "28px",
                     "slug": "core-theme-heading-five",
-                    "fluid": { "min": "22px", "max": "28px" }
+                    "fluid": { "min": "20px", "max": "28px" }
                 },
                 {
                     "name": "Heading Six",
