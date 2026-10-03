@@ -1,310 +1,106 @@
-/**
- * Open Roles job board — [opening_roles]
- *
- * Search bar, Job Type tabs and the role card grid.
- */
+/* =============================================================================
+   Open Roles — [opening_roles]
+   Cards in the theme's card style: white, 14px corner, soft shadow, a Mantis
+   accent bar, job type and open count, the title and an Apply link.
+   ============================================================================= */
 
-.core-theme-jobs {
-    --core-theme-jobs-accent: var(--wp--preset--color--core-theme-tiber, #04262f);
-    --core-theme-jobs-border: var(--wp--preset--color--core-theme-neutral-lightest, #f2f2f2);
-    --core-theme-jobs-muted: #5b6072;
-    --core-theme-jobs-ink: var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d);
+.core-roles {
+    display: grid;
+    grid-template-columns: repeat(var(--core-roles-columns, 3), minmax(0, 1fr));
+    gap: 24px;
 }
 
-/* ── Search bar ────────────────────────────────────────────────────────── */
+/* Card grids are one column on tablet and mobile. */
+@media (max-width: 1024px) {
+    .core-roles {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
 
-.core-theme-jobs__search {
+.core-role {
     display: flex;
-    align-items: center;
-    gap: 0;
-    max-width: 840px;
-    margin: 0 auto;
-    padding: 10px 10px 10px 8px;
-    background: #fff;
-    border-radius: 999px;
-    box-shadow: 0 10px 30px rgba(24, 33, 77, 0.08);
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    background: var(--wp--preset--color--core-theme-white);
+    border-radius: 14px;
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--wp--preset--color--core-theme-white-dark) 25%, transparent);
 }
 
-.core-theme-jobs__field {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 0 14px;
+/* The 40px Mantis accent bar used on the theme's other cards. */
+.core-role::before {
+    content: '';
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--wp--preset--color--core-theme-mantis);
 }
 
-/* Hairline separators between the three inputs, as in the design. */
-.core-theme-jobs__field + .core-theme-jobs__field {
-    border-left: 1px solid var(--core-theme-jobs-border);
-}
-
-.core-theme-jobs__icon {
-    flex: none;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    color: var(--core-theme-jobs-muted);
-}
-
-.core-theme-jobs__input {
-    width: 100%;
-    min-width: 0;
-    padding: 10px 0;
-    border: 0;
-    background: none;
-    color: var(--core-theme-jobs-ink);
-    font-size: 15px;
-    line-height: 1.4;
-}
-
-.core-theme-jobs__input::placeholder {
-    color: var(--core-theme-jobs-muted);
-    opacity: 1;
-}
-
-.core-theme-jobs__input:focus {
-    outline: none;
-}
-
-.core-theme-jobs__field:focus-within .core-theme-jobs__icon {
-    color: var(--core-theme-jobs-accent);
-}
-
-/* The select carries its own chevron, so the native one is hidden. */
-.core-theme-jobs__field--select select.core-theme-jobs__input {
-    appearance: none;
-    -webkit-appearance: none;
-    padding-right: 24px;
-    cursor: pointer;
-}
-
-.core-theme-jobs__field--select .core-theme-jobs__icon:last-child {
-    position: absolute;
-    right: 8px;
-    margin: 0;
-    pointer-events: none;
-    width: 18px;
-    height: 18px;
-}
-
-.core-theme-jobs__submit {
-    flex: none;
-    padding: 14px 30px;
-    border: 0;
-    border-radius: 999px;
-    background: var(--core-theme-jobs-accent);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.core-theme-jobs__submit:hover,
-.core-theme-jobs__submit:focus-visible {
-    background: var(--wp--preset--color--core-theme-tiber-dark, #031e25);
-}
-
-/* ── Tabs ──────────────────────────────────────────────────────────────── */
-
-.core-theme-jobs__tabs {
+.core-role__meta {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 28px;
-    margin: 56px 0 28px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
-.core-theme-jobs__tab {
-    padding: 0 0 6px;
-    border: 0;
-    border-bottom: 2px solid transparent;
-    background: none;
-    color: var(--core-theme-jobs-muted);
-    font-size: 15px;
-    line-height: 1.4;
-    cursor: pointer;
-    transition:
-        color 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.core-theme-jobs__tab:hover {
-    color: var(--core-theme-jobs-ink);
-}
-
-.core-theme-jobs__tab.is-active {
-    color: var(--core-theme-jobs-ink);
-    border-bottom-color: var(--core-theme-jobs-ink);
-    font-weight: 500;
-}
-
-/* ── Card grid ─────────────────────────────────────────────────────────── */
-
-.core-theme-jobs__grid {
-    display: grid;
-    grid-template-columns: repeat(var(--core-theme-jobs-columns, 4), minmax(0, 1fr));
-    gap: 20px;
-}
-
-.core-theme-jobs__grid[data-columns='1'] {
-    --core-theme-jobs-columns: 1;
-}
-.core-theme-jobs__grid[data-columns='2'] {
-    --core-theme-jobs-columns: 2;
-}
-.core-theme-jobs__grid[data-columns='3'] {
-    --core-theme-jobs-columns: 3;
-}
-.core-theme-jobs__grid[data-columns='4'] {
-    --core-theme-jobs-columns: 4;
-}
-
-.core-theme-job {
-    display: block;
-    padding: 22px 24px 24px;
-    border: 1px solid var(--core-theme-jobs-border);
-    border-radius: 10px;
-    background: #fff;
-    color: inherit;
-    text-decoration: none;
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-a.core-theme-job:hover,
-a.core-theme-job:focus-visible {
-    border-color: var(--core-theme-jobs-accent);
-    box-shadow: 0 6px 18px rgba(24, 33, 77, 0.08);
-}
-
-.core-theme-job__icon {
-    display: block;
-    height: 26px;
-    margin-bottom: 18px;
-    color: var(--core-theme-jobs-accent);
-    line-height: 0;
-}
-
-.core-theme-job__icon img,
-.core-theme-job__icon svg {
-    width: auto;
-    height: 26px;
-    max-width: 100%;
-}
-
-.core-theme-job__title {
-    display: block;
-    margin-bottom: 6px;
-    color: var(--core-theme-jobs-ink);
-    font-size: 17px;
+.core-role__type {
+    font-size: var(--wp--preset--font-size--core-theme-small);
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-mantis-dark);
 }
 
-.core-theme-job__meta {
-    display: block;
-    color: var(--core-theme-jobs-muted);
-    font-size: 14px;
+.core-role__count {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--wp--preset--color--core-theme-mantis-lighter);
+    color: var(--wp--preset--color--core-theme-mantis-dark);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.core-role__title {
+    margin: 0;
+    font-family: var(--wp--preset--font-family--titling-gothic-fb-wide);
+    font-size: var(--wp--preset--font-size--core-theme-heading-six);
+    font-weight: 500;
     line-height: 1.4;
+    color: var(--wp--preset--color--core-theme-tiber);
 }
 
-/*
- * The separator is CSS rather than text: wptexturize turns " - " in content
- * into an en dash, and the design calls for a hyphen.
- */
-.core-theme-job__type + .core-theme-job__open::before {
-    content: ' - ';
+/* Apply: the design's Link button. `margin-top: auto` keeps the links level
+   across a row of cards with titles of different lengths. */
+.core-role__apply {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    align-self: flex-start;
+    margin-top: auto;
+    padding-top: 4px;
+    font-size: var(--wp--preset--font-size--core-theme-medium);
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-mantis-dark);
+    text-decoration: none;
 }
 
-.core-theme-job[hidden] {
-    display: none;
+.core-role__apply:hover {
+    color: var(--wp--preset--color--core-theme-mantis-darker);
 }
 
-.core-theme-jobs__empty {
-    margin: 32px 0 0;
-    text-align: center;
-    color: var(--core-theme-jobs-muted);
+.core-role__apply svg {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
 }
 
-/* ── Responsive ────────────────────────────────────────────────────────── */
-
-/*
- * The attribute selector below is not decoration: the per-column rules above
- * are `[data-columns='n']`, so a bare `.core-theme-jobs__grid` here would lose to
- * them on specificity and the grid would stay at its desktop count on every
- * screen. A media query adds no specificity of its own.
- */
-@media (max-width: 1024px) {
-    .core-theme-jobs__grid[data-columns] {
-        --core-theme-jobs-columns: 2;
-    }
+.core-role__apply:hover svg {
+    transform: translateX(3px);
 }
 
-@media (max-width: 781px) {
-    /* The pill cannot hold three inputs side by side; stack them instead. */
-    .core-theme-jobs__search {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 4px;
-        padding: 12px;
-        border-radius: 20px;
-    }
-
-    .core-theme-jobs__field + .core-theme-jobs__field {
-        border-left: 0;
-        border-top: 1px solid var(--core-theme-jobs-border);
-    }
-
-    /*
-     * 16px minimum: iOS Safari zooms the whole page in when a focused input
-     * is smaller than that, which leaves the visitor scrolled sideways.
-     */
-    .core-theme-jobs__input {
-        font-size: 16px;
-    }
-
-    .core-theme-jobs__submit {
-        margin-top: 8px;
-        width: 100%;
-    }
-
-    .core-theme-jobs__tabs {
-        gap: 18px;
-        margin: 36px 0 22px;
-    }
-}
-
-@media (max-width: 599px) {
-    .core-theme-jobs__grid[data-columns] {
-        --core-theme-jobs-columns: 1;
-    }
-
-    .core-theme-job {
-        padding: 18px 18px 20px;
-    }
-
-    .core-theme-jobs__tabs {
-        /*
-         * Too many job types to fit a phone, so the tabs scroll sideways
-         * rather than wrapping into an uneven block.
-         */
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .core-theme-jobs__tabs::-webkit-scrollbar {
-        display: none;
-    }
-
-    .core-theme-jobs__tab {
-        flex: none;
-        white-space: nowrap;
-    }
+.core-roles__empty {
+    margin: 0;
+    font-size: var(--wp--preset--font-size--core-theme-large);
+    color: var(--wp--preset--color--core-theme-neutral-dark);
 }

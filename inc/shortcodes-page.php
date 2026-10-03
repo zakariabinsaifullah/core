@@ -29,31 +29,36 @@ if ( ! function_exists( 'core_theme_get_shortcodes' ) ) :
 			array(
 				'title'       => __( 'Opening Roles', 'core' ),
 				'tag'         => 'opening_roles',
-				'description' => __( 'Renders the job board: a search bar, Job Type tabs and a grid of role cards showing the symbolic icon, the role title and its job type with the vacancy count. Only roles switched on in the Active column of All Open Roles are listed. Add roles under <code>Open Roles</code>, and their categories under <code>Open Roles &rarr; Job Types</code>.', 'core' ),
+				'description' => __( 'Lists open roles as cards: job type, number of open positions, the role title and an Apply now link. Only roles switched on in the Active column of All Open Roles are listed. Add roles under <code>Open Roles</code> (each has Active, Vacancies and Apply Link) and their categories under <code>Open Roles &rarr; Job Types</code>.', 'core' ),
 				'examples'    => array(
 					array(
 						'label' => __( 'Basic usage', 'core' ),
-						'note'  => __( 'Every attribute is optional — this shows all active roles in 4 columns, newest first, with the search bar and tabs.', 'core' ),
+						'note'  => __( 'Every attribute is optional — this shows every active role, newest first, three per row.', 'core' ),
 						'code'  => '[opening_roles]',
 					),
 					array(
-						'label' => __( 'Just the grid', 'core' ),
-						'note'  => __( 'Drops the search bar and the tabs, for a section that only lists roles.', 'core' ),
-						'code'  => '[opening_roles search="no" tabs="no" per_page="8"]',
+						'label' => __( 'One team only', 'core' ),
+						'note'  => __( 'Limit to one or more Job Types by slug or ID.', 'core' ),
+						'code'  => '[opening_roles job_type="tax"]',
+					),
+					array(
+						'label' => __( 'In the order you set', 'core' ),
+						'note'  => __( 'Sort by title, or by date with <code>order="ASC"</code> for oldest first.', 'core' ),
+						'code'  => '[opening_roles orderby="title" order="ASC"]',
 					),
 					array(
 						'label' => __( 'All optional attributes', 'core' ),
 						'note'  => __( 'Each attribute shown at its default value.', 'core' ),
-						'code'  => '[opening_roles columns="4" per_page="-1" order="DESC" orderby="date" search="yes" tabs="yes"]',
+						'code'  => '[opening_roles columns="3" count="-1" job_type="" orderby="date" order="DESC" empty="There are no open roles right now."]',
 					),
 				),
 				'attrs'       => array(
-					array( 'name' => 'columns',  'default' => '4',    'desc' => __( 'Columns on desktop, 1&ndash;4. Drops to 2 below 1024px and to 1 below 600px.', 'core' ) ),
-					array( 'name' => 'per_page', 'default' => '-1',   'desc' => __( 'How many roles to show. <code>-1</code> shows every active one.', 'core' ) ),
+					array( 'name' => 'columns',  'default' => '3',    'desc' => __( 'Cards per row on desktop, 1&ndash;4. Tablet and mobile always show one per row.', 'core' ) ),
+					array( 'name' => 'count',    'default' => '-1',   'desc' => __( 'How many roles to show. <code>-1</code> shows every active one.', 'core' ) ),
+					array( 'name' => 'job_type', 'default' => '',     'desc' => __( 'Comma-separated Job Type slugs or IDs. Empty shows every type.', 'core' ) ),
+					array( 'name' => 'orderby',  'default' => 'date', 'desc' => __( '<code>date</code> or <code>title</code>.', 'core' ) ),
 					array( 'name' => 'order',    'default' => 'DESC', 'desc' => __( 'Sort direction &mdash; <code>ASC</code> or <code>DESC</code>.', 'core' ) ),
-					array( 'name' => 'orderby',  'default' => 'date', 'desc' => __( 'Any WP_Query orderby value. Use <code>menu_order</code> with each role&rsquo;s Order field to sequence them by hand.', 'core' ) ),
-					array( 'name' => 'search',   'default' => 'yes',  'desc' => __( 'Show the search bar &mdash; <code>yes</code> or <code>no</code>. It filters by keyword (title and Tags), by city and by job type.', 'core' ) ),
-					array( 'name' => 'tabs',     'default' => 'yes',  'desc' => __( 'Show the Job Type tabs &mdash; <code>yes</code> or <code>no</code>. Only job types that have an active role behind them appear.', 'core' ) ),
+					array( 'name' => 'empty',    'default' => '',     'desc' => __( 'Message shown when no role is open. Set it to an empty value to show nothing.', 'core' ) ),
 				),
 			),
 			array(

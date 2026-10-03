@@ -101,16 +101,12 @@ add_filter( 'enter_title_here', 'core_theme_open_role_title_placeholder', 10, 2 
 
 if ( ! function_exists( 'core_theme_register_open_role_taxonomies' ) ) :
 	/**
-	 * Registers Job Type and Tags for open roles.
+	 * Registers Job Type for open roles.
 	 *
-	 * Job Type is hierarchical so it presents the checkbox UI of a fixed
-	 * vocabulary (Clinical, Support Staff, Remote …) — it drives the filter
-	 * tabs and the "Clinical - 42 open" line on the role cards.
-	 *
-	 * Tags is flat and behaves like keywords; the shortcode's search matches
-	 * against it as well as the title.
-	 *
-	 * Neither has a public archive: open roles have no front-end views at all.
+	 * Hierarchical so it presents the checkbox UI of a fixed vocabulary (Tax,
+	 * Accounting, Advisory …). It is shown on the role card and can limit the
+	 * [opening_roles] shortcode. No public archive: open roles have no
+	 * front-end views at all.
 	 */
 	function core_theme_register_open_role_taxonomies() {
 		register_taxonomy(
@@ -143,36 +139,6 @@ if ( ! function_exists( 'core_theme_register_open_role_taxonomies' ) ) :
 				'rewrite'           => false,
 			)
 		);
-
-		register_taxonomy(
-			'core-theme-role-tag',
-			'open-role',
-			array(
-				'labels'            => array(
-					'name'                       => _x( 'Tags', 'taxonomy general name', 'core' ),
-					'singular_name'              => _x( 'Tag', 'taxonomy singular name', 'core' ),
-					'menu_name'                  => __( 'Tags', 'core' ),
-					'all_items'                  => __( 'All Tags', 'core' ),
-					'edit_item'                  => __( 'Edit Tag', 'core' ),
-					'add_new_item'               => __( 'Add New Tag', 'core' ),
-					'new_item_name'              => __( 'New Tag Name', 'core' ),
-					'search_items'               => __( 'Search Tags', 'core' ),
-					'separate_items_with_commas' => __( 'Separate keywords with commas', 'core' ),
-					'add_or_remove_items'        => __( 'Add or remove keywords', 'core' ),
-					'not_found'                  => __( 'No tags found.', 'core' ),
-				),
-				'hierarchical'      => false,
-				'public'            => false,
-				'publicly_queryable' => false,
-				'show_ui'           => true,
-				'show_in_menu'      => true,
-				'show_admin_column' => true,
-				'show_in_nav_menus' => false,
-				'show_in_rest'      => false,
-				'query_var'         => false,
-				'rewrite'           => false,
-			)
-		);
 	}
 endif;
 add_action( 'init', 'core_theme_register_open_role_taxonomies' );
@@ -184,26 +150,14 @@ if ( ! function_exists( 'core_theme_register_open_role_meta' ) ) :
 	/**
 	 * Registers the open role meta.
 	 *
-	 * Job type, salary, match rate and work arrangement used to live here;
-	 * job type is now a taxonomy and the others were dropped.
+	 * A role keeps four settings: Active, Vacancies, Apply Link and its Job
+	 * Types (a taxonomy). Location, the symbolic icon and keyword tags were
+	 * dropped with the job board's search bar.
 	 */
 	function core_theme_register_open_role_meta() {
 		$auth = function () {
 			return current_user_can( 'edit_posts' );
 		};
-
-		register_post_meta(
-			'open-role',
-			'core_theme_role_location',
-			array(
-				'single'            => true,
-				'type'              => 'string',
-				'show_in_rest'      => false,
-				'description'       => __( 'City or postcode the role is based in.', 'core' ),
-				'sanitize_callback' => 'sanitize_text_field',
-				'auth_callback'     => $auth,
-			)
-		);
 
 		register_post_meta(
 			'open-role',
@@ -214,20 +168,6 @@ if ( ! function_exists( 'core_theme_register_open_role_meta' ) ) :
 				'show_in_rest'      => false,
 				'default'           => 0,
 				'description'       => __( 'How many positions are open for this role.', 'core' ),
-				'sanitize_callback' => 'absint',
-				'auth_callback'     => $auth,
-			)
-		);
-
-		register_post_meta(
-			'open-role',
-			'core_theme_role_icon',
-			array(
-				'single'            => true,
-				'type'              => 'integer',
-				'show_in_rest'      => false,
-				'default'           => 0,
-				'description'       => __( 'Attachment ID of the symbolic icon.', 'core' ),
 				'sanitize_callback' => 'absint',
 				'auth_callback'     => $auth,
 			)
@@ -300,9 +240,7 @@ if ( ! function_exists( 'core_theme_render_open_role_meta_box' ) ) :
 	function core_theme_render_open_role_meta_box( $post ) {
 		wp_nonce_field( 'core_theme_save_open_role', 'core_theme_open_role_nonce' );
 
-		$location   = get_post_meta( $post->ID, 'core_theme_role_location', true );
 		$vacancies  = get_post_meta( $post->ID, 'core_theme_role_vacancies', true );
-		$icon_id    = (int) get_post_meta( $post->ID, 'core_theme_role_icon', true );
 		$apply_link = get_post_meta( $post->ID, 'core_theme_role_apply_link', true );
 
 		// A brand new draft has no meta row yet, and register_post_meta
@@ -311,7 +249,6 @@ if ( ! function_exists( 'core_theme_render_open_role_meta_box' ) ) :
 			? (bool) get_post_meta( $post->ID, 'core_theme_role_active', true )
 			: true;
 
-		$icon_url = $icon_id ? wp_get_attachment_url( $icon_id ) : '';
 		?>
 		<p>
 			<label>
@@ -332,38 +269,7 @@ if ( ! function_exists( 'core_theme_render_open_role_meta_box' ) ) :
 				step="1"
 				value="<?php echo esc_attr( '' === $vacancies ? '0' : (string) (int) $vacancies ); ?>"
 			/>
-			<span class="description"><?php esc_html_e( 'Shown on the card as "42 open".', 'core' ); ?></span>
-		</p>
-
-		<p>
-			<label for="core-theme-role-location"><strong><?php esc_html_e( 'Location', 'core' ); ?></strong></label><br />
-			<input
-				type="text"
-				id="core-theme-role-location"
-				name="core_theme_role_location"
-				class="widefat"
-				value="<?php echo esc_attr( $location ); ?>"
-				placeholder="<?php esc_attr_e( 'City or postcode', 'core' ); ?>"
-			/>
-			<span class="description"><?php esc_html_e( 'Matched against the "City or postcode" search field.', 'core' ); ?></span>
-		</p>
-
-		<p>
-			<strong><?php esc_html_e( 'Symbolic Icon', 'core' ); ?></strong><br />
-			<span class="core-theme-role-icon-preview" style="display:inline-block;min-width:48px;min-height:48px;margin:6px 0;">
-				<?php if ( $icon_url ) : ?>
-					<img src="<?php echo esc_url( $icon_url ); ?>" alt="" style="max-width:48px;max-height:48px;" />
-				<?php endif; ?>
-			</span><br />
-			<input type="hidden" id="core-theme-role-icon" name="core_theme_role_icon" value="<?php echo esc_attr( (string) $icon_id ); ?>" />
-			<button type="button" class="button core-theme-role-icon-select">
-				<?php echo $icon_id ? esc_html__( 'Replace Icon', 'core' ) : esc_html__( 'Upload Icon', 'core' ); ?>
-			</button>
-			<button type="button" class="button-link core-theme-role-icon-remove" style="<?php echo $icon_id ? '' : 'display:none;'; ?>color:#b32d2e;">
-				<?php esc_html_e( 'Remove', 'core' ); ?>
-			</button>
-			<br />
-			<span class="description"><?php esc_html_e( 'An image or an SVG. SVG uploads are cleaned of scripts and event handlers first.', 'core' ); ?></span>
+			<span class="description"><?php esc_html_e( 'Shown on the card as "2 open". Leave at 0 to hide it.', 'core' ); ?></span>
 		</p>
 
 		<p>
@@ -377,7 +283,9 @@ if ( ! function_exists( 'core_theme_render_open_role_meta_box' ) ) :
 				value="<?php echo esc_attr( $apply_link ); ?>"
 				placeholder="https://"
 			/>
+			<span class="description"><?php esc_html_e( 'Where "Apply now" sends candidates: a job board, an email (mailto:) or a page on this site. Leave empty to hide the link.', 'core' ); ?></span>
 		</p>
+		<p class="description"><?php esc_html_e( 'Set the role\'s Job Types in the box on the right.', 'core' ); ?></p>
 		<?php
 	}
 endif;
@@ -408,20 +316,8 @@ if ( ! function_exists( 'core_theme_save_open_role_meta' ) ) :
 
 		update_post_meta(
 			$post_id,
-			'core_theme_role_location',
-			isset( $_POST['core_theme_role_location'] ) ? sanitize_text_field( wp_unslash( $_POST['core_theme_role_location'] ) ) : ''
-		);
-
-		update_post_meta(
-			$post_id,
 			'core_theme_role_vacancies',
 			isset( $_POST['core_theme_role_vacancies'] ) ? absint( wp_unslash( $_POST['core_theme_role_vacancies'] ) ) : 0
-		);
-
-		update_post_meta(
-			$post_id,
-			'core_theme_role_icon',
-			isset( $_POST['core_theme_role_icon'] ) ? absint( wp_unslash( $_POST['core_theme_role_icon'] ) ) : 0
 		);
 
 		update_post_meta(
@@ -668,37 +564,8 @@ add_action( 'init', 'core_theme_register_testimonial_post_type' );
 
 
 // =============================================================================
-// Open Role — icon picker & SVG uploads
+// SVG uploads
 // =============================================================================
-
-if ( ! function_exists( 'core_theme_open_role_icon_assets' ) ) :
-	/**
-	 * Loads the media frame and the icon picker on the open role edit screen.
-	 *
-	 * @param string $hook Current admin page.
-	 */
-	function core_theme_open_role_icon_assets( $hook ) {
-		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
-			return;
-		}
-
-		if ( 'open-role' !== get_post_type() ) {
-			return;
-		}
-
-		wp_enqueue_media();
-
-		wp_enqueue_script(
-			'core-theme-open-role-icon',
-			get_theme_file_uri( 'assets/js/open-role-icon.js' ),
-			array( 'jquery' ),
-			wp_get_theme()->get( 'Version' ),
-			true
-		);
-	}
-endif;
-add_action( 'admin_enqueue_scripts', 'core_theme_open_role_icon_assets' );
-
 
 if ( ! function_exists( 'core_theme_allow_svg_upload' ) ) :
 	/**
