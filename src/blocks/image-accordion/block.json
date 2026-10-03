@@ -2,7 +2,7 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "core-theme/image-accordion",
-    "version": "0.0.20",
+    "version": "0.0.21",
     "title": "Image Accordion",
     "category": "core-theme",
     "icon": "images-alt2",

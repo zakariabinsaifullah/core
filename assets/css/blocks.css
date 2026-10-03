@@ -864,7 +864,8 @@ header.wp-block-kadence-rowlayout::before {
    alignment, so children shrink to their content width. An image-only
    child (a Section with just a background image, like the partner
    portraits) then collapses to 0px wide. The editor uses different CSS, so
-   it only breaks on the front end. Stretch the stacked children instead.
+   it only breaks on the front end. Stretch the stacked children instead,
+   and let each one take its natural height.
    The second selector outranks Kadence's rule inside a Row Layout with
    "Inner Column Height 100%".
    ========================================================================== */
@@ -873,5 +874,15 @@ header.wp-block-kadence-rowlayout::before {
     .wp-block-kadence-column.kb-section-dir-horizontal.kb-section-sm-dir-vertical > .kt-inside-inner-col,
     .kt-inner-column-height-full:not(.kt-has-1-columns) > .wp-block-kadence-column.kb-section-dir-horizontal.kb-section-sm-dir-vertical > .kt-inside-inner-col {
         align-items: stretch;
+    }
+
+    /*
+     * Each stacked child takes its natural height. Kadence keeps the
+     * horizontal `flex: 1 1 0%` (a 0px start height in a column) and gives a
+     * child with a Max Width `flex: 0 1 100%` through a 6-class :not() chain;
+     * the repeated class lifts this to 7 so it wins without !important.
+     */
+    .wp-block-kadence-column.kb-section-dir-horizontal.kb-section-sm-dir-vertical > .kt-inside-inner-col > .wp-block-kadence-column.wp-block-kadence-column.wp-block-kadence-column {
+        flex: 0 0 auto;
     }
 }
