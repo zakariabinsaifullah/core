@@ -1,5 +1,6 @@
 /* =============================================================================
-   Posts Grid Shortcode — shortcode.css
+   Posts Grid + Featured Post shortcodes — shortcode.css
+   [core_theme_posts_grid], [core_theme_posts_tabs], [core_theme_featured_post]
    ============================================================================= */
 
 /* Wrapper */
@@ -13,110 +14,89 @@
 }
 
 /* =============================================================================
-   Filter Nav
+   Category filter pills
    ============================================================================= */
-
-/* Tabs read as plain text until selected, when one takes the theme's tiber
-   pill. The grid is designed to sit on a dark section, so the resting colour
-   is white rather than the page's text colour. */
 
 .ipg-nav {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 48px;
-    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
 }
 
 .ipg-filter-btn {
     cursor: pointer;
-    background: transparent;
-    border: 0;
+    background: var(--wp--preset--color--core-theme-white);
+    border: 1px solid var(--wp--preset--color--core-theme-neutral-lighter);
+    border-radius: 999px;
+    padding: 10px 18px;
     font-family: inherit;
-    font-size: 16px;
-    font-weight: 400;
-    color: #ffffff;
-    padding: 10px 24px;
-    border-radius: 100px;
+    font-size: var(--wp--preset--font-size--core-theme-small);
+    font-weight: 600;
     line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-tiber);
     transition:
         background-color 0.2s ease,
+        border-color 0.2s ease,
         color 0.2s ease;
 }
 
 .ipg-filter-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    border-color: var(--wp--preset--color--core-theme-tiber);
 }
 
 .ipg-filter-btn.active,
 .ipg-filter-btn.active:hover {
-    background: var(--wp--preset--color--core-theme-tiber, #04262f);
-    color: #ffffff;
+    background: var(--wp--preset--color--core-theme-tiber);
+    border-color: var(--wp--preset--color--core-theme-tiber);
+    color: var(--wp--preset--color--core-theme-white);
 }
 
 .ipg-filter-btn:focus-visible {
-    outline: 2px solid #ffffff;
+    outline: 2px solid var(--wp--preset--color--core-theme-tiber);
     outline-offset: 2px;
 }
 
 /* =============================================================================
-   Post Grid
+   Post grid — 3 columns on desktop, 1 on tablet and mobile
    ============================================================================= */
 
 .ipg-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 24px;
-    row-gap: 60px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .ipg-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 560px) {
-    .ipg-grid {
-        grid-template-columns: 1fr;
-        row-gap: 40px;
-    }
-
-    .ipg-nav {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .ipg-nav .ipg-filter-btn {
-        width: 100%;
-        padding: 16px 24px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
     }
 }
 
 .ipg-no-posts {
-    color: #ffffff;
-    font-size: 15px;
+    color: var(--wp--preset--color--core-theme-neutral-dark);
+    font-size: var(--wp--preset--font-size--core-theme-medium);
 }
 
 /* =============================================================================
-   Post Card
+   Post card
    ============================================================================= */
 
-/* No frame around the card: the image, the meta row and the text sit directly
-   on the section background. */
 .ipg-card {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    background: var(--wp--preset--color--core-theme-white);
+    border-radius: 14px;
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--wp--preset--color--core-theme-white-dark) 25%, transparent);
 }
 
 .ipg-card__image {
     display: block;
+    height: 240px;
     overflow: hidden;
-    border-radius: 12px;
-    aspect-ratio: 7 / 5;
-    margin-bottom: 24px;
 }
 
 .ipg-card__image img {
@@ -127,90 +107,92 @@
     transition: transform 0.35s ease;
 }
 
-.ipg-card__image:hover img {
+.ipg-card:hover .ipg-card__image img {
     transform: scale(1.04);
 }
 
 .ipg-card__body {
     display: flex;
-    flex-direction: column;
     flex: 1;
-}
-
-/* Meta row: category pill, then date */
-.ipg-card__meta-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 12px;
-    margin-bottom: 24px;
+    padding: 24px 24px 28px;
 }
 
-.ipg-card__category {
-    padding: 5px 14px;
-    border-radius: 100px;
-    background: #374151;
-    color: #ffffff;
-    font-size: 14px;
-    line-height: 1.4;
+/* Meta: category • date (shared shape with the featured post) */
+.ipg-card__meta,
+.ipg-featured__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--wp--preset--font-size--core-theme-small);
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-neutral);
 }
 
-.ipg-card__date {
-    font-size: 12px;
-    color: #ffffff;
+.ipg-card__category,
+.ipg-featured__category {
+    font-weight: 600;
+    color: var(--wp--preset--color--core-theme-mantis-dark);
 }
 
 .ipg-card__title {
-    margin: 0 0 20px;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #ffffff;
+    margin: 0;
+    font-family: var(--wp--preset--font-family--titling-gothic-fb-wide);
+    font-size: var(--wp--preset--font-size--core-theme-heading-six);
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--wp--preset--color--core-theme-tiber);
 }
 
-.ipg-card__title a {
-    text-decoration: none;
+.ipg-card__title a,
+.ipg-featured__title a {
     color: inherit;
-    transition: opacity 0.2s ease;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.ipg-card__title a:hover {
-    opacity: 0.8;
+.ipg-card__title a:hover,
+.ipg-featured__title a:hover {
+    color: var(--wp--preset--color--core-theme-mantis-dark);
 }
 
+/* !important because the grid sits inside post content, where theme.json's
+   paragraph colour is written at a specificity this rule cannot otherwise beat. */
 .ipg-card__excerpt {
-    margin: 0 0 24px;
-    font-size: 16px;
+    margin: 0;
+    font-size: var(--wp--preset--font-size--core-theme-medium);
     line-height: 1.5;
-
-    /* !important because the grid usually sits inside post content, where
-       theme.json's paragraph colour is written at a specificity this rule
-       cannot otherwise beat. */
-    color: #ffffff !important;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    color: var(--wp--preset--color--core-theme-neutral-dark) !important;
 }
 
-/* Learn More: the theme's default button, which `wp-element-button` on the
-   anchor already supplies. Only the arrow and its spacing belong here — and
-   `margin-top: auto` so the buttons line up across a row of uneven cards. */
-.ipg-card__button {
+/* Read more: the design's text link with an arrow. `margin-top: auto` keeps
+   the links level across a row of cards with uneven text. */
+.ipg-card__link {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     align-self: flex-start;
     margin-top: auto;
+    padding-top: 4px;
+    font-size: var(--wp--preset--font-size--core-theme-medium);
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-mantis-dark);
     text-decoration: none;
 }
 
-.ipg-card__button-arrow {
+.ipg-card__link:hover {
+    color: var(--wp--preset--color--core-theme-mantis-darker);
+}
+
+.ipg-card__arrow {
     flex-shrink: 0;
     transition: transform 0.2s ease;
 }
 
-.ipg-card__button:hover .ipg-card__button-arrow {
+.ipg-card__link:hover .ipg-card__arrow {
     transform: translateX(3px);
 }
 
@@ -219,7 +201,7 @@
    ============================================================================= */
 
 .ipg-pagination-wrap {
-    margin-top: 50px;
+    margin-top: 32px;
 }
 
 .ipg-pagination {
@@ -227,7 +209,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .ipg-page-btn {
@@ -238,47 +220,153 @@
     min-width: 40px;
     height: 40px;
     padding: 0 6px;
-    background: #ffffff;
-    border: 1px solid #d8d8d8;
+    background: var(--wp--preset--color--core-theme-white);
+    border: 1px solid var(--wp--preset--color--core-theme-neutral-lighter);
     border-radius: 8px;
-    color: #191919;
-    font-size: 14px;
-    font-weight: 500;
+    color: var(--wp--preset--color--core-theme-tiber);
+    font-family: inherit;
+    font-size: var(--wp--preset--font-size--core-theme-small);
+    font-weight: 600;
     line-height: 1;
-    transition: all 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
-/* Tiber rather than the lighter tiber-light: it is the same colour as the
-   Learn More button and the selected tab, so the grid keeps one accent. */
 .ipg-page-btn:hover:not(:disabled) {
-    border-color: var(--wp--preset--color--core-theme-tiber, #04262f);
-    color: var(--wp--preset--color--core-theme-tiber, #04262f);
+    border-color: var(--wp--preset--color--core-theme-tiber);
 }
 
 .ipg-page-btn.active {
-    background: var(--wp--preset--color--core-theme-tiber, #04262f);
-    border-color: var(--wp--preset--color--core-theme-tiber, #04262f);
-    color: #ffffff;
+    background: var(--wp--preset--color--core-theme-tiber);
+    border-color: var(--wp--preset--color--core-theme-tiber);
+    color: var(--wp--preset--color--core-theme-white);
 }
 
 .ipg-page-btn:disabled {
     cursor: default;
-    opacity: 0.35;
+    opacity: 0.4;
 }
 
-.ipg-page-btn.ipg-page-arrow svg {
+.ipg-page-btn .ipg-arrow {
     display: block;
     pointer-events: none;
+}
+
+.ipg-arrow--prev {
+    transform: rotate(180deg);
 }
 
 .ipg-page-ellipsis {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 40px;
+    min-width: 24px;
     height: 40px;
-    color: #b2b2b2;
-    font-size: 14px;
+    color: var(--wp--preset--color--core-theme-neutral);
+    font-size: var(--wp--preset--font-size--core-theme-small);
+    font-weight: 600;
     user-select: none;
-    letter-spacing: 0.05em;
+}
+
+/* =============================================================================
+   Featured post — [core_theme_featured_post]
+   ============================================================================= */
+
+.ipg-featured {
+    display: flex;
+    overflow: hidden;
+    background: var(--wp--preset--color--core-theme-peppermint-lighter);
+    border: 1px solid var(--wp--preset--color--core-theme-neutral-lighter);
+    border-radius: 24px;
+}
+
+/* 660px of the 1280px card in the design */
+.ipg-featured__image {
+    display: block;
+    flex: 0 0 51.5%;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.ipg-featured__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.ipg-featured:hover .ipg-featured__image img {
+    transform: scale(1.03);
+}
+
+.ipg-featured__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 18px;
+    min-width: 0;
+    padding: 48px;
+}
+
+.ipg-featured__tag {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--wp--preset--color--core-theme-mantis-lighter);
+    color: var(--wp--preset--color--core-theme-mantis-dark);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.ipg-featured__title {
+    margin: 0;
+    font-family: var(--wp--preset--font-family--titling-gothic-fb-wide);
+    font-size: var(--wp--preset--font-size--core-theme-heading-three);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--wp--preset--color--core-theme-tiber);
+}
+
+.ipg-featured__excerpt {
+    margin: 0;
+    font-size: var(--wp--preset--font-size--core-theme-large);
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-neutral-dark) !important;
+}
+
+/* The theme's primary button comes from `wp-element-button`; only spacing here. */
+.ipg-featured__button {
+    margin-top: 8px;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    .ipg-featured {
+        flex-direction: column;
+    }
+
+    .ipg-featured__image {
+        flex: none;
+        min-height: 0;
+        height: 300px;
+    }
+
+    .ipg-featured__body {
+        padding: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ipg-featured__image {
+        height: 240px;
+    }
+
+    .ipg-featured__body {
+        padding: 24px;
+    }
 }

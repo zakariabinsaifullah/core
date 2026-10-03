@@ -2,9 +2,11 @@
 /**
  * Posts Grid Shortcode
  *
- * Renders a filterable, paginated post grid via AJAX.
+ * Renders a filterable, paginated post grid via AJAX, and a single featured
+ * post card to sit above it.
  *
- * Usage: [core_theme_posts_grid per_page="6" post_type="post"]
+ * Usage: [core_theme_featured_post]
+ *        [core_theme_posts_grid per_page="9" exclude="featured"]
  */
 
 // =============================================================================
@@ -39,21 +41,48 @@ endif;
 
 if ( ! function_exists( 'core_theme_posts_grid_arrow_svg' ) ) :
 	/**
-	 * The theme's button arrow, drawn in the current text colour.
+	 * The design's right arrow, stroked in the current text colour.
 	 *
-	 * Same artwork as assets/svg/button-arrow.svg, inlined because this markup
-	 * also travels over AJAX, where a background-image on a stylesheet class
-	 * would be the only alternative.
+	 * Inlined because this markup also travels over AJAX.
+	 *
+	 * @param int    $size  Rendered width and height in px.
+	 * @param string $class Class for the svg element.
 	 */
-	function core_theme_posts_grid_arrow_svg() {
-		return '<svg class="ipg-card__button-arrow" width="20" height="13" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16.1091 7.2829C15.2473 6.71473 14.379 6.158 13.5238 5.57838C12.5622 4.92374 11.5683 4.30364 10.6753 3.55942C9.82349 2.84947 9.67578 1.89259 10.2646 0.92927C10.8724 -0.0585588 11.7969 -0.186572 12.8006 0.207684C13.3369 0.419859 13.834 0.736366 14.3373 1.02853C17.8595 3.08052 21.3708 5.1516 24.9016 7.18832C27.7336 8.8235 27.9734 10.7682 25.2493 12.4461C22.215 14.3138 18.9895 15.8736 15.8091 17.4828C14.8296 17.9782 13.7214 18.1004 13.0112 16.8931C12.4135 15.8789 12.7864 15.0285 14.2172 14.0822C14.9148 13.6203 15.6294 13.1861 16.8626 12.4093C15.7126 12.1965 15.1235 12.0018 14.5328 11.9918C11.2521 11.9262 7.97074 11.9061 4.68891 11.8602C3.72639 11.8463 2.7445 11.9153 1.80578 11.7398C0.806918 11.5545 -0.0420513 10.9506 0.0015718 9.77751C0.0524664 8.4407 0.959801 7.97434 2.17058 7.96048C5.74004 7.92283 9.30655 7.88597 12.876 7.84832C13.9055 7.83775 14.9363 7.82036 15.965 7.80678C16.014 7.63189 16.0631 7.45699 16.1091 7.2829Z" fill="currentColor"/></svg>';
+	function core_theme_posts_grid_arrow_svg( $size = 18, $class = 'ipg-arrow' ) {
+		return '<svg class="' . esc_attr( $class ) . '" width="' . (int) $size . '" height="' . (int) $size . '" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M3.6 9H14.4M9.9 13.5L14.4 9L9.9 4.5" stroke="currentColor" stroke-width="1.575" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+	}
+endif;
+
+
+if ( ! function_exists( 'core_theme_posts_grid_post_meta' ) ) :
+	/**
+	 * Category (first term of the taxonomy) • date, shared by the card and the
+	 * featured post.
+	 *
+	 * @param int    $post_id  Post ID.
+	 * @param string $taxonomy Taxonomy used for the category label.
+	 * @param string $prefix   BEM block name for the classes.
+	 */
+	function core_theme_posts_grid_post_meta( $post_id, $taxonomy, $prefix ) {
+		$terms    = get_the_terms( $post_id, $taxonomy );
+		$cat_name = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0]->name : '';
+
+		$html = '<div class="' . $prefix . '__meta">';
+		if ( $cat_name ) {
+			$html .= '<span class="' . $prefix . '__category">' . esc_html( $cat_name ) . '</span>';
+			$html .= '<span class="' . $prefix . '__sep" aria-hidden="true">&bull;</span>';
+		}
+		$html .= '<time class="' . $prefix . '__date" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . esc_html( get_the_date( 'F j, Y', $post_id ) ) . '</time>';
+		$html .= '</div>';
+
+		return $html;
 	}
 endif;
 
 
 if ( ! function_exists( 'core_theme_posts_grid_render_post_item' ) ) :
 	/**
-	 * Renders a single post card: image → meta (category, date) → title → excerpt → Learn More.
+	 * Renders a single post card: image → category • date → title → excerpt → Read more.
 	 *
 	 * @param int    $post_id  Post ID.
 	 * @param string $taxonomy Taxonomy used for the category label.
@@ -66,54 +95,32 @@ if ( ! function_exists( 'core_theme_posts_grid_render_post_item' ) ) :
 
 		$permalink = get_permalink( $post_id );
 		$title     = get_the_title( $post_id );
-		$excerpt   = get_the_excerpt( $post_id );
-		$date      = get_the_date( 'M j, Y', $post_id );
+		$excerpt   = wp_trim_words( get_the_excerpt( $post_id ), 22 );
 		$thumbnail = has_post_thumbnail( $post_id )
 			? get_the_post_thumbnail( $post_id, 'medium_large', array( 'loading' => 'lazy' ) )
 			: '';
 
-		// Category (first term of the resolved taxonomy).
-		$terms    = get_the_terms( $post_id, $taxonomy );
-		$cat_name = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0]->name : '';
-
-		$html = '<div class="ipg-card">';
+		$html = '<article class="ipg-card">';
 
 		if ( $thumbnail ) {
-			$html .= '<a href="' . esc_url( $permalink ) . '" class="ipg-card__image" tabindex="-1" aria-hidden="true">';
-			$html .= $thumbnail;
-			$html .= '</a>';
+			$html .= '<a href="' . esc_url( $permalink ) . '" class="ipg-card__image" tabindex="-1" aria-hidden="true">' . $thumbnail . '</a>';
 		}
 
 		$html .= '<div class="ipg-card__body">';
-
-		// Meta row: category pill, then date.
-		if ( $cat_name || $date ) {
-			$html .= '<div class="ipg-card__meta-row">';
-			if ( $cat_name ) {
-				$html .= '<span class="ipg-card__category">' . esc_html( $cat_name ) . '</span>';
-			}
-			$html .= '<span class="ipg-card__date">' . esc_html( $date ) . '</span>';
-			$html .= '</div>';
-		}
-
-		$html .= '<h2 class="ipg-card__title"><a href="' . esc_url( $permalink ) . '">' . esc_html( $title ) . '</a></h2>';
+		$html .= core_theme_posts_grid_post_meta( $post_id, $taxonomy, 'ipg-card' );
+		$html .= '<h3 class="ipg-card__title"><a href="' . esc_url( $permalink ) . '">' . esc_html( $title ) . '</a></h3>';
 
 		if ( $excerpt ) {
 			$html .= '<p class="ipg-card__excerpt">' . esc_html( $excerpt ) . '</p>';
 		}
 
-		/*
-		 * `wp-element-button` is the selector theme.json's styles.elements.button
-		 * compiles to, so this is the theme's default button by construction
-		 * rather than a copy of its current look.
-		 */
-		$html .= '<a class="wp-element-button ipg-card__button" href="' . esc_url( $permalink ) . '">';
-		$html .= '<span>' . esc_html__( 'Learn More', 'core' ) . '</span>';
-		$html .= core_theme_posts_grid_arrow_svg();
+		$html .= '<a class="ipg-card__link" href="' . esc_url( $permalink ) . '" aria-label="' . esc_attr( sprintf( /* translators: %s: post title */ __( 'Read more: %s', 'core' ), $title ) ) . '">';
+		$html .= '<span>' . esc_html__( 'Read more', 'core' ) . '</span>';
+		$html .= core_theme_posts_grid_arrow_svg( 18, 'ipg-card__arrow' );
 		$html .= '</a>';
 
 		$html .= '</div>';
-		$html .= '</div>';
+		$html .= '</article>';
 
 		return $html;
 	}
@@ -218,8 +225,8 @@ if ( ! function_exists( 'core_theme_posts_grid_render_pagination' ) ) :
 			return '';
 		}
 
-		$svg_prev = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
-		$svg_next = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+		$svg_prev = core_theme_posts_grid_arrow_svg( 16, 'ipg-arrow ipg-arrow--prev' );
+		$svg_next = core_theme_posts_grid_arrow_svg( 16, 'ipg-arrow' );
 
 		$html = '<div class="ipg-pagination">';
 
@@ -237,7 +244,7 @@ if ( ! function_exists( 'core_theme_posts_grid_render_pagination' ) ) :
 				$html .= '<span class="ipg-page-ellipsis">&hellip;</span>';
 			} else {
 				$active = ( (int) $page === $current_page ) ? ' active' : '';
-				$html  .= '<button class="ipg-page-btn' . $active . '" data-page="' . (int) $page . '" aria-label="' . sprintf( esc_attr__( 'Page %d', 'core' ), (int) $page ) . '">' . (int) $page . '</button>';
+				$html  .= '<button class="ipg-page-btn' . $active . '"' . ( $active ? ' aria-current="page"' : '' ) . ' data-page="' . (int) $page . '" aria-label="' . sprintf( esc_attr__( 'Page %d', 'core' ), (int) $page ) . '">' . (int) $page . '</button>';
 			}
 		}
 
@@ -270,6 +277,7 @@ if ( ! function_exists( 'core_theme_posts_grid_ajax' ) ) :
 		$post_type  = isset( $_POST['post_type'] )  ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) )       : 'post';
 		$taxonomy   = isset( $_POST['taxonomy'] )   ? sanitize_key( $_POST['taxonomy'] )                             : 'category';
 		$categories = isset( $_POST['categories'] ) ? sanitize_text_field( wp_unslash( $_POST['categories'] ) )      : '';
+		$exclude    = isset( $_POST['exclude'] )    ? array_filter( array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $_POST['exclude'] ) ) ) ) ) : array();
 
 		if ( ! post_type_exists( $post_type ) ) {
 			$post_type = 'post';
@@ -286,6 +294,7 @@ if ( ! function_exists( 'core_theme_posts_grid_ajax' ) ) :
 			'posts_per_page' => $per_page,
 			'paged'          => $page,
 			'post_status'    => 'publish',
+			'post__not_in'   => $exclude,
 		);
 
 		if ( $cat > 0 ) {
@@ -323,6 +332,63 @@ add_action( 'wp_ajax_nopriv_core_theme_posts_grid', 'core_theme_posts_grid_ajax'
 // =============================================================================
 // Shortcode
 // =============================================================================
+
+if ( ! function_exists( 'core_theme_get_featured_post_id' ) ) :
+	/**
+	 * The post the featured card shows: the given ID when it is a published
+	 * post of the type, otherwise the newest sticky post, otherwise the newest
+	 * post. 0 when there is none.
+	 *
+	 * @param int|string $id        Requested post ID, or empty.
+	 * @param string     $post_type Post type.
+	 */
+	function core_theme_get_featured_post_id( $id = '', $post_type = 'post' ) {
+		$id = absint( $id );
+		if ( $id && 'publish' === get_post_status( $id ) && get_post_type( $id ) === $post_type ) {
+			return $id;
+		}
+
+		$base = array(
+			'post_type'           => $post_type,
+			'post_status'         => 'publish',
+			'posts_per_page'      => 1,
+			'fields'              => 'ids',
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+		);
+
+		$sticky = 'post' === $post_type ? get_option( 'sticky_posts', array() ) : array();
+		if ( $sticky ) {
+			$ids = get_posts( $base + array( 'post__in' => array_map( 'absint', $sticky ) ) );
+			if ( $ids ) {
+				return (int) $ids[0];
+			}
+		}
+
+		$ids = get_posts( $base );
+		return $ids ? (int) $ids[0] : 0;
+	}
+endif;
+
+
+if ( ! function_exists( 'core_theme_posts_grid_resolve_exclude' ) ) :
+	/**
+	 * Turns the grid's `exclude` attribute into post IDs. The token `featured`
+	 * resolves to whatever [core_theme_featured_post] shows without an id.
+	 */
+	function core_theme_posts_grid_resolve_exclude( $exclude_raw, $post_type ) {
+		$ids = array();
+		foreach ( array_filter( array_map( 'trim', explode( ',', (string) $exclude_raw ) ), 'strlen' ) as $token ) {
+			if ( 'featured' === strtolower( $token ) ) {
+				$ids[] = core_theme_get_featured_post_id( '', $post_type );
+			} else {
+				$ids[] = absint( $token );
+			}
+		}
+		return array_values( array_unique( array_filter( $ids ) ) );
+	}
+endif;
+
 
 if ( ! function_exists( 'core_theme_posts_grid_resolve_taxonomy' ) ) :
 	/**
@@ -368,9 +434,9 @@ if ( ! function_exists( 'core_theme_posts_grid_render_tabs' ) ) :
 		}
 
 		$html  = '<div class="ipg-nav">';
-		$html .= '<button class="ipg-filter-btn active" data-cat="0">' . esc_html__( 'All', 'core' ) . '</button>';
+		$html .= '<button type="button" class="ipg-filter-btn active" aria-pressed="true" data-cat="0">' . esc_html__( 'All', 'core' ) . '</button>';
 		foreach ( $terms as $term ) {
-			$html .= '<button class="ipg-filter-btn" data-cat="' . esc_attr( $term->term_id ) . '">' . esc_html( $term->name ) . '</button>';
+			$html .= '<button type="button" class="ipg-filter-btn" aria-pressed="false" data-cat="' . esc_attr( $term->term_id ) . '">' . esc_html( $term->name ) . '</button>';
 		}
 		$html .= '</div>';
 
@@ -381,19 +447,22 @@ endif;
 
 if ( ! function_exists( 'core_theme_posts_grid_shortcode' ) ) :
 	/**
-	 * [core_theme_posts_grid per_page="6" post_type="post" categories="4,9" id=""]
+	 * [core_theme_posts_grid per_page="9" post_type="post" categories="4,9" exclude="featured" id=""]
 	 *
-	 * `per_page`   — posts per page (default 6).
+	 * `per_page`   — posts per page (default 9).
 	 * `categories` — comma-separated term IDs or slugs; omit for all categories.
+	 * `exclude`    — comma-separated post IDs to leave out; the word `featured`
+	 *                stands for the post [core_theme_featured_post] shows.
 	 * `id`         — when set, tabs are omitted and the grid listens for a remote
 	 *                core-theme:filter event fired by [core_theme_posts_tabs for="<id>"].
 	 */
 	function core_theme_posts_grid_shortcode( $atts ) {
 		$atts = shortcode_atts(
 			array(
-				'per_page'   => 6,
+				'per_page'   => 9,
 				'post_type'  => 'post',
 				'categories' => '',
+				'exclude'    => '',
 				'id'         => '',
 			),
 			$atts,
@@ -410,6 +479,7 @@ if ( ! function_exists( 'core_theme_posts_grid_shortcode' ) ) :
 
 		$taxonomy        = core_theme_posts_grid_resolve_taxonomy( $post_type );
 		$allowed_cat_ids = core_theme_posts_grid_resolve_allowed_cats( $atts['categories'], $taxonomy );
+		$exclude_ids     = core_theme_posts_grid_resolve_exclude( $atts['exclude'], $post_type );
 
 		if ( empty( $allowed_cat_ids ) ) {
 			return '<p class="ipg-no-posts">' . esc_html__( 'No categories found.', 'core' ) . '</p>';
@@ -421,6 +491,7 @@ if ( ! function_exists( 'core_theme_posts_grid_shortcode' ) ) :
 			'posts_per_page' => $per_page,
 			'paged'          => 1,
 			'post_status'    => 'publish',
+			'post__not_in'   => $exclude_ids,
 			'tax_query'      => array(
 				array(
 					'taxonomy' => $taxonomy,
@@ -439,6 +510,7 @@ if ( ! function_exists( 'core_theme_posts_grid_shortcode' ) ) :
 			'postType'   => $post_type,
 			'taxonomy'   => $taxonomy,
 			'categories' => implode( ',', $allowed_cat_ids ),
+			'exclude'    => implode( ',', $exclude_ids ),
 		) );
 
 		$grid_id_attr = $grid_id ? ' data-grid-id="' . esc_attr( $grid_id ) . '"' : '';
@@ -529,3 +601,76 @@ if ( ! function_exists( 'core_theme_posts_tabs_shortcode' ) ) :
 	}
 endif;
 add_shortcode( 'core_theme_posts_tabs', 'core_theme_posts_tabs_shortcode' );
+
+
+if ( ! function_exists( 'core_theme_featured_post_shortcode' ) ) :
+	/**
+	 * [core_theme_featured_post id="" post_type="post" label="Featured" button="Read more"]
+	 *
+	 * One post as a wide card: image on the left; tag, category • date, title,
+	 * excerpt and a Read more button on the right. Without `id` it shows the
+	 * newest sticky post, or the newest post when none is sticky.
+	 */
+	function core_theme_featured_post_shortcode( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'id'        => '',
+				'post_type' => 'post',
+				'label'     => __( 'Featured', 'core' ),
+				'button'    => __( 'Read more', 'core' ),
+			),
+			$atts,
+			'core_theme_featured_post'
+		);
+
+		$post_type = sanitize_key( $atts['post_type'] );
+		if ( ! post_type_exists( $post_type ) ) {
+			$post_type = 'post';
+		}
+
+		$post_id = core_theme_get_featured_post_id( $atts['id'], $post_type );
+		if ( ! $post_id ) {
+			return '';
+		}
+
+		core_theme_posts_grid_enqueue_assets();
+
+		$taxonomy  = core_theme_posts_grid_resolve_taxonomy( $post_type );
+		$permalink = get_permalink( $post_id );
+		$title     = get_the_title( $post_id );
+		$excerpt   = wp_trim_words( get_the_excerpt( $post_id ), 40 );
+
+		$html = '<article class="ipg-featured">';
+
+		if ( has_post_thumbnail( $post_id ) ) {
+			$html .= '<a href="' . esc_url( $permalink ) . '" class="ipg-featured__image" tabindex="-1" aria-hidden="true">';
+			$html .= get_the_post_thumbnail( $post_id, 'large' );
+			$html .= '</a>';
+		}
+
+		$html .= '<div class="ipg-featured__body">';
+
+		if ( '' !== trim( $atts['label'] ) ) {
+			$html .= '<span class="ipg-featured__tag">' . esc_html( $atts['label'] ) . '</span>';
+		}
+
+		$html .= core_theme_posts_grid_post_meta( $post_id, $taxonomy, 'ipg-featured' );
+		$html .= '<h2 class="ipg-featured__title"><a href="' . esc_url( $permalink ) . '">' . esc_html( $title ) . '</a></h2>';
+
+		if ( $excerpt ) {
+			$html .= '<p class="ipg-featured__excerpt">' . esc_html( $excerpt ) . '</p>';
+		}
+
+		/*
+		 * `wp-element-button` is what theme.json's styles.elements.button
+		 * compiles to, so this is the theme's primary button by construction.
+		 */
+		$html .= '<a class="wp-element-button ipg-featured__button" href="' . esc_url( $permalink ) . '" aria-label="' . esc_attr( sprintf( /* translators: %s: post title */ __( 'Read more: %s', 'core' ), $title ) ) . '">' . esc_html( $atts['button'] ) . '</a>';
+
+		$html .= '</div>';
+		$html .= '</article>';
+
+		return $html;
+	}
+endif;
+add_shortcode( 'core_theme_featured_post', 'core_theme_featured_post_shortcode' );

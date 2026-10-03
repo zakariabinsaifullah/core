@@ -57,42 +57,81 @@ if ( ! function_exists( 'core_theme_get_shortcodes' ) ) :
 				),
 			),
 			array(
-				'title'       => __( 'Posts Grid', 'core' ),
-				'tag'         => 'core_theme_posts_grid',
-				'description' => __( 'Renders posts as a three-column grid of cards: featured image, a category pill beside the date, the title, the excerpt and a Learn More button. Category tabs and pagination filter the grid in place, without reloading the page. The card text is white, so place this on a dark section.', 'core' ),
+				'title'       => __( 'Featured Post', 'core' ),
+				'tag'         => 'core_theme_featured_post',
+				'description' => __( 'One post as a wide card for the top of the blog: featured image on the left; a Featured tag, category and date, title, excerpt and a Read more button on the right. Without an <code>id</code> it shows the newest <strong>sticky</strong> post (Post settings &rarr; Stick to the top of the blog), or the newest post when none is sticky.', 'core' ),
 				'examples'    => array(
 					array(
 						'label' => __( 'Basic usage', 'core' ),
-						'note'  => __( 'Every attribute is optional — this shows the 6 newest posts with tabs for every category that has posts in it.', 'core' ),
-						'code'  => '[core_theme_posts_grid]',
+						'note'  => __( 'Shows the newest sticky post. Make a post sticky to feature it.', 'core' ),
+						'code'  => '[core_theme_featured_post]',
 					),
 					array(
-						'label' => __( 'Only certain categories', 'core' ),
-						'note'  => __( 'Limits both the posts and the tabs to the categories you name, by slug or by ID.', 'core' ),
-						'code'  => '[core_theme_posts_grid per_page="9" categories="buying-a-practice,valuation"]',
+						'label' => __( 'A specific post', 'core' ),
+						'note'  => __( 'Pick the post by ID (shown in the URL when editing it).', 'core' ),
+						'code'  => '[core_theme_featured_post id="123"]',
 					),
 					array(
-						'label' => __( 'Tabs somewhere else on the page', 'core' ),
-						'note'  => __( 'Give the grid an <code>id</code> and it renders without tabs; a separate [core_theme_posts_tabs] block with a matching <code>for</code> then drives it. Useful when the tabs belong in their own row above a full-width grid.', 'core' ),
-						'code'  => '[core_theme_posts_grid id="blog" per_page="6"]',
+						'label' => __( 'Paired with the grid', 'core' ),
+						'note'  => __( 'Put the grid after it with <code>exclude="featured"</code> so the featured post is not repeated in the grid. If you set an <code>id</code> here, use the same ID in the grid&rsquo;s <code>exclude</code>.', 'core' ),
+						'code'  => "[core_theme_featured_post]\n[core_theme_posts_grid per_page=\"9\" exclude=\"featured\"]",
 					),
 					array(
 						'label' => __( 'All optional attributes', 'core' ),
 						'note'  => __( 'Each attribute shown at its default value.', 'core' ),
-						'code'  => '[core_theme_posts_grid per_page="6" post_type="post" categories="" id=""]',
+						'code'  => '[core_theme_featured_post id="" post_type="post" label="Featured" button="Read more"]',
 					),
 				),
 				'attrs'       => array(
-					array( 'name' => 'per_page',   'default' => '6',    'desc' => __( 'Posts per page, up to 50. Anything beyond that count is reached through the pagination beneath the grid.', 'core' ) ),
-					array( 'name' => 'post_type',  'default' => 'post', 'desc' => __( 'Which post type to list. The tabs follow that type&rsquo;s own hierarchical taxonomy.', 'core' ) ),
+					array( 'name' => 'id',        'default' => '',          'desc' => __( 'Post ID to feature. Empty uses the newest sticky post, then the newest post.', 'core' ) ),
+					array( 'name' => 'post_type', 'default' => 'post',      'desc' => __( 'Which post type to pick from.', 'core' ) ),
+					array( 'name' => 'label',     'default' => 'Featured',  'desc' => __( 'Text of the small tag above the title. Empty hides the tag.', 'core' ) ),
+					array( 'name' => 'button',    'default' => 'Read more', 'desc' => __( 'Button label.', 'core' ) ),
+				),
+			),
+			array(
+				'title'       => __( 'Posts Grid', 'core' ),
+				'tag'         => 'core_theme_posts_grid',
+				'description' => __( 'Renders posts as white cards in a three-column grid (one column on tablet and mobile): featured image, category and date, title, excerpt and a Read more link. Category pills and pagination filter the grid in place, without reloading the page. Designed for a light section.', 'core' ),
+				'examples'    => array(
+					array(
+						'label' => __( 'Basic usage', 'core' ),
+						'note'  => __( 'Every attribute is optional — this shows the 9 newest posts with a pill for every category that has posts in it.', 'core' ),
+						'code'  => '[core_theme_posts_grid]',
+					),
+					array(
+						'label' => __( 'Blog page, under the featured post', 'core' ),
+						'note'  => __( 'Leaves out the post [core_theme_featured_post] is showing, so it is not listed twice.', 'core' ),
+						'code'  => '[core_theme_posts_grid per_page="9" exclude="featured"]',
+					),
+					array(
+						'label' => __( 'Only certain categories', 'core' ),
+						'note'  => __( 'Limits both the posts and the pills to the categories you name, by slug or by ID.', 'core' ),
+						'code'  => '[core_theme_posts_grid per_page="6" categories="business-tax,outsourced-cfo"]',
+					),
+					array(
+						'label' => __( 'Pills somewhere else on the page', 'core' ),
+						'note'  => __( 'Give the grid an <code>id</code> and it renders without pills; a separate [core_theme_posts_tabs] block with a matching <code>for</code> then drives it.', 'core' ),
+						'code'  => '[core_theme_posts_grid id="blog" per_page="9"]',
+					),
+					array(
+						'label' => __( 'All optional attributes', 'core' ),
+						'note'  => __( 'Each attribute shown at its default value.', 'core' ),
+						'code'  => '[core_theme_posts_grid per_page="9" post_type="post" categories="" exclude="" id=""]',
+					),
+				),
+				'attrs'       => array(
+					array( 'name' => 'per_page',   'default' => '9',    'desc' => __( 'Posts per page, up to 50. The rest are reached through the pagination beneath the grid.', 'core' ) ),
+					array( 'name' => 'post_type',  'default' => 'post', 'desc' => __( 'Which post type to list. The pills follow that type&rsquo;s own hierarchical taxonomy.', 'core' ) ),
 					array( 'name' => 'categories', 'default' => '',     'desc' => __( 'Comma-separated term slugs or IDs. Leave empty for every category that has posts in it.', 'core' ) ),
-					array( 'name' => 'id',         'default' => '',     'desc' => __( 'Set this to move the tabs out of the grid and into a [core_theme_posts_tabs] block with the same value in its <code>for</code> attribute.', 'core' ) ),
+					array( 'name' => 'exclude',    'default' => '',     'desc' => __( 'Comma-separated post IDs to leave out. The word <code>featured</code> stands for the post [core_theme_featured_post] shows without an id.', 'core' ) ),
+					array( 'name' => 'id',         'default' => '',     'desc' => __( 'Set this to move the pills out of the grid and into a [core_theme_posts_tabs] block with the same value in its <code>for</code> attribute.', 'core' ) ),
 				),
 			),
 			array(
 				'title'       => __( 'Posts Tabs', 'core' ),
 				'tag'         => 'core_theme_posts_tabs',
-				'description' => __( 'The category tabs on their own, for driving a [core_theme_posts_grid] placed elsewhere on the page. Only needed when the two have to sit in separate blocks &mdash; a grid without an <code>id</code> already draws its own tabs.', 'core' ),
+				'description' => __( 'The category pills on their own, for driving a [core_theme_posts_grid] placed elsewhere on the page. Only needed when the two have to sit in separate blocks &mdash; a grid without an <code>id</code> already draws its own tabs.', 'core' ),
 				'examples'    => array(
 					array(
 						'label' => __( 'Paired with a grid', 'core' ),
@@ -444,7 +483,7 @@ if ( ! function_exists( 'core_theme_shortcodes_render_page' ) ) :
 							<h2 class="psr-card__title"><?php echo esc_html( $sc['title'] ); ?></h2>
 							<span class="psr-card__badge"><?php echo esc_html( '[' . $sc['tag'] . ']' ); ?></span>
 						</div>
-						<p class="psr-card__desc"><?php echo wp_kses( $sc['description'], array( 'code' => array() ) ); ?></p>
+						<p class="psr-card__desc"><?php echo wp_kses( $sc['description'], array( 'code' => array(), 'strong' => array() ) ); ?></p>
 					</div>
 
 					<div class="psr-card__body">

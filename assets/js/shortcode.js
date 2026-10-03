@@ -25,6 +25,7 @@
 					post_type:  config.postType  || 'post',
 					taxonomy:   config.taxonomy  || 'category',
 					categories: config.categories || '',
+					exclude:    config.exclude    || '',
 				} );
 
 				fetch( config.ajaxUrl, { method: 'POST', body: body } )
@@ -66,8 +67,10 @@
 				btn.addEventListener( 'click', function () {
 					wrapper.querySelectorAll( '.ipg-filter-btn' ).forEach( function ( b ) {
 						b.classList.remove( 'active' );
+						b.setAttribute( 'aria-pressed', 'false' );
 					} );
 					this.classList.add( 'active' );
+					this.setAttribute( 'aria-pressed', 'true' );
 					grid.state.cat  = parseInt( this.dataset.cat || '0', 10 );
 					grid.state.page = 1;
 					grid.fetch();
@@ -98,8 +101,10 @@
 				btn.addEventListener( 'click', function () {
 					tabsEl.querySelectorAll( '.ipg-filter-btn' ).forEach( function ( b ) {
 						b.classList.remove( 'active' );
+						b.setAttribute( 'aria-pressed', 'false' );
 					} );
 					this.classList.add( 'active' );
+					this.setAttribute( 'aria-pressed', 'true' );
 
 					document.dispatchEvent( new CustomEvent( 'core-theme:filter', {
 						detail: {
