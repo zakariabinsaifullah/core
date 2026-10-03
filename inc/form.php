@@ -7,7 +7,7 @@
  *   core_theme_form_shortcode      – Form Shortcode
  *   core_theme_form_title          – Panel heading
  *   core_theme_form_description    – Panel description paragraph
- *   core_theme_book_call_link      – Booking URL behind the panel's "Book a call" tab
+ *   core_theme_form_note           – Small print under the submit button
  *
  * @package Core
  */
@@ -48,7 +48,7 @@ function core_theme_form_panel_html() {
 	$shortcode   = get_option( 'core_theme_form_shortcode', '' );
 	$title       = get_option( 'core_theme_form_title', 'Contact us' );
 	$description = get_option( 'core_theme_form_description', '' );
-	$book_link   = get_option( 'core_theme_book_call_link', '' );
+	$note        = get_option( 'core_theme_form_note', "We'll never share your information." );
 
 	// Don't render the panel if neither option is set.
 	if ( ! $phone && ! $shortcode ) {
@@ -68,7 +68,7 @@ function core_theme_form_panel_html() {
 		<div class="core-theme-form-panel__header">
 			<?php if ( $phone ) : ?>
 			<a href="tel:<?php echo esc_attr( preg_replace( '/[^\d+]/', '', $phone ) ); ?>" class="core-theme-form-panel__phone">
-				<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<path d="M3.62 7.79C5.06 10.62 7.38 12.93 10.21 14.38L12.41 12.18C12.68 11.91 13.08 11.82 13.43 11.94C14.55 12.31 15.76 12.51 17 12.51C17.55 12.51 18 12.96 18 13.51V17C18 17.55 17.55 18 17 18C7.61 18 0 10.39 0 1C0 0.45 0.45 0 1 0H4.5C5.05 0 5.5 0.45 5.5 1C5.5 2.25 5.7 3.45 6.07 4.57C6.18 4.92 6.1 5.31 5.82 5.59L3.62 7.79Z" fill="currentColor"/>
 				</svg>
 				<?php echo esc_html( $phone ); ?>
@@ -78,55 +78,27 @@ function core_theme_form_panel_html() {
 			<?php endif; ?>
 
 			<button class="core-theme-form-panel__close" aria-label="<?php esc_attr_e( 'Close form', 'core' ); ?>">
-				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 				</svg>
 			</button>
 		</div>
 
 		<div class="core-theme-form-panel__body">
-			<?php
-			/*
-			 * The two tabs only make sense as a pair: with no booking URL set
-			 * there is nowhere for the second one to go, and a lone "Message
-			 * us" tab above the form it already describes says nothing. So the
-			 * whole row is dropped and the panel opens straight onto the title.
-			 */
-			if ( $book_link ) :
-				?>
-				<nav class="core-theme-form-panel__tabs" aria-label="<?php esc_attr_e( 'Contact options', 'core' ); ?>">
-					<span class="core-theme-form-panel__tab is-active" aria-current="true">
-						<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-							<rect x="1.75" y="3.75" width="16.5" height="12.5" rx="2" stroke="currentColor" stroke-width="1.6"/>
-							<path d="M2.5 5L10 10.5L17.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-						<?php esc_html_e( 'Message us', 'core' ); ?>
-					</span>
-
+			<?php if ( $title ) : ?>
+				<h2 class="core-theme-form-panel__title">
 					<?php
 					/*
-					 * A scheduling page belongs in its own tab; an on-page
-					 * target does not — opening #book in a new tab would just
-					 * reload the site there.
+					 * A closing full stop is drawn in Mantis, like the period on
+					 * every section heading, so it is split off and wrapped.
 					 */
-					$book_in_new_tab = 0 !== strpos( $book_link, '#' );
+					if ( '.' === substr( $title, -1 ) ) {
+						echo esc_html( substr( $title, 0, -1 ) ) . '<span class="core-theme-form-panel__accent">.</span>';
+					} else {
+						echo esc_html( $title );
+					}
 					?>
-					<a
-						class="core-theme-form-panel__tab"
-						href="<?php echo esc_url( $book_link ); ?>"
-						<?php echo $book_in_new_tab ? 'target="_blank" rel="noopener"' : ''; ?>
-					>
-						<svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-							<rect x="2.75" y="3.75" width="14.5" height="13.5" rx="2" stroke="currentColor" stroke-width="1.6"/>
-							<path d="M2.75 8H17.25M6.5 2.5V5M13.5 2.5V5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-						</svg>
-						<?php esc_html_e( 'Book a call', 'core' ); ?>
-					</a>
-				</nav>
-			<?php endif; ?>
-
-			<?php if ( $title ) : ?>
-				<h2 class="core-theme-form-panel__title"><?php echo esc_html( $title ); ?></h2>
+				</h2>
 			<?php endif; ?>
 
 			<?php if ( $description ) : ?>
@@ -135,6 +107,10 @@ function core_theme_form_panel_html() {
 
 			<?php if ( $shortcode ) : ?>
 				<?php echo do_shortcode( $shortcode ); ?>
+			<?php endif; ?>
+
+			<?php if ( $note ) : ?>
+				<p class="core-theme-form-panel__note"><?php echo esc_html( $note ); ?></p>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -170,12 +146,10 @@ function core_theme_form_register_settings() {
 		array( 'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field', 'default' => '' )
 	);
 
-	// Stored as plain text rather than run through esc_url_raw, so a fragment
-	// such as #book — or any other non-absolute target — survives saving.
 	register_setting(
 		'core_theme_form_group',
-		'core_theme_book_call_link',
-		array( 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field', 'default' => '' )
+		'core_theme_form_note',
+		array( 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field', 'default' => "We'll never share your information." )
 	);
 }
 
@@ -334,22 +308,20 @@ function core_theme_form_render_page() {
 				</tr>
 				<tr>
 					<th scope="row">
-						<label for="core_theme_book_call_link">
-							<?php esc_html_e( 'Book a Call Link', 'core' ); ?>
+						<label for="core_theme_form_note">
+							<?php esc_html_e( 'Form Note', 'core' ); ?>
 						</label>
 					</th>
 					<td>
-						<?php /* Deliberately not type="url": that would have the browser reject an on-page target like #book. */ ?>
 						<input
 							type="text"
-							id="core_theme_book_call_link"
-							name="core_theme_book_call_link"
-							value="<?php echo esc_attr( get_option( 'core_theme_book_call_link', '' ) ); ?>"
+							id="core_theme_form_note"
+							name="core_theme_form_note"
+							value="<?php echo esc_attr( get_option( 'core_theme_form_note', "We'll never share your information." ) ); ?>"
 							class="regular-text"
-							placeholder="https://calendly.com/your-link"
 						/>
 						<p class="description">
-							<?php esc_html_e( 'Destination for the panel\'s "Book a call" tab — a scheduling page, or an on-page target such as #book. Leave this empty and the panel shows no tabs at all.', 'core' ); ?>
+							<?php esc_html_e( 'Small print shown under the submit button. Leave empty to hide it.', 'core' ); ?>
 						</p>
 					</td>
 				</tr>

@@ -29,17 +29,14 @@
     bottom: 0;
     width: 100%;
     max-width: 720px;
-
-    /* Off-white, as drawn — the fields are white and read as raised against
-       it, which they would not on a white panel. */
-    background: #f9fafb;
+    background: var(--wp--preset--color--core-theme-white);
     z-index: 99999;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+    box-shadow: -8px 0 40px color-mix(in srgb, var(--wp--preset--color--core-theme-neutral-darkest) 18%, transparent);
 }
 
 .core-theme-form-panel.is-open {
@@ -49,32 +46,29 @@
 /* ── Header ──────────────────────────────────────────────────────────────────── */
 
 .core-theme-form-panel__header {
-    background: var(--wp--preset--color--core-theme-tiber, #04262f);
-    color: #ffffff;
+    background: var(--wp--preset--color--core-theme-tiber);
+    color: var(--wp--preset--color--core-theme-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    /* A fixed 56px bar with the contents centred in it, rather than a height
-       that follows whichever of the phone link or close button is taller. */
-    min-height: 56px;
-    padding: 0 28px;
+    padding: 16px 24px;
     flex-shrink: 0;
 }
 
 .core-theme-form-panel__phone {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #ffffff;
+    gap: 8px;
+    font-size: var(--wp--preset--font-size--core-theme-medium);
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-white);
     text-decoration: none;
     transition: opacity 0.2s ease;
 }
 
 .core-theme-form-panel__phone:hover {
-    color: #ffffff;
+    color: var(--wp--preset--color--core-theme-white);
     opacity: 0.85;
     text-decoration: none;
 }
@@ -82,9 +76,9 @@
 .core-theme-form-panel__close {
     background: none;
     border: none;
-    color: #ffffff;
+    color: var(--wp--preset--color--core-theme-white);
     cursor: pointer;
-    padding: 4px;
+    padding: 0;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -95,7 +89,7 @@
 
 .core-theme-form-panel__close:hover {
     background: none;
-    color: #ffffff;
+    color: var(--wp--preset--color--core-theme-white);
     opacity: 0.7;
 }
 
@@ -106,122 +100,49 @@
     overflow-y: auto;
 
     /* 80px sides put the content in a 560px column inside the 720px panel, as
-       drawn. Far too generous on a phone, where the panel is the whole screen
-       — see the narrow-screen block at the end of this section. */
-    padding: 40px 80px 52px;
+       drawn. Far too generous on a phone — see the narrow-screen block below. */
+    padding: 32px 80px 56px;
     -webkit-overflow-scrolling: touch;
 }
 
-/* ── Tab nav ────────────────────────────────────────────────────────────────── */
-
-/* Two equal tabs over a hairline, the current one marked by a thick rule that
-   sits on top of that hairline. Only "Message us" is ever current: the other is
-   a plain link out to the booking page, so there is nothing to switch between
-   and no script behind this. */
-
-.core-theme-form-panel__tabs {
-    display: flex;
-    border-bottom: 1px solid var(--wp--preset--color--core-theme-neutral-light, #b2b3b3);
-    margin: 0 0 40px;
-}
-
-.core-theme-form-panel__tab {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 8px 12px;
-    font-family: inherit;
-    font-size: 15px;
+.core-theme-form-panel__title {
+    font-family: var(--wp--preset--font-family--titling-gothic-fb-wide);
+    font-size: var(--wp--preset--font-size--core-theme-heading-four);
     font-weight: 500;
     line-height: 1.3;
-    color: var(--wp--preset--color--core-theme-neutral-light, #b2b3b3);
-    text-decoration: none;
-
-    /* Pulls the tab's own rule down over the row's hairline so the two occupy
-       the same line rather than stacking into 5px of border. */
-    margin-bottom: -1px;
-    border-bottom: 4px solid transparent;
-    transition:
-        color 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.core-theme-form-panel__tab svg {
-    flex-shrink: 0;
-}
-
-.core-theme-form-panel__tab:hover,
-.core-theme-form-panel__tab:focus {
-    color: var(--wp--preset--color--core-theme-tiber, #04262f);
-    text-decoration: none;
-}
-
-.core-theme-form-panel__tab:focus-visible {
-    outline: 2px solid var(--wp--preset--color--core-theme-tiber, #04262f);
-    outline-offset: -2px;
-}
-
-.core-theme-form-panel__tab.is-active {
-    color: var(--wp--preset--color--core-theme-tiber, #04262f);
-    border-bottom-color: var(--wp--preset--color--core-theme-tiber, #04262f);
-}
-
-/* ── Tab panels ─────────────────────────────────────────────────────────────── */
-
-.core-theme-form-panel__panel[hidden] {
-    display: none;
-}
-
-.core-theme-form-panel__calendly {
-    margin-top: 8px;
-}
-
-.core-theme-form-panel__calendly iframe {
-    display: block;
-    width: 100%;
-}
-
-.core-theme-form-panel__title {
-    font-size: clamp(22px, 5vw, 25px);
-    font-weight: 400;
-    line-height: 1.2;
-
-    /* The drawn title sits tighter than Instrument Sans's default tracking at this
-       size; without this it runs about 6% wider than the artwork. */
-    letter-spacing: -0.02em;
-    color: var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d);
-    text-align: center;
+    color: var(--wp--preset--color--core-theme-tiber);
     margin: 0 0 16px;
 }
 
-.core-theme-form-panel__desc {
-    font-size: 16px;
-    color: #4b5563;
-    line-height: 1.5;
-    text-align: center;
+/* The closing full stop, in Mantis like every section heading's. */
+.core-theme-form-panel__accent {
+    color: var(--wp--preset--color--core-theme-mantis);
+}
 
-    /* Holds the three-line measure of the design instead of running the full
-       width of the column. */
-    max-width: 540px;
-    margin: 0 auto 40px;
+.core-theme-form-panel__desc {
+    font-size: var(--wp--preset--font-size--core-theme-medium);
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-neutral-dark);
+    margin: 0 0 24px;
+}
+
+/* Small print under the submit button. */
+.core-theme-form-panel__note {
+    font-size: var(--wp--preset--font-size--core-theme-small);
+    line-height: 1.5;
+    color: var(--wp--preset--color--core-theme-neutral);
+    margin: 12px 0 0;
 }
 
 /* On a phone the panel is the whole screen, so the 80px column of the design
    would leave the fields barely half the width. */
 @media (max-width: 600px) {
     .core-theme-form-panel__header {
-        padding: 0 20px;
+        padding: 16px 20px;
     }
 
     .core-theme-form-panel__body {
         padding: 28px 20px 40px;
-    }
-
-    .core-theme-form-panel__tab {
-        font-size: 14px;
-        gap: 8px;
     }
 }
 
@@ -326,9 +247,9 @@ body.core-theme-panel-open {
 /* ── Panel fields ───────────────────────────────────────────────────────────
 
    The slide-in panel draws its fields differently from the forms sitting in
-   page content: taller boxes, a rounder corner, a firmer border and bold black
-   labels above them. All of it is scoped to the panel body so the subscription
-   forms on the page keep the metrics set above.
+   page content: 56px boxes with an 8px corner and a light border, semibold
+   Tiber labels with a Mantis asterisk. All of it is scoped to the panel body so
+   the subscription forms on the page keep the metrics set above.
 
    Each selector here carries one class more than the rule it overrides, which
    is what lets it win — several of those rules are !important. */
@@ -337,6 +258,7 @@ body.core-theme-panel-open {
     --gf-ctrl-size: 56px;
     --gf-ctrl-size-md: 56px;
     --gf-ctrl-line-height: 56px;
+    --gf-ctrl-padding-x: 16px;
     --gf-ctrl-radius: 8px;
 
     /* GF caps the radius of taller controls separately, so without this the
@@ -345,28 +267,73 @@ body.core-theme-panel-open {
 }
 
 .core-theme-form-panel__body .gform-theme--foundation .gform_fields {
-    row-gap: 28px !important;
+    row-gap: 24px !important;
 }
 
 .core-theme-form-panel__body .gform-body.gform_body input,
 .core-theme-form-panel__body .gform-body.gform_body textarea,
 .core-theme-form-panel__body .gform-body.gform_body select {
-    border-color: var(--wp--preset--color--core-theme-neutral-light, #b2b3b3) !important;
+    border-color: var(--wp--preset--color--core-theme-neutral-lighter) !important;
+    border-radius: 8px !important;
+    color: var(--wp--preset--color--core-theme-neutral-dark);
+}
+
+.core-theme-form-panel__body .gform-body.gform_body textarea {
+    height: 160px;
+    min-block-size: 160px;
+    padding: 16px;
+}
+
+.core-theme-form-panel__body .gform_body input::placeholder,
+.core-theme-form-panel__body .gform_body textarea::placeholder {
+    color: var(--wp--preset--color--core-theme-neutral) !important;
+}
+
+.core-theme-form-panel__body .gform_body input:focus,
+.core-theme-form-panel__body .gform_body textarea:focus,
+.core-theme-form-panel__body .gform_body select:focus {
+    border-color: var(--wp--preset--color--core-theme-tiber) !important;
 }
 
 .core-theme-form-panel__body .gfield_label {
-    display: block;
-    color: var(--wp--preset--color--core-theme-neutral-dark, #4c4d4d) !important;
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    line-height: 1.3;
+    display: flex;
+    gap: 4px;
+    color: var(--wp--preset--color--core-theme-tiber) !important;
+    font-size: var(--wp--preset--font-size--core-theme-medium) !important;
+    font-weight: 600 !important;
+    line-height: 1.5;
     margin: 0 0 8px !important;
 }
 
-/* No asterisks in the design. Required fields still announce themselves —
-   Gravity Forms puts aria-required on the input, not on this mark. */
+/* The required asterisk, in Mantis Dark as drawn. */
 .core-theme-form-panel__body .gfield_required {
-    display: none;
+    display: inline;
+    margin: 0;
+    color: var(--wp--preset--color--core-theme-mantis-dark) !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+}
+
+.core-theme-form-panel__body .gform-footer {
+    margin-top: 32px !important;
+    padding: 0 !important;
+}
+
+/* Primary button, as drawn: the theme's default button (Mantis, 4px corner,
+   12px / 42px padding, bold). The site-wide submit style further down is the
+   older Tiber pill with an arrow, so the panel restates the default here. */
+.core-theme-form-panel__body .gform_button.button {
+    background-color: var(--wp--preset--color--core-theme-mantis) !important;
+    background-image: none !important;
+    color: var(--wp--preset--color--core-theme-white) !important;
+    padding: 12px 42px !important;
+    border-radius: 4px !important;
+    font-weight: 700 !important;
+}
+
+.core-theme-form-panel__body .gform_button.button:hover,
+.core-theme-form-panel__body .gform_button.button:focus {
+    background-color: var(--wp--preset--color--core-theme-mantis-dark) !important;
 }
 
 /* ── Submit button ──────────────────────────────────────────────────────────
