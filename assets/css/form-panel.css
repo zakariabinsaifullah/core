@@ -278,9 +278,11 @@ body.core-theme-panel-open {
     color: var(--wp--preset--color--core-theme-neutral-dark);
 }
 
+/* 160px as drawn. Gravity Forms sizes its "large" textarea with a 192px
+   min-block-size, so both lengths need !important to come down to it. */
 .core-theme-form-panel__body .gform-body.gform_body textarea {
-    height: 160px;
-    min-block-size: 160px;
+    height: 160px !important;
+    min-block-size: 160px !important;
     padding: 16px;
 }
 
